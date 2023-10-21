@@ -1,0 +1,38 @@
+[0.100s] Invoking command in '/home/ubuntu/workspaces/diff_robot/build/my_bot': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/ubuntu/workspaces/diff_robot/build/my_bot -- -j4 -l4
+[0.256s] Invoked command in '/home/ubuntu/workspaces/diff_robot/build/my_bot' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/ubuntu/workspaces/diff_robot/build/my_bot -- -j4 -l4
+[0.488s] Invoking command in '/home/ubuntu/workspaces/diff_robot/build/my_bot': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --install /home/ubuntu/workspaces/diff_robot/build/my_bot
+[0.533s] -- Install configuration: ""
+[0.536s] -- Execute custom install script
+[0.540s] -- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/config/empty.yaml
+[0.541s] -- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/config/gaz_ros2_ctl_use_sim.yaml
+[0.545s] -- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/config/gazebo_params.yaml
+[0.548s] -- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/config/joystick.yaml
+[0.550s] -- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/config/my_controllers.yaml
+[0.551s] -- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/config/view_bot.rviz
+[0.564s] -- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/description/gazebo_control.xacro
+[0.565s] -- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/description/inertial_macros.xacro
+[0.565s] -- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/description/robot.urdf.xacro
+[0.571s] -- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/description/robot_core.xacro
+[0.572s] -- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/description/ros2_control.xacro
+[0.572s] -- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/launch/joystick.launch.py
+[0.573s] -- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/launch/launch_robot.launch.py
+[0.573s] -- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/launch/launch_sim.launch.py
+[0.574s] -- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/launch/rsp.launch.py
+[0.575s] -- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/worlds/empty.world
+[0.575s] -- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/worlds/obstacles.world
+[0.576s] -- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/ament_index/resource_index/package_run_dependencies/my_bot
+[0.576s] -- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/ament_index/resource_index/parent_prefix_path/my_bot
+[0.577s] -- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/environment/ament_prefix_path.sh
+[0.578s] -- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/environment/ament_prefix_path.dsv
+[0.582s] -- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/environment/path.sh
+[0.583s] -- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/environment/path.dsv
+[0.583s] -- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/local_setup.bash
+[0.584s] -- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/local_setup.sh
+[0.584s] -- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/local_setup.zsh
+[0.585s] -- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/local_setup.dsv
+[0.585s] -- Symlinking: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/package.dsv
+[0.622s] -- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/ament_index/resource_index/packages/my_bot
+[0.624s] -- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/cmake/my_botConfig.cmake
+[0.625s] -- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/cmake/my_botConfig-version.cmake
+[0.627s] -- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/package.xml
+[0.634s] Invoked command in '/home/ubuntu/workspaces/diff_robot/build/my_bot' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --install /home/ubuntu/workspaces/diff_robot/build/my_bot

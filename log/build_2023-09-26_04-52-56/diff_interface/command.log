@@ -1,0 +1,2 @@
+Invoking command in '/home/ubuntu/workspaces/diff_robot/build/diff_interface': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /home/ubuntu/workspaces/diff_robot/build/diff_interface -- -j4 -l4
+Invoked command in '/home/ubuntu/workspaces/diff_robot/build/diff_interface' returned '2': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /home/ubuntu/workspaces/diff_robot/build/diff_interface -- -j4 -l4

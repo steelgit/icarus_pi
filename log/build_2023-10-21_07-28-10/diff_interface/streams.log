@@ -1,0 +1,12 @@
+[0.098s] Invoking command in '/home/ubuntu/workspaces/diff_robot/build/diff_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/ubuntu/workspaces/diff_robot/build/diff_interface -- -j4 -l4
+[0.300s] [35m[1mScanning dependencies of target diff_interface[0m
+[0.463s] [ 33%] [32mBuilding CXX object CMakeFiles/diff_interface.dir/src/diffdrive_MyBot.cpp.o[0m
+[5.988s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/diffdrive_MyBot.cpp:[m[K In member function ‘[01m[Kvirtual hardware_interface::return_type DiffDriveMyBot::configure(const hardware_interface::HardwareInfo&)[m[K’:
+[5.989s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/diffdrive_MyBot.cpp:33:20:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K;[m[K’ before ‘[01m[Kdo[m[K’
+[5.989s]    33 |     stop_encoders()
+[5.990s]       |                    [01;31m[K^[m[K
+[5.990s]       |                    [32m[K;[m[K
+[8.393s] make[2]: *** [CMakeFiles/diff_interface.dir/build.make:63: CMakeFiles/diff_interface.dir/src/diffdrive_MyBot.cpp.o] Error 1
+[8.393s] make[1]: *** [CMakeFiles/Makefile2:78: CMakeFiles/diff_interface.dir/all] Error 2
+[8.394s] make: *** [Makefile:141: all] Error 2
+[8.400s] Invoked command in '/home/ubuntu/workspaces/diff_robot/build/diff_interface' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/ubuntu/workspaces/diff_robot/build/diff_interface -- -j4 -l4

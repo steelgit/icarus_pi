@@ -1,0 +1,242 @@
+[0.000000] (-) TimerEvent: {}
+[0.000966] (diff_interface) JobQueued: {'identifier': 'diff_interface', 'dependencies': OrderedDict()}
+[0.001264] (my_bot) JobQueued: {'identifier': 'my_bot', 'dependencies': OrderedDict()}
+[0.001994] (diff_interface) JobStarted: {'identifier': 'diff_interface'}
+[0.050088] (my_bot) JobStarted: {'identifier': 'my_bot'}
+[0.094549] (diff_interface) JobProgress: {'identifier': 'diff_interface', 'progress': 'cmake'}
+[0.097891] (diff_interface) JobProgress: {'identifier': 'diff_interface', 'progress': 'build'}
+[0.101056] (diff_interface) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/ubuntu/workspaces/diff_robot/build/diff_interface', '--', '-j4', '-l4'], 'cwd': '/home/ubuntu/workspaces/diff_robot/build/diff_interface', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'ubuntu'), ('SSH_CLIENT', '192.168.1.12 35698 22'), ('XDG_SESSION_TYPE', 'tty'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/ubuntu/workspaces/diff_robot/install/diff_interface/lib:/opt/ros/foxy/opt/yaml_cpp_vendor/lib:/opt/ros/foxy/opt/rviz_ogre_vendor/lib:/opt/ros/foxy/lib/aarch64-linux-gnu:/opt/ros/foxy/lib'), ('MOTD_SHOWN', 'pam'), ('HOME', '/home/ubuntu'), ('OLDPWD', '/home/ubuntu'), ('SSH_TTY', '/dev/pts/0'), ('ROS_PYTHON_VERSION', '3'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('_colcon_cd_root', '/opt/ros/foxy/'), ('COLCON_PREFIX_PATH', '/home/ubuntu/workspaces/diff_robot/install'), ('ROS_DISTRO', 'foxy'), ('LOGNAME', 'ubuntu'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('TERM', 'xterm-256color'), ('XDG_SESSION_ID', '40688'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/foxy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', 'localhost:11.0'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('ROS_DOMAIN_ID', '13'), ('AMENT_PREFIX_PATH', '/home/ubuntu/workspaces/diff_robot/install/my_bot:/home/ubuntu/workspaces/diff_robot/install/diff_interface:/opt/ros/foxy'), ('SHELL', '/bin/bash'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('PWD', '/home/ubuntu/workspaces/diff_robot/build/diff_interface'), ('LC_ALL', 'en_US.UTF-8'), ('SSH_CONNECTION', '192.168.1.12 35698 192.168.1.117 22'), ('XDG_DATA_DIRS', '/usr/local/share:/usr/share:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/foxy/lib/python3.8/site-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/home/ubuntu/workspaces/diff_robot/install/my_bot:/home/ubuntu/workspaces/diff_robot/install/diff_interface:/opt/ros/foxy')]), 'shell': False}
+[0.104893] (-) TimerEvent: {}
+[0.125924] (my_bot) JobProgress: {'identifier': 'my_bot', 'progress': 'cmake'}
+[0.129393] (my_bot) JobProgress: {'identifier': 'my_bot', 'progress': 'build'}
+[0.130525] (my_bot) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/ubuntu/workspaces/diff_robot/build/my_bot', '--', '-j4', '-l4'], 'cwd': '/home/ubuntu/workspaces/diff_robot/build/my_bot', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'ubuntu'), ('SSH_CLIENT', '192.168.1.12 35698 22'), ('XDG_SESSION_TYPE', 'tty'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/ubuntu/workspaces/diff_robot/install/diff_interface/lib:/opt/ros/foxy/opt/yaml_cpp_vendor/lib:/opt/ros/foxy/opt/rviz_ogre_vendor/lib:/opt/ros/foxy/lib/aarch64-linux-gnu:/opt/ros/foxy/lib'), ('MOTD_SHOWN', 'pam'), ('HOME', '/home/ubuntu'), ('OLDPWD', '/home/ubuntu'), ('SSH_TTY', '/dev/pts/0'), ('ROS_PYTHON_VERSION', '3'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('_colcon_cd_root', '/opt/ros/foxy/'), ('COLCON_PREFIX_PATH', '/home/ubuntu/workspaces/diff_robot/install'), ('ROS_DISTRO', 'foxy'), ('LOGNAME', 'ubuntu'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('TERM', 'xterm-256color'), ('XDG_SESSION_ID', '40688'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/foxy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', 'localhost:11.0'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('ROS_DOMAIN_ID', '13'), ('AMENT_PREFIX_PATH', '/home/ubuntu/workspaces/diff_robot/install/my_bot:/home/ubuntu/workspaces/diff_robot/install/diff_interface:/opt/ros/foxy'), ('SHELL', '/bin/bash'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('PWD', '/home/ubuntu/workspaces/diff_robot/build/my_bot'), ('LC_ALL', 'en_US.UTF-8'), ('SSH_CONNECTION', '192.168.1.12 35698 192.168.1.117 22'), ('XDG_DATA_DIRS', '/usr/local/share:/usr/share:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/foxy/lib/python3.8/site-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/home/ubuntu/workspaces/diff_robot/install/my_bot:/home/ubuntu/workspaces/diff_robot/install/diff_interface:/opt/ros/foxy')]), 'shell': False}
+[0.205152] (-) TimerEvent: {}
+[0.229340] (diff_interface) StdoutLine: {'line': b'-- Found ament_cmake: 0.9.12 (/opt/ros/foxy/share/ament_cmake/cmake)\n'}
+[0.298956] (my_bot) CommandEnded: {'returncode': 0}
+[0.305456] (-) TimerEvent: {}
+[0.349794] (diff_interface) StdoutLine: {'line': b'-- Using PYTHON_EXECUTABLE: /usr/bin/python3\n'}
+[0.405616] (-) TimerEvent: {}
+[0.444477] (my_bot) JobProgress: {'identifier': 'my_bot', 'progress': 'install'}
+[0.495393] (my_bot) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/ubuntu/workspaces/diff_robot/build/my_bot'], 'cwd': '/home/ubuntu/workspaces/diff_robot/build/my_bot', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'ubuntu'), ('SSH_CLIENT', '192.168.1.12 35698 22'), ('XDG_SESSION_TYPE', 'tty'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/ubuntu/workspaces/diff_robot/install/diff_interface/lib:/opt/ros/foxy/opt/yaml_cpp_vendor/lib:/opt/ros/foxy/opt/rviz_ogre_vendor/lib:/opt/ros/foxy/lib/aarch64-linux-gnu:/opt/ros/foxy/lib'), ('MOTD_SHOWN', 'pam'), ('HOME', '/home/ubuntu'), ('OLDPWD', '/home/ubuntu'), ('SSH_TTY', '/dev/pts/0'), ('ROS_PYTHON_VERSION', '3'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('_colcon_cd_root', '/opt/ros/foxy/'), ('COLCON_PREFIX_PATH', '/home/ubuntu/workspaces/diff_robot/install'), ('ROS_DISTRO', 'foxy'), ('LOGNAME', 'ubuntu'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('TERM', 'xterm-256color'), ('XDG_SESSION_ID', '40688'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/foxy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', 'localhost:11.0'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('ROS_DOMAIN_ID', '13'), ('AMENT_PREFIX_PATH', '/home/ubuntu/workspaces/diff_robot/install/my_bot:/home/ubuntu/workspaces/diff_robot/install/diff_interface:/opt/ros/foxy'), ('SHELL', '/bin/bash'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('PWD', '/home/ubuntu/workspaces/diff_robot/build/my_bot'), ('LC_ALL', 'en_US.UTF-8'), ('SSH_CONNECTION', '192.168.1.12 35698 192.168.1.117 22'), ('XDG_DATA_DIRS', '/usr/local/share:/usr/share:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/foxy/lib/python3.8/site-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/home/ubuntu/workspaces/diff_robot/install/my_bot:/home/ubuntu/workspaces/diff_robot/install/diff_interface:/opt/ros/foxy')]), 'shell': False}
+[0.506839] (-) TimerEvent: {}
+[0.544083] (my_bot) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[0.545822] (my_bot) StdoutLine: {'line': b'-- Execute custom install script\n'}
+[0.549148] (my_bot) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/config/empty.yaml\n'}
+[0.550290] (my_bot) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/config/gaz_ros2_ctl_use_sim.yaml\n'}
+[0.551423] (my_bot) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/config/gazebo_params.yaml\n'}
+[0.552621] (my_bot) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/config/joystick.yaml\n'}
+[0.553826] (my_bot) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/config/my_controllers.yaml\n'}
+[0.554982] (my_bot) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/config/view_bot.rviz\n'}
+[0.557719] (my_bot) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/description/gazebo_control.xacro\n'}
+[0.559020] (my_bot) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/description/inertial_macros.xacro\n'}
+[0.560354] (my_bot) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/description/robot.urdf.xacro\n'}
+[0.561827] (my_bot) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/description/robot_core.xacro\n'}
+[0.563067] (my_bot) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/description/ros2_control.xacro\n'}
+[0.565425] (my_bot) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/launch/joystick.launch.py\n'}
+[0.566856] (my_bot) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/launch/launch_robot.launch.py\n'}
+[0.567888] (my_bot) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/launch/launch_sim.launch.py\n'}
+[0.569172] (my_bot) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/launch/rsp.launch.py\n'}
+[0.571740] (my_bot) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/worlds/empty.world\n'}
+[0.572634] (my_bot) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/worlds/obstacles.world\n'}
+[0.574827] (my_bot) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/ament_index/resource_index/package_run_dependencies/my_bot\n'}
+[0.576694] (my_bot) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/ament_index/resource_index/parent_prefix_path/my_bot\n'}
+[0.578313] (my_bot) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/environment/ament_prefix_path.sh\n'}
+[0.580507] (my_bot) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/environment/ament_prefix_path.dsv\n'}
+[0.581803] (my_bot) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/environment/path.sh\n'}
+[0.583336] (my_bot) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/environment/path.dsv\n'}
+[0.584892] (my_bot) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/local_setup.bash\n'}
+[0.586322] (my_bot) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/local_setup.sh\n'}
+[0.587904] (my_bot) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/local_setup.zsh\n'}
+[0.590585] (my_bot) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/local_setup.dsv\n'}
+[0.592663] (my_bot) StdoutLine: {'line': b'-- Symlinking: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/package.dsv\n'}
+[0.606904] (-) TimerEvent: {}
+[0.629171] (my_bot) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/ament_index/resource_index/packages/my_bot\n'}
+[0.634830] (my_bot) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/cmake/my_botConfig.cmake\n'}
+[0.635574] (my_bot) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/cmake/my_botConfig-version.cmake\n'}
+[0.637183] (my_bot) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/package.xml\n'}
+[0.640297] (my_bot) CommandEnded: {'returncode': 0}
+[0.707144] (-) TimerEvent: {}
+[0.809593] (-) TimerEvent: {}
+[0.869448] (my_bot) JobEnded: {'identifier': 'my_bot', 'rc': 0}
+[0.909723] (-) TimerEvent: {}
+[1.010393] (-) TimerEvent: {}
+[1.111065] (-) TimerEvent: {}
+[1.211750] (-) TimerEvent: {}
+[1.234887] (diff_interface) StdoutLine: {'line': b'-- Found hardware_interface: 0.11.0 (/opt/ros/foxy/share/hardware_interface/cmake)\n'}
+[1.311934] (-) TimerEvent: {}
+[1.373582] (diff_interface) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[1.387919] (diff_interface) StdoutLine: {'line': b'-- Found rosidl_adapter: 1.3.1 (/opt/ros/foxy/share/rosidl_adapter/cmake)\n'}
+[1.412106] (-) TimerEvent: {}
+[1.512813] (-) TimerEvent: {}
+[1.613515] (-) TimerEvent: {}
+[1.714200] (-) TimerEvent: {}
+[1.814935] (-) TimerEvent: {}
+[1.915889] (-) TimerEvent: {}
+[2.016614] (-) TimerEvent: {}
+[2.117317] (-) TimerEvent: {}
+[2.218021] (-) TimerEvent: {}
+[2.318747] (-) TimerEvent: {}
+[2.349263] (diff_interface) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[2.418933] (-) TimerEvent: {}
+[2.519636] (-) TimerEvent: {}
+[2.620407] (-) TimerEvent: {}
+[2.721132] (-) TimerEvent: {}
+[2.821879] (-) TimerEvent: {}
+[2.922580] (-) TimerEvent: {}
+[3.023289] (-) TimerEvent: {}
+[3.124049] (-) TimerEvent: {}
+[3.224801] (-) TimerEvent: {}
+[3.325887] (-) TimerEvent: {}
+[3.426685] (-) TimerEvent: {}
+[3.527477] (-) TimerEvent: {}
+[3.628495] (-) TimerEvent: {}
+[3.729316] (-) TimerEvent: {}
+[3.836108] (-) TimerEvent: {}
+[3.937051] (-) TimerEvent: {}
+[4.037799] (-) TimerEvent: {}
+[4.138474] (-) TimerEvent: {}
+[4.211501] (diff_interface) StdoutLine: {'line': b'-- Found controller_manager: 0.11.0 (/opt/ros/foxy/share/controller_manager/cmake)\n'}
+[4.238679] (-) TimerEvent: {}
+[4.339381] (-) TimerEvent: {}
+[4.394842] (diff_interface) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 1.0.4 (/opt/ros/foxy/share/rmw_implementation_cmake/cmake)\n'}
+[4.400136] (diff_interface) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[4.439582] (-) TimerEvent: {}
+[4.540290] (-) TimerEvent: {}
+[4.641061] (-) TimerEvent: {}
+[4.741811] (-) TimerEvent: {}
+[4.842547] (-) TimerEvent: {}
+[4.943292] (-) TimerEvent: {}
+[5.044026] (-) TimerEvent: {}
+[5.144778] (-) TimerEvent: {}
+[5.245480] (-) TimerEvent: {}
+[5.346208] (-) TimerEvent: {}
+[5.447057] (-) TimerEvent: {}
+[5.547831] (-) TimerEvent: {}
+[5.648783] (-) TimerEvent: {}
+[5.749538] (-) TimerEvent: {}
+[5.850299] (-) TimerEvent: {}
+[5.951016] (-) TimerEvent: {}
+[6.051830] (-) TimerEvent: {}
+[6.116975] (diff_interface) StdoutLine: {'line': b'-- Configuring done\n'}
+[6.151992] (-) TimerEvent: {}
+[6.232038] (diff_interface) StdoutLine: {'line': b'-- Generating done\n'}
+[6.239808] (diff_interface) StdoutLine: {'line': b'-- Build files have been written to: /home/ubuntu/workspaces/diff_robot/build/diff_interface\n'}
+[6.252288] (-) TimerEvent: {}
+[6.353284] (-) TimerEvent: {}
+[6.363526] (diff_interface) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target diff_interface\x1b[0m\n'}
+[6.453475] (-) TimerEvent: {}
+[6.512945] (diff_interface) StdoutLine: {'line': b'[ 20%] \x1b[32mBuilding CXX object CMakeFiles/diff_interface.dir/src/motor_control.cpp.o\x1b[0m\n'}
+[6.553674] (-) TimerEvent: {}
+[6.654501] (-) TimerEvent: {}
+[6.755906] (-) TimerEvent: {}
+[6.856821] (-) TimerEvent: {}
+[6.957642] (-) TimerEvent: {}
+[7.058518] (-) TimerEvent: {}
+[7.159397] (-) TimerEvent: {}
+[7.260253] (-) TimerEvent: {}
+[7.361034] (-) TimerEvent: {}
+[7.461830] (-) TimerEvent: {}
+[7.562755] (-) TimerEvent: {}
+[7.663581] (-) TimerEvent: {}
+[7.764335] (-) TimerEvent: {}
+[7.865148] (-) TimerEvent: {}
+[7.965939] (-) TimerEvent: {}
+[8.067244] (-) TimerEvent: {}
+[8.168067] (-) TimerEvent: {}
+[8.269155] (-) TimerEvent: {}
+[8.370053] (-) TimerEvent: {}
+[8.470877] (-) TimerEvent: {}
+[8.571688] (-) TimerEvent: {}
+[8.672473] (-) TimerEvent: {}
+[8.773261] (-) TimerEvent: {}
+[8.874195] (-) TimerEvent: {}
+[8.974958] (-) TimerEvent: {}
+[9.075803] (-) TimerEvent: {}
+[9.176630] (-) TimerEvent: {}
+[9.277473] (-) TimerEvent: {}
+[9.378267] (-) TimerEvent: {}
+[9.479026] (-) TimerEvent: {}
+[9.579852] (-) TimerEvent: {}
+[9.680632] (-) TimerEvent: {}
+[9.781479] (-) TimerEvent: {}
+[9.882226] (-) TimerEvent: {}
+[9.983064] (-) TimerEvent: {}
+[10.083827] (-) TimerEvent: {}
+[10.184647] (-) TimerEvent: {}
+[10.285499] (-) TimerEvent: {}
+[10.386326] (-) TimerEvent: {}
+[10.487140] (-) TimerEvent: {}
+[10.587927] (-) TimerEvent: {}
+[10.688746] (-) TimerEvent: {}
+[10.789547] (-) TimerEvent: {}
+[10.890365] (-) TimerEvent: {}
+[10.991174] (-) TimerEvent: {}
+[11.091980] (-) TimerEvent: {}
+[11.192806] (-) TimerEvent: {}
+[11.293599] (-) TimerEvent: {}
+[11.394382] (-) TimerEvent: {}
+[11.495204] (-) TimerEvent: {}
+[11.596026] (-) TimerEvent: {}
+[11.696868] (-) TimerEvent: {}
+[11.797659] (-) TimerEvent: {}
+[11.898461] (-) TimerEvent: {}
+[11.999291] (-) TimerEvent: {}
+[12.100087] (-) TimerEvent: {}
+[12.200927] (-) TimerEvent: {}
+[12.301726] (-) TimerEvent: {}
+[12.402507] (-) TimerEvent: {}
+[12.503309] (-) TimerEvent: {}
+[12.604121] (-) TimerEvent: {}
+[12.704953] (-) TimerEvent: {}
+[12.805991] (-) TimerEvent: {}
+[12.883587] (diff_interface) StdoutLine: {'line': b'[ 40%] \x1b[32m\x1b[1mLinking CXX shared library libdiff_interface.so\x1b[0m\n'}
+[12.906222] (-) TimerEvent: {}
+[13.007174] (-) TimerEvent: {}
+[13.108618] (-) TimerEvent: {}
+[13.211671] (-) TimerEvent: {}
+[13.312927] (-) TimerEvent: {}
+[13.413917] (-) TimerEvent: {}
+[13.514911] (-) TimerEvent: {}
+[13.615926] (-) TimerEvent: {}
+[13.716865] (-) TimerEvent: {}
+[13.817781] (-) TimerEvent: {}
+[13.856484] (diff_interface) StdoutLine: {'line': b'[100%] Built target diff_interface\n'}
+[13.896696] (diff_interface) CommandEnded: {'returncode': 0}
+[13.918035] (-) TimerEvent: {}
+[14.018903] (-) TimerEvent: {}
+[14.049244] (diff_interface) JobProgress: {'identifier': 'diff_interface', 'progress': 'install'}
+[14.050783] (diff_interface) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/ubuntu/workspaces/diff_robot/build/diff_interface'], 'cwd': '/home/ubuntu/workspaces/diff_robot/build/diff_interface', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'ubuntu'), ('SSH_CLIENT', '192.168.1.12 35698 22'), ('XDG_SESSION_TYPE', 'tty'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/ubuntu/workspaces/diff_robot/install/diff_interface/lib:/opt/ros/foxy/opt/yaml_cpp_vendor/lib:/opt/ros/foxy/opt/rviz_ogre_vendor/lib:/opt/ros/foxy/lib/aarch64-linux-gnu:/opt/ros/foxy/lib'), ('MOTD_SHOWN', 'pam'), ('HOME', '/home/ubuntu'), ('OLDPWD', '/home/ubuntu'), ('SSH_TTY', '/dev/pts/0'), ('ROS_PYTHON_VERSION', '3'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('_colcon_cd_root', '/opt/ros/foxy/'), ('COLCON_PREFIX_PATH', '/home/ubuntu/workspaces/diff_robot/install'), ('ROS_DISTRO', 'foxy'), ('LOGNAME', 'ubuntu'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('TERM', 'xterm-256color'), ('XDG_SESSION_ID', '40688'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/foxy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', 'localhost:11.0'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('ROS_DOMAIN_ID', '13'), ('AMENT_PREFIX_PATH', '/home/ubuntu/workspaces/diff_robot/install/my_bot:/home/ubuntu/workspaces/diff_robot/install/diff_interface:/opt/ros/foxy'), ('SHELL', '/bin/bash'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('PWD', '/home/ubuntu/workspaces/diff_robot/build/diff_interface'), ('LC_ALL', 'en_US.UTF-8'), ('SSH_CONNECTION', '192.168.1.12 35698 192.168.1.117 22'), ('XDG_DATA_DIRS', '/usr/local/share:/usr/share:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/foxy/lib/python3.8/site-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/home/ubuntu/workspaces/diff_robot/install/my_bot:/home/ubuntu/workspaces/diff_robot/install/diff_interface:/opt/ros/foxy')]), 'shell': False}
+[14.095265] (diff_interface) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[14.096086] (diff_interface) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/robot_hardware.xml\n'}
+[14.096955] (diff_interface) StdoutLine: {'line': b'-- Installing: /home/ubuntu/workspaces/diff_robot/install/diff_interface/lib/libdiff_interface.so\n'}
+[14.102738] (diff_interface) StdoutLine: {'line': b'-- Set runtime path of "/home/ubuntu/workspaces/diff_robot/install/diff_interface/lib/libdiff_interface.so" to ""\n'}
+[14.103405] (diff_interface) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/controllers\n'}
+[14.103904] (diff_interface) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/controllers/robot_controller_example.yaml\n'}
+[14.104418] (diff_interface) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface\n'}
+[14.104871] (diff_interface) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/test_robot.launch.py\n'}
+[14.105231] (diff_interface) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/environment/library_path.sh\n'}
+[14.105562] (diff_interface) StdoutLine: {'line': b'-- Installing: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/environment/library_path.dsv\n'}
+[14.106031] (diff_interface) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/ament_index/resource_index/package_run_dependencies/diff_interface\n'}
+[14.106526] (diff_interface) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/ament_index/resource_index/parent_prefix_path/diff_interface\n'}
+[14.107019] (diff_interface) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/environment/ament_prefix_path.sh\n'}
+[14.107484] (diff_interface) StdoutLine: {'line': b'-- Installing: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/environment/ament_prefix_path.dsv\n'}
+[14.108718] (diff_interface) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/environment/path.sh\n'}
+[14.109260] (diff_interface) StdoutLine: {'line': b'-- Installing: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/environment/path.dsv\n'}
+[14.110194] (diff_interface) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/local_setup.bash\n'}
+[14.110677] (diff_interface) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/local_setup.sh\n'}
+[14.111151] (diff_interface) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/local_setup.zsh\n'}
+[14.111574] (diff_interface) StdoutLine: {'line': b'-- Installing: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/local_setup.dsv\n'}
+[14.112509] (diff_interface) StdoutLine: {'line': b'-- Installing: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/package.dsv\n'}
+[14.113690] (diff_interface) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/ament_index/resource_index/packages/diff_interface\n'}
+[14.114222] (diff_interface) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/ament_index/resource_index/hardware_interface__pluginlib__plugin/diff_interface\n'}
+[14.114709] (diff_interface) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/cmake/ament_cmake_export_libraries-extras.cmake\n'}
+[14.115140] (diff_interface) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/cmake/ament_cmake_export_dependencies-extras.cmake\n'}
+[14.115545] (diff_interface) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/cmake/diff_interfaceConfig.cmake\n'}
+[14.116114] (diff_interface) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/cmake/diff_interfaceConfig-version.cmake\n'}
+[14.116854] (diff_interface) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/package.xml\n'}
+[14.119156] (-) TimerEvent: {}
+[14.121817] (diff_interface) CommandEnded: {'returncode': 0}
+[14.219451] (-) TimerEvent: {}
+[14.320669] (-) TimerEvent: {}
+[14.393906] (diff_interface) JobEnded: {'identifier': 'diff_interface', 'rc': 0}
+[14.397198] (-) EventReactorShutdown: {}

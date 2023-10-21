@@ -1,0 +1,105 @@
+[0.099s] Invoking command in '/home/ubuntu/workspaces/diff_robot/build/diff_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/ubuntu/workspaces/diff_robot/build/diff_interface -- -j4 -l4
+[0.295s] [35m[1mScanning dependencies of target diff_interface[0m
+[0.397s] [ 20%] [32mBuilding CXX object CMakeFiles/diff_interface.dir/src/diffdrive_MyBot.cpp.o[0m
+[0.410s] [ 40%] [32mBuilding CXX object CMakeFiles/diff_interface.dir/src/motor_control.cpp.o[0m
+[0.430s] [ 60%] [32mBuilding CXX object CMakeFiles/diff_interface.dir/src/rotary_encoder.cpp.o[0m
+[0.819s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/rotary_encoder.cpp:5:10:[m[K [01;31m[Kfatal error: [m[Kdiff_intercae/rotary_encoder.hpp: No such file or directory
+[0.820s]     5 | #include [01;31m[K"diff_intercae/rotary_encoder.hpp"[m[K
+[0.821s]       |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.822s] compilation terminated.
+[2.076s] make[2]: *** [CMakeFiles/diff_interface.dir/build.make:102: CMakeFiles/diff_interface.dir/src/rotary_encoder.cpp.o] Error 1
+[2.077s] make[2]: *** Waiting for unfinished jobs....
+[6.464s] In file included from [01m[K/opt/ros/foxy/include/rclcpp/client.hpp:40[m[K,
+[6.465s]                  from [01m[K/opt/ros/foxy/include/rclcpp/callback_group.hpp:23[m[K,
+[6.465s]                  from [01m[K/opt/ros/foxy/include/rclcpp/any_executable.hpp:20[m[K,
+[6.466s]                  from [01m[K/opt/ros/foxy/include/rclcpp/memory_strategy.hpp:24[m[K,
+[6.466s]                  from [01m[K/opt/ros/foxy/include/rclcpp/memory_strategies.hpp:18[m[K,
+[6.467s]                  from [01m[K/opt/ros/foxy/include/rclcpp/executor_options.hpp:20[m[K,
+[6.469s]                  from [01m[K/opt/ros/foxy/include/rclcpp/executor.hpp:33[m[K,
+[6.469s]                  from [01m[K/opt/ros/foxy/include/rclcpp/executors/multi_threaded_executor.hpp:26[m[K,
+[6.470s]                  from [01m[K/opt/ros/foxy/include/rclcpp/executors.hpp:21[m[K,
+[6.471s]                  from [01m[K/opt/ros/foxy/include/rclcpp/rclcpp.hpp:146[m[K,
+[6.471s]                  from [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/include/diff_interface/motor_control.h:6[m[K,
+[6.472s]                  from [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:1[m[K:
+[6.472s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:[m[K In member function ‘[01m[Kvoid motor_control::callback1(int)[m[K’:
+[6.473s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:15:26:[m[K [01;35m[Kwarning: [m[Kleft operand of comma operator has no effect [[01;35m[K-Wunused-value[m[K]
+[6.474s]    15 |    RCLCPP_INFO(logger_, ([01;35m[K"pos1= %i \n"[m[K, (pos) ));
+[6.474s]       |                          [01;35m[K^~~~~~~~~~~~~[m[K
+[6.475s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:15:39:[m[K [01;31m[Kerror: [m[Kinvalid conversion from ‘[01m[Kint[m[K’ to ‘[01m[Kconst char*[m[K’ [[01;31m[K-fpermissive[m[K]
+[6.477s]    15 |    RCLCPP_INFO(logger_, [01;31m[K("pos1= %i \n", (pos) )[m[K);
+[6.478s]       |                         [01;31m[K~~~~~~~~~~~~~~^~~~~~~~~[m[K
+[6.479s]       |                                       [01;31m[K|[m[K
+[6.480s]       |                                       [01;31m[Kint[m[K
+[6.480s] In file included from [01m[K/opt/ros/foxy/include/rclcpp/client.hpp:36[m[K,
+[6.481s]                  from [01m[K/opt/ros/foxy/include/rclcpp/callback_group.hpp:23[m[K,
+[6.482s]                  from [01m[K/opt/ros/foxy/include/rclcpp/any_executable.hpp:20[m[K,
+[6.482s]                  from [01m[K/opt/ros/foxy/include/rclcpp/memory_strategy.hpp:24[m[K,
+[6.483s]                  from [01m[K/opt/ros/foxy/include/rclcpp/memory_strategies.hpp:18[m[K,
+[6.484s]                  from [01m[K/opt/ros/foxy/include/rclcpp/executor_options.hpp:20[m[K,
+[6.484s]                  from [01m[K/opt/ros/foxy/include/rclcpp/executor.hpp:33[m[K,
+[6.485s]                  from [01m[K/opt/ros/foxy/include/rclcpp/executors/multi_threaded_executor.hpp:26[m[K,
+[6.485s]                  from [01m[K/opt/ros/foxy/include/rclcpp/executors.hpp:21[m[K,
+[6.486s]                  from [01m[K/opt/ros/foxy/include/rclcpp/rclcpp.hpp:146[m[K,
+[6.487s]                  from [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/include/diff_interface/motor_control.h:6[m[K,
+[6.488s]                  from [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:1[m[K:
+[6.488s] [01m[K/opt/ros/foxy/include/rclcpp/utilities.hpp:296:27:[m[K [01;36m[Knote: [m[K  initializing argument 1 of ‘[01m[Kconst char* rclcpp::get_c_string(const char*)[m[K’
+[6.489s]   296 | get_c_string([01;36m[Kconst char * string_in[m[K);
+[6.490s]       |              [01;36m[K~~~~~~~~~~~~~^~~~~~~~~[m[K
+[6.490s] In file included from [01m[K/opt/ros/foxy/include/rclcpp/client.hpp:40[m[K,
+[6.491s]                  from [01m[K/opt/ros/foxy/include/rclcpp/callback_group.hpp:23[m[K,
+[6.492s]                  from [01m[K/opt/ros/foxy/include/rclcpp/any_executable.hpp:20[m[K,
+[6.492s]                  from [01m[K/opt/ros/foxy/include/rclcpp/memory_strategy.hpp:24[m[K,
+[6.493s]                  from [01m[K/opt/ros/foxy/include/rclcpp/memory_strategies.hpp:18[m[K,
+[6.493s]                  from [01m[K/opt/ros/foxy/include/rclcpp/executor_options.hpp:20[m[K,
+[6.494s]                  from [01m[K/opt/ros/foxy/include/rclcpp/executor.hpp:33[m[K,
+[6.495s]                  from [01m[K/opt/ros/foxy/include/rclcpp/executors/multi_threaded_executor.hpp:26[m[K,
+[6.496s]                  from [01m[K/opt/ros/foxy/include/rclcpp/executors.hpp:21[m[K,
+[6.497s]                  from [01m[K/opt/ros/foxy/include/rclcpp/rclcpp.hpp:146[m[K,
+[6.498s]                  from [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/include/diff_interface/motor_control.h:6[m[K,
+[6.499s]                  from [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:1[m[K:
+[6.499s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:[m[K In member function ‘[01m[Kvoid motor_control::callback2(int)[m[K’:
+[6.500s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:24:26:[m[K [01;35m[Kwarning: [m[Kleft operand of comma operator has no effect [[01;35m[K-Wunused-value[m[K]
+[6.501s]    24 |    RCLCPP_INFO(logger_, ([01;35m[K"pos2= %i \n"[m[K, (pos) ));
+[6.501s]       |                          [01;35m[K^~~~~~~~~~~~~[m[K
+[6.502s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:24:39:[m[K [01;31m[Kerror: [m[Kinvalid conversion from ‘[01m[Kint[m[K’ to ‘[01m[Kconst char*[m[K’ [[01;31m[K-fpermissive[m[K]
+[6.503s]    24 |    RCLCPP_INFO(logger_, [01;31m[K("pos2= %i \n", (pos) )[m[K);
+[6.503s]       |                         [01;31m[K~~~~~~~~~~~~~~^~~~~~~~~[m[K
+[6.504s]       |                                       [01;31m[K|[m[K
+[6.504s]       |                                       [01;31m[Kint[m[K
+[6.505s] In file included from [01m[K/opt/ros/foxy/include/rclcpp/client.hpp:36[m[K,
+[6.506s]                  from [01m[K/opt/ros/foxy/include/rclcpp/callback_group.hpp:23[m[K,
+[6.506s]                  from [01m[K/opt/ros/foxy/include/rclcpp/any_executable.hpp:20[m[K,
+[6.507s]                  from [01m[K/opt/ros/foxy/include/rclcpp/memory_strategy.hpp:24[m[K,
+[6.508s]                  from [01m[K/opt/ros/foxy/include/rclcpp/memory_strategies.hpp:18[m[K,
+[6.508s]                  from [01m[K/opt/ros/foxy/include/rclcpp/executor_options.hpp:20[m[K,
+[6.509s]                  from [01m[K/opt/ros/foxy/include/rclcpp/executor.hpp:33[m[K,
+[6.509s]                  from [01m[K/opt/ros/foxy/include/rclcpp/executors/multi_threaded_executor.hpp:26[m[K,
+[6.510s]                  from [01m[K/opt/ros/foxy/include/rclcpp/executors.hpp:21[m[K,
+[6.511s]                  from [01m[K/opt/ros/foxy/include/rclcpp/rclcpp.hpp:146[m[K,
+[6.511s]                  from [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/include/diff_interface/motor_control.h:6[m[K,
+[6.512s]                  from [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:1[m[K:
+[6.513s] [01m[K/opt/ros/foxy/include/rclcpp/utilities.hpp:296:27:[m[K [01;36m[Knote: [m[K  initializing argument 1 of ‘[01m[Kconst char* rclcpp::get_c_string(const char*)[m[K’
+[6.513s]   296 | get_c_string([01;36m[Kconst char * string_in[m[K);
+[6.514s]       |              [01;36m[K~~~~~~~~~~~~~^~~~~~~~~[m[K
+[6.515s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:[m[K In member function ‘[01m[Kint motor_control::start_encoders()[m[K’:
+[6.515s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:34:50:[m[K [01;31m[Kerror: [m[Krequest for member ‘[01m[Kcallback1[m[K’ in ‘[01m[K(motor_control*)this[m[K’, which is of pointer type ‘[01m[Kmotor_control*[m[K’ (maybe you meant to use ‘[01m[K->[m[K’ ?)
+[6.516s]    34 |     re_decoder *dec1 = new re_decoder(7, 8, this.[01;31m[Kcallback1[m[K);
+[6.517s]       |                                                  [01;31m[K^~~~~~~~~[m[K
+[6.517s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:35:52:[m[K [01;31m[Kerror: [m[Krequest for member ‘[01m[Kcallback2[m[K’ in ‘[01m[K(motor_control*)this[m[K’, which is of pointer type ‘[01m[Kmotor_control*[m[K’ (maybe you meant to use ‘[01m[K->[m[K’ ?)
+[6.518s]    35 |     re_decoder *dec2 = new re_decoder(17, 18, this.[01;31m[Kcallback2[m[K);
+[6.518s]       |                                                    [01;31m[K^~~~~~~~~[m[K
+[6.519s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:34:17:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kdec1[m[K’ [[01;35m[K-Wunused-variable[m[K]
+[6.520s]    34 |     re_decoder *[01;35m[Kdec1[m[K = new re_decoder(7, 8, this.callback1);
+[6.520s]       |                 [01;35m[K^~~~[m[K
+[6.521s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:35:17:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kdec2[m[K’ [[01;35m[K-Wunused-variable[m[K]
+[6.522s]    35 |     re_decoder *[01;35m[Kdec2[m[K = new re_decoder(17, 18, this.callback2);
+[6.522s]       |                 [01;35m[K^~~~[m[K
+[6.523s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/diffdrive_MyBot.cpp:[m[K In member function ‘[01m[Kvirtual hardware_interface::return_type DiffDriveMyBot::configure(const hardware_interface::HardwareInfo&)[m[K’:
+[6.524s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/diffdrive_MyBot.cpp:33:5:[m[K [01;31m[Kerror: [m[K‘[01m[Kstop_encoders[m[K’ was not declared in this scope
+[6.525s]    33 |     [01;31m[Kstop_encoders[m[K();
+[6.525s]       |     [01;31m[K^~~~~~~~~~~~~[m[K
+[7.923s] make[2]: *** [CMakeFiles/diff_interface.dir/build.make:89: CMakeFiles/diff_interface.dir/src/motor_control.cpp.o] Error 1
+[9.082s] make[2]: *** [CMakeFiles/diff_interface.dir/build.make:63: CMakeFiles/diff_interface.dir/src/diffdrive_MyBot.cpp.o] Error 1
+[9.083s] make[1]: *** [CMakeFiles/Makefile2:78: CMakeFiles/diff_interface.dir/all] Error 2
+[9.084s] make: *** [Makefile:141: all] Error 2
+[9.089s] Invoked command in '/home/ubuntu/workspaces/diff_robot/build/diff_interface' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/ubuntu/workspaces/diff_robot/build/diff_interface -- -j4 -l4

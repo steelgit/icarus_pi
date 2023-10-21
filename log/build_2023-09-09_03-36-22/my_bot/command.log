@@ -1,0 +1,6 @@
+Invoking command in '/home/ubuntu/workspaces/diff_robot/build/my_bot': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake /home/ubuntu/workspaces/diff_robot/src/my_bot -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/ubuntu/workspaces/diff_robot/install/my_bot
+Invoked command in '/home/ubuntu/workspaces/diff_robot/build/my_bot' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake /home/ubuntu/workspaces/diff_robot/src/my_bot -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/ubuntu/workspaces/diff_robot/install/my_bot
+Invoking command in '/home/ubuntu/workspaces/diff_robot/build/my_bot': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /home/ubuntu/workspaces/diff_robot/build/my_bot -- -j4 -l4
+Invoked command in '/home/ubuntu/workspaces/diff_robot/build/my_bot' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /home/ubuntu/workspaces/diff_robot/build/my_bot -- -j4 -l4
+Invoking command in '/home/ubuntu/workspaces/diff_robot/build/my_bot': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --install /home/ubuntu/workspaces/diff_robot/build/my_bot
+Invoked command in '/home/ubuntu/workspaces/diff_robot/build/my_bot' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --install /home/ubuntu/workspaces/diff_robot/build/my_bot

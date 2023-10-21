@@ -1,0 +1,49 @@
+[0.098s] Invoking command in '/home/ubuntu/workspaces/diff_robot/build/diff_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/ubuntu/workspaces/diff_robot/build/diff_interface -- -j4 -l4
+[0.303s] [35m[1mScanning dependencies of target diff_interface[0m
+[0.539s] [ 20%] [32mBuilding CXX object CMakeFiles/diff_interface.dir/src/diffdrive_MyBot.cpp.o[0m
+[0.562s] [ 40%] [32mBuilding CXX object CMakeFiles/diff_interface.dir/src/motor_control.cpp.o[0m
+[6.297s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:[m[K In function ‘[01m[Kvoid callback1(int)[m[K’:
+[6.298s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:11:15:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kpos[m[K’ [[01;35m[K-Wunused-variable[m[K]
+[6.299s]    11 |    static int [01;35m[Kpos[m[K = 0;
+[6.300s]       |               [01;35m[K^~~[m[K
+[6.301s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:[m[K In function ‘[01m[Kvoid callback2(int)[m[K’:
+[6.302s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:18:20:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kway[m[K’ [[01;35m[K-Wunused-parameter[m[K]
+[6.303s]    18 | void callback2([01;35m[Kint way[m[K)
+[6.303s]       |                [01;35m[K~~~~^~~[m[K
+[7.701s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:[m[K At global scope:
+[7.701s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:11:15:[m[K [01;35m[Kwarning: [m[K‘[01m[Kpos[m[K’ defined but not used [[01;35m[K-Wunused-variable[m[K]
+[7.702s]    11 |    static int [01;35m[Kpos[m[K = 0;
+[7.704s]       |               [01;35m[K^~~[m[K
+[11.026s] [ 60%] [32m[1mLinking CXX shared library libdiff_interface.so[0m
+[11.993s] [100%] Built target diff_interface
+[12.036s] Invoked command in '/home/ubuntu/workspaces/diff_robot/build/diff_interface' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/ubuntu/workspaces/diff_robot/build/diff_interface -- -j4 -l4
+[12.192s] Invoking command in '/home/ubuntu/workspaces/diff_robot/build/diff_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --install /home/ubuntu/workspaces/diff_robot/build/diff_interface
+[12.229s] -- Install configuration: ""
+[12.229s] -- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/robot_hardware.xml
+[12.230s] -- Installing: /home/ubuntu/workspaces/diff_robot/install/diff_interface/lib/libdiff_interface.so
+[12.236s] -- Set runtime path of "/home/ubuntu/workspaces/diff_robot/install/diff_interface/lib/libdiff_interface.so" to ""
+[12.237s] -- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/controllers
+[12.237s] -- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/controllers/robot_controller_example.yaml
+[12.238s] -- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface
+[12.238s] -- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/test_robot.launch.py
+[12.239s] -- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/environment/library_path.sh
+[12.239s] -- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/environment/library_path.dsv
+[12.240s] -- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/ament_index/resource_index/package_run_dependencies/diff_interface
+[12.240s] -- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/ament_index/resource_index/parent_prefix_path/diff_interface
+[12.241s] -- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/environment/ament_prefix_path.sh
+[12.241s] -- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/environment/ament_prefix_path.dsv
+[12.242s] -- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/environment/path.sh
+[12.242s] -- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/environment/path.dsv
+[12.243s] -- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/local_setup.bash
+[12.243s] -- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/local_setup.sh
+[12.243s] -- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/local_setup.zsh
+[12.244s] -- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/local_setup.dsv
+[12.244s] -- Installing: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/package.dsv
+[12.245s] -- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/ament_index/resource_index/packages/diff_interface
+[12.245s] -- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/ament_index/resource_index/hardware_interface__pluginlib__plugin/diff_interface
+[12.246s] -- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/cmake/ament_cmake_export_libraries-extras.cmake
+[12.246s] -- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/cmake/ament_cmake_export_dependencies-extras.cmake
+[12.247s] -- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/cmake/diff_interfaceConfig.cmake
+[12.247s] -- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/cmake/diff_interfaceConfig-version.cmake
+[12.248s] -- Up-to-date: /home/ubuntu/workspaces/diff_robot/install/diff_interface/share/diff_interface/package.xml
+[12.261s] Invoked command in '/home/ubuntu/workspaces/diff_robot/build/diff_interface' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --install /home/ubuntu/workspaces/diff_robot/build/diff_interface

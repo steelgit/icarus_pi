@@ -1,0 +1,10 @@
+[01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/rotary_encoder.cpp:[m[K In function ‘[01m[Kvoid _cb(int, unsigned int, unsigned int, uint32_t, void*)[m[K’:
+[01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/rotary_encoder.cpp:58:16:[m[K [01;35m[Kwarning: [m[Kcomparison of integer expressions of different signedness: ‘[01m[Kunsigned int[m[K’ and ‘[01m[Kint[m[K’ [[01;35m[K-Wsign-compare[m[K]
+   58 |       if ([01;35m[Kgpio == self->gpioA[m[K)
+      |           [01;35m[K~~~~~^~~~~~~~~~~~~~[m[K
+[01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/rotary_encoder.cpp:51:8:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kpi[m[K’ [[01;35m[K-Wunused-parameter[m[K]
+   51 |    [01;35m[Kint pi[m[K, unsigned gpio, unsigned level, uint32_t tick, void *user)
+      |    [01;35m[K~~~~^~[m[K
+[01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/rotary_encoder.cpp:51:52:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Ktick[m[K’ [[01;35m[K-Wunused-parameter[m[K]
+   51 |    int pi, unsigned gpio, unsigned level, [01;35m[Kuint32_t tick[m[K, void *user)
+      |                                           [01;35m[K~~~~~~~~~^~~~[m[K

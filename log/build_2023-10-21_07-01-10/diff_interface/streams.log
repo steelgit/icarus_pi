@@ -1,0 +1,10 @@
+[0.101s] Invoking command in '/home/ubuntu/workspaces/diff_robot/build/diff_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/ubuntu/workspaces/diff_robot/build/diff_interface -- -j4 -l4
+[0.303s] [35m[1mScanning dependencies of target diff_interface[0m
+[0.467s] [ 33%] [32mBuilding CXX object CMakeFiles/diff_interface.dir/src/diffdrive_MyBot.cpp.o[0m
+[5.712s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/diffdrive_MyBot.cpp:13:33:[m[K [01;31m[Kerror: [m[Kdefinition of implicitly-declared ‘[01m[Kvirtual DiffDriveMyBot::~DiffDriveMyBot()[m[K’
+[5.712s]    13 | DiffDriveMyBot::~DiffDriveMyBot([01;31m[K)[m[K
+[5.713s]       |                                 [01;31m[K^[m[K
+[8.159s] make[2]: *** [CMakeFiles/diff_interface.dir/build.make:63: CMakeFiles/diff_interface.dir/src/diffdrive_MyBot.cpp.o] Error 1
+[8.160s] make[1]: *** [CMakeFiles/Makefile2:78: CMakeFiles/diff_interface.dir/all] Error 2
+[8.161s] make: *** [Makefile:141: all] Error 2
+[8.167s] Invoked command in '/home/ubuntu/workspaces/diff_robot/build/diff_interface' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/ubuntu/workspaces/diff_robot/build/diff_interface -- -j4 -l4

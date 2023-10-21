@@ -1,0 +1,29 @@
+[01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/rotary_encoder.cpp:[m[K In function ‘[01m[Kvoid _cb(int, unsigned int, unsigned int, uint32_t, void*)[m[K’:
+[01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/rotary_encoder.cpp:53:16:[m[K [01;31m[Kerror: [m[Kinvalid conversion from ‘[01m[Kvoid*[m[K’ to ‘[01m[KRED_t*[m[K’ {aka ‘[01m[K_RED_s*[m[K’} [[01;31m[K-fpermissive[m[K]
+   53 |    RED_t *self=[01;31m[Kuser[m[K;
+      |                [01;31m[K^~~~[m[K
+      |                [01;31m[K|[m[K
+      |                [01;31m[Kvoid*[m[K
+[01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/rotary_encoder.cpp:58:16:[m[K [01;35m[Kwarning: [m[Kcomparison of integer expressions of different signedness: ‘[01m[Kunsigned int[m[K’ and ‘[01m[Kint[m[K’ [[01;35m[K-Wsign-compare[m[K]
+   58 |       if ([01;35m[Kgpio == self->gpioA[m[K)
+      |           [01;35m[K~~~~~^~~~~~~~~~~~~~[m[K
+[01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/rotary_encoder.cpp:51:8:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kpi[m[K’ [[01;35m[K-Wunused-parameter[m[K]
+   51 |    [01;35m[Kint pi[m[K, unsigned gpio, unsigned level, uint32_t tick, void *user)
+      |    [01;35m[K~~~~^~[m[K
+[01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/rotary_encoder.cpp:51:52:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Ktick[m[K’ [[01;35m[K-Wunused-parameter[m[K]
+   51 |    int pi, unsigned gpio, unsigned level, [01;35m[Kuint32_t tick[m[K, void *user)
+      |                                           [01;35m[K~~~~~~~~~^~~~[m[K
+[01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/rotary_encoder.cpp:[m[K In function ‘[01m[KRED_t* RED(int, int, int, int, RED_CB_t)[m[K’:
+[01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/rotary_encoder.cpp:93:17:[m[K [01;31m[Kerror: [m[Kinvalid conversion from ‘[01m[Kvoid*[m[K’ to ‘[01m[KRED_t*[m[K’ {aka ‘[01m[K_RED_s*[m[K’} [[01;31m[K-fpermissive[m[K]
+   93 |    self = [01;31m[Kmalloc(sizeof(RED_t))[m[K;
+      |           [01;31m[K~~~~~~^~~~~~~~~~~~~~~[m[K
+      |                 [01;31m[K|[m[K
+      |                 [01;31m[Kvoid*[m[K
+make[2]: *** [CMakeFiles/diff_interface.dir/build.make:102: CMakeFiles/diff_interface.dir/src/rotary_encoder.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+[01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:[m[K In function ‘[01m[Kvoid callback1(int)[m[K’:
+[01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:9:20:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kway[m[K’ [[01;35m[K-Wunused-parameter[m[K]
+    9 | void callback1([01;35m[Kint way[m[K)
+      |                [01;35m[K~~~~^~~[m[K
+make[1]: *** [CMakeFiles/Makefile2:78: CMakeFiles/diff_interface.dir/all] Error 2
+make: *** [Makefile:141: all] Error 2

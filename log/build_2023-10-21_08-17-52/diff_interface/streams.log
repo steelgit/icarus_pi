@@ -1,0 +1,22 @@
+[0.104s] Invoking command in '/home/ubuntu/workspaces/diff_robot/build/diff_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/ubuntu/workspaces/diff_robot/build/diff_interface -- -j4 -l4
+[0.303s] [35m[1mScanning dependencies of target diff_interface[0m
+[0.477s] [ 20%] [32mBuilding CXX object CMakeFiles/diff_interface.dir/src/diffdrive_MyBot.cpp.o[0m
+[0.502s] [ 40%] [32mBuilding CXX object CMakeFiles/diff_interface.dir/src/motor_control.cpp.o[0m
+[1.519s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:[m[K In member function ‘[01m[Kint motor_control::start_encoders()[m[K’:
+[1.522s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:36:5:[m[K [01;31m[Kerror: [m[K‘[01m[Kdec1[m[K’ was not declared in this scope
+[1.522s]    36 |     [01;31m[Kdec1[m[K = new re_decoder(7, 8, callback1);
+[1.523s]       |     [01;31m[K^~~~[m[K
+[1.524s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:36:16:[m[K [01;31m[Kerror: [m[Kexpected type-specifier before ‘[01m[Kre_decoder[m[K’
+[1.524s]    36 |     dec1 = new [01;31m[Kre_decoder[m[K(7, 8, callback1);
+[1.525s]       |                [01;31m[K^~~~~~~~~~[m[K
+[1.526s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:37:5:[m[K [01;31m[Kerror: [m[K‘[01m[Kdec2[m[K’ was not declared in this scope
+[1.526s]    37 |     [01;31m[Kdec2[m[K = new re_decoder(17, 18, callback2);
+[1.527s]       |     [01;31m[K^~~~[m[K
+[1.528s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:37:16:[m[K [01;31m[Kerror: [m[Kexpected type-specifier before ‘[01m[Kre_decoder[m[K’
+[1.529s]    37 |     dec2 = new [01;31m[Kre_decoder[m[K(17, 18, callback2);
+[1.529s]       |                [01;31m[K^~~~~~~~~~[m[K
+[1.650s] make[2]: *** [CMakeFiles/diff_interface.dir/build.make:89: CMakeFiles/diff_interface.dir/src/motor_control.cpp.o] Error 1
+[1.651s] make[2]: *** Waiting for unfinished jobs....
+[10.450s] make[1]: *** [CMakeFiles/Makefile2:78: CMakeFiles/diff_interface.dir/all] Error 2
+[10.450s] make: *** [Makefile:141: all] Error 2
+[10.456s] Invoked command in '/home/ubuntu/workspaces/diff_robot/build/diff_interface' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/ubuntu/workspaces/diff_robot/build/diff_interface -- -j4 -l4

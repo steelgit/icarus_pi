@@ -1,0 +1,9 @@
+<library path="diff_interface">
+  <class name="diff_interface/DiffDriveMyBot"
+         type="DiffDriveMyBot"
+         base_class_type="hardware_interface::SystemInterface">
+    <description>
+      Hardware Interface for Differential Drive rPi controller.
+    </description>
+  </class>
+</library>

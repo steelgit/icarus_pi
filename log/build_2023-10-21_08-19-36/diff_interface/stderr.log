@@ -1,0 +1,8 @@
+[01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:[m[K In member function ‘[01m[Kint motor_control::start_encoders()[m[K’:
+[01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:30:9:[m[K [01;31m[Kerror: [m[K‘[01m[KgpioInitialise[m[K’ was not declared in this scope
+   30 |     if ([01;31m[KgpioInitialise[m[K() < 0)
+      |         [01;31m[K^~~~~~~~~~~~~~[m[K
+make[2]: *** [CMakeFiles/diff_interface.dir/build.make:89: CMakeFiles/diff_interface.dir/src/motor_control.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+make[1]: *** [CMakeFiles/Makefile2:78: CMakeFiles/diff_interface.dir/all] Error 2
+make: *** [Makefile:141: all] Error 2

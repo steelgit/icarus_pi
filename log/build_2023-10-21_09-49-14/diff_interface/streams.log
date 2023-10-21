@@ -1,0 +1,35 @@
+[0.101s] Invoking command in '/home/ubuntu/workspaces/diff_robot/build/diff_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/ubuntu/workspaces/diff_robot/build/diff_interface -- -j4 -l4
+[0.309s] [35m[1mScanning dependencies of target diff_interface[0m
+[0.541s] [ 20%] [32mBuilding CXX object CMakeFiles/diff_interface.dir/src/diffdrive_MyBot.cpp.o[0m
+[0.572s] [ 40%] [32mBuilding CXX object CMakeFiles/diff_interface.dir/src/motor_control.cpp.o[0m
+[0.591s] [ 60%] [32mBuilding CXX object CMakeFiles/diff_interface.dir/src/rotary_encoder.cpp.o[0m
+[0.790s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/rotary_encoder.cpp:[m[K In function ‘[01m[Kvoid _cb(int, unsigned int, unsigned int, uint32_t, void*)[m[K’:
+[0.791s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/rotary_encoder.cpp:53:16:[m[K [01;31m[Kerror: [m[Kinvalid conversion from ‘[01m[Kvoid*[m[K’ to ‘[01m[KRED_t*[m[K’ {aka ‘[01m[K_RED_s*[m[K’} [[01;31m[K-fpermissive[m[K]
+[0.791s]    53 |    RED_t *self=[01;31m[Kuser[m[K;
+[0.791s]       |                [01;31m[K^~~~[m[K
+[0.792s]       |                [01;31m[K|[m[K
+[0.792s]       |                [01;31m[Kvoid*[m[K
+[0.794s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/rotary_encoder.cpp:58:16:[m[K [01;35m[Kwarning: [m[Kcomparison of integer expressions of different signedness: ‘[01m[Kunsigned int[m[K’ and ‘[01m[Kint[m[K’ [[01;35m[K-Wsign-compare[m[K]
+[0.795s]    58 |       if ([01;35m[Kgpio == self->gpioA[m[K)
+[0.795s]       |           [01;35m[K~~~~~^~~~~~~~~~~~~~[m[K
+[0.797s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/rotary_encoder.cpp:51:8:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kpi[m[K’ [[01;35m[K-Wunused-parameter[m[K]
+[0.798s]    51 |    [01;35m[Kint pi[m[K, unsigned gpio, unsigned level, uint32_t tick, void *user)
+[0.799s]       |    [01;35m[K~~~~^~[m[K
+[0.800s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/rotary_encoder.cpp:51:52:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Ktick[m[K’ [[01;35m[K-Wunused-parameter[m[K]
+[0.801s]    51 |    int pi, unsigned gpio, unsigned level, [01;35m[Kuint32_t tick[m[K, void *user)
+[0.802s]       |                                           [01;35m[K~~~~~~~~~^~~~[m[K
+[0.805s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/rotary_encoder.cpp:[m[K In function ‘[01m[KRED_t* RED(int, int, int, int, RED_CB_t)[m[K’:
+[0.806s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/rotary_encoder.cpp:93:17:[m[K [01;31m[Kerror: [m[Kinvalid conversion from ‘[01m[Kvoid*[m[K’ to ‘[01m[KRED_t*[m[K’ {aka ‘[01m[K_RED_s*[m[K’} [[01;31m[K-fpermissive[m[K]
+[0.807s]    93 |    self = [01;31m[Kmalloc(sizeof(RED_t))[m[K;
+[0.807s]       |           [01;31m[K~~~~~~^~~~~~~~~~~~~~~[m[K
+[0.808s]       |                 [01;31m[K|[m[K
+[0.808s]       |                 [01;31m[Kvoid*[m[K
+[0.824s] make[2]: *** [CMakeFiles/diff_interface.dir/build.make:102: CMakeFiles/diff_interface.dir/src/rotary_encoder.cpp.o] Error 1
+[0.825s] make[2]: *** Waiting for unfinished jobs....
+[6.496s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:[m[K In function ‘[01m[Kvoid callback1(int)[m[K’:
+[6.496s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:9:20:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kway[m[K’ [[01;35m[K-Wunused-parameter[m[K]
+[6.497s]     9 | void callback1([01;35m[Kint way[m[K)
+[6.498s]       |                [01;35m[K~~~~^~~[m[K
+[11.075s] make[1]: *** [CMakeFiles/Makefile2:78: CMakeFiles/diff_interface.dir/all] Error 2
+[11.075s] make: *** [Makefile:141: all] Error 2
+[11.081s] Invoked command in '/home/ubuntu/workspaces/diff_robot/build/diff_interface' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/ubuntu/workspaces/diff_robot/build/diff_interface -- -j4 -l4

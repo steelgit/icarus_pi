@@ -1,0 +1,45 @@
+[0.097s] Invoking command in '/home/ubuntu/workspaces/diff_robot/build/diff_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/ubuntu/workspaces/diff_robot/build/diff_interface -- -j4 -l4
+[0.302s] [35m[1mScanning dependencies of target diff_interface[0m
+[0.525s] [ 20%] [32mBuilding CXX object CMakeFiles/diff_interface.dir/src/motor_control.cpp.o[0m
+[5.555s] In file included from [01m[K/opt/ros/foxy/include/rclcpp/service.hpp:34[m[K,
+[5.556s]                  from [01m[K/opt/ros/foxy/include/rclcpp/callback_group.hpp:25[m[K,
+[5.556s]                  from [01m[K/opt/ros/foxy/include/rclcpp/any_executable.hpp:20[m[K,
+[5.556s]                  from [01m[K/opt/ros/foxy/include/rclcpp/memory_strategy.hpp:24[m[K,
+[5.557s]                  from [01m[K/opt/ros/foxy/include/rclcpp/memory_strategies.hpp:18[m[K,
+[5.558s]                  from [01m[K/opt/ros/foxy/include/rclcpp/executor_options.hpp:20[m[K,
+[5.558s]                  from [01m[K/opt/ros/foxy/include/rclcpp/executor.hpp:33[m[K,
+[5.559s]                  from [01m[K/opt/ros/foxy/include/rclcpp/executors/multi_threaded_executor.hpp:26[m[K,
+[5.559s]                  from [01m[K/opt/ros/foxy/include/rclcpp/executors.hpp:21[m[K,
+[5.560s]                  from [01m[K/opt/ros/foxy/include/rclcpp/rclcpp.hpp:146[m[K,
+[5.561s]                  from [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/include/diff_interface/motor_control.h:6[m[K,
+[5.561s]                  from [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:1[m[K:
+[5.562s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:[m[K In function ‘[01m[Kvoid callback1(int)[m[K’:
+[5.562s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:15:16:[m[K [01;31m[Kerror: [m[K‘[01m[Klogger_[m[K’ was not declared in this scope
+[5.563s]    15 |    RCLCPP_INFO([01;31m[Klogger_[m[K, "pos1= %i \n", pos);
+[5.563s]       |                [01;31m[K^~~~~~~[m[K
+[5.564s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:15:4:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[5.564s]    15 |    [01;31m[KRCLCPP_INFO[m[K(logger_, "pos1= %i \n", pos);
+[5.565s]       |    [01;31m[K^~~~~~~~~~~[m[K
+[5.565s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:15:4:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[5.565s]    15 |    [01;31m[KRCLCPP_INFO[m[K(logger_, "pos1= %i \n", pos);
+[5.566s]       |    [01;31m[K^~~~~~~~~~~[m[K
+[5.566s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:15:4:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[5.567s]    15 |    [01;31m[KRCLCPP_INFO[m[K(logger_, "pos1= %i \n", pos);
+[5.567s]       |    [01;31m[K^~~~~~~~~~~[m[K
+[5.567s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:[m[K In function ‘[01m[Kvoid callback2(int)[m[K’:
+[5.568s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:24:16:[m[K [01;31m[Kerror: [m[K‘[01m[Klogger_[m[K’ was not declared in this scope
+[5.568s]    24 |    RCLCPP_INFO([01;31m[Klogger_[m[K, "pos2= %i \n", pos);
+[5.569s]       |                [01;31m[K^~~~~~~[m[K
+[5.569s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:24:4:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[5.569s]    24 |    [01;31m[KRCLCPP_INFO[m[K(logger_, "pos2= %i \n", pos);
+[5.570s]       |    [01;31m[K^~~~~~~~~~~[m[K
+[5.570s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:24:4:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[5.571s]    24 |    [01;31m[KRCLCPP_INFO[m[K(logger_, "pos2= %i \n", pos);
+[5.571s]       |    [01;31m[K^~~~~~~~~~~[m[K
+[5.572s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:24:4:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[5.572s]    24 |    [01;31m[KRCLCPP_INFO[m[K(logger_, "pos2= %i \n", pos);
+[5.573s]       |    [01;31m[K^~~~~~~~~~~[m[K
+[6.845s] make[2]: *** [CMakeFiles/diff_interface.dir/build.make:89: CMakeFiles/diff_interface.dir/src/motor_control.cpp.o] Error 1
+[6.846s] make[1]: *** [CMakeFiles/Makefile2:78: CMakeFiles/diff_interface.dir/all] Error 2
+[6.846s] make: *** [Makefile:141: all] Error 2
+[6.852s] Invoked command in '/home/ubuntu/workspaces/diff_robot/build/diff_interface' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/ubuntu/workspaces/diff_robot/build/diff_interface -- -j4 -l4

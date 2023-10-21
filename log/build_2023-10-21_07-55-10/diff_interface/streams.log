@@ -1,0 +1,51 @@
+[0.099s] Invoking command in '/home/ubuntu/workspaces/diff_robot/build/diff_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/ubuntu/workspaces/diff_robot/build/diff_interface -- -j4 -l4
+[0.300s] [35m[1mScanning dependencies of target diff_interface[0m
+[0.664s] [ 20%] [32mBuilding CXX object CMakeFiles/diff_interface.dir/src/diffdrive_MyBot.cpp.o[0m
+[0.677s] [ 40%] [32mBuilding CXX object CMakeFiles/diff_interface.dir/src/motor_control.cpp.o[0m
+[6.431s] In file included from [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:1[m[K:
+[6.431s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/include/diff_interface/motor_control.h:24:16:[m[K [01;31m[Kerror: [m[K‘[01m[Krclcpp::Logger::Logger()[m[K’ is private within this context
+[6.432s]    24 | rclcpp::Logger [01;31m[Klogger_[m[K;
+[6.433s]       |                [01;31m[K^~~~~~~[m[K
+[6.433s] In file included from [01m[K/opt/ros/foxy/include/rclcpp/logging.hpp:23[m[K,
+[6.434s]                  from [01m[K/opt/ros/foxy/include/rclcpp/service.hpp:34[m[K,
+[6.435s]                  from [01m[K/opt/ros/foxy/include/rclcpp/callback_group.hpp:25[m[K,
+[6.435s]                  from [01m[K/opt/ros/foxy/include/rclcpp/any_executable.hpp:20[m[K,
+[6.436s]                  from [01m[K/opt/ros/foxy/include/rclcpp/memory_strategy.hpp:24[m[K,
+[6.437s]                  from [01m[K/opt/ros/foxy/include/rclcpp/memory_strategies.hpp:18[m[K,
+[6.437s]                  from [01m[K/opt/ros/foxy/include/rclcpp/executor_options.hpp:20[m[K,
+[6.438s]                  from [01m[K/opt/ros/foxy/include/rclcpp/executor.hpp:33[m[K,
+[6.438s]                  from [01m[K/opt/ros/foxy/include/rclcpp/executors/multi_threaded_executor.hpp:26[m[K,
+[6.439s]                  from [01m[K/opt/ros/foxy/include/rclcpp/executors.hpp:21[m[K,
+[6.440s]                  from [01m[K/opt/ros/foxy/include/rclcpp/rclcpp.hpp:146[m[K,
+[6.440s]                  from [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/include/diff_interface/motor_control.h:6[m[K,
+[6.441s]                  from [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:1[m[K:
+[6.442s] [01m[K/opt/ros/foxy/include/rclcpp/logger.hpp:88:3:[m[K [01;36m[Knote: [m[Kdeclared private here
+[6.442s]    88 |   [01;36m[KLogger[m[K()
+[6.443s]       |   [01;36m[K^~~~~~[m[K
+[6.557s] In file included from [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/include/diff_interface/diffdrive_MyBot.h:16[m[K,
+[6.558s]                  from [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/diffdrive_MyBot.cpp:1[m[K:
+[6.558s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/include/diff_interface/motor_control.h:24:16:[m[K [01;31m[Kerror: [m[K‘[01m[Krclcpp::Logger::Logger()[m[K’ is private within this context
+[6.559s]    24 | rclcpp::Logger [01;31m[Klogger_[m[K;
+[6.560s]       |                [01;31m[K^~~~~~~[m[K
+[6.561s] In file included from [01m[K/opt/ros/foxy/include/rclcpp/logging.hpp:23[m[K,
+[6.561s]                  from [01m[K/opt/ros/foxy/include/rclcpp/service.hpp:34[m[K,
+[6.562s]                  from [01m[K/opt/ros/foxy/include/rclcpp/callback_group.hpp:25[m[K,
+[6.562s]                  from [01m[K/opt/ros/foxy/include/rclcpp/any_executable.hpp:20[m[K,
+[6.563s]                  from [01m[K/opt/ros/foxy/include/rclcpp/memory_strategy.hpp:24[m[K,
+[6.564s]                  from [01m[K/opt/ros/foxy/include/rclcpp/memory_strategies.hpp:18[m[K,
+[6.570s]                  from [01m[K/opt/ros/foxy/include/rclcpp/executor_options.hpp:20[m[K,
+[6.572s]                  from [01m[K/opt/ros/foxy/include/rclcpp/executor.hpp:33[m[K,
+[6.573s]                  from [01m[K/opt/ros/foxy/include/rclcpp/executors/multi_threaded_executor.hpp:26[m[K,
+[6.574s]                  from [01m[K/opt/ros/foxy/include/rclcpp/executors.hpp:21[m[K,
+[6.575s]                  from [01m[K/opt/ros/foxy/include/rclcpp/rclcpp.hpp:146[m[K,
+[6.576s]                  from [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/include/diff_interface/diffdrive_MyBot.h:5[m[K,
+[6.576s]                  from [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/diffdrive_MyBot.cpp:1[m[K:
+[6.577s] [01m[K/opt/ros/foxy/include/rclcpp/logger.hpp:88:3:[m[K [01;36m[Knote: [m[Kdeclared private here
+[6.578s]    88 |   [01;36m[KLogger[m[K()
+[6.578s]       |   [01;36m[K^~~~~~[m[K
+[7.929s] make[2]: *** [CMakeFiles/diff_interface.dir/build.make:89: CMakeFiles/diff_interface.dir/src/motor_control.cpp.o] Error 1
+[7.930s] make[2]: *** Waiting for unfinished jobs....
+[9.195s] make[2]: *** [CMakeFiles/diff_interface.dir/build.make:63: CMakeFiles/diff_interface.dir/src/diffdrive_MyBot.cpp.o] Error 1
+[9.196s] make[1]: *** [CMakeFiles/Makefile2:78: CMakeFiles/diff_interface.dir/all] Error 2
+[9.197s] make: *** [Makefile:141: all] Error 2
+[9.203s] Invoked command in '/home/ubuntu/workspaces/diff_robot/build/diff_interface' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/ubuntu/workspaces/diff_robot/build/diff_interface -- -j4 -l4

@@ -1,0 +1,11 @@
+[0.107s] Invoking command in '/home/ubuntu/workspaces/diff_robot/build/diff_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/ubuntu/workspaces/diff_robot/build/diff_interface -- -j4 -l4
+[0.312s] [35m[1mScanning dependencies of target diff_interface[0m
+[0.563s] [ 20%] [32mBuilding CXX object CMakeFiles/diff_interface.dir/src/motor_control.cpp.o[0m
+[5.695s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:[m[K In member function ‘[01m[Kint motor_control::start_encoders()[m[K’:
+[5.696s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:29:11:[m[K [01;31m[Kerror: [m[K‘[01m[Kpigpiod_if2[m[K’ has not been declared
+[5.696s]    29 |     pi_ = [01;31m[Kpigpiod_if2[m[K::pigpio_start(NULL, NULL);
+[5.696s]       |           [01;31m[K^~~~~~~~~~~[m[K
+[7.009s] make[2]: *** [CMakeFiles/diff_interface.dir/build.make:89: CMakeFiles/diff_interface.dir/src/motor_control.cpp.o] Error 1
+[7.010s] make[1]: *** [CMakeFiles/Makefile2:78: CMakeFiles/diff_interface.dir/all] Error 2
+[7.010s] make: *** [Makefile:141: all] Error 2
+[7.016s] Invoked command in '/home/ubuntu/workspaces/diff_robot/build/diff_interface' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/ubuntu/workspaces/diff_robot/build/diff_interface -- -j4 -l4

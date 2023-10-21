@@ -1,0 +1,21 @@
+[0.119s] Invoking command in '/home/ubuntu/workspaces/diff_robot/build/diff_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/ubuntu/workspaces/diff_robot/build/diff_interface -- -j4 -l4
+[0.320s] [35m[1mScanning dependencies of target diff_interface[0m
+[0.522s] [ 20%] [32mBuilding CXX object CMakeFiles/diff_interface.dir/src/diffdrive_MyBot.cpp.o[0m
+[0.555s] [ 40%] [32mBuilding CXX object CMakeFiles/diff_interface.dir/src/motor_control.cpp.o[0m
+[1.972s] In file included from [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/motor_control.cpp:1[m[K:
+[1.972s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/include/diff_interface/motor_control.h:12:23:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K;[m[K’ at end of member declaration
+[1.973s]    12 |         motor_control([01;31m[K)[m[K
+[1.974s]       |                       [01;31m[K^[m[K
+[1.975s]       |                        [32m[K;[m[K
+[2.101s] make[2]: *** [CMakeFiles/diff_interface.dir/build.make:89: CMakeFiles/diff_interface.dir/src/motor_control.cpp.o] Error 1
+[2.101s] make[2]: *** Waiting for unfinished jobs....
+[6.702s] In file included from [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/include/diff_interface/diffdrive_MyBot.h:16[m[K,
+[6.703s]                  from [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/diffdrive_MyBot.cpp:1[m[K:
+[6.704s] [01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/include/diff_interface/motor_control.h:12:23:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K;[m[K’ at end of member declaration
+[6.704s]    12 |         motor_control([01;31m[K)[m[K
+[6.705s]       |                       [01;31m[K^[m[K
+[6.706s]       |                        [32m[K;[m[K
+[9.624s] make[2]: *** [CMakeFiles/diff_interface.dir/build.make:63: CMakeFiles/diff_interface.dir/src/diffdrive_MyBot.cpp.o] Error 1
+[9.625s] make[1]: *** [CMakeFiles/Makefile2:78: CMakeFiles/diff_interface.dir/all] Error 2
+[9.626s] make: *** [Makefile:141: all] Error 2
+[9.631s] Invoked command in '/home/ubuntu/workspaces/diff_robot/build/diff_interface' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/ubuntu/workspaces/diff_robot/build/diff_interface -- -j4 -l4
