@@ -29,8 +29,9 @@ return_type DiffDriveMyBot::configure(const hardware_interface::HardwareInfo & i
   l_wheel_.setup(cfg_.left_wheel_name, cfg_.enc_counts_per_rev);
   r_wheel_.setup(cfg_.right_wheel_name, cfg_.enc_counts_per_rev);
 
-  //setup motor encoder
-  motor_ctr.start_encoders();
+  //setup motor_control
+  motor_ctr.start_motors();
+  //motor_ctr.start_encoders();
 
 
   RCLCPP_INFO(logger_, "Finished Configuration");
@@ -103,11 +104,9 @@ hardware_interface::return_type DiffDriveMyBot::read()
     return return_type::ERROR;
   }
 
-  //arduino_.readEncoderValues(l_wheel_.enc, r_wheel_.enc);
-
   //setup motor encoder
-  int val = motor_ctr.read_encoders();
-  RCLCPP_INFO(logger_, "  Read Encoder Values:  %i", val);
+  //int val = motor_ctr.read_encoders();
+  //RCLCPP_INFO(logger_, "  Read Encoder Values:  %i", val);
 
   double pos_prev = l_wheel_.pos;
   l_wheel_.pos = l_wheel_.calcEncAngle();
@@ -132,11 +131,9 @@ hardware_interface::return_type DiffDriveMyBot::write()
     return return_type::ERROR;
   }
 
-  //RCLCPP_INFO(logger_, "  Write speed Value:  %f", (l_wheel_.cmd / l_wheel_.rads_per_count / cfg_.loop_rate));
-  //arduino_.setMotorValues(l_wheel_.cmd / l_wheel_.rads_per_count / cfg_.loop_rate, r_wheel_.cmd / r_wheel_.rads_per_count / cfg_.loop_rate);
-
-
-
+  //setup motor 
+  motor_ctr.setMotor(l_wheel_.cmd / l_wheel_.rads_per_count / cfg_.loop_rate);
+  //RCLCPP_INFO(logger_, "  Write Motor Value:  %f", (l_wheel_.cmd / l_wheel_.rads_per_count / cfg_.loop_rate));
 
   return return_type::OK;
 
