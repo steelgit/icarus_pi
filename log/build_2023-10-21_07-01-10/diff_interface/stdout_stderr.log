@@ -1,8 +1,0 @@
-[35m[1mScanning dependencies of target diff_interface[0m
-[ 33%] [32mBuilding CXX object CMakeFiles/diff_interface.dir/src/diffdrive_MyBot.cpp.o[0m
-[01m[K/home/ubuntu/workspaces/diff_robot/src/diff_interface/src/diffdrive_MyBot.cpp:13:33:[m[K [01;31m[Kerror: [m[Kdefinition of implicitly-declared ‘[01m[Kvirtual DiffDriveMyBot::~DiffDriveMyBot()[m[K’
-   13 | DiffDriveMyBot::~DiffDriveMyBot([01;31m[K)[m[K
-      |                                 [01;31m[K^[m[K
-make[2]: *** [CMakeFiles/diff_interface.dir/build.make:63: CMakeFiles/diff_interface.dir/src/diffdrive_MyBot.cpp.o] Error 1
-make[1]: *** [CMakeFiles/Makefile2:78: CMakeFiles/diff_interface.dir/all] Error 2
-make: *** [Makefile:141: all] Error 2

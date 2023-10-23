@@ -1,6 +1,0 @@
-Invoking command in '/home/ubuntu/workspaces/diff_robot/build/diff_interface': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake /home/ubuntu/workspaces/diff_robot/src/diff_interface -DCMAKE_INSTALL_PREFIX=/home/ubuntu/workspaces/diff_robot/install/diff_interface
-Invoked command in '/home/ubuntu/workspaces/diff_robot/build/diff_interface' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake /home/ubuntu/workspaces/diff_robot/src/diff_interface -DCMAKE_INSTALL_PREFIX=/home/ubuntu/workspaces/diff_robot/install/diff_interface
-Invoking command in '/home/ubuntu/workspaces/diff_robot/build/diff_interface': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /home/ubuntu/workspaces/diff_robot/build/diff_interface -- -j4 -l4
-Invoked command in '/home/ubuntu/workspaces/diff_robot/build/diff_interface' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /home/ubuntu/workspaces/diff_robot/build/diff_interface -- -j4 -l4
-Invoking command in '/home/ubuntu/workspaces/diff_robot/build/diff_interface': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --install /home/ubuntu/workspaces/diff_robot/build/diff_interface
-Invoked command in '/home/ubuntu/workspaces/diff_robot/build/diff_interface' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --install /home/ubuntu/workspaces/diff_robot/build/diff_interface

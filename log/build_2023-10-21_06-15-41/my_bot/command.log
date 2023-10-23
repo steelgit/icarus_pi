@@ -1,4 +1,0 @@
-Invoking command in '/home/ubuntu/workspaces/diff_robot/build/my_bot': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /home/ubuntu/workspaces/diff_robot/build/my_bot -- -j4 -l4
-Invoked command in '/home/ubuntu/workspaces/diff_robot/build/my_bot' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /home/ubuntu/workspaces/diff_robot/build/my_bot -- -j4 -l4
-Invoking command in '/home/ubuntu/workspaces/diff_robot/build/my_bot': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --install /home/ubuntu/workspaces/diff_robot/build/my_bot
-Invoked command in '/home/ubuntu/workspaces/diff_robot/build/my_bot' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --install /home/ubuntu/workspaces/diff_robot/build/my_bot
