@@ -10,6 +10,16 @@ using namespace std;
 
 #include "diff_interface/rotary_encoder.h"
 
+struct motor{
+    const uint8_t PWM_MAX;
+    const uint8_t ENA; //enableMotor Pin
+    const uint8_t IN1; //forwardPin
+    const uint8_t IN2; //backwardPin
+    const uint8_t FREQ; //
+    const uint8_t RANGE; //
+};
+
+
 class motor_control
 {
     public:
@@ -19,10 +29,11 @@ class motor_control
         int start_encoders();
         int stop_encoders();
         int read_encoders();
+        void motor_config(motor m);
         
-        int start_motors();
-        void setMotorMode(const string &mode);
-        void setMotor(const double &power); 
+        int start_motors(motor FL, motor FR);
+        void setMotorMode(const string &mode, motor m);
+        void setMotor(const double &power, motor m); 
 
     private:
 
@@ -36,13 +47,7 @@ class motor_control
         int optGpioB = 3;
         int optGlitch = 1000;
         int optMode = RED_MODE_DETENT;
-
-        const uint8_t PWM_MAX = 240;
-        const uint8_t ENA = 21; // Pin 40   //enableMotor Pin
-        const uint8_t IN1 = 20; // Pin 38    //forwardPin
-        const uint8_t IN2 = 16; // Pin 36   //backwardPin
-        const uint8_t FREQ = 60; //
-        const uint8_t RANGE = 255; //
+      
 
 };
 

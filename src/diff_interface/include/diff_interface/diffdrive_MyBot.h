@@ -52,6 +52,9 @@ private:
   rclcpp::Logger logger_;
 
   std::chrono::time_point<std::chrono::system_clock> time_;
+
+  motor FL = {240, 21, 20, 16, 60, 255};
+  motor FR = {240, 26, 19, 13, 60, 255};
   
 };
 

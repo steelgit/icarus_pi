@@ -30,7 +30,7 @@ return_type DiffDriveMyBot::configure(const hardware_interface::HardwareInfo & i
   r_wheel_.setup(cfg_.right_wheel_name, cfg_.enc_counts_per_rev);
 
   //setup motor_control
-  motor_ctr.start_motors();
+  motor_ctr.start_motors(FL, FR);
   //motor_ctr.start_encoders();
 
 
@@ -131,8 +131,9 @@ hardware_interface::return_type DiffDriveMyBot::write()
     return return_type::ERROR;
   }
 
-  //setup motor 
-  motor_ctr.setMotor(l_wheel_.cmd / l_wheel_.rads_per_count / cfg_.loop_rate);
+  //wire to motors
+  motor_ctr.setMotor(l_wheel_.cmd / l_wheel_.rads_per_count / cfg_.loop_rate, FL);
+  motor_ctr.setMotor(r_wheel_.cmd / r_wheel_.rads_per_count / cfg_.loop_rate, FR);
   //RCLCPP_INFO(logger_, "  Write Motor Value:  %f", (l_wheel_.cmd / l_wheel_.rads_per_count / cfg_.loop_rate));
 
   return return_type::OK;
