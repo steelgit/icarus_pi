@@ -20,14 +20,19 @@ return_type DiffDriveMyBot::configure(const hardware_interface::HardwareInfo & i
 
   time_ = std::chrono::system_clock::now();
 
-  cfg_.left_wheel_name = info_.hardware_parameters["left_wheel_name"];
-  cfg_.right_wheel_name = info_.hardware_parameters["right_wheel_name"];
+  cfg_.front_left_wheel_name = info_.hardware_parameters["front_left_wheel_name"];
+  cfg_.back_left_wheel_name = info_.hardware_parameters["back_left_wheel_name"];
+  cfg_.front_right_wheel_name = info_.hardware_parameters["front_right_wheel_name"];
+  cfg_.back_right_wheel_name = info_.hardware_parameters["back_right_wheel_name"];
   cfg_.loop_rate = std::stof(info_.hardware_parameters["loop_rate"]);
   cfg_.enc_counts_per_rev = std::stoi(info_.hardware_parameters["enc_counts_per_rev"]);
 
   // Set up the wheels
-  l_wheel_.setup(cfg_.left_wheel_name, cfg_.enc_counts_per_rev);
-  r_wheel_.setup(cfg_.right_wheel_name, cfg_.enc_counts_per_rev);
+  fl_wheel_.setup(cfg_.front_left_wheel_name, cfg_.enc_counts_per_rev);
+  bl_wheel_.setup(cfg_.back_left_wheel_name, cfg_.enc_counts_per_rev);
+  fr_wheel_.setup(cfg_.front_right_wheel_name, cfg_.enc_counts_per_rev);
+  br_wheel_.setup(cfg_.back_right_wheel_name, cfg_.enc_counts_per_rev);
+
 
   //setup motor_control
   motor_ctr.start_motors(FL, FR);
@@ -46,11 +51,14 @@ std::vector<hardware_interface::StateInterface> DiffDriveMyBot::export_state_int
 
   std::vector<hardware_interface::StateInterface> state_interfaces;
 
-  state_interfaces.emplace_back(hardware_interface::StateInterface(l_wheel_.name, hardware_interface::HW_IF_VELOCITY, &l_wheel_.vel));
-  state_interfaces.emplace_back(hardware_interface::StateInterface(l_wheel_.name, hardware_interface::HW_IF_POSITION, &l_wheel_.pos));
-  state_interfaces.emplace_back(hardware_interface::StateInterface(r_wheel_.name, hardware_interface::HW_IF_VELOCITY, &r_wheel_.vel));
-  state_interfaces.emplace_back(hardware_interface::StateInterface(r_wheel_.name, hardware_interface::HW_IF_POSITION, &r_wheel_.pos));
-
+  state_interfaces.emplace_back(hardware_interface::StateInterface(fl_wheel_.name, hardware_interface::HW_IF_VELOCITY, &fl_wheel_.vel));
+  state_interfaces.emplace_back(hardware_interface::StateInterface(fl_wheel_.name, hardware_interface::HW_IF_POSITION, &fl_wheel_.pos));
+  state_interfaces.emplace_back(hardware_interface::StateInterface(fr_wheel_.name, hardware_interface::HW_IF_VELOCITY, &fr_wheel_.vel));
+  state_interfaces.emplace_back(hardware_interface::StateInterface(fr_wheel_.name, hardware_interface::HW_IF_POSITION, &fr_wheel_.pos));
+  state_interfaces.emplace_back(hardware_interface::StateInterface(bl_wheel_.name, hardware_interface::HW_IF_VELOCITY, &bl_wheel_.vel));
+  state_interfaces.emplace_back(hardware_interface::StateInterface(bl_wheel_.name, hardware_interface::HW_IF_POSITION, &bl_wheel_.pos));
+  state_interfaces.emplace_back(hardware_interface::StateInterface(br_wheel_.name, hardware_interface::HW_IF_VELOCITY, &br_wheel_.vel));
+  state_interfaces.emplace_back(hardware_interface::StateInterface(br_wheel_.name, hardware_interface::HW_IF_POSITION, &br_wheel_.pos));
   return state_interfaces;
 }
 
@@ -60,8 +68,10 @@ std::vector<hardware_interface::CommandInterface> DiffDriveMyBot::export_command
 
   std::vector<hardware_interface::CommandInterface> command_interfaces;
 
-  command_interfaces.emplace_back(hardware_interface::CommandInterface(l_wheel_.name, hardware_interface::HW_IF_VELOCITY, &l_wheel_.cmd));
-  command_interfaces.emplace_back(hardware_interface::CommandInterface(r_wheel_.name, hardware_interface::HW_IF_VELOCITY, &r_wheel_.cmd));
+  command_interfaces.emplace_back(hardware_interface::CommandInterface(fl_wheel_.name, hardware_interface::HW_IF_VELOCITY, &fl_wheel_.cmd));
+  command_interfaces.emplace_back(hardware_interface::CommandInterface(fr_wheel_.name, hardware_interface::HW_IF_VELOCITY, &fr_wheel_.cmd));
+  command_interfaces.emplace_back(hardware_interface::CommandInterface(bl_wheel_.name, hardware_interface::HW_IF_VELOCITY, &bl_wheel_.cmd));
+  command_interfaces.emplace_back(hardware_interface::CommandInterface(br_wheel_.name, hardware_interface::HW_IF_VELOCITY, &br_wheel_.cmd));
 
   return command_interfaces;
 }
@@ -108,13 +118,13 @@ hardware_interface::return_type DiffDriveMyBot::read()
   //int val = motor_ctr.read_encoders();
   //RCLCPP_INFO(logger_, "  Read Encoder Values:  %i", val);
 
-  double pos_prev = l_wheel_.pos;
-  l_wheel_.pos = l_wheel_.calcEncAngle();
-  l_wheel_.vel = (l_wheel_.pos - pos_prev) / deltaSeconds;
+  double pos_prev = fl_wheel_.pos;
+  fl_wheel_.pos = fl_wheel_.calcEncAngle();
+  fl_wheel_.vel = (fl_wheel_.pos - pos_prev) / deltaSeconds;
 
-  pos_prev = r_wheel_.pos;
-  r_wheel_.pos = r_wheel_.calcEncAngle();
-  r_wheel_.vel = (r_wheel_.pos - pos_prev) / deltaSeconds;
+  pos_prev = fr_wheel_.pos;
+  fr_wheel_.pos = fr_wheel_.calcEncAngle();
+  fr_wheel_.vel = (fr_wheel_.pos - pos_prev) / deltaSeconds;
 
 
 
@@ -132,9 +142,9 @@ hardware_interface::return_type DiffDriveMyBot::write()
   }
 
   //wire to motors
-  motor_ctr.setMotor(l_wheel_.cmd / l_wheel_.rads_per_count / cfg_.loop_rate, FL);
-  motor_ctr.setMotor(r_wheel_.cmd / r_wheel_.rads_per_count / cfg_.loop_rate, FR);
-  //RCLCPP_INFO(logger_, "  Write Motor Value:  %f", (l_wheel_.cmd / l_wheel_.rads_per_count / cfg_.loop_rate));
+  motor_ctr.setMotor(fl_wheel_.cmd / fl_wheel_.rads_per_count / cfg_.loop_rate, FL);
+  motor_ctr.setMotor(fr_wheel_.cmd / fr_wheel_.rads_per_count / cfg_.loop_rate, FR);
+  //RCLCPP_INFO(logger_, "  Write Motor Value:  %f", (fl_wheel_.cmd / fl_wheel_.rads_per_count / cfg_.loop_rate));
 
   return return_type::OK;
 

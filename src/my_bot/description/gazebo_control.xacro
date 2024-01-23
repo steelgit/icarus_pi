@@ -5,14 +5,17 @@
         <plugin name="diff_drive" filename="libgazebo_ros_diff_drive.so">
 
             <!-- Wheel Information -->
-            <left_joint>left_wheel_joint</left_joint>
-            <right_joint>right_wheel_joint</right_joint>
-            <wheel_separation>0.35</wheel_separation>
-            <wheel_diameter>0.1</wheel_diameter>
+            <num_wheel_pairs>2</num_wheel_pairs>
+            <left_joint>frontLeft_joint</left_joint>
+            <left_joint>backLeft_joint</left_joint>
+            <right_joint>frontRight_joint</right_joint>
+            <right_joint>backRight_joint</right_joint>
+            <wheel_separation>0.7</wheel_separation>
+            <wheel_diameter>0.024</wheel_diameter>
 
 
             <!-- Limits -->
-            <max_wheel_torque>200</max_wheel_torque>
+            <max_wheel_torque>500</max_wheel_torque>
             <max_wheel_acceleration>10.0</max_wheel_acceleration>
 
             

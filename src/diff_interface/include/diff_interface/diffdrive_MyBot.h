@@ -45,8 +45,10 @@ private:
 
   Config cfg_;
 
-  Wheel l_wheel_;
-  Wheel r_wheel_;
+  Wheel fl_wheel_;
+  Wheel fr_wheel_;
+  Wheel bl_wheel_;
+  Wheel br_wheel_;
   motor_control motor_ctr;
 
   rclcpp::Logger logger_;
@@ -54,7 +56,7 @@ private:
   std::chrono::time_point<std::chrono::system_clock> time_;
 
   motor FL = {240, 21, 20, 16, 60, 255};
-  motor FR = {240, 26, 19, 13, 60, 255};
+  motor FR = {240, 13, 6, 5, 60, 255};
   
 };
 
