@@ -10,6 +10,7 @@
 /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/description/robot.urdf.xacro
 /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/description/robot_core.xacro
 /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/description/robot_dimensions.xacro
+/home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/description/robot_hw_consts.xacro
 /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/description/ros2_control.xacro
 /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/launch/joystick.launch.py
 /home/ubuntu/workspaces/diff_robot/install/my_bot/share/my_bot/launch/launch_robot.launch.py

@@ -44,7 +44,7 @@ int motor_control::start_encoders()
     return 0;
 }
 
-int motor_control::start_motors(motor FL, motor FR){
+int motor_control::start_motors(motor FL, motor BL, motor FR, motor BR){
     RCLCPP_INFO(logger_, ("----Starting motors" ));
     pi_ = pigpio_start(optHost, optPort);
     if (pi_ < 0) 
@@ -54,7 +54,9 @@ int motor_control::start_motors(motor FL, motor FR){
     }
 
     motor_config(FL);
+    motor_config(BL);
     motor_config(FR);
+    motor_config(BR);
 
     return 0;
 }

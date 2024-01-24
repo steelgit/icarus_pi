@@ -31,7 +31,7 @@ class motor_control
         int read_encoders();
         void motor_config(motor m);
         
-        int start_motors(motor FL, motor FR);
+        int start_motors(motor FL, motor BL, motor FR, motor BR);
         void setMotorMode(const string &mode, motor m);
         void setMotor(const double &power, motor m); 
 

@@ -35,7 +35,7 @@ return_type DiffDriveMyBot::configure(const hardware_interface::HardwareInfo & i
 
 
   //setup motor_control
-  motor_ctr.start_motors(FL, FR);
+  motor_ctr.start_motors(FL, BL, FR, BR);
   //motor_ctr.start_encoders();
 
 
@@ -122,9 +122,17 @@ hardware_interface::return_type DiffDriveMyBot::read()
   fl_wheel_.pos = fl_wheel_.calcEncAngle();
   fl_wheel_.vel = (fl_wheel_.pos - pos_prev) / deltaSeconds;
 
+  pos_prev = bl_wheel_.pos;
+  bl_wheel_.pos = fr_wheel_.calcEncAngle();
+  bl_wheel_.vel = (fr_wheel_.pos - pos_prev) / deltaSeconds;
+
   pos_prev = fr_wheel_.pos;
   fr_wheel_.pos = fr_wheel_.calcEncAngle();
   fr_wheel_.vel = (fr_wheel_.pos - pos_prev) / deltaSeconds;
+
+  pos_prev = br_wheel_.pos;
+  br_wheel_.pos = fr_wheel_.calcEncAngle();
+  br_wheel_.vel = (fr_wheel_.pos - pos_prev) / deltaSeconds;
 
 
 
@@ -143,7 +151,9 @@ hardware_interface::return_type DiffDriveMyBot::write()
 
   //wire to motors
   motor_ctr.setMotor(fl_wheel_.cmd / fl_wheel_.rads_per_count / cfg_.loop_rate, FL);
+  motor_ctr.setMotor(bl_wheel_.cmd / bl_wheel_.rads_per_count / cfg_.loop_rate, BL);
   motor_ctr.setMotor(fr_wheel_.cmd / fr_wheel_.rads_per_count / cfg_.loop_rate, FR);
+  motor_ctr.setMotor(br_wheel_.cmd / br_wheel_.rads_per_count / cfg_.loop_rate, BR);
   //RCLCPP_INFO(logger_, "  Write Motor Value:  %f", (fl_wheel_.cmd / fl_wheel_.rads_per_count / cfg_.loop_rate));
 
   return return_type::OK;
