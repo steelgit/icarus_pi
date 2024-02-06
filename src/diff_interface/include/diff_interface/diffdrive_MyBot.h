@@ -55,7 +55,7 @@ private:
 
   std::chrono::time_point<std::chrono::system_clock> time_;
 
-  motor FL = {240, 21, 20, 16, 60, 255};
+  motor FL = {PWM_MAX = 240, 21, 20, 16, 60, 255};
   motor FR = {240, 13, 6, 5, 60, 255};
   motor BL = {240, 2, 3, 4, 60, 255};
   motor BR = {240, 25, 24, 23, 60, 255};
