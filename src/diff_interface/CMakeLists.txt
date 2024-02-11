@@ -21,6 +21,8 @@ find_package(hardware_interface REQUIRED)
 find_package(controller_manager REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(pluginlib REQUIRED)
+find_package(control_toolbox REQUIRED)
+
 
 
 add_library(diff_interface SHARED src/diffdrive_MyBot.cpp src/wheel.cpp src/motor_control.cpp src/rotary_encoder.cpp)
@@ -38,6 +40,7 @@ ament_target_dependencies(
   controller_manager
   rclcpp
   pluginlib
+  control_toolbox
 )
 
 pluginlib_export_plugin_description_file(hardware_interface robot_hardware.xml)

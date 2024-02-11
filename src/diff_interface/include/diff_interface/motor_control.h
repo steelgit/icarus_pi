@@ -4,11 +4,14 @@
 #include <iostream>
 #include <cstring>
 #include "rclcpp/rclcpp.hpp"
+#include "rclcpp/clock.hpp"
 #include <pigpiod_if2.h>
 
-using namespace std;
-
 #include "diff_interface/rotary_encoder.h"
+#include "control_toolbox/pid.hpp"
+
+using namespace std;
+using control_toolbox::Pid;
 
 struct motor{
     const uint8_t PWM_MAX;
@@ -16,7 +19,7 @@ struct motor{
     const uint8_t IN1; //forwardPin
     const uint8_t IN2; //backwardPin
     const uint8_t FREQ; //
-    const uint8_t RANGE; //
+    const uint16_t RANGE; //
 };
 
 
@@ -43,13 +46,22 @@ class motor_control
         char *optPort   = NULL;
 
         RED_t *renc;
-        int optGpioA = 2;
-        int optGpioB = 3;
+        int optGpioA = 17;
+        int optGpioB = 27;
         int optGlitch = 1000;
         int optMode = RED_MODE_DETENT;
-      
 
 };
+
+
+//encoder values
+const double desiredPosition = 0.5;
+const double PROPORTIONAL_GAIN = 6.0;
+const double INTERGRAL_GAIN = 1.0;
+const double DERIVATIVE_GAIN = 2.0;
+const double I_MIN = 0.3;
+const double I_MAX = -0.3;
+const bool ANTIWINDUP = true;
 
 
 

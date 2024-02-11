@@ -4,14 +4,22 @@ motor_control::motor_control()
     : logger_(rclcpp::get_logger("motor_control"))
 {}
 
+//Global varaibles
 static int pos1 = 0;
+int out = 0;
 
-void callback1(int way)
-{
-   //static int pos = 0;
+auto EncoderClock = std::make_shared<rclcpp::Node>("EncoderClock");
+rclcpp::Time now_time;
+rclcpp::Time last_time = EncoderClock->get_clock()->now();
+control_toolbox::Pid pid;
 
-   pos1 += way;
-   //std::cout << "pos=" << pos << std::endl;
+void callback1(int currentPosition)
+{   
+    now_time = EncoderClock->get_clock()->now();
+    double effort = pid.computeCommand(desiredPosition - currentPosition, (now_time - last_time).nanoseconds());
+    last_time = EncoderClock->get_clock()->now();
+    out = currentPosition;
+    //RCLCPP_INFO(rclcpp::get_logger("encoder_control"), "effort= %f        currentPosition= %i \n", effort, out);
    
 }
 
@@ -28,6 +36,9 @@ int motor_control::start_encoders()
 {
     RCLCPP_INFO(logger_, ("----Starting encoders" ));
     //pi_ = pigpio_start(optHost, optPort);
+
+    pid.initPid(PROPORTIONAL_GAIN, INTERGRAL_GAIN, DERIVATIVE_GAIN, I_MAX, I_MIN, ANTIWINDUP);
+    
     
     if (pi_ < 0) 
     {
@@ -109,7 +120,7 @@ void motor_control::setMotor(const double &power, motor m) {
 }
 
 int motor_control::read_encoders(){
-    return pos1;
+    return out;
 }
 
 motor_control::~motor_control()
@@ -120,6 +131,7 @@ motor_control::~motor_control()
     {
         RED_cancel(renc);
         pigpio_stop(pi_);
+        RCLCPP_INFO(logger_, ("----GPIO Stopped"));
     }
 
 }

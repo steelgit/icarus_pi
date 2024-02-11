@@ -54,11 +54,16 @@ private:
   rclcpp::Logger logger_;
 
   std::chrono::time_point<std::chrono::system_clock> time_;
+  
+  // motor = {PWM_MAX, ENA, IN1, IN2, FREQ, RANGE}
+  uint8_t PWM_MAX = 255;
+  uint8_t FREQ = 50;
+  uint16_t RANGE = 1000;
 
-  motor FL = {PWM_MAX = 240, 21, 20, 16, 60, 255};
-  motor FR = {240, 13, 6, 5, 60, 255};
-  motor BL = {240, 2, 3, 4, 60, 255};
-  motor BR = {240, 25, 24, 23, 60, 255};
+  motor FL = {PWM_MAX, 21, 20, 16, FREQ, RANGE};
+  motor FR = {PWM_MAX, 13, 6, 5, FREQ, RANGE};
+  motor BL = {PWM_MAX, 2, 3, 4, FREQ, RANGE};
+  motor BR = {PWM_MAX, 25, 24, 23, FREQ, RANGE};
   
 };
 

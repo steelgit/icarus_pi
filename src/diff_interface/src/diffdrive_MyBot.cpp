@@ -36,7 +36,7 @@ return_type DiffDriveMyBot::configure(const hardware_interface::HardwareInfo & i
 
   //setup motor_control
   motor_ctr.start_motors(FL, BL, FR, BR);
-  //motor_ctr.start_encoders();
+  motor_ctr.start_encoders();
 
 
   RCLCPP_INFO(logger_, "Finished Configuration");
@@ -100,22 +100,14 @@ return_type DiffDriveMyBot::stop()
 hardware_interface::return_type DiffDriveMyBot::read()
 {
 
-  // TODO fix chrono duration
-
   // Calculate time delta
   auto new_time = std::chrono::system_clock::now();
   std::chrono::duration<double> diff = new_time - time_;
   double deltaSeconds = diff.count();
   time_ = new_time;
 
-
-  if (1==0) //check connection
-  {
-    return return_type::ERROR;
-  }
-
   //setup motor encoder
-  //int val = motor_ctr.read_encoders();
+  fl_wheel_.enc = motor_ctr.read_encoders();
   //RCLCPP_INFO(logger_, "  Read Encoder Values:  %i", val);
 
   double pos_prev = fl_wheel_.pos;
@@ -123,18 +115,18 @@ hardware_interface::return_type DiffDriveMyBot::read()
   fl_wheel_.vel = (fl_wheel_.pos - pos_prev) / deltaSeconds;
 
   pos_prev = bl_wheel_.pos;
-  bl_wheel_.pos = fr_wheel_.calcEncAngle();
-  bl_wheel_.vel = (fr_wheel_.pos - pos_prev) / deltaSeconds;
+  bl_wheel_.pos = bl_wheel_.calcEncAngle();
+  bl_wheel_.vel = (bl_wheel_.pos - pos_prev) / deltaSeconds;
 
   pos_prev = fr_wheel_.pos;
   fr_wheel_.pos = fr_wheel_.calcEncAngle();
   fr_wheel_.vel = (fr_wheel_.pos - pos_prev) / deltaSeconds;
 
   pos_prev = br_wheel_.pos;
-  br_wheel_.pos = fr_wheel_.calcEncAngle();
-  br_wheel_.vel = (fr_wheel_.pos - pos_prev) / deltaSeconds;
+  br_wheel_.pos = br_wheel_.calcEncAngle();
+  br_wheel_.vel = (br_wheel_.pos - pos_prev) / deltaSeconds;
 
-
+  RCLCPP_INFO(logger_, "  Read Encoder Values:  %f", fl_wheel_.vel);
 
   return return_type::OK;
 
@@ -154,7 +146,8 @@ hardware_interface::return_type DiffDriveMyBot::write()
   motor_ctr.setMotor(bl_wheel_.cmd / bl_wheel_.rads_per_count / cfg_.loop_rate, BL);
   motor_ctr.setMotor(fr_wheel_.cmd / fr_wheel_.rads_per_count / cfg_.loop_rate, FR);
   motor_ctr.setMotor(br_wheel_.cmd / br_wheel_.rads_per_count / cfg_.loop_rate, BR);
-  //RCLCPP_INFO(logger_, "  Write Motor Value:  %f", (fl_wheel_.cmd / fl_wheel_.rads_per_count / cfg_.loop_rate));
+  RCLCPP_INFO(logger_, "  Write Motor Value:  %f", (fl_wheel_.cmd / fl_wheel_.rads_per_count / cfg_.loop_rate));
+  RCLCPP_INFO(logger_, "  Write Motor raw:  %f", fl_wheel_.cmd);
 
   return return_type::OK;
 
