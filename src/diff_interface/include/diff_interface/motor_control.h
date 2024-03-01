@@ -10,6 +10,8 @@
 #include "diff_interface/rotary_encoder.h"
 #include "control_toolbox/pid.hpp"
 
+#include<unistd.h> 
+
 using namespace std;
 using control_toolbox::Pid;
 
@@ -46,19 +48,19 @@ class motor_control
         char *optPort   = NULL;
 
         RED_t *renc;
-        int optGpioA = 17;
-        int optGpioB = 27;
-        int optGlitch = 1000;
+        int optGpioA = 26;
+        int optGpioB = 19;
+        int optGlitch = 250;
         int optMode = RED_MODE_DETENT;
 
 };
 
 
 //encoder values
-const double desiredPosition = 0.5;
-const double PROPORTIONAL_GAIN = 6.0;
-const double INTERGRAL_GAIN = 1.0;
-const double DERIVATIVE_GAIN = 2.0;
+const double desiredPosition = 0;
+const double PROPORTIONAL_GAIN = 5.0;
+const double INTERGRAL_GAIN = .1;
+const double DERIVATIVE_GAIN = .005;
 const double I_MIN = 0.3;
 const double I_MAX = -0.3;
 const bool ANTIWINDUP = true;

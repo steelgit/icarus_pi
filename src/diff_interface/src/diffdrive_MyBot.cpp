@@ -10,6 +10,16 @@ DiffDriveMyBot::DiffDriveMyBot()
     : logger_(rclcpp::get_logger("DiffDriveMyBot"))
 {}
 
+DiffDriveMyBot::~DiffDriveMyBot()
+{
+  for(int iter = 1; iter < debug.size(); iter=iter+2) 
+  { 
+    double input = debug[iter];
+    double output = debug[iter-1];
+    RCLCPP_INFO(logger_, "  Speed - input:  %f    output: %f", input, output);
+  }
+}
+
 return_type DiffDriveMyBot::configure(const hardware_interface::HardwareInfo & info)
 {
   if (configure_default(info) != return_type::OK) {
@@ -81,9 +91,6 @@ return_type DiffDriveMyBot::start()
 {
   RCLCPP_INFO(logger_, "Starting Controller...");
 
-  //arduino_.sendEmptyMsg();
-  //arduino_.setPidValues(30, 20, 0, 100);
-
   status_ = hardware_interface::status::STARTED;
 
   return return_type::OK;
@@ -93,7 +100,7 @@ return_type DiffDriveMyBot::stop()
 {
   RCLCPP_INFO(logger_, "Stopping Controller...");
   status_ = hardware_interface::status::STOPPED;
-
+  
   return return_type::OK;
 }
 
@@ -126,7 +133,11 @@ hardware_interface::return_type DiffDriveMyBot::read()
   br_wheel_.pos = br_wheel_.calcEncAngle();
   br_wheel_.vel = (br_wheel_.pos - pos_prev) / deltaSeconds;
 
-  RCLCPP_INFO(logger_, "  Read Encoder Values:  %f", fl_wheel_.vel);
+  //RCLCPP_INFO(logger_, "  Read Encoder Values:  %f", fl_wheel_.vel);
+  debug.push_back(fl_wheel_.vel);
+  debug.push_back(fl_wheel_.cmd);
+  //debug.push_back(fl_wheel_.cmd / fl_wheel_.rads_per_count / cfg_.loop_rate);
+  
 
   return return_type::OK;
 

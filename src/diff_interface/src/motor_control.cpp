@@ -5,22 +5,23 @@ motor_control::motor_control()
 {}
 
 //Global varaibles
-static int pos1 = 0;
-int out = 0;
-
+int currentLeftPosition = 0;
 auto EncoderClock = std::make_shared<rclcpp::Node>("EncoderClock");
 rclcpp::Time now_time;
 rclcpp::Time last_time = EncoderClock->get_clock()->now();
 control_toolbox::Pid pid;
+double effort;
 
 void callback1(int currentPosition)
 {   
     now_time = EncoderClock->get_clock()->now();
-    double effort = pid.computeCommand(desiredPosition - currentPosition, (now_time - last_time).nanoseconds());
+    auto time_difference = (now_time - last_time).nanoseconds();
+    effort = pid.computeCommand(desiredPosition - currentPosition, time_difference);
     last_time = EncoderClock->get_clock()->now();
-    out = currentPosition;
-    //RCLCPP_INFO(rclcpp::get_logger("encoder_control"), "effort= %f        currentPosition= %i \n", effort, out);
-   
+    currentLeftPosition = currentPosition;
+
+    //RCLCPP_INFO(rclcpp::get_logger("encoder_control"), "effort= %f        currentPosition= %i \n", effort, currentPosition);
+
 }
 
 void callback2(int way)
@@ -51,7 +52,6 @@ int motor_control::start_encoders()
 
     renc = RED(pi_, optGpioA, optGpioB, optMode, callback1);
     RED_set_glitch_filter(renc, optGlitch);
-
     return 0;
 }
 
@@ -120,6 +120,7 @@ void motor_control::setMotor(const double &power, motor m) {
 }
 
 int motor_control::read_encoders(){
+    int out = currentLeftPosition;
     return out;
 }
 

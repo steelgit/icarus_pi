@@ -24,6 +24,7 @@ class DiffDriveMyBot : public hardware_interface::BaseInterface<hardware_interfa
 
 public:
   DiffDriveMyBot();
+  ~DiffDriveMyBot();
   
   return_type configure(const hardware_interface::HardwareInfo & info) override;
 
@@ -57,13 +58,15 @@ private:
   
   // motor = {PWM_MAX, ENA, IN1, IN2, FREQ, RANGE}
   uint8_t PWM_MAX = 255;
-  uint8_t FREQ = 50;
-  uint16_t RANGE = 1000;
+  uint8_t FREQ = 200;
+  uint16_t RANGE = 255;
 
   motor FL = {PWM_MAX, 21, 20, 16, FREQ, RANGE};
   motor FR = {PWM_MAX, 13, 6, 5, FREQ, RANGE};
   motor BL = {PWM_MAX, 2, 3, 4, FREQ, RANGE};
   motor BR = {PWM_MAX, 25, 24, 23, FREQ, RANGE};
+
+  std::vector<double> debug;
   
 };
 
