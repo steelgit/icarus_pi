@@ -12,7 +12,7 @@ struct Config
   std::string back_right_wheel_name = "back_right_wheel_name";
   float loop_rate = 30;
 
-  int enc_counts_per_rev = 1920;
+  int enc_counts_per_rev = 0;
 };
 
 

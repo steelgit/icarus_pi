@@ -16,7 +16,7 @@ using namespace std;
 using control_toolbox::Pid;
 
 struct motor{
-    const uint8_t PWM_MAX;
+    const uint16_t PWM_MAX;
     const uint8_t ENA; //enableMotor Pin
     const uint8_t IN1; //forwardPin
     const uint8_t IN2; //backwardPin
@@ -48,9 +48,17 @@ class motor_control
         char *optPort   = NULL;
 
         RED_t *renc;
+        
         int optGpioA = 26;
         int optGpioB = 19;
         int optGlitch = 250;
+        
+        /*
+        int optGpioA = 26;
+        int optGpioB = 19;
+        int optGlitch = 250;
+        */
+
         int optMode = RED_MODE_DETENT;
 
 };

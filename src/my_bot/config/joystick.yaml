@@ -3,6 +3,7 @@ joy_node:
     device_id: 0
     deadzone: 0.05
     autorepeat_rate: 20.0
+    sticky_buttons: true
 
 teleop_node:
   ros__parameters:

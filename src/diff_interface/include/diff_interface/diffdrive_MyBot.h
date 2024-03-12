@@ -57,9 +57,9 @@ private:
   std::chrono::time_point<std::chrono::system_clock> time_;
   
   // motor = {PWM_MAX, ENA, IN1, IN2, FREQ, RANGE}
-  uint8_t PWM_MAX = 255;
+  uint16_t PWM_MAX = 1000;
   uint8_t FREQ = 200;
-  uint16_t RANGE = 255;
+  uint16_t RANGE = 1000;
 
   motor FL = {PWM_MAX, 21, 20, 16, FREQ, RANGE};
   motor FR = {PWM_MAX, 13, 6, 5, FREQ, RANGE};
