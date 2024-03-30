@@ -53,14 +53,14 @@
 [3.631s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ubuntu/workspaces/diff_robot/src/diff_interface) by extensions ['ros']
 [3.631s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ubuntu/workspaces/diff_robot/src/diff_interface) by extension 'ros'
 [3.691s] DEBUG:colcon.colcon_core.package_identification:Package '/home/ubuntu/workspaces/diff_robot/src/diff_interface' with type 'ros.ament_cmake' and name 'diff_interface'
-[3.694s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ubuntu/workspaces/diff_robot/src/my_bot) by extensions ['ignore', 'ignore_ament_install']
-[3.710s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ubuntu/workspaces/diff_robot/src/my_bot) by extension 'ignore'
-[3.711s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ubuntu/workspaces/diff_robot/src/my_bot) by extension 'ignore_ament_install'
-[3.711s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ubuntu/workspaces/diff_robot/src/my_bot) by extensions ['colcon_pkg']
-[3.712s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ubuntu/workspaces/diff_robot/src/my_bot) by extension 'colcon_pkg'
-[3.713s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ubuntu/workspaces/diff_robot/src/my_bot) by extensions ['colcon_meta']
-[3.713s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ubuntu/workspaces/diff_robot/src/my_bot) by extension 'colcon_meta'
-[3.714s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ubuntu/workspaces/diff_robot/src/my_bot) by extensions ['ros']
-[3.714s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ubuntu/workspaces/diff_robot/src/my_bot) by extension 'ros'
-[3.718s] DEBUG:colcon.colcon_core.package_identification:Package '/home/ubuntu/workspaces/diff_robot/src/my_bot' with type 'ros.ament_cmake' and name 'my_bot'
+[3.694s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ubuntu/workspaces/diff_robot/src/icarus_pi) by extensions ['ignore', 'ignore_ament_install']
+[3.710s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ubuntu/workspaces/diff_robot/src/icarus_pi) by extension 'ignore'
+[3.711s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ubuntu/workspaces/diff_robot/src/icarus_pi) by extension 'ignore_ament_install'
+[3.711s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ubuntu/workspaces/diff_robot/src/icarus_pi) by extensions ['colcon_pkg']
+[3.712s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ubuntu/workspaces/diff_robot/src/icarus_pi) by extension 'colcon_pkg'
+[3.713s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ubuntu/workspaces/diff_robot/src/icarus_pi) by extensions ['colcon_meta']
+[3.713s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ubuntu/workspaces/diff_robot/src/icarus_pi) by extension 'colcon_meta'
+[3.714s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ubuntu/workspaces/diff_robot/src/icarus_pi) by extensions ['ros']
+[3.714s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ubuntu/workspaces/diff_robot/src/icarus_pi) by extension 'ros'
+[3.718s] DEBUG:colcon.colcon_core.package_identification:Package '/home/ubuntu/workspaces/diff_robot/src/icarus_pi' with type 'ros.ament_cmake' and name 'icarus_pi'
 [3.718s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults

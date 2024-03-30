@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot name="my_bot" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+<robot name="icarus_pi" xmlns:xacro="http://www.ros.org/wiki/xacro" >
 
     <xacro:include filename="inertial_macros.xacro"/>
     <xacro:include filename="robot_dimensions.xacro"/>
