@@ -1,4 +1,4 @@
-# diff_robot
+# icarus_pi
 install the pigpio library using sent info
 
 
