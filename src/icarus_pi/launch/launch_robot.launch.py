@@ -40,7 +40,7 @@ def generate_launch_description():
         package='twist_mux',
         executable='twist_mux',
         parameters=[twist_mux_params],
-        remappings=[('/cmd_vel_out','/diff_cont/cmd_vel_unstamped')]
+        remappings=[('/cmd_vel_out','/mech_cont/cmd_vel_unstamped')]
         )
 
     robot_description = Command(['ros2 param get --hide-type /robot_state_publisher robot_description'])
@@ -59,7 +59,7 @@ def generate_launch_description():
     diff_drive_spawner = Node(
         package="controller_manager",
         executable="spawner.py",   #on humble it is no longer spawner.py
-        arguments=["diff_cont"],
+        arguments=["mech_cont"],
     )
 
     delayed_diff_drive_spawner = RegisterEventHandler(

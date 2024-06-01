@@ -134,8 +134,8 @@ hardware_interface::return_type DiffDriveMyBot::read()
   br_wheel_.vel = (br_wheel_.pos - pos_prev) / deltaSeconds;
 
   //RCLCPP_INFO(logger_, "  Read Encoder Values:  %f", fl_wheel_.vel);
-  debug.push_back(fl_wheel_.vel);
-  debug.push_back(fl_wheel_.cmd);
+  //debug.push_back(fl_wheel_.vel);
+  //debug.push_back(fl_wheel_.cmd);
   //debug.push_back(fl_wheel_.cmd / fl_wheel_.rads_per_count / cfg_.loop_rate);
   
 
@@ -157,8 +157,8 @@ hardware_interface::return_type DiffDriveMyBot::write()
   motor_ctr.setMotor(bl_wheel_.cmd / bl_wheel_.rads_per_count / cfg_.loop_rate, BL);
   motor_ctr.setMotor(fr_wheel_.cmd / fr_wheel_.rads_per_count / cfg_.loop_rate, FR);
   motor_ctr.setMotor(br_wheel_.cmd / br_wheel_.rads_per_count / cfg_.loop_rate, BR);
-  RCLCPP_INFO(logger_, "  Write Motor Value:  %f", (fl_wheel_.cmd / fl_wheel_.rads_per_count / cfg_.loop_rate));
-  RCLCPP_INFO(logger_, "  Write Motor raw:  %f", fl_wheel_.cmd);
+  //RCLCPP_INFO(logger_, "  Write Motor Value:  %f", (fl_wheel_.cmd / fl_wheel_.rads_per_count / cfg_.loop_rate));
+  //RCLCPP_INFO(logger_, "  Write Motor raw:  %f", fl_wheel_.cmd);
 
   return return_type::OK;
 
@@ -173,4 +173,4 @@ hardware_interface::return_type DiffDriveMyBot::write()
 PLUGINLIB_EXPORT_CLASS(
   DiffDriveMyBot,
   hardware_interface::SystemInterface
-)
+) 
