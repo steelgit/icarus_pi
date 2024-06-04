@@ -1,18 +1,19 @@
-#include "diff_interface/diffdrive_MyBot.h"
-
-
+#include "icarus_interface/Icarus_HW_Interface.h"
 #include "hardware_interface/types/hardware_interface_type_values.hpp"
 
-
-
-
-DiffDriveMyBot::DiffDriveMyBot()
-    : logger_(rclcpp::get_logger("DiffDriveMyBot"))
+IcarusInterface::IcarusInterface()
+    : logger_(rclcpp::get_logger("IcarusInterface"))
 {}
 
-DiffDriveMyBot::~DiffDriveMyBot()
+IcarusInterface::~IcarusInterface()
 {
-  for(int iter = 1; iter < debug.size(); iter=iter+2) 
+  if (pi_ >= 0)
+  {   
+    RCLCPP_INFO(logger_, ("----Stopping Pi"));
+    pigpio_stop(pi_);
+  }
+
+  for(unsigned long int iter = 1; iter < debug.size(); iter=iter+2) 
   { 
     double input = debug[iter];
     double output = debug[iter-1];
@@ -20,7 +21,7 @@ DiffDriveMyBot::~DiffDriveMyBot()
   }
 }
 
-return_type DiffDriveMyBot::configure(const hardware_interface::HardwareInfo & info)
+return_type IcarusInterface::configure(const hardware_interface::HardwareInfo & info)
 {
   if (configure_default(info) != return_type::OK) {
     return return_type::ERROR;
@@ -43,10 +44,17 @@ return_type DiffDriveMyBot::configure(const hardware_interface::HardwareInfo & i
   fr_wheel_.setup(cfg_.front_right_wheel_name, cfg_.enc_counts_per_rev);
   br_wheel_.setup(cfg_.back_right_wheel_name, cfg_.enc_counts_per_rev);
 
+  int pi_ = pigpio_start(OPTHOST, OPTPORT);
+    if (pi_ < 0) 
+    {
+        RCLCPP_INFO(logger_, ("----gpio failed to initialize (motor)" ));
+        return return_type::ERROR;
+    }
+
 
   //setup motor_control
-  motor_ctr.start_motors(FL, BL, FR, BR);
-  motor_ctr.start_encoders();
+  motor_ctr.start_motors();
+  enc_ctr.start_encoders();
 
 
   RCLCPP_INFO(logger_, "Finished Configuration");
@@ -55,7 +63,7 @@ return_type DiffDriveMyBot::configure(const hardware_interface::HardwareInfo & i
   return return_type::OK;
 }
 
-std::vector<hardware_interface::StateInterface> DiffDriveMyBot::export_state_interfaces()
+std::vector<hardware_interface::StateInterface> IcarusInterface::export_state_interfaces()
 {
   // We need to set up a position and a velocity interface for each wheel
 
@@ -72,7 +80,7 @@ std::vector<hardware_interface::StateInterface> DiffDriveMyBot::export_state_int
   return state_interfaces;
 }
 
-std::vector<hardware_interface::CommandInterface> DiffDriveMyBot::export_command_interfaces()
+std::vector<hardware_interface::CommandInterface> IcarusInterface::export_command_interfaces()
 {
   // We need to set up a velocity command interface for each wheel
 
@@ -87,7 +95,7 @@ std::vector<hardware_interface::CommandInterface> DiffDriveMyBot::export_command
 }
 
 
-return_type DiffDriveMyBot::start()
+return_type IcarusInterface::start()
 {
   RCLCPP_INFO(logger_, "Starting Controller...");
 
@@ -96,7 +104,7 @@ return_type DiffDriveMyBot::start()
   return return_type::OK;
 }
 
-return_type DiffDriveMyBot::stop()
+return_type IcarusInterface::stop()
 {
   RCLCPP_INFO(logger_, "Stopping Controller...");
   status_ = hardware_interface::status::STOPPED;
@@ -104,7 +112,7 @@ return_type DiffDriveMyBot::stop()
   return return_type::OK;
 }
 
-hardware_interface::return_type DiffDriveMyBot::read()
+hardware_interface::return_type IcarusInterface::read()
 {
 
   // Calculate time delta
@@ -114,7 +122,7 @@ hardware_interface::return_type DiffDriveMyBot::read()
   time_ = new_time;
 
   //setup motor encoder
-  fl_wheel_.enc = motor_ctr.read_encoders();
+  fl_wheel_.enc = enc_ctr.read_encoders();
   //RCLCPP_INFO(logger_, "  Read Encoder Values:  %i", val);
 
   double pos_prev = fl_wheel_.pos;
@@ -144,7 +152,7 @@ hardware_interface::return_type DiffDriveMyBot::read()
   
 }
 
-hardware_interface::return_type DiffDriveMyBot::write()
+hardware_interface::return_type IcarusInterface::write()
 {
 
   if (1==0)  //check connection
@@ -153,10 +161,10 @@ hardware_interface::return_type DiffDriveMyBot::write()
   }
 
   //wire to motors
-  motor_ctr.setMotor(fl_wheel_.cmd / fl_wheel_.rads_per_count / cfg_.loop_rate, FL);
-  motor_ctr.setMotor(bl_wheel_.cmd / bl_wheel_.rads_per_count / cfg_.loop_rate, BL);
-  motor_ctr.setMotor(fr_wheel_.cmd / fr_wheel_.rads_per_count / cfg_.loop_rate, FR);
-  motor_ctr.setMotor(br_wheel_.cmd / br_wheel_.rads_per_count / cfg_.loop_rate, BR);
+  motor_ctr.setMotor(fl_wheel_.cmd / fl_wheel_.rads_per_count / cfg_.loop_rate, MOTOR_FL);
+  motor_ctr.setMotor(bl_wheel_.cmd / bl_wheel_.rads_per_count / cfg_.loop_rate, MOTOR_BL);
+  motor_ctr.setMotor(fr_wheel_.cmd / fr_wheel_.rads_per_count / cfg_.loop_rate, MOTOR_FR);
+  motor_ctr.setMotor(br_wheel_.cmd / br_wheel_.rads_per_count / cfg_.loop_rate, MOTOR_BR);
   //RCLCPP_INFO(logger_, "  Write Motor Value:  %f", (fl_wheel_.cmd / fl_wheel_.rads_per_count / cfg_.loop_rate));
   //RCLCPP_INFO(logger_, "  Write Motor raw:  %f", fl_wheel_.cmd);
 
@@ -171,6 +179,6 @@ hardware_interface::return_type DiffDriveMyBot::write()
 #include "pluginlib/class_list_macros.hpp"
 
 PLUGINLIB_EXPORT_CLASS(
-  DiffDriveMyBot,
+  IcarusInterface,
   hardware_interface::SystemInterface
 ) 

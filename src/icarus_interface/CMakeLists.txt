@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(diff_interface)
+project(icarus_interface)
 
 # Default to C99
 if(NOT CMAKE_C_STANDARD)
@@ -25,17 +25,17 @@ find_package(control_toolbox REQUIRED)
 
 
 
-add_library(diff_interface SHARED src/diffdrive_MyBot.cpp src/wheel.cpp src/motor_control.cpp src/rotary_encoder.cpp)
+add_library(icarus_interface SHARED src/Icarus_HW_Interface.cpp src/wheel.cpp src/motor_control.cpp src/rotary_encoder.cpp)
 
-target_link_libraries(diff_interface pigpiod_if2)
+target_link_libraries(icarus_interface pigpiod_if2)
 
 target_include_directories(
-  diff_interface
+  icarus_interface
   PRIVATE
   include
 )
 ament_target_dependencies(
-  diff_interface
+  icarus_interface
   hardware_interface
   controller_manager
   rclcpp
@@ -47,7 +47,7 @@ pluginlib_export_plugin_description_file(hardware_interface robot_hardware.xml)
 
 
 install(
-  TARGETS diff_interface
+  TARGETS icarus_interface
   DESTINATION lib
 )
 
@@ -57,7 +57,7 @@ install(
 )
 
 ament_export_libraries(
-  diff_interface
+  icarus_interface
 )
 ament_export_dependencies(
   hardware_interface

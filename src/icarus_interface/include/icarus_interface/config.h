@@ -1,5 +1,5 @@
-#ifndef DIFFDRIVE_MYBOT_CONFIG_H
-#define DIFFDRIVE_MYBOT_CONFIG_H
+#ifndef ICARUSINTERFACE_CONFIG_H
+#define ICARUSINTERFACE_CONFIG_H
 
 #include <string>
 
@@ -16,4 +16,4 @@ struct Config
 };
 
 
-#endif // DIFFDRIVE_MYBOT_CONFIG_H
+#endif // ICARUSINTERFACE_CONFIG_H

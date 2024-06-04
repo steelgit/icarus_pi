@@ -56,16 +56,16 @@ def generate_launch_description():
 
     delayed_controller_manager = TimerAction(period=3.0, actions=[controller_manager])
 
-    diff_drive_spawner = Node(
+    controller_spawner = Node(
         package="controller_manager",
         executable="spawner.py",   #on humble it is no longer spawner.py
         arguments=["mech_cont"],
     )
 
-    delayed_diff_drive_spawner = RegisterEventHandler(
+    delayed_controller_spawner = RegisterEventHandler(
         event_handler=OnProcessStart(
             target_action=controller_manager,
-            on_start=[diff_drive_spawner],
+            on_start=[controller_spawner],
         )
     )
 
@@ -88,6 +88,6 @@ def generate_launch_description():
         twist_mux,
         joystick,
         delayed_controller_manager,
-        delayed_diff_drive_spawner,
+        delayed_controller_spawner,
         delayed_joint_broad_spawner
     ])

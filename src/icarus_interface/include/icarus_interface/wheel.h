@@ -1,5 +1,5 @@
-#ifndef DIFFDRIVE_MYBOT_WHEEL_H
-#define DIFFDRIVE_MYBOT_WHEEL_H
+#ifndef ICARUSINTERFACE_WHEEL_H
+#define ICARUSINTERFACE_WHEEL_H
 
 #include <string>
 
@@ -31,4 +31,4 @@ class Wheel
 };
 
 
-#endif // DIFFDRIVE_MYBOT_WHEEL_H
+#endif // ICARUSINTERFACE_WHEEL_H

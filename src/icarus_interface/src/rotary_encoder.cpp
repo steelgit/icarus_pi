@@ -3,7 +3,7 @@
 
 #include <pigpiod_if2.h>
 
-#include "diff_interface/rotary_encoder.h"
+#include "icarus_interface/rotary_encoder.h"
 
 /* PRIVATE ---------------------------------------------------------------- */
 

@@ -4,7 +4,7 @@
     <xacro:unless value="$(arg sim_mode)">
         <ros2_control name="RealRobot" type="system">
             <hardware>
-                <plugin>diff_interface/DiffDriveMyBot</plugin>
+                <plugin>icarus_interface/IcarusInterface</plugin>
                 <param name="front_left_wheel_name">frontLeft_joint</param>
                 <param name="back_left_wheel_name">backLeft_joint</param>
                 <param name="front_right_wheel_name">frontRight_joint</param>
