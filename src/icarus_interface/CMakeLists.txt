@@ -25,7 +25,12 @@ find_package(control_toolbox REQUIRED)
 
 
 
-add_library(icarus_interface SHARED src/Icarus_HW_Interface.cpp src/wheel.cpp src/motor_control.cpp src/rotary_encoder.cpp)
+add_library(icarus_interface SHARED
+src/encoder_control.cpp
+src/Icarus_HW_Interface.cpp 
+src/motor_control.cpp 
+src/rotary_encoder.cpp
+src/wheel.cpp)
 
 target_link_libraries(icarus_interface pigpiod_if2)
 

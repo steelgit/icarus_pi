@@ -1,24 +1,27 @@
 #include "icarus_interface/Icarus_HW_Interface.h"
 #include "hardware_interface/types/hardware_interface_type_values.hpp"
 
+//GLOBALS
+int pi_;
+Wheel fl_wheel_;
+Wheel fr_wheel_;
+Wheel bl_wheel_;
+Wheel br_wheel_;
+
 IcarusInterface::IcarusInterface()
     : logger_(rclcpp::get_logger("IcarusInterface"))
 {}
 
 IcarusInterface::~IcarusInterface()
 {
-  if (pi_ >= 0)
-  {   
-    RCLCPP_INFO(logger_, ("----Stopping Pi"));
-    pigpio_stop(pi_);
-  }
-
+  /*
   for(unsigned long int iter = 1; iter < debug.size(); iter=iter+2) 
   { 
     double input = debug[iter];
     double output = debug[iter-1];
     RCLCPP_INFO(logger_, "  Speed - input:  %f    output: %f", input, output);
   }
+  */
 }
 
 return_type IcarusInterface::configure(const hardware_interface::HardwareInfo & info)
@@ -44,7 +47,7 @@ return_type IcarusInterface::configure(const hardware_interface::HardwareInfo & 
   fr_wheel_.setup(cfg_.front_right_wheel_name, cfg_.enc_counts_per_rev);
   br_wheel_.setup(cfg_.back_right_wheel_name, cfg_.enc_counts_per_rev);
 
-  int pi_ = pigpio_start(OPTHOST, OPTPORT);
+  pi_ = pigpio_start(OPTHOST, OPTPORT);
     if (pi_ < 0) 
     {
         RCLCPP_INFO(logger_, ("----gpio failed to initialize (motor)" ));
@@ -123,7 +126,7 @@ hardware_interface::return_type IcarusInterface::read()
 
   //setup motor encoder
   //fl_wheel_.enc = enc_ctr.read_encoders();
-  //RCLCPP_INFO(logger_, "  Read Encoder Values:  %i", val);
+  //RCLCPP_INFO(logger_, "  Read Encoder Values:  %f", val);
 
   double pos_prev = fl_wheel_.pos;
   fl_wheel_.pos = fl_wheel_.calcEncAngle();
@@ -141,10 +144,10 @@ hardware_interface::return_type IcarusInterface::read()
   br_wheel_.pos = br_wheel_.calcEncAngle();
   br_wheel_.vel = (br_wheel_.pos - pos_prev) / deltaSeconds;
 
-  RCLCPP_INFO(logger_, "  Read Encoder Values:  %f", fl_wheel_.vel);
   //debug.push_back(fl_wheel_.vel);
   //debug.push_back(fl_wheel_.cmd);
   //debug.push_back(fl_wheel_.cmd / fl_wheel_.rads_per_count / cfg_.loop_rate);
+  //debug.push_back(fl_wheel_.enc);
   
 
   return return_type::OK;

@@ -67,11 +67,16 @@ motor_control::~motor_control()
 
     if (pi_ >= 0)
     {   
-        set_PWM_dutycycle(pi_, MOTOR_FL.ENA, 0);
-        set_PWM_dutycycle(pi_, MOTOR_BL.ENA, 0);
-        set_PWM_dutycycle(pi_, MOTOR_FR.ENA, 0);
-        set_PWM_dutycycle(pi_, MOTOR_BR.ENA, 0);
+        setMotor(0, MOTOR_FL);
+        setMotor(0, MOTOR_BL);
+        setMotor(0, MOTOR_FR);
+        setMotor(0, MOTOR_BR);
         RCLCPP_INFO(logger_, ("----motor GPIO Stopped"));
+    }
+    if (pi_ >= 0)
+    {   
+        RCLCPP_INFO(logger_, ("----Stopping Pi"));
+        pigpio_stop(pi_);
     }
 
 }

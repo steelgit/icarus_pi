@@ -21,11 +21,6 @@
 
 using hardware_interface::return_type;
 
-Wheel fl_wheel_;
-Wheel fr_wheel_;
-Wheel bl_wheel_;
-Wheel br_wheel_;
-
 class IcarusInterface : public hardware_interface::BaseInterface<hardware_interface::SystemInterface>
 {
   public:

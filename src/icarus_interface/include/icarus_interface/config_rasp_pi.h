@@ -43,10 +43,11 @@ const motor MOTOR_BR = {PWM_MAX, 25, 24, 23, FREQ, RANGE};
 // encoder = {OptA, OptB, Glitch}
 const uint8_t OPTGLITCH_DEFAULT = 250;
 
-const encoder ENCODER_FL = {26, 19, OPTGLITCH_DEFAULT};
-const encoder ENCODER_FR = {12, 1, OPTGLITCH_DEFAULT};
-const encoder ENCODER_BL = {7, 8, OPTGLITCH_DEFAULT};
-const encoder ENCODER_BR = {27, 17, OPTGLITCH_DEFAULT};
+const encoder ENCODER_FL = {7, 8, OPTGLITCH_DEFAULT};
+const encoder ENCODER_FR = {27, 17, OPTGLITCH_DEFAULT};
+const encoder ENCODER_BL = {12, 1, OPTGLITCH_DEFAULT};
+const encoder ENCODER_BR = {26, 19, OPTGLITCH_DEFAULT};
+
 
 //===============================================================
 //  GLOBAL VARIABLES
@@ -54,6 +55,9 @@ const encoder ENCODER_BR = {27, 17, OPTGLITCH_DEFAULT};
 extern int pi_;
 
 extern Wheel fl_wheel_;
+extern Wheel fr_wheel_;
+extern Wheel bl_wheel_;
+extern Wheel br_wheel_;
 extern int effortFL;
 
 #endif // ICARUSINTERFACE_CONFIG_RASP_PI_H
