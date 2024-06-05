@@ -58,7 +58,6 @@ void motor_control::setMotor(const double &power, motor m) {
         pwm = m.PWM_MAX;
     }
 
-    //RCLCPP_INFO(logger_, ("set pwm to %d \n"), pwm);
     set_PWM_dutycycle(pi_,m.ENA, pwm);
 }
 

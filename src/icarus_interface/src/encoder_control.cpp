@@ -1,26 +1,24 @@
 #include "icarus_interface/encoder_control.h"
 
 //Global varaibles
-int currentLeftPosition = 0;
 auto EncoderClock = std::make_shared<rclcpp::Node>("EncoderClock");
-rclcpp::Time last_time = EncoderClock->get_clock()->now();
-double effort;
-int desiredPosition;
+rclcpp::Time last_timeFL = EncoderClock->get_clock()->now();
 control_toolbox::Pid pidFL;
 control_toolbox::Pid pidBL;
 control_toolbox::Pid pidFR;
 control_toolbox::Pid pidBR;
+int desSpdFL_ = 0;  //TODO remove assignment and link to motor
 
-void callback1(int currentPosition)
+void callbackFL(int currentPosition)
 {   
     static rclcpp::Time now_time = EncoderClock->get_clock()->now();
     auto time_difference = (now_time - last_time).nanoseconds();
-    effort = pid.computeCommand(desiredPosition - currentPosition, time_difference);
-    last_time = EncoderClock->get_clock()->now();
-    currentLeftPosition = currentPosition;
+    static double effortFL = pid.computeCommand(desSpdFL_ - currentPosition, time_difference);
+    last_timeFL = EncoderClock->get_clock()->now();
+    fl_wheel_.enc= fl_wheel_.enc + currentPosition;
 }
 
-void callback2(int way)
+void callbackFR(int way)
 {
    //static int pos = 0;
 
@@ -51,15 +49,15 @@ int encoder_control::start_encoders()
     else
         RCLCPP_INFO(logger_, ("----PiGPIO version::  %i" ), get_pigpio_version(pi_));
 
-
-    renc = RED(pi_, optGpioA, optGpioB, optMode, callback1);
-    RED_set_glitch_filter(renc, optGlitch);
+    REDencFL = RED(pi_, ENCODER_FL.OPTGPIOA, ENCODER_FL.OPTGPIOB, optMode, callbackFL);
+    REDencFR = RED(pi_, ENCODER_FR.OPTGPIOA, ENCODER_FR.OPTGPIOB, optMode, callbackFR);
+    REDencBL = RED(pi_, ENCODER_BL.OPTGPIOA, ENCODER_BL.OPTGPIOB, optMode, callbackBL);
+    REDencBR = RED(pi_, ENCODER_BR.OPTGPIOA, ENCODER_BR.OPTGPIOB, optMode, callbackBR);
+    RED_set_glitch_filter(rencFL, ENCODER_FL.OPTGLITCH);
+    RED_set_glitch_filter(rencFR, ENCODER_FR.OPTGLITCH);
+    RED_set_glitch_filter(rencBL, ENCODER_BL.OPTGLITCH);
+    RED_set_glitch_filter(rencBR, ENCODER_BR.OPTGLITCH);
     return 0;
-}
-
-int encoder_control::read_encoders(){
-    int out = currentLeftPosition;
-    return out;
 }
 
 encoder_control::~motor_control()
@@ -68,7 +66,10 @@ encoder_control::~motor_control()
 
     if (pi_ >= 0)
     {
-        RED_cancel(renc);
+        RED_cancel(REDencFL);
+        RED_cancel(REDencFR);
+        RED_cancel(REDencBL);
+        RED_cancel(REDencBR);
         RCLCPP_INFO(logger_, ("----encoder GPIO Stopped"));
     }
 

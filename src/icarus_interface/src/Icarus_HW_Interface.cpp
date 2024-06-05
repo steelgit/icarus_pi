@@ -122,7 +122,7 @@ hardware_interface::return_type IcarusInterface::read()
   time_ = new_time;
 
   //setup motor encoder
-  fl_wheel_.enc = enc_ctr.read_encoders();
+  //fl_wheel_.enc = enc_ctr.read_encoders();
   //RCLCPP_INFO(logger_, "  Read Encoder Values:  %i", val);
 
   double pos_prev = fl_wheel_.pos;
@@ -141,7 +141,7 @@ hardware_interface::return_type IcarusInterface::read()
   br_wheel_.pos = br_wheel_.calcEncAngle();
   br_wheel_.vel = (br_wheel_.pos - pos_prev) / deltaSeconds;
 
-  //RCLCPP_INFO(logger_, "  Read Encoder Values:  %f", fl_wheel_.vel);
+  RCLCPP_INFO(logger_, "  Read Encoder Values:  %f", fl_wheel_.vel);
   //debug.push_back(fl_wheel_.vel);
   //debug.push_back(fl_wheel_.cmd);
   //debug.push_back(fl_wheel_.cmd / fl_wheel_.rads_per_count / cfg_.loop_rate);

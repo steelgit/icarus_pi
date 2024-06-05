@@ -10,6 +10,7 @@
 
 #include "rotary_encoder.h"
 #include "config_rasp_pi.h"
+#include "wheel.h"
 
 #include<unistd.h> 
 

@@ -46,10 +46,10 @@ def generate_launch_description():
                                    '-entity', 'icarus_pi'],
                         output='screen')
 
-    diff_drive_spawner = Node(
+    controller_drive_spawner = Node(
         package="controller_manager",
         executable="spawner.py",   #on humble it is no longer spawner.py
-        arguments=["diff_cont"],
+        arguments=["mech_cont"],
     )
 
     joint_broad_spawner = Node(
@@ -66,6 +66,6 @@ def generate_launch_description():
         gazebo,
         spawn_entity,
         joystick,
-        diff_drive_spawner,
+        controller_drive_spawner,
         joint_broad_spawner
     ])
