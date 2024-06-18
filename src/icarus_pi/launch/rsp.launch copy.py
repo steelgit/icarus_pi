@@ -18,7 +18,7 @@ def generate_launch_description():
 
     # Process the URDF file
     pkg_path = os.path.join(get_package_share_directory('icarus_pi'))
-    xacro_file = os.path.join(pkg_path,'Meshes','Mechanum - Left.URDF','Mechanum - Left.URDF.urdf')
+    xacro_file = os.path.join(pkg_path,'Meshes','Mecanum-Left.URDF','Mecanum-Left.URDF.urdf')
     #robot_description_config = xacro.process_file(xacro_file)
     robot_description_config = Command(['xacro ', xacro_file, ' use_ros2_control:=', use_ros2_control, ' sim_mode:=', use_sim_time])
     
