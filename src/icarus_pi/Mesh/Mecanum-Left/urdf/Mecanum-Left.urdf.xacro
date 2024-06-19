@@ -1,9 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
-     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
-     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
-<robot
-  name="Mecanum-Left">
+<?xml version="1.0"?>
+
+<robot name="Mecanum-Left" xmlns:xacro="http://www.ros.org/wiki/xacro" >
   <link
     name="base_link">
     <inertial>
@@ -26,7 +23,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Mecanum-Left/meshes/base_link.STL" />
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/base_link.STL" />
       </geometry>
       <material
         name="">
@@ -40,7 +37,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Mecanum-Left/meshes/base_link.STL" />
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/base_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -66,7 +63,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Mecanum-Left/meshes/Mecanum_roller_link_1.STL" />
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/Mecanum_roller_link_1.STL" />
       </geometry>
       <material
         name="">
@@ -80,7 +77,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Mecanum-Left/meshes/Mecanum_roller_link_1.STL" />
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/Mecanum_roller_link_1.STL" />
       </geometry>
     </collision>
   </link>
@@ -119,7 +116,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Mecanum-Left/meshes/Mecanum_roller_link_2.STL" />
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/Mecanum_roller_link_2.STL" />
       </geometry>
       <material
         name="">
@@ -133,7 +130,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Mecanum-Left/meshes/Mecanum_roller_link_2.STL" />
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/Mecanum_roller_link_2.STL" />
       </geometry>
     </collision>
   </link>
@@ -172,7 +169,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Mecanum-Left/meshes/Mecanum_roller_link_3.STL" />
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/Mecanum_roller_link_3.STL" />
       </geometry>
       <material
         name="">
@@ -186,7 +183,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Mecanum-Left/meshes/Mecanum_roller_link_3.STL" />
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/Mecanum_roller_link_3.STL" />
       </geometry>
     </collision>
   </link>
@@ -225,7 +222,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Mecanum-Left/meshes/Mecanum_roller_link_4.STL" />
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/Mecanum_roller_link_4.STL" />
       </geometry>
       <material
         name="">
@@ -239,7 +236,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Mecanum-Left/meshes/Mecanum_roller_link_4.STL" />
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/Mecanum_roller_link_4.STL" />
       </geometry>
     </collision>
   </link>
@@ -278,7 +275,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Mecanum-Left/meshes/Mecanum_roller_link_5.STL" />
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/Mecanum_roller_link_5.STL" />
       </geometry>
       <material
         name="">
@@ -292,7 +289,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Mecanum-Left/meshes/Mecanum_roller_link_5.STL" />
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/Mecanum_roller_link_5.STL" />
       </geometry>
     </collision>
   </link>
@@ -331,7 +328,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Mecanum-Left/meshes/Mecanum_roller_link_6.STL" />
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/Mecanum_roller_link_6.STL" />
       </geometry>
       <material
         name="">
@@ -345,7 +342,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Mecanum-Left/meshes/Mecanum_roller_link_6.STL" />
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/Mecanum_roller_link_6.STL" />
       </geometry>
     </collision>
   </link>
@@ -384,7 +381,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Mecanum-Left/meshes/Mecanum_roller_link_7.STL" />
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/Mecanum_roller_link_7.STL" />
       </geometry>
       <material
         name="">
@@ -398,7 +395,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Mecanum-Left/meshes/Mecanum_roller_link_7.STL" />
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/Mecanum_roller_link_7.STL" />
       </geometry>
     </collision>
   </link>
@@ -437,7 +434,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Mecanum-Left/meshes/Mecanum_roller_link_8.STL" />
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/Mecanum_roller_link_8.STL" />
       </geometry>
       <material
         name="">
@@ -451,7 +448,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Mecanum-Left/meshes/Mecanum_roller_link_8.STL" />
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/Mecanum_roller_link_8.STL" />
       </geometry>
     </collision>
   </link>
@@ -490,7 +487,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Mecanum-Left/meshes/Mecanum_roller_link_9.STL" />
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/Mecanum_roller_link_9.STL" />
       </geometry>
       <material
         name="">
@@ -504,7 +501,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Mecanum-Left/meshes/Mecanum_roller_link_9.STL" />
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/Mecanum_roller_link_9.STL" />
       </geometry>
     </collision>
   </link>
@@ -521,4 +518,102 @@
     <axis
       xyz="1 0 0" />
   </joint>
+
+    <ros2_control name="gazeboSimSystem" type="system">	
+		<hardware>
+			<plugin>gazebo_ros2_control/GazeboSystem</plugin>
+		</hardware>
+
+		<joint name="Mecanum_roller_joint_1">
+			<command_interface name="velocity">
+				<param name="min">-100</param>
+				<param name="max">100</param>
+			</command_interface>
+			<state_interface name="position"/>
+			<state_interface name="velocity"/>
+		</joint>
+
+		<joint name="Mecanum_roller_joint_2">
+			<command_interface name="velocity">
+				<param name="min">-100</param>
+				<param name="max">100</param>
+			</command_interface>
+			<state_interface name="position"/>
+			<state_interface name="velocity"/>
+		</joint>
+
+    		<joint name="Mecanum_roller_joint_3">
+			<command_interface name="velocity">
+				<param name="min">-100</param>
+				<param name="max">100</param>
+			</command_interface>
+			<state_interface name="position"/>
+			<state_interface name="velocity"/>
+		</joint>
+
+    		<joint name="Mecanum_roller_joint_4">
+			<command_interface name="velocity">
+				<param name="min">-100</param>
+				<param name="max">100</param>
+			</command_interface>
+			<state_interface name="position"/>
+			<state_interface name="velocity"/>
+		</joint>
+
+    		<joint name="Mecanum_roller_joint_5">
+			<command_interface name="velocity">
+				<param name="min">-100</param>
+				<param name="max">100</param>
+			</command_interface>
+			<state_interface name="position"/>
+			<state_interface name="velocity"/>
+		</joint>
+
+    		<joint name="Mecanum_roller_joint_6">
+			<command_interface name="velocity">
+				<param name="min">-100</param>
+				<param name="max">100</param>
+			</command_interface>
+			<state_interface name="position"/>
+			<state_interface name="velocity"/>
+		</joint>
+
+    		<joint name="Mecanum_roller_joint_7">
+			<command_interface name="velocity">
+				<param name="min">-100</param>
+				<param name="max">100</param>
+			</command_interface>
+			<state_interface name="position"/>
+			<state_interface name="velocity"/>
+		</joint>
+
+    		<joint name="Mecanum_roller_joint_8">
+			<command_interface name="velocity">
+				<param name="min">-100</param>
+				<param name="max">100</param>
+			</command_interface>
+			<state_interface name="position"/>
+			<state_interface name="velocity"/>
+		</joint>
+
+    		<joint name="Mecanum_roller_joint_9">
+			<command_interface name="velocity">
+				<param name="min">-100</param>
+				<param name="max">100</param>
+			</command_interface>
+			<state_interface name="position"/>
+			<state_interface name="velocity"/>
+		</joint>
+	</ros2_control>
+
+  	<gazebo>
+		<plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+			<parameters>$(find icarus_pi)/config/controllers.yaml</parameters>
+			<robot_param>robot_description</robot_param>
+			<robot_param_node>robot_state_publisher</robot_param_node>
+			<controller_manager_name>icarus_controller_manager</controller_manager_name>
+		</plugin>
+	</gazebo>
+
+
 </robot>

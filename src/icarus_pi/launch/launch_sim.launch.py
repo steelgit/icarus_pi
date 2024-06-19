@@ -6,7 +6,8 @@ from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-
+import launch
+from launch.substitutions import Command, LaunchConfiguration
 from launch_ros.actions import Node
 
 
@@ -21,7 +22,7 @@ def generate_launch_description():
 
     rsp = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource([os.path.join(
-                    get_package_share_directory(package_name),'launch','rsp.launch.py'
+                    get_package_share_directory(package_name),'launch','rsp.wheel.py'
                 )]), launch_arguments={'use_sim_time': 'true', 'use_ros2_control': 'true'}.items()
     )
 
@@ -57,15 +58,28 @@ def generate_launch_description():
         executable="spawner.py",   #on humble it is no longer spawner.py
         arguments=["joint_broad"],
 )
+    joint_state_publisher_node = Node(
+        package = 'joint_state_publisher',
+        executable = 'joint_state_publisher',
+        name = 'joint_state_publisher',
+        #condition = launch.conditions.UnlessCondition(LaunchConfiguration('gui'))
+)
 
+    joint_state_publisher_gui_node =Node(
+        package = 'joint_state_publisher_gui',
+        executable = 'joint_state_publisher_gui',
+        name = 'joint_state_publisher_gui',
+        condition = launch.conditions.IfCondition(LaunchConfiguration('gui'))
+    )
 
 
     # Launch them all!
     return LaunchDescription([
         rsp,
+        joint_state_publisher_node,
         gazebo,
         spawn_entity,
-        joystick,
-        controller_drive_spawner,
+        #joystick,
+        #controller_drive_spawner,
         joint_broad_spawner
     ])

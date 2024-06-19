@@ -6,7 +6,7 @@ from launch import LaunchDescription
 from launch.substitutions import LaunchConfiguration, Command
 from launch.actions import DeclareLaunchArgument
 from launch_ros.actions import Node
-
+import launch_ros.descriptions
 import xacro
 
 
@@ -18,18 +18,19 @@ def generate_launch_description():
 
     # Process the URDF file
     pkg_path = os.path.join(get_package_share_directory('icarus_pi'))
-    xacro_file = os.path.join(pkg_path,'Meshes','Mecanum-Left.URDF','Mecanum-Left.URDF.urdf')
+    xacro_file = os.path.join(pkg_path,'Mesh','Mecanum-Right','urdf','Mecanum-Right.urdf.xacro')
+    urdf_to_xacro = xacro.process_file(xacro_file)
+    robot_description = urdf_to_xacro.toxml()
     #robot_description_config = xacro.process_file(xacro_file)
     robot_description_config = Command(['xacro ', xacro_file, ' use_ros2_control:=', use_ros2_control, ' sim_mode:=', use_sim_time])
     
     # Create a robot_state_publisher node
-    params = {'robot_description': robot_description_config, 'use_sim_time': use_sim_time}
-    node_robot_state_publisher = Node(
-        package='robot_state_publisher',
-        executable='robot_state_publisher',
-        output='screen',
-        parameters=[params]
+    node_robot_state_publisher =Node(
+        package = 'robot_state_publisher',
+        executable = 'robot_state_publisher',
+        parameters = [{'robot_description': robot_description}]
     )
+
 
 
     # Launch!
