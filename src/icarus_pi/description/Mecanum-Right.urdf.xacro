@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
-     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
-     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
-<robot
-  name="Mecanum-Right">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
+  <xacro:macro name="MecanumR" params="prefix x_reflect y_reflect">
   <link
-    name="Right_Base_Link">
+    name="${prefix}_link">
     <inertial>
       <origin
         xyz="-4.7771233839358E-07 2.34552518933002E-07 -2.07119508697187E-07"
@@ -44,8 +41,14 @@
       </geometry>
     </collision>
   </link>
+  <joint name="${prefix}_joint" type="continuous"> 
+		<parent link="base_link"/>
+		<child link="${prefix}_link"/>
+		<origin xyz="${x_reflect*wheel_xoff} ${y_reflect*(chassis_width/2 + wheel_ygap)} ${-wheel_zoff}" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+	</joint>
   <link
-    name="Mecanum_Roller_Link1">
+    name="${prefix}_Mecanum_Roller_Link1">
     <inertial>
       <origin
         xyz="-4.16595979552251E-05 0 1.56125112837913E-17"
@@ -85,20 +88,20 @@
     </collision>
   </link>
   <joint
-    name="Mecanum_Roller_Joint_1"
+    name="${prefix}_Mecanum_Roller_Joint_1"
     type="continuous">
     <origin
       xyz="-0.00786276516006295 -0.00229210366796707 0.0151828566548909"
       rpy="-1.36068806852681 0.491674447872911 -2.73783219400761" />
     <parent
-      link="Right_Base_Link" />
+      link="${prefix}_link" />
     <child
-      link="Mecanum_Roller_Link1" />
+      link="${prefix}_Mecanum_Roller_Link1" />
     <axis
       xyz="1 0 0" />
   </joint>
   <link
-    name="Mecanum_Roller_Link2">
+    name="${prefix}_Mecanum_Roller_Link2">
     <inertial>
       <origin
         xyz="-4.19537259518619E-05 5.55111512312578E-17 4.5102810375397E-17"
@@ -138,20 +141,20 @@
     </collision>
   </link>
   <joint
-    name="Mecanum_Roller_Joint_2"
+    name="${prefix}_Mecanum_Roller_Joint_2"
     type="continuous">
     <origin
       xyz="-0.00257449912034201 0.00825350947765706 0.0149280771357719"
       rpy="1.93542758330994 -0.0214038442701011 0.265392618762669" />
     <parent
-      link="Right_Base_Link" />
+      link="${prefix}_link" />
     <child
-      link="Mecanum_Roller_Link2" />
+      link="${prefix}_Mecanum_Roller_Link2" />
     <axis
       xyz="1 0 0" />
   </joint>
   <link
-    name="Mecanum_Roller_Link3">
+    name="${prefix}_Mecanum_Roller_Link3">
     <inertial>
       <origin
         xyz="-4.16595979550827E-05 -1.73472347597681E-18 -1.73472347597681E-18"
@@ -191,20 +194,20 @@
     </collision>
   </link>
   <joint
-    name="Mecanum_Roller_Joint_3"
+    name="${prefix}_Mecanum_Roller_Joint_3"
     type="continuous">
     <origin
       xyz="0.0038677825728569 0.0149620683207087 0.00766633686486059"
       rpy="-1.45997240902279 -0.325004631734415 3.05656776956051" />
     <parent
-      link="Right_Base_Link" />
+      link="${prefix}_link" />
     <child
-      link="Mecanum_Roller_Link3" />
+      link="${prefix}_Mecanum_Roller_Link3" />
     <axis
       xyz="1 0 0" />
   </joint>
   <link
-    name="Mecanum_Roller_Link4">
+    name="${prefix}_Mecanum_Roller_Link4">
     <inertial>
       <origin
         xyz="4.16595979567443E-05 0 -1.73472347597681E-18"
@@ -244,20 +247,20 @@
     </collision>
   </link>
   <joint
-    name="Mecanum_Roller_Joint_4"
+    name="${prefix}_Mecanum_Roller_Joint_4"
     type="continuous">
     <origin
       xyz="0.00844966471730028 0.0146945636211975 -0.00320451517983013"
       rpy="-1.23509707840396 0.401303910502291 -0.602154738197085" />
     <parent
-      link="Right_Base_Link" />
+      link="${prefix}_link" />
     <child
-      link="Mecanum_Roller_Link4" />
+      link="${prefix}_Mecanum_Roller_Link4" />
     <axis
       xyz="1 0 0" />
   </joint>
   <link
-    name="Mecanum_Roller_Link5">
+    name="${prefix}_Mecanum_Roller_Link5">
     <inertial>
       <origin
         xyz="4.16595979569898E-05 3.64291929955129E-17 -1.38777878078145E-17"
@@ -297,20 +300,20 @@
     </collision>
   </link>
   <joint
-    name="Mecanum_Roller_Joint_5"
+    name="${prefix}_Mecanum_Roller_Joint_5"
     type="continuous">
     <origin
       xyz="0.00902723373565527 0.0075761638010083 -0.0125978865105267"
       rpy="1.01038415879456 0.159830081855345 -1.04575970415485" />
     <parent
-      link="Right_Base_Link" />
+      link="${prefix}_link" />
     <child
-      link="Mecanum_Roller_Link5" />
+      link="${prefix}_Mecanum_Roller_Link5" />
     <axis
       xyz="1 0 0" />
   </joint>
   <link
-    name="Mecanum_Roller_Link6">
+    name="${prefix}_Mecanum_Roller_Link6">
     <inertial>
       <origin
         xyz="4.16595979573133E-05 -6.93889390390723E-18 1.73472347597681E-18"
@@ -350,20 +353,20 @@
     </collision>
   </link>
   <joint
-    name="Mecanum_Roller_Joint_6"
+    name="${prefix}_Mecanum_Roller_Joint_6"
     type="continuous">
     <origin
       xyz="0.00533023866526893 -0.00306235275179063 -0.0161185142859026"
       rpy="-1.00833638122774 -0.270056335980709 -1.28003202448786" />
     <parent
-      link="Right_Base_Link" />
+      link="${prefix}_link" />
     <child
-      link="Mecanum_Roller_Link6" />
+      link="${prefix}_Mecanum_Roller_Link6" />
     <axis
       xyz="1 0 0" />
   </joint>
   <link
-    name="Mecanum_Roller_Link7">
+    name="${prefix}_Mecanum_Roller_Link7">
     <inertial>
       <origin
         xyz="4.19537259526218E-05 2.94902990916057E-17 1.38777878078145E-17"
@@ -403,20 +406,20 @@
     </collision>
   </link>
   <joint
-    name="Mecanum_Roller_Joint_7"
+    name="${prefix}_Mecanum_Roller_Joint_7"
     type="continuous">
     <origin
       xyz="-0.000911455412901512 -0.0122431059082033 -0.0121190576424399"
       rpy="0.755293558147071 0.758576984655219 1.85745610617137" />
     <parent
-      link="Right_Base_Link" />
+      link="${prefix}_link" />
     <child
-      link="Mecanum_Roller_Link7" />
+      link="${prefix}_Mecanum_Roller_Link7" />
     <axis
       xyz="1 0 0" />
   </joint>
   <link
-    name="Mecanum_Roller_Link8">
+    name="${prefix}_Mecanum_Roller_Link8">
     <inertial>
       <origin
         xyz="-4.19537259514699E-05 1.38777878078145E-17 -1.21430643318376E-17"
@@ -456,20 +459,20 @@
     </collision>
   </link>
   <joint
-    name="Mecanum_Roller_Joint_8"
+    name="${prefix}_Mecanum_Roller_Joint_8"
     type="continuous">
     <origin
       xyz="-0.00677729047097743 -0.0156703192336383 -0.00247090679262434"
       rpy="2.95463100680286 -1.13639269714102 -0.725426795925048" />
     <parent
-      link="Right_Base_Link" />
+      link="${prefix}_link" />
     <child
-      link="Mecanum_Roller_Link8" />
+      link="${prefix}_Mecanum_Roller_Link8" />
     <axis
       xyz="1 0 0" />
   </joint>
   <link
-    name="Mecanum_Roller_Link9">
+    name="${prefix}_Mecanum_Roller_Link9">
     <inertial>
       <origin
         xyz="-4.16595979555983E-05 -5.20417042793042E-18 6.93889390390723E-18"
@@ -509,114 +512,17 @@
     </collision>
   </link>
   <joint
-    name="Mecanum_Roller_Joint_9"
+    name="${prefix}_Mecanum_Roller_Joint_9"
     type="continuous">
     <origin
       xyz="-0.00952257709379006 -0.011740361523891 0.00831146125366275"
       rpy="0.326455693966909 0.964739218565908 -2.90683123969866" />
     <parent
-      link="Right_Base_Link" />
+      link="${prefix}_link" />
     <child
-      link="Mecanum_Roller_Link9" />
+      link="${prefix}_Mecanum_Roller_Link9" />
     <axis
       xyz="1 0 0" />
   </joint>
-
-    <ros2_control name="gazeboSimSystem" type="system">	
-		<hardware>
-			<plugin>gazebo_ros2_control/GazeboSystem</plugin>
-		</hardware>
-
-		<joint name="Mecanum_roller_joint_1">
-			<command_interface name="velocity">
-				<param name="min">-100</param>
-				<param name="max">100</param>
-			</command_interface>
-			<state_interface name="position"/>
-			<state_interface name="velocity"/>
-		</joint>
-
-		<joint name="Mecanum_roller_joint_2">
-			<command_interface name="velocity">
-				<param name="min">-100</param>
-				<param name="max">100</param>
-			</command_interface>
-			<state_interface name="position"/>
-			<state_interface name="velocity"/>
-		</joint>
-
-    		<joint name="Mecanum_roller_joint_3">
-			<command_interface name="velocity">
-				<param name="min">-100</param>
-				<param name="max">100</param>
-			</command_interface>
-			<state_interface name="position"/>
-			<state_interface name="velocity"/>
-		</joint>
-
-    		<joint name="Mecanum_roller_joint_4">
-			<command_interface name="velocity">
-				<param name="min">-100</param>
-				<param name="max">100</param>
-			</command_interface>
-			<state_interface name="position"/>
-			<state_interface name="velocity"/>
-		</joint>
-
-    		<joint name="Mecanum_roller_joint_5">
-			<command_interface name="velocity">
-				<param name="min">-100</param>
-				<param name="max">100</param>
-			</command_interface>
-			<state_interface name="position"/>
-			<state_interface name="velocity"/>
-		</joint>
-
-    		<joint name="Mecanum_roller_joint_6">
-			<command_interface name="velocity">
-				<param name="min">-100</param>
-				<param name="max">100</param>
-			</command_interface>
-			<state_interface name="position"/>
-			<state_interface name="velocity"/>
-		</joint>
-
-    		<joint name="Mecanum_roller_joint_7">
-			<command_interface name="velocity">
-				<param name="min">-100</param>
-				<param name="max">100</param>
-			</command_interface>
-			<state_interface name="position"/>
-			<state_interface name="velocity"/>
-		</joint>
-
-    		<joint name="Mecanum_roller_joint_8">
-			<command_interface name="velocity">
-				<param name="min">-100</param>
-				<param name="max">100</param>
-			</command_interface>
-			<state_interface name="position"/>
-			<state_interface name="velocity"/>
-		</joint>
-
-    		<joint name="Mecanum_roller_joint_9">
-			<command_interface name="velocity">
-				<param name="min">-100</param>
-				<param name="max">100</param>
-			</command_interface>
-			<state_interface name="position"/>
-			<state_interface name="velocity"/>
-		</joint>
-	</ros2_control>
-
-  	<gazebo>
-		<plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
-			<parameters>$(find icarus_pi)/config/controllers.yaml</parameters>
-			<robot_param>robot_description</robot_param>
-			<robot_param_node>robot_state_publisher</robot_param_node>
-			<controller_manager_name>icarus_controller_manager</controller_manager_name>
-		</plugin>
-	</gazebo>
-
-
+  </xacro:macro>
 </robot>
