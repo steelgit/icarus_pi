@@ -17,7 +17,7 @@
 		</collision>
 
 		<visual>
-			<origin xyz = "${-chassis_length/2 + 2*lidar_radius} 0 ${chassis_height/4}" rpy="0 0 0"/>
+			<origin xyz = "${-chassis_length/2 + 2*lidar_radius} 0 ${chassis_height/16}" rpy="0 0 0"/>
 			<geometry>
 				<cylinder radius="${lidar_radius}" length=".06"/>
 			</geometry>
@@ -32,7 +32,7 @@
 	<!--^^make joint continuous to mimic spinning lidar?-->
 		<parent link="base_link"/>
 		<child link="lidar_link"/>
-		<origin xyz="${-chassis_length/2 + lidar_radius} 0 ${chassis_height/2+.02}" rpy="0 0 0"/>
+		<origin xyz="${-chassis_length/2 + lidar_radius} 0 ${chassis_height/2+.03}" rpy="0 0 0"/>
 	</joint>
 
     <!--adding gazebo plugins to the sim-->

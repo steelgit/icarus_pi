@@ -1,21 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
-  <xacro:macro name="MecanumR" params="prefix x_reflect y_reflect">
+  <xacro:macro name="Mecanum" params="prefix x_reflect y_reflect r_reflect">
   <link
     name="${prefix}_link">
     <inertial>
       <origin
-        xyz="-4.7771233839358E-07 2.34552518933002E-07 -2.07119508697187E-07"
+        xyz="-5.71071320654166E-07 1.24074703998625E-17 -8.40087960733809E-19"
         rpy="0 0 0" />
       <mass
-        value="0.0110925597603562" />
+        value="0.0110925597603563" />
       <inertia
-        ixx="1.26410691718137E-06"
-        ixy="-1.5460162528858E-07"
-        ixz="1.36519585539842E-07"
-        iyy="1.02513832514045E-06"
-        iyz="-6.70299050271453E-08"
-        izz="1.00842045851304E-06" />
+        ixx="1.39920510272198E-06"
+        ixy="6.03598608368132E-22"
+        ixz="2.70201401925188E-21"
+        iyy="9.49230299056441E-07"
+        iyz="-8.48228743085689E-23"
+        izz="9.49230299056441E-07" />
     </inertial>
     <visual>
       <origin
@@ -23,7 +23,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="file://$(find icarus_pi)/Mesh/Mecanum-Right/meshes/Right_Base_Link.STL" />
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/base_link.STL" />
       </geometry>
       <material
         name="">
@@ -37,134 +37,451 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="file://$(find icarus_pi)/Mesh/Mecanum-Right/meshes/Right_Base_Link.STL" />
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/base_link.STL" />
       </geometry>
     </collision>
   </link>
   <joint name="${prefix}_joint" type="continuous"> 
 		<parent link="base_link"/>
 		<child link="${prefix}_link"/>
-		<origin xyz="${x_reflect*wheel_xoff} ${y_reflect*(chassis_width/2 + wheel_ygap)} ${-wheel_zoff}" rpy="0 0 0"/>
-    <axis xyz="0 0 1"/>
+		<origin xyz="${x_reflect*wheel_xoff} ${y_reflect*(chassis_width/2 + wheel_ygap)} ${-wheel_zoff}" rpy="0 0 ${r_reflect}"/>
+    <axis xyz="1 0 0"/>
 	</joint>
   <link
-    name="${prefix}_Mecanum_Roller_Link1">
+    name="${prefix}_Mecanum_roller_link_1">
     <inertial>
       <origin
-        xyz="-4.16595979552251E-05 0 1.56125112837913E-17"
-        rpy="0 0 0" />
-      <mass
-        value="0.00104310145784987" />
-      <inertia
-        ixx="9.96758957260102E-09"
-        ixy="2.95006210648795E-24"
-        ixz="2.48154183765908E-24"
-        iyy="3.79225492604175E-08"
-        iyz="-1.60266243682149E-24"
-        izz="3.79225492604175E-08" />
-    </inertial>
-    <visual>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="file://$(find icarus_pi)/Mesh/Mecanum-Right/meshes/Mecanum_Roller_Link1.STL" />
-      </geometry>
-      <material
-        name="">
-        <color
-          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
-      </material>
-    </visual>
-    <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="file://$(find icarus_pi)/Mesh/Mecanum-Right/meshes/Mecanum_Roller_Link1.STL" />
-      </geometry>
-    </collision>
-  </link>
-  <joint
-    name="${prefix}_Mecanum_Roller_Joint_1"
-    type="continuous">
-    <origin
-      xyz="-0.00786276516006295 -0.00229210366796707 0.0151828566548909"
-      rpy="-1.36068806852681 0.491674447872911 -2.73783219400761" />
-    <parent
-      link="${prefix}_link" />
-    <child
-      link="${prefix}_Mecanum_Roller_Link1" />
-    <axis
-      xyz="1 0 0" />
-  </joint>
-  <link
-    name="${prefix}_Mecanum_Roller_Link2">
-    <inertial>
-      <origin
-        xyz="-4.19537259518619E-05 5.55111512312578E-17 4.5102810375397E-17"
-        rpy="0 0 0" />
-      <mass
-        value="0.00104310145784987" />
-      <inertia
-        ixx="9.96758957260102E-09"
-        ixy="4.13590306276514E-25"
-        ixz="8.27180612553028E-25"
-        iyy="3.79225492604175E-08"
-        iyz="0"
-        izz="3.79225492604175E-08" />
-    </inertial>
-    <visual>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="file://$(find icarus_pi)/Mesh/Mecanum-Right/meshes/Mecanum_Roller_Link2.STL" />
-      </geometry>
-      <material
-        name="">
-        <color
-          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
-      </material>
-    </visual>
-    <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="file://$(find icarus_pi)/Mesh/Mecanum-Right/meshes/Mecanum_Roller_Link2.STL" />
-      </geometry>
-    </collision>
-  </link>
-  <joint
-    name="${prefix}_Mecanum_Roller_Joint_2"
-    type="continuous">
-    <origin
-      xyz="-0.00257449912034201 0.00825350947765706 0.0149280771357719"
-      rpy="1.93542758330994 -0.0214038442701011 0.265392618762669" />
-    <parent
-      link="${prefix}_link" />
-    <child
-      link="${prefix}_Mecanum_Roller_Link2" />
-    <axis
-      xyz="1 0 0" />
-  </joint>
-  <link
-    name="${prefix}_Mecanum_Roller_Link3">
-    <inertial>
-      <origin
-        xyz="-4.16595979550827E-05 -1.73472347597681E-18 -1.73472347597681E-18"
+        xyz="4.19537259525784E-05 -9.19403442267708E-17 -4.5102810375397E-17"
         rpy="0 0 0" />
       <mass
         value="0.00104310145784987" />
       <inertia
         ixx="9.96758957260103E-09"
-        ixy="1.88700577238659E-24"
-        ixz="4.44609579247252E-24"
+        ixy="8.47860127866853E-24"
+        ixz="-4.54949336904165E-24"
+        iyy="3.79225492604175E-08"
+        iyz="3.30872245021211E-24"
+        izz="3.79225492604176E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/Mecanum_roller_link_1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/Mecanum_roller_link_1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="${prefix}_Mecanum_roller_joint_1" type="continuous">
+    <origin
+      xyz="0.00012912 0.014344 0.0095825"
+      rpy="-2.7656 0.6249 2.6298" />
+    <parent
+      link="${prefix}_link" />
+    <child
+      link="${prefix}_Mecanum_roller_link_1" />
+    <axis
+      xyz="1 0 0" />
+  </joint>
+  <link
+    name="${prefix}_Mecanum_roller_link_2">
+    <inertial>
+      <origin
+        xyz="-4.19537259514885E-05 -2.77555756156289E-17 -9.71445146547012E-17"
+        rpy="0 0 0" />
+      <mass
+        value="0.00104310145784987" />
+      <inertia
+        ixx="9.96758957260103E-09"
+        ixy="1.68021061924834E-24"
+        ixz="-5.37667398159468E-24"
+        iyy="3.79225492604175E-08"
+        iyz="-1.03397576569128E-25"
+        izz="3.79225492604175E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/Mecanum_roller_link_2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/Mecanum_roller_link_2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="${prefix}_Mecanum_roller_joint_2"
+    type="continuous">
+    <origin
+      xyz="-0.00012933 0.0045802 0.016631"
+      rpy="1.6775 -0.19406 -0.76608" />
+    <parent
+      link="${prefix}_link" />
+    <child
+      link="${prefix}_Mecanum_roller_link_2" />
+    <axis
+      xyz="1 0 0" />
+  </joint>
+  <link
+    name="${prefix}_Mecanum_roller_link_3">
+    <inertial>
+      <origin
+        xyz="-4.19537259517232E-05 6.24500451351651E-17 -1.45716771982052E-16"
+        rpy="0 0 0" />
+      <mass
+        value="0.00104310145784987" />
+      <inertia
+        ixx="9.96758957260103E-09"
+        ixy="4.39439700418796E-24"
+        ixz="-8.27180612553028E-25"
+        iyy="3.79225492604175E-08"
+        iyz="-1.65436122510606E-24"
+        izz="3.79225492604175E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/Mecanum_roller_link_3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/Mecanum_roller_link_3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="${prefix}_Mecanum_roller_joint_3"
+    type="continuous">
+    <origin
+      xyz="0.00012912 -0.006946 0.01579"
+      rpy="1.4846 0.29377 -0.73958" />
+    <parent
+      link="${prefix}_link" />
+    <child
+      link="${prefix}_Mecanum_roller_link_3" />
+    <axis
+      xyz="1 0 0" />
+  </joint>
+  <link
+    name="${prefix}_Mecanum_roller_link_4">
+    <inertial>
+      <origin
+        xyz="-4.19537259518845E-05 9.54097911787244E-17 -5.03069808033274E-17"
+        rpy="0 0 0" />
+      <mass
+        value="0.00104310145784987" />
+      <inertia
+        ixx="9.9675895729459E-09"
+        ixy="-5.11818004017186E-24"
+        ixz="2.68833699079734E-24"
+        iyy="3.79225492606102E-08"
+        iyz="-8.27180612553028E-25"
+        izz="3.79225492606102E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/Mecanum_roller_link_4.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/Mecanum_roller_link_4.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="${prefix}_Mecanum_roller_joint_4"
+    type="continuous">
+    <origin
+      xyz="0.00012912 -0.015471 0.0076312"
+      rpy="1.4497 0.68992 -0.41086" />
+    <parent
+      link="${prefix}_link" />
+    <child
+      link="${prefix}_Mecanum_roller_link_4" />
+    <axis
+      xyz="1 0 0" />
+  </joint>
+  <link
+    name="${prefix}_Mecanum_roller_link_5">
+    <inertial>
+      <origin
+        xyz="4.1659597956364E-05 1.04950770296597E-16 1.38777878078145E-17"
+        rpy="0 0 0" />
+      <mass
+        value="0.00104310145784987" />
+      <inertia
+        ixx="9.96758957260103E-09"
+        ixy="3.87740912134232E-25"
+        ixz="-2.1713491079517E-24"
+        iyy="3.79225492604175E-08"
+        iyz="2.06795153138257E-25"
+        izz="3.79225492604175E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/Mecanum_roller_link_5.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/Mecanum_roller_link_5.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="${prefix}_Mecanum_roller_joint_5"
+    type="continuous">
+    <origin
+      xyz="0.00012912 -0.016757 -0.0040986"
+      rpy="1.6948 0.7554 0.24013" />
+    <parent
+      link="${prefix}_link" />
+    <child
+      link="${prefix}_Mecanum_roller_link_5" />
+    <axis
+      xyz="1 0 0" />
+  </joint>
+  <link
+    name="${prefix}_Mecanum_roller_link_6">
+    <inertial>
+      <origin
+        xyz="-4.19537259515289E-05 6.93889390390723E-18 1.73472347597681E-18"
+        rpy="0 0 0" />
+      <mass
+        value="0.00104310145784984" />
+      <inertia
+        ixx="9.96758957158561E-09"
+        ixy="-6.04875822929401E-24"
+        ixz="-1.15805285757424E-23"
+        iyy="3.79225492599098E-08"
+        iyz="8.27180612553028E-25"
+        izz="3.79225492599098E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/Mecanum_roller_link_6.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/Mecanum_roller_link_6.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="${prefix}_Mecanum_roller_joint_6"
+    type="continuous">
+    <origin
+      xyz="0.00012912 -0.010202 -0.013911"
+      rpy="1.7524 0.42673 0.68129" />
+    <parent
+      link="${prefix}_link" />
+    <child
+      link="${prefix}_Mecanum_roller_link_6" />
+    <axis
+      xyz="1 0 0" />
+  </joint>
+  <link
+    name="${prefix}_Mecanum_roller_link_7">
+    <inertial>
+      <origin
+        xyz="-4.19537259513104E-05 6.24500451351651E-17 4.16333634234434E-17"
+        rpy="0 0 0" />
+      <mass
+        value="0.00104310145784987" />
+      <inertia
+        ixx="9.96758957260102E-09"
+        ixy="-3.30872245021211E-24"
+        ixz="-1.03397576569128E-24"
+        iyy="3.79225492604175E-08"
+        iyz="2.48154183765908E-24"
+        izz="3.79225492604175E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/Mecanum_roller_link_7.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/Mecanum_roller_link_7.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="${prefix}_Mecanum_roller_joint_7"
+    type="continuous">
+    <origin
+      xyz="0.00012912 0.0011266 -0.017214"
+      rpy="2.5112 -0.051481 0.78407" />
+    <parent
+      link="${prefix}_link" />
+    <child
+      link="${prefix}_Mecanum_roller_link_7" />
+    <axis
+      xyz="1 0 0" />
+  </joint>
+  <link
+    name="${prefix}_Mecanum_roller_link_8">
+    <inertial>
+      <origin
+        xyz="4.16595979570254E-05 -8.67361737988404E-18 -6.93889390390723E-18"
+        rpy="0 0 0" />
+      <mass
+        value="0.00104310145784987" />
+      <inertia
+        ixx="9.96758957226301E-09"
+        ixy="-4.23930063933427E-24"
+        ixz="-3.30872245021211E-24"
+        iyy="3.79225492602485E-08"
+        iyz="-4.13590306276514E-25"
+        izz="3.79225492602485E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/Mecanum_roller_link_8.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/Mecanum_roller_link_8.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="${prefix}_Mecanum_roller_joint_8"
+    type="continuous">
+    <origin
+      xyz="-0.00012933 0.012113 -0.012282"
+      rpy="-1.7252 -0.51523 0.6222" />
+    <parent
+      link="${prefix}_link" />
+    <child
+      link="${prefix}_Mecanum_roller_link_8" />
+    <axis
+      xyz="1 0 0" />
+  </joint>
+  <link
+    name="${prefix}_Mecanum_roller_link_9">
+    <inertial>
+      <origin
+        xyz="-4.19537259509657E-05 8.02309607639273E-17 -1.04083408558608E-17"
+        rpy="0 0 0" />
+      <mass
+        value="0.00104310145784987" />
+      <inertia
+        ixx="9.96758957260103E-09"
+        ixy="-3.36042123849667E-25"
+        ixz="2.99852972050473E-24"
         iyy="3.79225492604175E-08"
         iyz="-4.13590306276514E-25"
         izz="3.79225492604175E-08" />
@@ -175,7 +492,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="file://$(find icarus_pi)/Mesh/Mecanum-Right/meshes/Mecanum_Roller_Link3.STL" />
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/Mecanum_roller_link_9.STL" />
       </geometry>
       <material
         name="">
@@ -189,338 +506,20 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="file://$(find icarus_pi)/Mesh/Mecanum-Right/meshes/Mecanum_Roller_Link3.STL" />
+          filename="file://$(find icarus_pi)/Mesh/Mecanum-Left/meshes/Mecanum_roller_link_9.STL" />
       </geometry>
     </collision>
   </link>
   <joint
-    name="${prefix}_Mecanum_Roller_Joint_3"
+    name="${prefix}_Mecanum_roller_joint_9"
     type="continuous">
     <origin
-      xyz="0.0038677825728569 0.0149620683207087 0.00766633686486059"
-      rpy="-1.45997240902279 -0.325004631734415 3.05656776956051" />
+      xyz="0.00012912 0.017148 -0.0018797"
+      rpy="1.5575 -0.78024 0.10117" />
     <parent
       link="${prefix}_link" />
     <child
-      link="${prefix}_Mecanum_Roller_Link3" />
-    <axis
-      xyz="1 0 0" />
-  </joint>
-  <link
-    name="${prefix}_Mecanum_Roller_Link4">
-    <inertial>
-      <origin
-        xyz="4.16595979567443E-05 0 -1.73472347597681E-18"
-        rpy="0 0 0" />
-      <mass
-        value="0.00104310145784984" />
-      <inertia
-        ixx="9.96758957238032E-09"
-        ixy="-2.06795153138257E-24"
-        ixz="-5.58346913473294E-24"
-        iyy="3.79225492603072E-08"
-        iyz="-4.96308367531817E-24"
-        izz="3.79225492603072E-08" />
-    </inertial>
-    <visual>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="file://$(find icarus_pi)/Mesh/Mecanum-Right/meshes/Mecanum_Roller_Link4.STL" />
-      </geometry>
-      <material
-        name="">
-        <color
-          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
-      </material>
-    </visual>
-    <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="file://$(find icarus_pi)/Mesh/Mecanum-Right/meshes/Mecanum_Roller_Link4.STL" />
-      </geometry>
-    </collision>
-  </link>
-  <joint
-    name="${prefix}_Mecanum_Roller_Joint_4"
-    type="continuous">
-    <origin
-      xyz="0.00844966471730028 0.0146945636211975 -0.00320451517983013"
-      rpy="-1.23509707840396 0.401303910502291 -0.602154738197085" />
-    <parent
-      link="${prefix}_link" />
-    <child
-      link="${prefix}_Mecanum_Roller_Link4" />
-    <axis
-      xyz="1 0 0" />
-  </joint>
-  <link
-    name="${prefix}_Mecanum_Roller_Link5">
-    <inertial>
-      <origin
-        xyz="4.16595979569898E-05 3.64291929955129E-17 -1.38777878078145E-17"
-        rpy="0 0 0" />
-      <mass
-        value="0.0010431014578499" />
-      <inertia
-        ixx="9.96758957260262E-09"
-        ixy="2.06795153138257E-25"
-        ixz="2.06795153138257E-24"
-        iyy="3.79225492604183E-08"
-        iyz="2.06795153138257E-24"
-        izz="3.79225492604183E-08" />
-    </inertial>
-    <visual>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="file://$(find icarus_pi)/Mesh/Mecanum-Right/meshes/Mecanum_Roller_Link5.STL" />
-      </geometry>
-      <material
-        name="">
-        <color
-          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
-      </material>
-    </visual>
-    <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="file://$(find icarus_pi)/Mesh/Mecanum-Right/meshes/Mecanum_Roller_Link5.STL" />
-      </geometry>
-    </collision>
-  </link>
-  <joint
-    name="${prefix}_Mecanum_Roller_Joint_5"
-    type="continuous">
-    <origin
-      xyz="0.00902723373565527 0.0075761638010083 -0.0125978865105267"
-      rpy="1.01038415879456 0.159830081855345 -1.04575970415485" />
-    <parent
-      link="${prefix}_link" />
-    <child
-      link="${prefix}_Mecanum_Roller_Link5" />
-    <axis
-      xyz="1 0 0" />
-  </joint>
-  <link
-    name="${prefix}_Mecanum_Roller_Link6">
-    <inertial>
-      <origin
-        xyz="4.16595979573133E-05 -6.93889390390723E-18 1.73472347597681E-18"
-        rpy="0 0 0" />
-      <mass
-        value="0.00104310145784987" />
-      <inertia
-        ixx="9.96758957260103E-09"
-        ixy="1.75775880167518E-24"
-        ixz="2.8951321439356E-24"
-        iyy="3.79225492604175E-08"
-        iyz="2.99852972050473E-24"
-        izz="3.79225492604175E-08" />
-    </inertial>
-    <visual>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="file://$(find icarus_pi)/Mesh/Mecanum-Right/meshes/Mecanum_Roller_Link6.STL" />
-      </geometry>
-      <material
-        name="">
-        <color
-          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
-      </material>
-    </visual>
-    <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="file://$(find icarus_pi)/Mesh/Mecanum-Right/meshes/Mecanum_Roller_Link6.STL" />
-      </geometry>
-    </collision>
-  </link>
-  <joint
-    name="${prefix}_Mecanum_Roller_Joint_6"
-    type="continuous">
-    <origin
-      xyz="0.00533023866526893 -0.00306235275179063 -0.0161185142859026"
-      rpy="-1.00833638122774 -0.270056335980709 -1.28003202448786" />
-    <parent
-      link="${prefix}_link" />
-    <child
-      link="${prefix}_Mecanum_Roller_Link6" />
-    <axis
-      xyz="1 0 0" />
-  </joint>
-  <link
-    name="${prefix}_Mecanum_Roller_Link7">
-    <inertial>
-      <origin
-        xyz="4.19537259526218E-05 2.94902990916057E-17 1.38777878078145E-17"
-        rpy="0 0 0" />
-      <mass
-        value="0.00104310145784982" />
-      <inertia
-        ixx="9.967589571584E-09"
-        ixy="1.55096364853693E-24"
-        ixz="-5.37667398159468E-24"
-        iyy="3.79225492598888E-08"
-        iyz="-1.24077091882954E-24"
-        izz="3.79225492598888E-08" />
-    </inertial>
-    <visual>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="file://$(find icarus_pi)/Mesh/Mecanum-Right/meshes/Mecanum_Roller_Link7.STL" />
-      </geometry>
-      <material
-        name="">
-        <color
-          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
-      </material>
-    </visual>
-    <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="file://$(find icarus_pi)/Mesh/Mecanum-Right/meshes/Mecanum_Roller_Link7.STL" />
-      </geometry>
-    </collision>
-  </link>
-  <joint
-    name="${prefix}_Mecanum_Roller_Joint_7"
-    type="continuous">
-    <origin
-      xyz="-0.000911455412901512 -0.0122431059082033 -0.0121190576424399"
-      rpy="0.755293558147071 0.758576984655219 1.85745610617137" />
-    <parent
-      link="${prefix}_link" />
-    <child
-      link="${prefix}_Mecanum_Roller_Link7" />
-    <axis
-      xyz="1 0 0" />
-  </joint>
-  <link
-    name="${prefix}_Mecanum_Roller_Link8">
-    <inertial>
-      <origin
-        xyz="-4.19537259514699E-05 1.38777878078145E-17 -1.21430643318376E-17"
-        rpy="0 0 0" />
-      <mass
-        value="0.00104310145784987" />
-      <inertia
-        ixx="9.96758957260103E-09"
-        ixy="-1.55096364853693E-24"
-        ixz="-2.06795153138257E-25"
-        iyy="3.79225492604175E-08"
-        iyz="-3.30872245021211E-24"
-        izz="3.79225492604175E-08" />
-    </inertial>
-    <visual>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="file://$(find icarus_pi)/Mesh/Mecanum-Right/meshes/Mecanum_Roller_Link8.STL" />
-      </geometry>
-      <material
-        name="">
-        <color
-          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
-      </material>
-    </visual>
-    <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="file://$(find icarus_pi)/Mesh/Mecanum-Right/meshes/Mecanum_Roller_Link8.STL" />
-      </geometry>
-    </collision>
-  </link>
-  <joint
-    name="${prefix}_Mecanum_Roller_Joint_8"
-    type="continuous">
-    <origin
-      xyz="-0.00677729047097743 -0.0156703192336383 -0.00247090679262434"
-      rpy="2.95463100680286 -1.13639269714102 -0.725426795925048" />
-    <parent
-      link="${prefix}_link" />
-    <child
-      link="${prefix}_Mecanum_Roller_Link8" />
-    <axis
-      xyz="1 0 0" />
-  </joint>
-  <link
-    name="${prefix}_Mecanum_Roller_Link9">
-    <inertial>
-      <origin
-        xyz="-4.16595979555983E-05 -5.20417042793042E-18 6.93889390390723E-18"
-        rpy="0 0 0" />
-      <mass
-        value="0.00104310145784987" />
-      <inertia
-        ixx="9.96758957260103E-09"
-        ixy="1.24077091882954E-24"
-        ixz="4.66581564268192E-24"
-        iyy="3.79225492604175E-08"
-        iyz="4.13590306276514E-25"
-        izz="3.79225492604175E-08" />
-    </inertial>
-    <visual>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="file://$(find icarus_pi)/Mesh/Mecanum-Right/meshes/Mecanum_Roller_Link9.STL" />
-      </geometry>
-      <material
-        name="">
-        <color
-          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
-      </material>
-    </visual>
-    <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="file://$(find icarus_pi)/Mesh/Mecanum-Right/meshes/Mecanum_Roller_Link9.STL" />
-      </geometry>
-    </collision>
-  </link>
-  <joint
-    name="${prefix}_Mecanum_Roller_Joint_9"
-    type="continuous">
-    <origin
-      xyz="-0.00952257709379006 -0.011740361523891 0.00831146125366275"
-      rpy="0.326455693966909 0.964739218565908 -2.90683123969866" />
-    <parent
-      link="${prefix}_link" />
-    <child
-      link="${prefix}_Mecanum_Roller_Link9" />
+      link="${prefix}_Mecanum_roller_link_9" />
     <axis
       xyz="1 0 0" />
   </joint>
