@@ -17,6 +17,8 @@ class Wheel
     double eff = 0;
     double velSetPt = 0;
     double rads_per_count = 0;
+    double desired_speed = 0;
+    double pos_prev = 0;
 
     Wheel() = default;
 
