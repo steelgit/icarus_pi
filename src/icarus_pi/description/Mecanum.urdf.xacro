@@ -1,21 +1,21 @@
 <?xml version="1.0"?>
-<robot name="c" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
   <xacro:macro name="Mecanum" params="prefix x_reflect y_reflect r_reflect">
   <link
     name="${prefix}_link">
     <inertial>
       <origin
-        xyz="-0.000234121527171483 0.00746425134099118 0.00346357398540496"
+        xyz="0.011813 0.0074643 0.015042"
         rpy="0 0 0" />
       <mass
-        value="0.0100561436842867" />
+        value="0.010056" />
       <inertia
-        ixx="9.08669427255961E-07"
-        ixy="-4.24091622646816E-23"
-        ixz="1.75713565333693E-21"
-        iyy="9.08669427255961E-07"
-        iyz="-5.13070575050977E-24"
-        izz="1.28540947587092E-06" />
+        ixx="1.2854E-06"
+        ixy="-1.0402E-23"
+        ixz="-1.8029E-21"
+        iyy="9.0867E-07"
+        iyz="-3.7562E-23"
+        izz="9.0867E-07" />
     </inertial>
     <visual>
       <origin
@@ -28,7 +28,7 @@
       <material
         name="">
         <color
-          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+          rgba="0.79216 0.81961 0.93333 1" />
       </material>
     </visual>
     <collision>
@@ -42,25 +42,25 @@
     </collision>
   </link>
     <joint name="${prefix}_joint" type="continuous"> 
-                <parent link="base_link"/>
-                <child link="${prefix}_link"/>
-                <origin xyz="${x_reflect*wheel_xoff} ${y_reflect*(chassis_width/2 + wheel_ygap)} ${-wheel_zoff}" rpy="0 0 ${r_reflect}"/>
-      <axis xyz="1 0 0"/>
-	        </joint>
+              <parent link="base_link"/>
+              <child link="${prefix}_link"/>
+              <origin xyz="${x_reflect*wheel_xoff} ${y_reflect*(chassis_width/2 + wheel_ygap)} ${-wheel_zoff}" rpy="0 0 ${r_reflect}"/>
+    <axis xyz="1 0 0"/>
+        </joint>
   <link
-    name="${prefix}_Mecanum_roller_link_1">
+    name="Mecanum_roller_link_1">
     <inertial>
       <origin
-        xyz="-0.0062458 -9.3675E-17 5.3776E-17"
+        xyz="0.012194 1.7694E-16 -2.3592E-16"
         rpy="0 0 0" />
       <mass
         value="0.0010939" />
       <inertia
         ixx="1.1179E-08"
-        ixy="4.5495E-24"
+        ixy="1.3442E-24"
         ixz="4.1359E-25"
         iyy="3.946E-08"
-        iyz="0"
+        iyz="-2.068E-24"
         izz="3.946E-08" />
     </inertial>
     <visual>
@@ -90,8 +90,8 @@
   <joint
     name="${prefix}_Mecanum_roller_joint_1" type="continuous">
     <origin
-      xyz="0.015107 0.00099836 0.016519"
-      rpy="1.4009 0.5236 0.95532" />
+      xyz="0.0032354879777911 -0.0211628583855368 0.0257385293646238"
+      rpy="1.40087787206783 0.523598775598295 -0.615479708670392" />
     <parent
       link="${prefix}_link" />
     <child
@@ -103,14 +103,14 @@
     name="${prefix}_Mecanum_roller_link_2">
     <inertial>
       <origin
-        xyz="0.0061167 2.2551E-17 -1.7347E-17"
+        xyz="0.0029529 -4.3368E-18 1.0408E-17"
         rpy="0 0 0" />
       <mass
         value="0.0010939" />
       <inertia
         ixx="1.1179E-08"
-        ixy="-1.2408E-24"
-        ixz="1.2408E-24"
+        ixy="-3.6706E-24"
+        ixz="-3.3087E-24"
         iyy="3.946E-08"
         iyz="0"
         izz="3.946E-08" />
@@ -143,8 +143,8 @@
     name="${prefix}_Mecanum_roller_joint_2"
     type="continuous">
     <origin
-      xyz="0.00892546832625979 0.000816090016708404 -0.00777134275651348"
-      rpy="1.37379417067013 -0.523598775598296 -0.955316618124505" />
+      xyz="0.013855 -0.025783 -0.0061895"
+      rpy="1.3738 -0.5236 -2.5261" />
     <parent
       link="${prefix}_link" />
     <child
@@ -156,16 +156,16 @@
     name="${prefix}_Mecanum_roller_link_3">
     <inertial>
       <origin
-        xyz="-0.0023361 1.7347E-18 8.2399E-17"
+        xyz="-0.0023361 1.3878E-17 6.9389E-18"
         rpy="0 0 0" />
       <mass
         value="0.0010939" />
       <inertia
         ixx="1.1179E-08"
-        ixy="-7.7548E-24"
-        ixz="-8.2718E-24"
+        ixy="1.4362E-22"
+        ixz="-4.26E-23"
         iyy="3.946E-08"
-        iyz="-1.2408E-24"
+        iyz="-4.1359E-24"
         izz="3.946E-08" />
     </inertial>
     <visual>
@@ -196,8 +196,8 @@
     name="${prefix}_Mecanum_roller_joint_3"
     type="continuous">
     <origin
-      xyz="-0.0018572 -0.0018572 -0.0097857"
-      rpy="1.8452 0 2.3562" />
+      xyz="0.0134188663284221 -0.0134188663284221 -0.00978574865900883"
+      rpy="1.84520374289531 0 0.78539816339745" />
     <parent
       link="${prefix}_link" />
     <child
@@ -209,16 +209,16 @@
     name="${prefix}_Mecanum_roller_link_4">
     <inertial>
       <origin
-        xyz="-0.0077796 4.3368E-18 3.4694E-18"
+        xyz="0.0030222 0 2.0817E-17"
         rpy="0 0 0" />
       <mass
         value="0.0010939" />
       <inertia
         ixx="1.1179E-08"
-        ixy="2.4815E-24"
-        ixz="1.2408E-24"
+        ixy="-3.2743E-23"
+        ixz="-1.4241E-22"
         iyy="3.946E-08"
-        iyz="-4.1359E-25"
+        iyz="-8.2718E-25"
         izz="3.946E-08" />
     </inertial>
     <visual>
@@ -249,8 +249,8 @@
     name="${prefix}_Mecanum_roller_joint_4"
     type="continuous">
     <origin
-      xyz="0.017016 0.001992 0.001992"
-      rpy="1.7863 0.7854 1.5708" />
+      xyz="0.00963 -0.032292 0.00963"
+      rpy="1.7863 0.7854 0" />
     <parent
       link="${prefix}_link" />
     <child
@@ -262,16 +262,16 @@
     name="${prefix}_Mecanum_roller_link_5">
     <inertial>
       <origin
-        xyz="0.0027764 3.4694E-18 -3.4694E-18"
+        xyz="0.013578 2.8623E-17 -7.546E-17"
         rpy="0 0 0" />
       <mass
         value="0.0010939" />
       <inertia
         ixx="1.1179E-08"
-        ixy="8.6854E-24"
-        ixz="3.1019E-25"
+        ixy="-3.4704E-23"
+        ixz="1.4829E-22"
         iyy="3.946E-08"
-        iyz="-1.2408E-24"
+        iyz="-8.2718E-25"
         izz="3.946E-08" />
     </inertial>
     <visual>
@@ -302,12 +302,12 @@
     name="${prefix}_Mecanum_roller_joint_5"
     type="continuous">
     <origin
-      xyz="-0.017484 -0.0054723 0.0054723"
-      rpy="1.2964 -0.7854 1.5708" />
+      xyz="0.0021658 0.002208 -0.0021658"
+      rpy="1.2964 -0.7854 0" />
     <parent
       link="${prefix}_link" />
     <child
-      link="${prefix}_Mecanum_roller_link_5" />
+      link="${prefix}_Mecanum_roller_joint_5" />
     <axis
       xyz="1 0 0" />
   </joint>
@@ -315,16 +315,16 @@
     name="${prefix}_Mecanum_roller_link_6">
     <inertial>
       <origin
-        xyz="0.0013476 -1.0408E-17 5.2042E-18"
+        xyz="0.0045113 1.2143E-17 1.7347E-18"
         rpy="0 0 0" />
       <mass
         value="0.0010939" />
       <inertia
         ixx="1.1179E-08"
-        ixy="-4.1359E-24"
-        ixz="1.6544E-24"
+        ixy="-3.8774E-24"
+        ixz="0"
         iyy="3.946E-08"
-        iyz="-2.4815E-24"
+        iyz="-1.6544E-24"
         izz="3.946E-08" />
     </inertial>
     <visual>
@@ -355,8 +355,8 @@
     name="${prefix}_Mecanum_roller_joint_6"
     type="continuous">
     <origin
-      xyz="-0.011738 -0.0044619 -0.0054275"
-      rpy="1.4009 -0.5236 2.1863" />
+      xyz="0.00857701202220883 -0.00512037328736673 -0.00700935343907806"
+      rpy="1.40087787206783 -0.523598775598296 0.615479708670392" />
     <parent
       link="${prefix}_link" />
     <child
@@ -368,16 +368,16 @@
     name="${prefix}_Mecanum_roller_link_7">
     <inertial>
       <origin
-        xyz="0.0011134 3.4694E-18 0"
+        xyz="0.018106 -5.2042E-18 3.4694E-18"
         rpy="0 0 0" />
       <mass
         value="0.0010939" />
       <inertia
         ixx="1.1179E-08"
-        ixy="6.2039E-24"
-        ixz="-1.2408E-24"
+        ixy="3.6189E-24"
+        ixz="-4.1359E-25"
         iyy="3.946E-08"
-        iyz="-8.2718E-25"
+        iyz="0"
         izz="3.946E-08" />
     </inertial>
     <visual>
@@ -408,8 +408,8 @@
     name="${prefix}_Mecanum_roller_joint_7"
     type="continuous">
     <origin
-      xyz="-0.013009 -0.0042964 0.019085"
-      rpy="1.5572 -0.5236 0.95532" />
+      xyz="-0.0010359 0.006229 0.010588"
+      rpy="1.5572 -0.5236 -0.61548" />
     <parent
       link="${prefix}_link" />
     <child
@@ -424,7 +424,7 @@
         xyz="0 0 0"
         rpy="0 0 0" />
       <mass
-        value="0" />
+        value="0.001" />
       <inertia
         ixx="0"
         ixy="0"
@@ -461,12 +461,12 @@
     name="${prefix}_Mecanum_roller_joint_8"
     type="continuous">
     <origin
-      xyz="0.00162308612981116 -0.00162308612981119 0.0247142513409912"
-      rpy="-2.1509048893029 0 0.785398163397446" />
+      xyz="-6.3119955066443E-05 -0.00318305230455557 0.0247142513409911"
+      rpy="-2.1509048893029 0 -0.78539816339745" />
     <parent
-      link="${prefix}_link" />
-    <child
       link="${prefix}_Mecanum_roller_link_8" />
+    <child
+      link="Mecanum_roller_link_8" />
     <axis
       xyz="1 0 0" />
   </joint>
