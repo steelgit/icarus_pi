@@ -470,4 +470,5 @@
     <axis
       xyz="1 0 0" />
   </joint>
+  </xacro:macro>
 </robot>
