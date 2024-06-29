@@ -20,47 +20,38 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef MECH_DRIVE_CONTROLLER__ODOMETRY_HPP_
-#define MECH_DRIVE_CONTROLLER__ODOMETRY_HPP_
+#ifndef MECH_DRIVE_CONTROLLER__KINEMATICS_HPP_
+#define MECH_DRIVE_CONTROLLER__KINEMATICS_HPP_
 
-#include <string>
+#include <memory>
 #include <vector>
 
-#include "mech_drive_controller/kinematics.hpp"
 #include "mech_drive_controller/types.hpp"
 
 namespace mech_drive_controllers {
 
-constexpr char EULER_FORWARD[] = "euler_forward";
-constexpr char RUNGE_KUTTA2[] = "runge_kutta2";
+constexpr double MECH_ROBOT_MAX_WHEELS = 4;
 
-class Odometry {
+class Kinematics {
  public:
-  Odometry();
-  ~Odometry();
-  bool setNumericIntegrationMethod(const std::string & numeric_integration_method);
-  void setRobotParams(RobotParams params);
-  void updateOpenLoop(RobotVelocity vel, double dt);
-  void update(const std::vector<double> & wheels_vel, double dt);
-  RobotPose getPose() const;
-  RobotVelocity getBodyVelocity() const;
-  void reset();
-
- protected:
-  void integrateByRungeKutta();
-  void integrateByEuler();
-  void integrateVelocities();
-  RobotVelocity body_vel_{0, 0, 0};
-  double dt_;
-
+  explicit Kinematics(RobotParams robot_params);
+  Kinematics();
+  ~Kinematics();
+  // Forward kinematics
+  RobotVelocity getBodyVelocity(const std::vector<double> & wheels_vel);
+  // Inverse kinematics
+  std::vector<double> getWheelsAngularVelocities(RobotVelocity vel);
+  void setRobotParams(RobotParams robot_params);
  private:
-  RobotPose pose_{0, 0, 0};
-  RobotParams robot_params_{0, 0, 0};
-  std::string numeric_integration_method_ = EULER_FORWARD;
-  Kinematics robot_kinematics_;
-  bool is_robot_param_set_{false};
+  void initializeParams();
+  RobotParams robot_params_;
+  std::vector<double> angular_vel_vec_;
+  double cos_gamma_;
+  double sin_gamma_;
+  double alpha_;
+  double beta_;
 };
 
 }  // namespace mech_drive_controllers
 
-#endif  // MECH_DRIVE_CONTROLLERS__ODOMETRY_HPP_
+#endif  // MECH_DRIVE_CONTROLLER__KINEMATICS_HPP_

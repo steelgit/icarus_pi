@@ -48,7 +48,7 @@
     <axis xyz="1 0 0"/>
         </joint>
   <link
-    name="Mecanum_roller_link_1">
+    name="${prefix}_Mecanum_roller_link_1">
     <inertial>
       <origin
         xyz="0.012194 1.7694E-16 -2.3592E-16"
@@ -307,7 +307,7 @@
     <parent
       link="${prefix}_link" />
     <child
-      link="${prefix}_Mecanum_roller_joint_5" />
+      link="${prefix}_Mecanum_roller_link_5" />
     <axis
       xyz="1 0 0" />
   </joint>
@@ -466,7 +466,7 @@
     <parent
       link="${prefix}_Mecanum_roller_link_8" />
     <child
-      link="Mecanum_roller_link_8" />
+      link="${prefix}_Mecanum_roller_link_8" />
     <axis
       xyz="1 0 0" />
   </joint>

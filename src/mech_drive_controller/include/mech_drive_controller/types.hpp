@@ -20,47 +20,31 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef MECH_DRIVE_CONTROLLER__ODOMETRY_HPP_
-#define MECH_DRIVE_CONTROLLER__ODOMETRY_HPP_
+#ifndef MECH_DRIVE_CONTROLLER__TYPES_HPP_
+#define MECH_DRIVE_CONTROLLER__TYPES_HPP_
 
-#include <string>
-#include <vector>
-
-#include "mech_drive_controller/kinematics.hpp"
-#include "mech_drive_controller/types.hpp"
+#define DEG2RAD(deg) (deg * M_PI / 180.0)
 
 namespace mech_drive_controllers {
 
-constexpr char EULER_FORWARD[] = "euler_forward";
-constexpr char RUNGE_KUTTA2[] = "runge_kutta2";
+struct RobotParams {
+  double wheel_radius;
+  double robot_radius;
+  double gamma;
+};
 
-class Odometry {
- public:
-  Odometry();
-  ~Odometry();
-  bool setNumericIntegrationMethod(const std::string & numeric_integration_method);
-  void setRobotParams(RobotParams params);
-  void updateOpenLoop(RobotVelocity vel, double dt);
-  void update(const std::vector<double> & wheels_vel, double dt);
-  RobotPose getPose() const;
-  RobotVelocity getBodyVelocity() const;
-  void reset();
+struct RobotVelocity {
+  double vx;    // [m/s]
+  double vy;    // [m/s]
+  double omega;    // [rad]
+};
 
- protected:
-  void integrateByRungeKutta();
-  void integrateByEuler();
-  void integrateVelocities();
-  RobotVelocity body_vel_{0, 0, 0};
-  double dt_;
-
- private:
-  RobotPose pose_{0, 0, 0};
-  RobotParams robot_params_{0, 0, 0};
-  std::string numeric_integration_method_ = EULER_FORWARD;
-  Kinematics robot_kinematics_;
-  bool is_robot_param_set_{false};
+struct RobotPose {
+  double x;        //  [m]
+  double y;        //  [m]
+  double theta;    // [rad]
 };
 
 }  // namespace mech_drive_controllers
 
-#endif  // MECH_DRIVE_CONTROLLERS__ODOMETRY_HPP_
+#endif  // MECH_DRIVE_CONTROLLER__TYPES_HPP_

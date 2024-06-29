@@ -1,165 +1,118 @@
-// Copyright 2020 PAL Robotics S.L.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// MIT License
 
-/*
- * Author: Enrique Fernández
- */
+// Copyright (c) 2022 Mateus Menezes
+
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
 
 #include "mech_drive_controller/odometry.hpp"
 
-namespace mech_drive_controller
-{
-Odometry::Odometry(size_t velocity_rolling_window_size)
-: timestamp_(0.0),
-  x_(0.0),
-  y_(0.0),
-  heading_(0.0),
-  linear_(0.0),
-  angular_(0.0),
-  wheel_separation_(0.0),
-  left_wheel_radius_(0.0),
-  right_wheel_radius_(0.0),
-  front_left_wheel_old_pos_(0.0),
-  front_right_wheel_old_pos_(0.0),
-  back_left_wheel_old_pos_(0.0),
-  back_right_wheel_old_pos_(0.0),
-  velocity_rolling_window_size_(velocity_rolling_window_size),
-  linear_accumulator_(velocity_rolling_window_size),
-  angular_accumulator_(velocity_rolling_window_size)
-{
-}
+#include <cmath>
+#include <exception>
+#include <limits>
+#include <sstream>
+#include <string>
 
-void Odometry::init(const rclcpp::Time & time)
-{
-  // Reset accumulators and timestamp:
-  resetAccumulators();
-  timestamp_ = time;
-}
+#include "mech_drive_controller/types.hpp"
 
-bool Odometry::update(double front_left_pos, double front_right_pos, double back_left_pos, double back_right_pos, const rclcpp::Time & time)
-{
-  // We cannot estimate the speed with very small time intervals:
-  const double dt = time.seconds() - timestamp_.seconds();
-  if (dt < 0.0001)
-  {
-    return false;  // Interval too small to integrate with
+namespace mech_drive_controllers {
+
+Odometry::Odometry() {}
+
+bool Odometry::setNumericIntegrationMethod(const std::string & numeric_integration_method) {
+  if (numeric_integration_method != EULER_FORWARD &&
+      numeric_integration_method != RUNGE_KUTTA2) {
+      this->numeric_integration_method_ = EULER_FORWARD;
+      return false;
   }
-
-  // Get current wheel joint positions:
-  const double front_left_wheel_cur_pos = front_left_pos * left_wheel_radius_;
-  const double front_right_wheel_cur_pos = front_right_pos * right_wheel_radius_;
-  const double back_left_wheel_cur_pos = back_left_pos * left_wheel_radius_;
-  const double back_right_wheel_cur_pos = back_right_pos * right_wheel_radius_;
-
-  // Estimate velocity of wheels using old and current position:
-  const double front_left_wheel_est_vel = front_left_wheel_cur_pos - front_left_wheel_old_pos_;
-  const double front_right_wheel_est_vel = front_right_wheel_cur_pos - front_right_wheel_old_pos_;
-  const double back_left_wheel_est_vel = back_left_wheel_cur_pos - back_left_wheel_old_pos_;
-  const double back_right_wheel_est_vel = back_right_wheel_cur_pos - back_right_wheel_old_pos_;
-
-  // Update old position with current:
-  front_left_wheel_old_pos_ = front_left_wheel_cur_pos;
-  front_right_wheel_old_pos_ = front_right_wheel_cur_pos;
-  back_left_wheel_old_pos_ = back_left_wheel_cur_pos;
-  back_right_wheel_old_pos_ = back_right_wheel_cur_pos;
-  
-
-  // Compute linear and angular diff:
-  const double linear = (front_right_wheel_est_vel + front_left_wheel_est_vel) * 0.5;
-  // Now there is a bug about scout angular velocity
-  const double angular = (front_right_wheel_est_vel + back_left_wheel_est_vel - front_left_wheel_est_vel - back_right_wheel_est_vel) / wheel_separation_;
-
-  // Integrate odometry:
-  integrateExact(linear, angular);
-
-  timestamp_ = time;
-
-  // Estimate speeds using a rolling mean to filter them out:
-  linear_accumulator_.accumulate(linear / dt);
-  angular_accumulator_.accumulate(angular / dt);
-
-  linear_ = linear_accumulator_.getRollingMean();
-  angular_ = angular_accumulator_.getRollingMean();
-
+  this->numeric_integration_method_ = numeric_integration_method;
   return true;
 }
 
-void Odometry::updateOpenLoop(double linear, double angular, const rclcpp::Time & time)
-{
-  /// Save last linear and angular velocity:
-  linear_ = linear;
-  angular_ = angular;
-
-  /// Integrate odometry:
-  const double dt = time.seconds() - timestamp_.seconds();
-  timestamp_ = time;
-  integrateExact(linear * dt, angular * dt);
-}
-
-void Odometry::resetOdometry()
-{
-  x_ = 0.0;
-  y_ = 0.0;
-  heading_ = 0.0;
-}
-
-void Odometry::setWheelParams(
-  double wheel_separation, double left_wheel_radius, double right_wheel_radius)
-{
-  wheel_separation_ = wheel_separation;
-  left_wheel_radius_ = left_wheel_radius;
-  right_wheel_radius_ = right_wheel_radius;
-}
-
-void Odometry::setVelocityRollingWindowSize(size_t velocity_rolling_window_size)
-{
-  velocity_rolling_window_size_ = velocity_rolling_window_size;
-
-  resetAccumulators();
-}
-
-void Odometry::integrateRungeKutta2(double linear, double angular)
-{
-  const double direction = heading_ + angular * 0.5;
-
-  /// Runge-Kutta 2nd order integration:
-  x_ += linear * cos(direction);
-  y_ += linear * sin(direction);
-  heading_ += angular;
-}
-
-void Odometry::integrateExact(double linear, double angular)
-{
-  if (fabs(angular) < 1e-6)
-  {
-    integrateRungeKutta2(linear, angular);
+void Odometry::setRobotParams(RobotParams params) {
+  if (params.wheel_radius < std::numeric_limits<double>::epsilon()) {
+    std::stringstream error;
+    error << "Invalid wheel radius " << params.wheel_radius << " set!" << std::endl;
+    throw std::runtime_error(error.str());
   }
-  else
-  {
-    /// Exact integration (should solve problems when angular is zero):
-    const double heading_old = heading_;
-    const double r = linear / angular;
-    heading_ += angular;
-    x_ += r * (sin(heading_) - sin(heading_old));
-    y_ += -r * (cos(heading_) - cos(heading_old));
+
+  if (params.robot_radius < std::numeric_limits<double>::epsilon()) {
+    std::stringstream error;
+    error << "Invalid robot radius " << params.wheel_radius << " set!" << std::endl;
+    throw std::runtime_error(error.str());
   }
+
+  this->robot_params_ = params;
+  robot_kinematics_.setRobotParams(robot_params_);
+  is_robot_param_set_ = true;
 }
 
-void Odometry::resetAccumulators()
-{
-  linear_accumulator_ = RollingMeanAccumulator(velocity_rolling_window_size_);
-  angular_accumulator_ = RollingMeanAccumulator(velocity_rolling_window_size_);
+void Odometry::updateOpenLoop(RobotVelocity vel, double dt_) {
+  this->body_vel_ = vel;
+  this->dt_ = dt_;
+  this->integrateVelocities();
 }
 
-}  // namespace diff_drive_controller
+void Odometry::update(const std::vector<double> & wheels_vel, double dt) {
+  if (!is_robot_param_set_) {
+    throw std::runtime_error(std::string("Robot parameters was not set or not set properly!"));
+  }
+  this->dt_ = dt;
+  this->body_vel_ = robot_kinematics_.getBodyVelocity(wheels_vel);
+  this->integrateVelocities();
+}
+
+RobotPose Odometry::getPose() const {
+  return pose_;
+}
+
+RobotVelocity Odometry::getBodyVelocity() const {
+  return body_vel_;
+}
+
+void Odometry::reset() {
+  pose_ = {0, 0, 0};
+}
+
+void Odometry::integrateByRungeKutta() {
+  double theta_bar = pose_.theta + (body_vel_.omega*dt_ / 2);
+  pose_.x = pose_.x + (body_vel_.vx * cos(theta_bar) - body_vel_.vy * sin(theta_bar)) * dt_;
+  pose_.y = pose_.y + (body_vel_.vx * sin(theta_bar) + body_vel_.vy * cos(theta_bar)) * dt_;
+  pose_.theta = pose_.theta + body_vel_.omega*dt_;
+}
+
+void Odometry::integrateByEuler() {
+  pose_.x = pose_.x + (body_vel_.vx * cos(pose_.theta) - body_vel_.vy * sin(pose_.theta)) * dt_;
+  pose_.y = pose_.y + (body_vel_.vx * sin(pose_.theta) + body_vel_.vy * cos(pose_.theta)) * dt_;
+  pose_.theta = pose_.theta + body_vel_.omega*dt_;
+}
+
+void Odometry::integrateVelocities() {
+  if (numeric_integration_method_ == RUNGE_KUTTA2) {
+    this->integrateByRungeKutta();
+    return;
+  }
+  // Euler method is the odometry class default!
+  this->integrateByEuler();
+  this->dt_ = 0;
+  this->body_vel_ = {0, 0, 0};
+}
+
+Odometry::~Odometry() {}
+
+}  // namespace mech_drive_controller
