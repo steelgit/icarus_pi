@@ -94,6 +94,16 @@ controller_interface::return_type MechDriveController::init(const std::string & 
     auto_declare<double>("linear.x.max_jerk", NAN);
     auto_declare<double>("linear.x.min_jerk", NAN);
 
+    auto_declare<bool>("linear.y.has_velocity_limits", false);
+    auto_declare<bool>("linear.y.has_acceleration_limits", false);
+    auto_declare<bool>("linear.y.has_jerk_limits", false);
+    auto_declare<double>("linear.y.max_velocity", NAN);
+    auto_declare<double>("linear.y.min_velocity", NAN);
+    auto_declare<double>("linear.y.max_acceleration", NAN);
+    auto_declare<double>("linear.y.min_acceleration", NAN);
+    auto_declare<double>("linear.y.max_jerk", NAN);
+    auto_declare<double>("linear.y.min_jerk", NAN);
+
     auto_declare<bool>("angular.z.has_velocity_limits", false);
     auto_declare<bool>("angular.z.has_acceleration_limits", false);
     auto_declare<bool>("angular.z.has_jerk_limits", false);
@@ -188,14 +198,16 @@ controller_interface::return_type MechDriveController::update()
   {
     last_msg->twist.linear.x = 0.0;
     last_msg->twist.angular.z = 0.0;
+    last_msg->twist.linear.y = 0.0;
   }
 
   // command may be limited further by SpeedLimit,
   // without affecting the stored twist command
   Twist command = *last_msg;
-  double & x = command.twist.linear.x;
+  std::vector<double> twist_cmd({0,0});
+  twist_cmd[0] = command.twist.linear.x;
   double & z = command.twist.angular.z;
-  double & y = command.twist.linear.y;  
+  twist_cmd[1] = command.twist.linear.y;  
 
   // Apply (possibly new) multipliers:
   const auto wheels = wheel_params_;
@@ -205,7 +217,7 @@ controller_interface::return_type MechDriveController::update()
 
   if (odom_params_.open_loop)
   {
-    odometry_.updateOpenLoop(x, z, current_time);
+    odometry_.updateOpenLoop(twist_cmd, z, current_time);
   }
   else
   {
@@ -282,9 +294,11 @@ controller_interface::return_type MechDriveController::update()
   auto & last_command = previous_commands_.back().twist;
   auto & second_to_last_command = previous_commands_.front().twist;
   limiter_linear_.limit(
-    x, last_command.linear.x, second_to_last_command.linear.x, update_dt.seconds());
+    twist_cmd[0], last_command.linear.x, second_to_last_command.linear.x, update_dt.seconds());
   limiter_angular_.limit(
     z, last_command.angular.z, second_to_last_command.angular.z, update_dt.seconds());
+  limiter_linear_.limit(
+    twist_cmd[1], last_command.angular.y, second_to_last_command.angular.y, update_dt.seconds());
 
   previous_commands_.pop();
   previous_commands_.emplace(command);
@@ -300,13 +314,13 @@ controller_interface::return_type MechDriveController::update()
 
   // Compute wheels velocities:
   const double velocity_front_left =
-    (x - y - z * wheel_separation) / left_wheel_radius;
+    (twist_cmd[0] - twist_cmd[1] - z * wheel_separation) / left_wheel_radius;
   const double velocity_front_right =
-    (x + y + z * wheel_separation) / right_wheel_radius;
+    (twist_cmd[0] + twist_cmd[1] + z * wheel_separation) / right_wheel_radius;
     const double velocity_back_left =
-    (x + y - z * wheel_separation) / left_wheel_radius;
+    (twist_cmd[0] + twist_cmd[1] - z * wheel_separation) / left_wheel_radius;
   const double velocity_back_right =
-    (x - y + z * wheel_separation) / right_wheel_radius;
+    (twist_cmd[0] - twist_cmd[1] + z * wheel_separation) / right_wheel_radius;
 
   // Set wheels velocities:
 

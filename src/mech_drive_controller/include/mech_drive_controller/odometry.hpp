@@ -36,7 +36,7 @@ public:
 
   void init(const rclcpp::Time & time);
   bool update(double front_left_pos, double front_right_pos, double back_left_pos, double back_right_pos, const rclcpp::Time & time);
-  void updateOpenLoop(double linear, double angular, const rclcpp::Time & time);
+  void updateOpenLoop(std::vector<double> & linear, double angular, const rclcpp::Time & time);
   void resetOdometry();
 
   double getX() const { return x_; }
@@ -51,8 +51,8 @@ public:
 private:
   using RollingMeanAccumulator = mech_drive_controller::RollingMeanAccumulator<double>;
 
-  void integrateRungeKutta2(double linear, double angular);
-  void integrateExact(double linear, double angular);
+  void integrateRungeKutta2(std::vector<double> linear, double angular);
+  void integrateExact(std::vector<double> linear, double angular);
   void resetAccumulators();
 
   // Current timestamp:
