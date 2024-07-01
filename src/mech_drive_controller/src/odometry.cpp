@@ -94,9 +94,9 @@ bool Odometry::update(double front_left_pos, double front_right_pos, double back
   // Estimate speeds using a rolling mean to filter them out:
   // TODO: Make linear accumaltor definition into a vector to store x and y vals 
   linear_accumulator_x.accumulate(linear[0] / dt); 
-  linear_x = linear_accumulator_x.getRollingMean();
+  linear_x = linear[0];
   linear_accumulator_y.accumulate(linear[1] / dt);
-  linear_y = linear_accumulator_y.getRollingMean();
+  linear_y = linear[1];
   angular_accumulator_.accumulate(angular / dt);
 
  
