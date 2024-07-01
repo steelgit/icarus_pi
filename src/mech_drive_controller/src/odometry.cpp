@@ -66,10 +66,10 @@ bool Odometry::update(double front_left_pos, double front_right_pos, double back
   const double back_right_wheel_cur_pos = back_right_pos * right_wheel_radius_;
 
   // Estimate velocity of wheels using old and current position:
-  const double front_left_wheel_est_vel = front_left_wheel_cur_pos - front_left_wheel_old_pos_;
-  const double front_right_wheel_est_vel = front_right_wheel_cur_pos - front_right_wheel_old_pos_;
-  const double back_left_wheel_est_vel = back_left_wheel_cur_pos - back_left_wheel_old_pos_;
-  const double back_right_wheel_est_vel = back_right_wheel_cur_pos - back_right_wheel_old_pos_;
+  const double front_left_wheel_est_vel = (front_left_wheel_cur_pos - front_left_wheel_old_pos_) / dt;
+  const double front_right_wheel_est_vel = (front_right_wheel_cur_pos - front_right_wheel_old_pos_) / dt;
+  const double back_left_wheel_est_vel = (back_left_wheel_cur_pos - back_left_wheel_old_pos_) / dt;
+  const double back_right_wheel_est_vel = (back_right_wheel_cur_pos - back_right_wheel_old_pos_) / dt;
 
   // Update old position with current:
   front_left_wheel_old_pos_ = front_left_wheel_cur_pos;
@@ -81,7 +81,7 @@ bool Odometry::update(double front_left_pos, double front_right_pos, double back
   // Compute linear and angular diff:
   //x[0], y[1]
   double linear_x = (front_left_wheel_est_vel + front_right_wheel_est_vel + back_left_wheel_est_vel + back_right_wheel_est_vel) * left_wheel_radius_ / 4  ;
-  double linear_y = (-front_left_wheel_est_vel + front_right_wheel_est_vel - back_left_wheel_est_vel + front_right_wheel_est_vel) * left_wheel_radius_ / 4; 
+  double linear_y = (-front_left_wheel_est_vel + front_right_wheel_est_vel + back_left_wheel_est_vel - back_right_wheel_est_vel) * left_wheel_radius_ / 4; 
   // Now there is a bug about scout angular velocity
   const double angular = (front_right_wheel_est_vel - back_left_wheel_est_vel - front_left_wheel_est_vel + back_right_wheel_est_vel) * left_wheel_radius_ / (4* wheel_separation_);
 
@@ -92,11 +92,11 @@ bool Odometry::update(double front_left_pos, double front_right_pos, double back
 
   // Estimate speeds using a rolling mean to filter them out:
   // TODO: Make linear accumaltor definition into a vector to store x and y vals 
-  linear_accumulator_x.accumulate(linear_x / dt); 
+  linear_accumulator_x.accumulate(linear_x); 
   linear_x = linear_accumulator_x.getRollingMean();
-  linear_accumulator_y.accumulate(linear_y / dt);
+  linear_accumulator_y.accumulate(linear_y);
   linear_y = linear_accumulator_y.getRollingMean();
-  angular_accumulator_.accumulate(angular / dt);
+  angular_accumulator_.accumulate(angular);
 
  
 
@@ -115,7 +115,6 @@ void Odometry::updateOpenLoop(double linear_x, double linear_y, double angular, 
   const double dt = time.seconds() - timestamp_.seconds();
   timestamp_ = time;
 
-  std::vector<double> linear_dt = {linear_x * dt, linear_y * dt};
   integrateExact(linear_x * dt, linear_y * dt, angular * dt);
 }
 
