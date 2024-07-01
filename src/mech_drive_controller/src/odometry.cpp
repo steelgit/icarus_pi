@@ -17,6 +17,7 @@
  */
 
 #include "mech_drive_controller/odometry.hpp"
+#include "iostream"
 
 namespace mech_drive_controller
 {
@@ -149,8 +150,10 @@ void Odometry::integrateRungeKutta2(std::vector<double> linear, double angular)
   const double direction = heading_ + angular ;
 
   /// Runge-Kutta 2nd order integration:
-  x_ += (linear[0] * cos(direction) - linear[1]*sin(direction));
-  y_ += (linear[0] * sin(direction) + linear[1]*cos(direction));
+  //x_ += (linear[0] * cos(direction) - linear[1]*sin(direction));
+  //y_ += (linear[0] * sin(direction) + linear[1]*cos(direction));
+  x_ += linear[0]
+  y+ += linear[1]
   heading_ += angular;
 }
 
