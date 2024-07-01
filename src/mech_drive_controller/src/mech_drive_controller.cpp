@@ -269,7 +269,8 @@ controller_interface::return_type MechDriveController::update()
       odometry_message.pose.pose.orientation.y = orientation.y();
       odometry_message.pose.pose.orientation.z = orientation.z();
       odometry_message.pose.pose.orientation.w = orientation.w();
-      odometry_message.twist.twist.linear.x = odometry_.getLinear();
+      odometry_message.twist.twist.linear.x = odometry_.getLinear_x();
+      odometry_message.twist.twist.linear.x = odometry_.getLinear_y();
       odometry_message.twist.twist.angular.z = odometry_.getAngular();
       realtime_odometry_publisher_->unlockAndPublish();
     }
