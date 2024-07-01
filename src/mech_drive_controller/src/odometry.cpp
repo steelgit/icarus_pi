@@ -36,7 +36,8 @@ Odometry::Odometry(size_t velocity_rolling_window_size)
   back_left_wheel_old_pos_(0.0),
   back_right_wheel_old_pos_(0.0),
   velocity_rolling_window_size_(velocity_rolling_window_size),
-  linear_accumulator_(velocity_rolling_window_size),
+  linear_accumulator_x(velocity_rolling_window_size),
+  linear_accumulator_y(velocity_rolling_window_size),
   angular_accumulator_(velocity_rolling_window_size)
 {
 }
@@ -91,10 +92,10 @@ bool Odometry::update(double front_left_pos, double front_right_pos, double back
 
   // Estimate speeds using a rolling mean to filter them out:
   // TODO: Make linear accumaltor definition into a vector to store x and y vals 
-  linear_accumulator_.accumulate(linear[0] / dt); 
-  linear_x = linear_accumulator_.getRollingMean();
-  linear_accumulator_ .accumulate(linear[1] / dt);
-  linear_y = linear_accumulator_.getRollingMean();
+  linear_accumulator_x.accumulate(linear[0] / dt); 
+  linear_x = linear_accumulator_x.getRollingMean();
+  linear_accumulator_y.accumulate(linear[1] / dt);
+  linear_y = linear_accumulator_y.getRollingMean();
   angular_accumulator_.accumulate(angular / dt);
 
  
@@ -165,14 +166,15 @@ void Odometry::integrateExact(std::vector<double> linear, double angular)
     const double ry = linear[1] / angular;
     heading_ += angular;
     x_ += rx* (sin(heading_) - sin(heading_old));
-    y_ += -ry * (cos(heading_) - cos(heading_old));
+    y_ += ry * (cos(heading_) - cos(heading_old));
 
   }
 }
 
 void Odometry::resetAccumulators()
 {
-  linear_accumulator_ = RollingMeanAccumulator(velocity_rolling_window_size_);
+  linear_accumulator_x = RollingMeanAccumulator(velocity_rolling_window_size_);
+  linear_accumulator_y = RollingMeanAccumulator(velocity_rolling_window_size_);
   angular_accumulator_ = RollingMeanAccumulator(velocity_rolling_window_size_);
 }
 

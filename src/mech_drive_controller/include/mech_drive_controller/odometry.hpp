@@ -82,7 +82,8 @@ private:
 
   // Rolling mean accumulators for the linear and angular velocities:
   size_t velocity_rolling_window_size_;
-  RollingMeanAccumulator linear_accumulator_;
+  RollingMeanAccumulator linear_accumulator_x;
+  RollingMeanAccumulator linear_accumulator_y;
   RollingMeanAccumulator angular_accumulator_;
 };
 
