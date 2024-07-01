@@ -217,7 +217,7 @@ controller_interface::return_type MechDriveController::update()
 
   if (odom_params_.open_loop)
   {
-    odometry_.updateOpenLoop(twist_cmd, z, current_time);
+    odometry_.updateOpenLoop(twist_cmd[0], twist_cmd[1], z, current_time);
   }
   else
   {

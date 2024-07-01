@@ -80,23 +80,22 @@ bool Odometry::update(double front_left_pos, double front_right_pos, double back
 
   // Compute linear and angular diff:
   //x[0], y[1]
-  std::vector<double> linear({0,0});
-  linear[0] = (front_left_wheel_est_vel + front_right_wheel_est_vel + back_left_wheel_est_vel + back_right_wheel_est_vel) * left_wheel_radius_ / 4  ;
-  linear[1] = (-front_left_wheel_est_vel + front_right_wheel_est_vel - back_left_wheel_est_vel + front_right_wheel_est_vel) * left_wheel_radius_ / 4; 
+  double linear_x = (front_left_wheel_est_vel + front_right_wheel_est_vel + back_left_wheel_est_vel + back_right_wheel_est_vel) * left_wheel_radius_ / 4  ;
+  double linear_y = (-front_left_wheel_est_vel + front_right_wheel_est_vel - back_left_wheel_est_vel + front_right_wheel_est_vel) * left_wheel_radius_ / 4; 
   // Now there is a bug about scout angular velocity
   const double angular = (front_right_wheel_est_vel - back_left_wheel_est_vel - front_left_wheel_est_vel + back_right_wheel_est_vel) * left_wheel_radius_ / (4* wheel_separation_);
 
   // Integrate odometry:
-  integrateExact(linear, angular);
+  integrateExact(linear_x, linear_y, angular);
 
   timestamp_ = time;
 
   // Estimate speeds using a rolling mean to filter them out:
   // TODO: Make linear accumaltor definition into a vector to store x and y vals 
-  linear_accumulator_x.accumulate(linear[0] / dt); 
-  linear_x = linear[0];
-  linear_accumulator_y.accumulate(linear[1] / dt);
-  linear_y = linear[1];
+  linear_accumulator_x.accumulate(linear_x / dt); 
+  linear_x = linear_accumulator_x.getRollingMean();
+  linear_accumulator_y.accumulate(linear_y / dt);
+  linear_y = linear_accumulator_y.getRollingMean();
   angular_accumulator_.accumulate(angular / dt);
 
  
@@ -108,11 +107,9 @@ bool Odometry::update(double front_left_pos, double front_right_pos, double back
   return true;
 }
 
-void Odometry::updateOpenLoop(std::vector<double> & linear, double angular, const rclcpp::Time & time)
+void Odometry::updateOpenLoop(double linear_x, double linear_y, double angular, const rclcpp::Time & time)
 {
   /// Save last linear and angular velocity:
-  double linear_x = linear[0];
-  double linear_y = linear[1];
   angular_ = angular;
 
   /// Integrate odometry:
@@ -120,7 +117,7 @@ void Odometry::updateOpenLoop(std::vector<double> & linear, double angular, cons
   timestamp_ = time;
 
   std::vector<double> linear_dt = {linear_x * dt, linear_y * dt};
-  integrateExact(linear_dt, angular * dt);
+  integrateExact(linear_x * dt, linear_y * dt, angular * dt);
 }
 
 void Odometry::resetOdometry()
@@ -145,30 +142,30 @@ void Odometry::setVelocityRollingWindowSize(size_t velocity_rolling_window_size)
   resetAccumulators();
 }
 
-void Odometry::integrateRungeKutta2(std::vector<double> linear, double angular)
+void Odometry::integrateRungeKutta2(double linear_x, double linear_y, double angular)
 {
   const double direction = heading_ + angular ;
 
   /// Runge-Kutta 2nd order integration:
-  //x_ += (linear[0] * cos(direction) - linear[1]*sin(direction));
-  //y_ += (linear[0] * sin(direction) + linear[1]*cos(direction));
-  x_ += linear[0];
-  y_ += linear[1];
+  x_ += (linear_x * cos(direction) - linear_y*sin(direction));
+  y_ += (linear_x * sin(direction) + linear_y*cos(direction));
+  //x_ += linear_x;
+  //y_ += linear_y;
   heading_ += angular;
 }
 
-void Odometry::integrateExact(std::vector<double> linear, double angular)
+void Odometry::integrateExact(double linear_x, double linear_y, double angular)
 {
   if (fabs(angular) < 1e-6)
   {
-    integrateRungeKutta2(linear, angular);
+    integrateRungeKutta2(linear_x, linear_y, angular);
   }
   else
   {
     /// Exact integration (should solve problems when angular is zero):
     const double heading_old = heading_;
-    const double rx = linear[0] / angular;
-    const double ry = linear[1] / angular;
+    const double rx = linear_x / angular;
+    const double ry = linear_y / angular;
     heading_ += angular;
     x_ += rx* (sin(heading_) - sin(heading_old));
     y_ += ry * (cos(heading_) - cos(heading_old));
