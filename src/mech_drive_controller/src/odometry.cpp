@@ -102,8 +102,7 @@ bool Odometry::update(double front_left_pos, double front_right_pos, double back
 
   angular_ = angular_accumulator_.getRollingMean();
 
-  std::cout << "linear_x: " << linear_x << ", linear_y: " << linear_y << ", angular: " << angular_ << std::endl;
-  std::cout << "Position: x = " << x_ << ", y = " << y_ << ", heading = " << heading_ << std::endl;
+
   return true;
 }
 
