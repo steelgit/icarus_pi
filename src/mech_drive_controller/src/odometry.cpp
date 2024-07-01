@@ -115,7 +115,7 @@ void Odometry::updateOpenLoop(std::vector<double> & linear, double angular, cons
   const double dt = time.seconds() - timestamp_.seconds();
   timestamp_ = time;
 
-  std::vector<double> linear_dt = {linear[0] * dt, linear[1] * dt};
+  std::vector<double> linear_dt = {linear_x * dt, linear_y * dt};
   integrateExact(linear_dt, angular * dt);
 }
 
