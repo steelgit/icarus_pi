@@ -88,10 +88,10 @@
 
 	</xacro:macro>
 
-	<xacro:wheel prefix="frontLeft" x_reflect="-1" y_reflect="-1"/>
-	<xacro:wheel prefix="frontRight" x_reflect="-1" y_reflect="1"/>
-	<xacro:wheel prefix="backLeft" x_reflect="1" y_reflect="-1"/>
-	<xacro:wheel prefix="backRight" x_reflect="1" y_reflect="1"/>
+	<xacro:wheel prefix="backRight" x_reflect="-1" y_reflect="-1"/>
+	<xacro:wheel prefix="backLeft" x_reflect="-1" y_reflect="1"/>
+	<xacro:wheel prefix="frontRight" x_reflect="1" y_reflect="-1"/>
+	<xacro:wheel prefix="frontLeft" x_reflect="1" y_reflect="1"/>
     
     
 </robot>

@@ -81,7 +81,7 @@ controller_interface::return_type MechDriveController::init(const std::string & 
 
     auto_declare<double>("cmd_vel_timeout", cmd_vel_timeout_.count() / 1000.0);
     auto_declare<bool>("publish_limited_velocity", publish_limited_velocity_);
-    auto_declare<int>("velocity_rolling_window_size", 10);
+    auto_declare<int>("velocity_rolling_window_size", 50);
     auto_declare<bool>("use_stamped_vel", use_stamped_vel_);
 
     auto_declare<bool>("linear.x.has_velocity_limits", false);
@@ -262,7 +262,7 @@ controller_interface::return_type MechDriveController::update()
       odometry_message.pose.pose.orientation.z = orientation.z();
       odometry_message.pose.pose.orientation.w = orientation.w();
       odometry_message.twist.twist.linear.x = odometry_.getLinear_x();
-      odometry_message.twist.twist.linear.x = odometry_.getLinear_y();
+      odometry_message.twist.twist.linear.y = odometry_.getLinear_y();
       odometry_message.twist.twist.angular.z = odometry_.getAngular();
       realtime_odometry_publisher_->unlockAndPublish();
     }

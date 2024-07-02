@@ -42,8 +42,8 @@ public:
   double getX() const { return x_; }
   double getY() const { return y_; }
   double getHeading() const { return heading_; }
-  double getLinear_x() const { return linear_x; }
-  double getLinear_y() const { return linear_y; }
+  double getLinear_x() const { return linear_x_; }
+  double getLinear_y() const { return linear_y_; }
   double getAngular() const { return angular_; }
 
   void setWheelParams(double wheel_separation, double left_wheel_radius, double right_wheel_radius);
@@ -65,8 +65,8 @@ private:
   double heading_;  // [rad]
 
   // Current velocity:
-  double linear_x;   //   [m/s]
-  double linear_y;
+  double linear_x_;   //   [m/s]
+  double linear_y_;
   double angular_;  // [rad/s]
 
   // Wheel kinematic parameters [m]:

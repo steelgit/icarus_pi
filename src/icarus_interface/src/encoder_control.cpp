@@ -35,7 +35,7 @@ void callbackFL(int currentPosition)
     fl_wheel_.vel = (fl_wheel_.pos - pos_prev) / deltaSeconds;
     static double effortFL = pidFL.computeCommand(desSpdFL_ - fl_wheel_.vel, time_difference);
     last_timeFL = EncoderClock->get_clock()->now();
-    fl_wheel_.enc = -currentPosition; //negative to fix
+    fl_wheel_.enc = currentPosition; //negative to fix
 }
 
 void callbackFR(int currentPosition)
@@ -50,7 +50,7 @@ void callbackFR(int currentPosition)
     fr_wheel_.vel = (fr_wheel_.pos - pos_prev) / deltaSeconds;
     static double effortFR = pidFR.computeCommand(desSpdFR_ - fr_wheel_.vel, time_difference);
     last_timeFR = EncoderClock->get_clock()->now();
-    fr_wheel_.enc = currentPosition;
+    fr_wheel_.enc = -currentPosition;
 }
 void callbackBL(int currentPosition)
 {
@@ -64,13 +64,13 @@ void callbackBL(int currentPosition)
     bl_wheel_.vel = (bl_wheel_.pos - pos_prev) / deltaSeconds;
     static double effortBL = pidBL.computeCommand(desSpdBL_ - bl_wheel_.vel, time_difference);
     last_timeBL = EncoderClock->get_clock()->now();
-    bl_wheel_.enc = -currentPosition;
+    bl_wheel_.enc = currentPosition;
     bl_wheel_.eff = effortBL;
 }
 void callbackBR(int currentPosition)
 {
 
-    br_wheel_.enc = currentPosition;
+    br_wheel_.enc = -currentPosition;
     double pos_prev = br_wheel_.pos;
 
     static rclcpp::Time now_time = EncoderClock->get_clock()->now();
