@@ -39,7 +39,7 @@ constexpr auto DEFAULT_COMMAND_UNSTAMPED_TOPIC = "~/cmd_vel_unstamped";
 constexpr auto DEFAULT_COMMAND_OUT_TOPIC = "~/cmd_vel_out";
 constexpr auto DEFAULT_ODOMETRY_TOPIC = "~/odom";
 constexpr auto DEFAULT_TRANSFORM_TOPIC = "/tf";
-constexpr auto WHEELS_QUANTITY = 3;
+constexpr auto WHEELS_QUANTITY = 4;
 }  // namespace
 
 namespace mech_drive_controllers {
@@ -67,9 +67,9 @@ controller_interface::return_type MechDriverController::init(
   try {
     auto_declare<std::vector<std::string>>("wheel_names", std::vector<std::string>());
 
-    auto_declare<double>("robot_radius", robot_params_.robot_radius);
     auto_declare<double>("wheel_radius", robot_params_.wheel_radius);
-    auto_declare<double>("gamma", robot_params_.gamma);
+    auto_declare<double>("wheel_separation_width", robot_params_.wheel_separation_width);
+    auto_declare<double>("wheel_separation_length", robot_params_.wheel_separation_length);
 
     auto_declare<std::string>("odom_frame_id", odom_params_.odom_frame_id);
     auto_declare<std::string>("base_frame_id", odom_params_.base_frame_id);
@@ -132,10 +132,9 @@ CallbackReturn MechDriverController::on_configure(
     return CallbackReturn::ERROR;
   }
 
-  robot_params_.robot_radius = node_->get_parameter("robot_radius").as_double();
   robot_params_.wheel_radius = node_->get_parameter("wheel_radius").as_double();
-  robot_params_.gamma = node_->get_parameter("gamma").as_double();
-  robot_params_.gamma = DEG2RAD(robot_params_.gamma);
+  robot_params_.wheel_separation_length = node_->get_parameter("wheel_separation_length").as_double();
+  robot_params_.wheel_separation_width = node_->get_parameter("wheel_separation_width").as_double();
 
   mech_robot_kinematics_.setRobotParams(robot_params_);
   odometry_.setRobotParams(robot_params_);
@@ -354,10 +353,11 @@ controller_interface::return_type MechDriverController::update() {
       {cmd_vel_->twist.linear.x,  cmd_vel_->twist.linear.y, cmd_vel_->twist.angular.z},
       update_dt.seconds());
   } else {
-    std::vector<double> wheels_angular_velocity({0, 0, 0});
+    std::vector<double> wheels_angular_velocity({0, 0, 0, 0});
     wheels_angular_velocity[0] = registered_wheel_handles_[0].velocity_state.get().get_value();
     wheels_angular_velocity[1] = registered_wheel_handles_[1].velocity_state.get().get_value();
     wheels_angular_velocity[2] = registered_wheel_handles_[2].velocity_state.get().get_value();
+    wheels_angular_velocity[3] = registered_wheel_handles_[3].velocity_state.get().get_value();
     try {
       odometry_.update(wheels_angular_velocity, update_dt.seconds());
     } catch(const std::runtime_error& e) {
@@ -406,6 +406,7 @@ controller_interface::return_type MechDriverController::update() {
   registered_wheel_handles_[0].velocity_command.get().set_value(wheels_angular_velocity.at(0));
   registered_wheel_handles_[1].velocity_command.get().set_value(wheels_angular_velocity.at(1));
   registered_wheel_handles_[2].velocity_command.get().set_value(wheels_angular_velocity.at(2));
+  registered_wheel_handles_[3].velocity_command.get().set_value(wheels_angular_velocity.at(3));
 
   return controller_interface::return_type::OK;
 }

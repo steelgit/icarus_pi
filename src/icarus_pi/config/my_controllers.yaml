@@ -12,20 +12,23 @@ controller_manager:
 mech_cont:
   ros__parameters:
     wheel_names: 
-      - frontRight_joint
-      - backLeft_joint
       - frontLeft_joint
+      - frontRight_joint
+      - backRight_joint
+      - backLeft_joint
 
-    robot_radius: 0.1
+    #robot_radius: 0.1
+    #gamma: 30.0 # angle between body fixed y axis and the normal of wheel3
     wheel_radius: .024
-    gamma: 30.0 # angle between body fixed y axis and the normal of wheel3
+    wheel_separation_width: 0.203
+    wheel_separation_length: 0.18
 
     publish_rate: 50.0
     odom_frame_id: odom
     base_frame_id: base_link
     pose_covariance_diagonal : [0.001, 0.001, 0.001, 0.001, 0.001, 0.01]
     twist_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.01]
-    odom_numeric_integration_method: runge_kutta2
+    odom_numeric_integration_method: euler_forward      #options: runge_kutta2 or euler_forward
 
     open_loop: false
     enable_odom_tf: true

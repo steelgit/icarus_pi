@@ -1,3 +1,5 @@
+//DONE
+
 // MIT License
 
 // Copyright (c) 2022 Mateus Menezes
@@ -46,10 +48,6 @@ class Kinematics {
   void initializeParams();
   RobotParams robot_params_;
   std::vector<double> angular_vel_vec_;
-  double cos_gamma_;
-  double sin_gamma_;
-  double alpha_;
-  double beta_;
 };
 
 }  // namespace mech_drive_controllers

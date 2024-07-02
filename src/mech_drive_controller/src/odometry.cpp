@@ -1,3 +1,5 @@
+//DONE
+
 // MIT License
 
 // Copyright (c) 2022 Mateus Menezes
@@ -48,12 +50,6 @@ void Odometry::setRobotParams(RobotParams params) {
   if (params.wheel_radius < std::numeric_limits<double>::epsilon()) {
     std::stringstream error;
     error << "Invalid wheel radius " << params.wheel_radius << " set!" << std::endl;
-    throw std::runtime_error(error.str());
-  }
-
-  if (params.robot_radius < std::numeric_limits<double>::epsilon()) {
-    std::stringstream error;
-    error << "Invalid robot radius " << params.wheel_radius << " set!" << std::endl;
     throw std::runtime_error(error.str());
   }
 

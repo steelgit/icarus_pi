@@ -66,8 +66,8 @@ class MechDriverController : public controller_interface::ControllerInterface {
   std::vector<std::string> wheel_names_;
   std::vector<WheelHandle> registered_wheel_handles_;
 
-  // Default parameters for axebot
-  RobotParams robot_params_{0.1, 0.0505, 0.0};
+  // Default parameters for robot (wheel_radius, chassis_width, chassis_length)
+  RobotParams robot_params_{0.024, 0.203, 0.18};
 
   struct OdometryParams {
     bool open_loop = false;
@@ -108,8 +108,6 @@ class MechDriverController : public controller_interface::ControllerInterface {
   void velocityCommandStampedCallback(const geometry_msgs::msg::TwistStamped::SharedPtr cmd_vel);
   void velocityCommandUnstampedCallback(const geometry_msgs::msg::Twist::SharedPtr cmd_vel);
   geometry_msgs::msg::TwistStamped::SharedPtr cmd_vel_;
-  double cos_gamma{0};
-  double sin_gamma{0};
 };
 
 }  // namespace mech_drive_controllers

@@ -1,3 +1,6 @@
+//DONE
+// mecanum wheel equations => https://ecam-eurobot.github.io/Tutorials/mechanical/mecanum.html
+
 // MIT License
 
 // Copyright (c) 2022 Mateus Menezes
@@ -38,31 +41,31 @@ Kinematics::Kinematics() {
   this->initializeParams();
 }
 
+//forward kinematics (given wheel velocities, find base velocity)
 RobotVelocity Kinematics::getBodyVelocity(const std::vector<double> & wheels_vel) {
   RobotVelocity vel;
-  double wm1 = wheels_vel.at(0);
-  double wm2 = wheels_vel.at(1);
-  double wm3 = wheels_vel.at(2);
+  double vel_front_left = wheels_vel.at(0);
+  double vel_front_right = wheels_vel.at(1);
+  double vel_back_right = wheels_vel.at(2);
+  double vel_back_left = wheels_vel.at(3);
 
-  vel.vx = beta_ * (wm2 - wm3);
-  vel.vy = alpha_ * (-wm1 + (0.5 * (wm2 + wm3)));
-  vel.omega = ((1/robot_params_.robot_radius)*alpha_) * ((sin_gamma_ * wm1) + (0.5 * (wm2 + wm3)));
-
-  vel.vx *= robot_params_.wheel_radius;
-  vel.vy *= robot_params_.wheel_radius;
-  vel.omega *= robot_params_.wheel_radius;
+  vel.vx = ((vel_front_left + vel_front_right + vel_back_right + vel_back_left) * robot_params_.wheel_radius / 4);
+  vel.vy = ((-vel_front_left + vel_front_right - vel_back_right + vel_back_left) * robot_params_.wheel_radius / 4);
+  vel.omega = ((-vel_front_left + vel_front_right + vel_back_right - vel_back_left) * robot_params_.wheel_radius / (4 * (robot_params_.wheel_separation_width + robot_params_.wheel_separation_length)));
 
   return vel;
 }
 
+//inverse kinematics (given base velocity find wheel velocities)
 std::vector<double> Kinematics::getWheelsAngularVelocities(RobotVelocity vel) {
-  double vx = vel.vx;
-  double vy = vel.vy;
-  double wl = vel.omega * robot_params_.robot_radius;
+  double x_linear_vel = vel.vx;
+  double y_linear_vel = vel.vy;
+  double yaw = vel.omega;
 
-  angular_vel_vec_[0] = (-vy + wl) / robot_params_.wheel_radius;
-  angular_vel_vec_[1] = ((vx * cos_gamma_) + (vy * sin_gamma_) + wl) / robot_params_.wheel_radius;
-  angular_vel_vec_[2] = ((-vx * cos_gamma_) + (vy * sin_gamma_) + wl) / robot_params_.wheel_radius;
+  angular_vel_vec_[0] = ((x_linear_vel - y_linear_vel - (yaw * (robot_params_.wheel_separation_length + robot_params_.wheel_separation_width))) * (1 / robot_params_.wheel_radius)); //front left 
+  angular_vel_vec_[1] = ((x_linear_vel + y_linear_vel + (yaw * (robot_params_.wheel_separation_length + robot_params_.wheel_separation_width))) * (1 / robot_params_.wheel_radius)); //front right
+  angular_vel_vec_[2] = ((x_linear_vel - y_linear_vel + (yaw * (robot_params_.wheel_separation_length + robot_params_.wheel_separation_width))) * (1 / robot_params_.wheel_radius)); //back right
+  angular_vel_vec_[3] = ((x_linear_vel + y_linear_vel - (yaw * (robot_params_.wheel_separation_length + robot_params_.wheel_separation_width))) * (1 / robot_params_.wheel_radius)); //back left
 
   return angular_vel_vec_;
 }
@@ -75,10 +78,6 @@ void Kinematics::setRobotParams(RobotParams robot_params) {
 void Kinematics::initializeParams() {
   angular_vel_vec_.reserve(MECH_ROBOT_MAX_WHEELS);
   angular_vel_vec_ = {0, 0, 0, 0};
-  cos_gamma_ = cos(robot_params_.gamma);
-  sin_gamma_ = sin(robot_params_.gamma);
-  alpha_ = 1 / (sin_gamma_ + 1);
-  beta_ = 1 / (2*cos_gamma_);
 }
 
 Kinematics::~Kinematics() {}

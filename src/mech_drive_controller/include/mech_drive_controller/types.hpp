@@ -1,3 +1,5 @@
+//DONE - make sure wheel_separation_length and wheel_separation_width exist
+
 // MIT License
 
 // Copyright (c) 2022 Mateus Menezes
@@ -29,8 +31,8 @@ namespace mech_drive_controllers {
 
 struct RobotParams {
   double wheel_radius;
-  double robot_radius;
-  double gamma;
+  double wheel_separation_width;
+  double wheel_separation_length;
 };
 
 struct RobotVelocity {
