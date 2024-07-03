@@ -1,0 +1,469 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
+  <xacro:macro name="Mecanum-Right" params="prefix x_reflect y_reflect r_reflect">
+    <link
+      name="${prefix}_link">
+      <inertial>
+        <origin
+          xyz="1.26236935779668E-18 6.8753657118438E-18 -1.82537623615078E-18"
+          rpy="0 0 0" />
+        <mass
+          value="0.0118270309310726" />
+        <inertia
+          ixx="1.05151006190876E-06"
+          ixy="1.716037457491E-21"
+          ixz="5.05880721300189E-23"
+          iyy="1.4398222580115E-06"
+          iyz="-4.33869183207793E-22"
+          izz="1.05151006190876E-06" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://Mecanum-8J-Right/meshes/base_link.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="0.698039215686274 0.698039215686274 0.698039215686274 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://Mecanum-8J-Right/meshes/base_link.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <link
+      name="${prefix}_Mecanum_roller_link_1">
+      <inertial>
+        <origin
+          xyz="4.6598E-05 3.9407E-06 -4.4062E-06"
+          rpy="0 0 0" />
+        <mass
+          value="0.0013674" />
+        <inertia
+          ixx="1.3974E-08"
+          ixy="-1.2408E-24"
+          ixz="-7.8582E-24"
+          iyy="4.9325E-08"
+          iyz="1.6544E-24"
+          izz="4.9325E-08" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://Mecanum-8J-Right/meshes/Mecanum_roller_link_1.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="0.69804 0.69804 0.69804 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://Mecanum-8J-Right/meshes/Mecanum_roller_link_1.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint
+      name="${prefix}_Mecanum_roller_joint_1"
+      type="continuous">
+      <origin
+        xyz="0.014612 -0.0091675 0"
+        rpy="-0.72969 -0.7854 -2.1306" />
+      <parent
+        link="${prefix}_link" />
+      <child
+        link="${prefix}_Mecanum_roller_link_1" />
+      <axis
+        xyz="1 0 0" />
+    </joint>
+    <link
+      name="${prefix}_Mecanum_roller_link_3">
+      <inertial>
+        <origin
+          xyz="-5.8421E-05 4.6304E-06 3.6747E-06"
+          rpy="0 0 0" />
+        <mass
+          value="0.0013674" />
+        <inertia
+          ixx="1.3974E-08"
+          ixy="3.7223E-24"
+          ixz="-2.2747E-24"
+          iyy="4.9325E-08"
+          iyz="-1.6544E-24"
+          izz="4.9325E-08" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://Mecanum-8J-Right/meshes/Mecanum_roller_link_3.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="0.69804 0.69804 0.69804 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://Mecanum-8J-Right/meshes/Mecanum_roller_link_3.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint
+      name="${prefix}_Mecanum_roller_joint_3"
+      type="continuous">
+      <origin
+        xyz="0.0091675 0.014612 0"
+        rpy="-2.2416 -0.7854 -0.55983" />
+      <parent
+        link="${prefix}_link" />
+      <child
+        link="${prefix}_Mecanum_roller_link_3" />
+      <axis
+        xyz="1 0 0" />
+    </joint>
+    <link
+      name="${prefix}_Mecanum_roller_link_4">
+      <inertial>
+        <origin
+          xyz="-5.8421E-05 9.4086E-07 5.836E-06"
+          rpy="0 0 0" />
+        <mass
+          value="0.0013674" />
+        <inertia
+          ixx="1.3974E-08"
+          ixy="4.1359E-25"
+          ixz="-3.2669E-24"
+          iyy="4.9325E-08"
+          iyz="3.1019E-25"
+          izz="4.9325E-08" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://Mecanum-8J-Right/meshes/Mecanum_roller_link_4.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="0.69804 0.69804 0.69804 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://Mecanum-8J-Right/meshes/Mecanum_roller_link_4.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint
+      name="${prefix}_Mecanum_roller_joint_4"
+      type="continuous">
+      <origin
+        xyz="-0.0038664 0.016811 0"
+        rpy="0.15984 0.7854 -2.916" />
+      <parent
+        link="${prefix}_link" />
+      <child
+        link="${prefix}_Mecanum_roller_link_4" />
+      <axis
+        xyz="1 0 0" />
+    </joint>
+    <link
+      name="${prefix}_Mecanum_roller_link_5">
+      <inertial>
+        <origin
+          xyz="-5.8421E-05 4.9513E-06 3.2293E-06"
+          rpy="0 0 0" />
+        <mass
+          value="0.0013674" />
+        <inertia
+          ixx="1.3974E-08"
+          ixy="-3.7223E-24"
+          ixz="1.3028E-23"
+          iyy="4.9325E-08"
+          iyz="1.6544E-24"
+          izz="4.9325E-08" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://Mecanum-8J-Right/meshes/Mecanum_roller_link_5.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="0.69804 0.69804 0.69804 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://Mecanum-8J-Right/meshes/Mecanum_roller_link_5.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint
+      name="${prefix}_Mecanum_roller_joint_5"
+      type="continuous">
+      <origin
+        xyz="-0.014621 0.0091533 0"
+        rpy="0.99286 0.7854 -2.1306" />
+      <parent
+        link="${prefix}_link" />
+      <child
+        link="${prefix}_Mecanum_roller_link_5" />
+      <axis
+        xyz="1 0 0" />
+    </joint>
+    <link
+      name="${prefix}_Mecanum_roller_link_6">
+      <inertial>
+        <origin
+          xyz="4.6598E-05 5.9111E-06 4.7784E-08"
+          rpy="0 0 0" />
+        <mass
+          value="0.0013674" />
+        <inertia
+          ixx="1.3974E-08"
+          ixy="5.7903E-24"
+          ixz="6.2039E-25"
+          iyy="4.9325E-08"
+          iyz="8.2718E-25"
+          izz="4.9325E-08" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://Mecanum-8J-Right/meshes/Mecanum_roller_link_6.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="0.69804 0.69804 0.69804 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://Mecanum-8J-Right/meshes/Mecanum_roller_link_6.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint
+      name="${prefix}_Mecanum_roller_joint_6"
+      type="continuous">
+      <origin
+        xyz="-0.016811 -0.0038664 0"
+        rpy="1.5627 0.7854 -1.3452" />
+      <parent
+        link="${prefix}_link" />
+      <child
+        link="${prefix}_Mecanum_roller_link_6" />
+      <axis
+        xyz="1 0 0" />
+    </joint>
+    <link
+      name="${prefix}_Mecanum_roller_link_7">
+      <inertial>
+        <origin
+          xyz="-0.00043342 5.7766E-06 1.2548E-06"
+          rpy="0 0 0" />
+        <mass
+          value="0.0013674" />
+        <inertia
+          ixx="1.3974E-08"
+          ixy="5.0148E-24"
+          ixz="4.1359E-25"
+          iyy="4.9325E-08"
+          iyz="-2.2747E-24"
+          izz="4.9325E-08" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://Mecanum-8J-Right/meshes/Mecanum_roller_link_7.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="0.69804 0.69804 0.69804 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://Mecanum-8J-Right/meshes/Mecanum_roller_link_7.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint
+      name="${prefix}_Mecanum_roller_joint_7"
+      type="continuous">
+      <origin
+        xyz="0.0038501 -0.016815 0"
+        rpy="-1.7847 -0.7854 -2.916" />
+      <parent
+        link="${prefix}_link" />
+      <child
+        link="${prefix}_Mecanum_roller_link_7" />
+      <axis
+        xyz="1 0 0" />
+    </joint>
+    <link
+      name="${prefix}_Mecanum_roller_link_8">
+      <inertial>
+        <origin
+          xyz="-5.8421E-05 -2.3563E-06 -5.4214E-06"
+          rpy="0 0 0" />
+        <mass
+          value="0.0013674" />
+        <inertia
+          ixx="1.3974E-08"
+          ixy="1.2408E-24"
+          ixz="5.2571E-24"
+          iyy="4.9325E-08"
+          iyz="-1.4217E-24"
+          izz="4.9325E-08" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://Mecanum-8J-Right/meshes/Mecanum_roller_link_8.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="0.69804 0.69804 0.69804 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://Mecanum-8J-Right/meshes/Mecanum_roller_link_8.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint
+      name="${prefix}_Mecanum_roller_joint_8"
+      type="continuous">
+      <origin
+        xyz="-0.0091675 -0.014612 0"
+        rpy="0.41001 -0.7854 2.5818" />
+      <parent
+        link="${prefix}_link" />
+      <child
+        link="${prefix}_Mecanum_roller_link_8" />
+      <axis
+        xyz="1 0 0" />
+    </joint>
+    <link
+      name="${prefix}_Mecanum_roller_link_2">
+      <inertial>
+        <origin
+          xyz="-5.8421E-05 5.8158E-06 -1.0583E-06"
+          rpy="0 0 0" />
+        <mass
+          value="0.0013674" />
+        <inertia
+          ixx="1.3974E-08"
+          ixy="-8.2718E-24"
+          ixz="-5.5835E-24"
+          iyy="4.9325E-08"
+          iyz="-8.2718E-24"
+          izz="4.9325E-08" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://Mecanum-8J-Right/meshes/Mecanum_roller_link_2.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="0.69804 0.69804 0.69804 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://Mecanum-8J-Right/meshes/Mecanum_roller_link_2.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint
+      name="${prefix}_Mecanum_roller_joint_2"
+      type="continuous">
+      <origin
+        xyz="0.016815 0.0038501 0"
+        rpy="-1.3908 -0.7854 -1.3452" />
+      <parent
+        link="${prefix}_link" />
+      <child
+        link="${prefix}_Mecanum_roller_link_2" />
+      <axis
+        xyz="1 0 0" />
+    </joint>
+  </xacro:macro>
+</robot>

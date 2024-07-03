@@ -57,7 +57,8 @@
     </gazebo>
   
      <!-- CHASSIS LINK -->
-    <xacro:include filename="Mecanum.urdf.xacro"/>
+    <xacro:include filename="Mecanum-Left.urdf.xacro"/>
+    <xacro:include filename="Mecanum-Right.urdf.xacro"/>
     <xacro:Mecanum prefix="frontRight" x_reflect="-1" y_reflect="1" r_reflect="${pi/2}"/>
     <xacro:Mecanum prefix="backLeft" x_reflect="1" y_reflect="-1" r_reflect="${pi/2}"/>
     <xacro:Mecanum prefix="frontLeft" x_reflect="-1" y_reflect="-1" r_reflect="${pi/2}"/>

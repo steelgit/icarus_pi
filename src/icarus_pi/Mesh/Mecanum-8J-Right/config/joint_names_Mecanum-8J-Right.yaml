@@ -1,1 +1,1 @@
-controller_joint_names: ['', 'Mecanum_roller_joint_1', 'Mecanum_roller_joint_3', 'Mecanum_roller_joint_4', 'Mecanum_roller_joint_5', 'Mecanum_roller_joint_6', 'Mecanum_roller_joint_7', 'Mecanum_roller_joint_8', 'Mecanum_roller_joint_2', ]
+controller_joint_names: ['', '${prefix}_Mecanum_roller_joint_1', '${prefix}_Mecanum_roller_joint_3', '${prefix}_Mecanum_roller_joint_4', '${prefix}_Mecanum_roller_joint_5', '${prefix}_Mecanum_roller_joint_6', '${prefix}_Mecanum_roller_joint_7', '${prefix}_Mecanum_roller_joint_8', '${prefix}_Mecanum_roller_joint_2', ]
