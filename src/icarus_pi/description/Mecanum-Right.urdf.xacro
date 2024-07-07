@@ -5,7 +5,7 @@
       name="${prefix}_link">
       <inertial>
         <origin
-          xyz="1.26236935779668E-18 6.8753657118438E-18 -1.82537623615078E-18"
+          xyz="0 0 0"
           rpy="0 0 0" />
         <mass
           value="0.0118270309310726" />
@@ -23,7 +23,7 @@
           rpy="0 0 0" />
         <geometry>
           <mesh
-            filename="package://Mecanum-8J-Right/meshes/base_link.STL" />
+            filename="file://$(find icarus_pi)/Mesh/Mecanum-8J-Right/meshes/base_link.STL" />
         </geometry>
         <material
           name="">
@@ -37,10 +37,16 @@
           rpy="0 0 0" />
         <geometry>
           <mesh
-            filename="package://Mecanum-8J-Right/meshes/base_link.STL" />
+            filename="file://$(find icarus_pi)/Mesh/Mecanum-8J-Right/meshes/base_link.STL" />
         </geometry>
       </collision>
-    </link>
+  </link>
+    <joint name="${prefix}_joint" type="continuous"> 
+              <parent link="base_link"/>
+              <child link="${prefix}_link"/>
+              <origin xyz="${x_reflect*wheel_xoff} ${y_reflect*(chassis_width/2 + wheel_ygap)} ${-wheel_zoff}" rpy="0 ${r_reflect} ${r_reflect}"/>
+    <axis xyz="0 0 1"/>
+        </joint>
     <link
       name="${prefix}_Mecanum_roller_link_1">
       <inertial>
@@ -63,7 +69,7 @@
           rpy="0 0 0" />
         <geometry>
           <mesh
-            filename="package://Mecanum-8J-Right/meshes/Mecanum_roller_link_1.STL" />
+            filename="file://$(find icarus_pi)/Mesh/Mecanum-8J-Right/meshes/Mecanum_roller_link_1.STL" />
         </geometry>
         <material
           name="">
@@ -77,13 +83,12 @@
           rpy="0 0 0" />
         <geometry>
           <mesh
-            filename="package://Mecanum-8J-Right/meshes/Mecanum_roller_link_1.STL" />
+            filename="file://$(find icarus_pi)/Mesh/Mecanum-8J-Right/meshes/Mecanum_roller_link_1.STL" />
         </geometry>
       </collision>
     </link>
     <joint
-      name="${prefix}_Mecanum_roller_joint_1"
-      type="continuous">
+      name="${prefix}_Mecanum_roller_joint_1" type="continuous">
       <origin
         xyz="0.014612 -0.0091675 0"
         rpy="-0.72969 -0.7854 -2.1306" />
@@ -116,7 +121,7 @@
           rpy="0 0 0" />
         <geometry>
           <mesh
-            filename="package://Mecanum-8J-Right/meshes/Mecanum_roller_link_3.STL" />
+            filename="file://$(find icarus_pi)/Mesh/Mecanum-8J-Right/meshes/Mecanum_roller_link_3.STL" />
         </geometry>
         <material
           name="">
@@ -130,7 +135,7 @@
           rpy="0 0 0" />
         <geometry>
           <mesh
-            filename="package://Mecanum-8J-Right/meshes/Mecanum_roller_link_3.STL" />
+            filename="file://$(find icarus_pi)/Mesh/Mecanum-8J-Right/meshes/Mecanum_roller_link_3.STL" />
         </geometry>
       </collision>
     </link>
@@ -169,7 +174,7 @@
           rpy="0 0 0" />
         <geometry>
           <mesh
-            filename="package://Mecanum-8J-Right/meshes/Mecanum_roller_link_4.STL" />
+            filename="file://$(find icarus_pi)/Mesh/Mecanum-8J-Right/meshes/Mecanum_roller_link_4.STL" />
         </geometry>
         <material
           name="">
@@ -183,7 +188,7 @@
           rpy="0 0 0" />
         <geometry>
           <mesh
-            filename="package://Mecanum-8J-Right/meshes/Mecanum_roller_link_4.STL" />
+            filename="file://$(find icarus_pi)/Mesh/Mecanum-8J-Right/meshes/Mecanum_roller_link_4.STL" />
         </geometry>
       </collision>
     </link>
@@ -222,7 +227,7 @@
           rpy="0 0 0" />
         <geometry>
           <mesh
-            filename="package://Mecanum-8J-Right/meshes/Mecanum_roller_link_5.STL" />
+            filename="file://$(find icarus_pi)/Mesh/Mecanum-8J-Right/meshes/Mecanum_roller_link_5.STL" />
         </geometry>
         <material
           name="">
@@ -236,7 +241,7 @@
           rpy="0 0 0" />
         <geometry>
           <mesh
-            filename="package://Mecanum-8J-Right/meshes/Mecanum_roller_link_5.STL" />
+            filename="file://$(find icarus_pi)/Mesh/Mecanum-8J-Right/meshes/Mecanum_roller_link_5.STL" />
         </geometry>
       </collision>
     </link>
@@ -275,7 +280,7 @@
           rpy="0 0 0" />
         <geometry>
           <mesh
-            filename="package://Mecanum-8J-Right/meshes/Mecanum_roller_link_6.STL" />
+            filename="file://$(find icarus_pi)/Mesh/Mecanum-8J-Right/meshes/Mecanum_roller_link_6.STL" />
         </geometry>
         <material
           name="">
@@ -289,7 +294,7 @@
           rpy="0 0 0" />
         <geometry>
           <mesh
-            filename="package://Mecanum-8J-Right/meshes/Mecanum_roller_link_6.STL" />
+            filename="file://$(find icarus_pi)/Mesh/Mecanum-8J-Right/meshes/Mecanum_roller_link_6.STL" />
         </geometry>
       </collision>
     </link>
@@ -328,7 +333,7 @@
           rpy="0 0 0" />
         <geometry>
           <mesh
-            filename="package://Mecanum-8J-Right/meshes/Mecanum_roller_link_7.STL" />
+            filename="file://$(find icarus_pi)/Mesh/Mecanum-8J-Right/meshes/Mecanum_roller_link_7.STL" />
         </geometry>
         <material
           name="">
@@ -342,7 +347,7 @@
           rpy="0 0 0" />
         <geometry>
           <mesh
-            filename="package://Mecanum-8J-Right/meshes/Mecanum_roller_link_7.STL" />
+            filename="file://$(find icarus_pi)/Mesh/Mecanum-8J-Right/meshes/Mecanum_roller_link_7.STL" />
         </geometry>
       </collision>
     </link>
@@ -381,7 +386,7 @@
           rpy="0 0 0" />
         <geometry>
           <mesh
-            filename="package://Mecanum-8J-Right/meshes/Mecanum_roller_link_8.STL" />
+            filename="file://$(find icarus_pi)/Mesh/Mecanum-8J-Right/meshes/Mecanum_roller_link_8.STL" />
         </geometry>
         <material
           name="">
@@ -395,7 +400,7 @@
           rpy="0 0 0" />
         <geometry>
           <mesh
-            filename="package://Mecanum-8J-Right/meshes/Mecanum_roller_link_8.STL" />
+            filename="file://$(find icarus_pi)/Mesh/Mecanum-8J-Right/meshes/Mecanum_roller_link_8.STL" />
         </geometry>
       </collision>
     </link>
@@ -434,7 +439,7 @@
           rpy="0 0 0" />
         <geometry>
           <mesh
-            filename="package://Mecanum-8J-Right/meshes/Mecanum_roller_link_2.STL" />
+            filename="file://$(find icarus_pi)/Mesh/Mecanum-8J-Right/meshes/Mecanum_roller_link_2.STL" />
         </geometry>
         <material
           name="">
@@ -448,7 +453,7 @@
           rpy="0 0 0" />
         <geometry>
           <mesh
-            filename="package://Mecanum-8J-Right/meshes/Mecanum_roller_link_2.STL" />
+            filename="file://$(find icarus_pi)/Mesh/Mecanum-8J-Right/meshes/Mecanum_roller_link_2.STL" />
         </geometry>
       </collision>
     </link>

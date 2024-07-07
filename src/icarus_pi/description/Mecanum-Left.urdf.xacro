@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
-  <xacro:macro name="Mecanum" params="prefix x_reflect y_reflect r_reflect">
+  <xacro:macro name="Mecanum-Left" params="prefix x_reflect y_reflect r_reflect">
   <link
     name="${prefix}_link">
     <inertial>
       <origin
-        xyz="0.011813 0.0074643 0.015042"
+        xyz="0 0 0"
         rpy="0 0 0" />
       <mass
         value="0.010056" />
@@ -48,7 +48,7 @@
     <axis xyz="1 0 0"/>
         </joint>
   <link
-    name="Mecanum_roller_link_1">
+    name="${prefix}_Mecanum_roller_link_1">
     <inertial>
       <origin
         xyz="0.012194 1.7694E-16 -2.3592E-16"
@@ -307,7 +307,7 @@
     <parent
       link="${prefix}_link" />
     <child
-      link="${prefix}_Mecanum_roller_joint_5" />
+      link="${prefix}_Mecanum_roller_link_5" />
     <axis
       xyz="1 0 0" />
   </joint>
@@ -426,12 +426,12 @@
       <mass
         value="0.001" />
       <inertia
-        ixx="0"
-        ixy="0"
-        ixz="0"
-        iyy="0"
+        ixx="1.1179E-08"
+        ixy="3.6189E-24"
+        ixz="-4.1359E-25"
+        iyy="3.946E-08"
         iyz="0"
-        izz="0" />
+        izz="3.946E-08" />
     </inertial>
     <visual>
       <origin
@@ -464,9 +464,9 @@
       xyz="-6.3119955066443E-05 -0.00318305230455557 0.0247142513409911"
       rpy="-2.1509048893029 0 -0.78539816339745" />
     <parent
-      link="${prefix}_Mecanum_roller_link_8" />
+      link="${prefix}_link" />
     <child
-      link="Mecanum_roller_link_8" />
+      link="${prefix}_Mecanum_roller_link_8" />
     <axis
       xyz="1 0 0" />
   </joint>
