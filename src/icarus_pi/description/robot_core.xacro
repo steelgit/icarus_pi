@@ -17,7 +17,7 @@
     <joint name="base_footprint_joint" type="fixed">
         <parent link="base_link"/>
         <child link="base_footprint"/>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <origin xyz="0 0 1" rpy="0 0 0"/>
     </joint>
 
     <link name="base_footprint">
@@ -59,9 +59,9 @@
      <!-- CHASSIS LINK -->
     <xacro:include filename="Mecanum-8J-Left.urdf.xacro"/>
     <xacro:include filename="Mecanum-Right.urdf.xacro"/>
-    <xacro:Mecanum-Right prefix="frontRight" x_reflect="-1" y_reflect="1" r_reflect="${pi/2}"/>
-    <xacro:Mecanum-Right prefix="backLeft" x_reflect="1" y_reflect="-1" r_reflect="${pi/2}"/>
-    <xacro:Mecanum-Left prefix="frontLeft" x_reflect="-1" y_reflect="-1" r_reflect="${pi/2}"/>
-    <xacro:Mecanum-Left prefix="backRight" x_reflect="1" y_reflect="1" r_reflect="${pi/2}"/>
+    <xacro:Mecanum-Right prefix="frontRight" x_reflect="-1" y_reflect="1" r_reflect="${pi/2}" mass="${wheel_mass}" radius="${wheel_radius}" length="${wheel_width}"/>
+    <xacro:Mecanum-Right prefix="backLeft" x_reflect="1" y_reflect="-1" r_reflect="${pi/2}" mass="${wheel_mass}" radius="${wheel_radius}" length="${wheel_width}"/>
+    <xacro:Mecanum-Left prefix="frontLeft" x_reflect="-1" y_reflect="-1" r_reflect="${pi/2}" mass="${wheel_mass}" radius="${wheel_radius}" length="${wheel_width}"/>
+    <xacro:Mecanum-Left prefix="backRight" x_reflect="1" y_reflect="1" r_reflect="${pi/2}" mass="${wheel_mass}" radius="${wheel_radius}" length="${wheel_width}"/>
 
 </robot>
