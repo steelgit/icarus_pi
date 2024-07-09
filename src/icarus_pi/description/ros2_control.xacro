@@ -93,6 +93,19 @@
         <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
             <parameters>$(find icarus_pi)/config/my_controllers.yaml</parameters>
             <parameters>$(find icarus_pi)/config/gaz_ros2_ctl_use_sim.yaml</parameters>
+            <num_wheel_pairs>2</num_wheel_pairs>
+            <left_joint>frontLeft_joint</left_joint>
+            <left_joint>backLeft_joint</left_joint>
+            <right_joint>frontRight_joint</right_joint>
+            <right_joint>backRight_joint</right_joint>
+            <wheel_separation>0.7</wheel_separation>
+            <wheel_diameter>0.024</wheel_diameter>
+            <odometry_frame>odom</odometry_frame>
+            <robot_base_frame>base_link</robot_base_frame>
+
+            <publish_odom>true</publish_odom>
+            <publish_odom_tf>true</publish_odom_tf>
+            <publish_wheel_tf>true</publish_wheel_tf>
         </plugin>
     </gazebo>
 

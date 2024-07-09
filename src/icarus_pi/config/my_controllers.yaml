@@ -23,6 +23,8 @@ mech_cont:
     
 
     use_stamped_vel: false
+    enable_odom_tf: true
+    odom_frame_id: odom
 
 
     joint_state:
