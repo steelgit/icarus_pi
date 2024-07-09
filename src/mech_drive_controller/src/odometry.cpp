@@ -29,7 +29,8 @@ Odometry::Odometry(size_t velocity_rolling_window_size)
   linear_x_(0.0),
   linear_y_(0.0),
   angular_(0.0),
-  wheel_separation_(0.0),
+  wheel_separation_width_(0.0),
+  wheel_separation_length_(0.0),
   left_wheel_radius_(0.0),
   right_wheel_radius_(0.0),
   front_left_wheel_old_pos_(0.0),
@@ -83,7 +84,7 @@ bool Odometry::update(double front_left_pos, double front_right_pos, double back
   const double linear_x = (front_left_wheel_est_vel + front_right_wheel_est_vel + back_left_wheel_est_vel + back_right_wheel_est_vel) * left_wheel_radius_ / 4;
   const double linear_y = (-front_left_wheel_est_vel + front_right_wheel_est_vel + back_left_wheel_est_vel - back_right_wheel_est_vel) * left_wheel_radius_ / 4; 
   // Now there is a bug about scout angular velocity
-  const double angular = (front_right_wheel_est_vel - back_left_wheel_est_vel - front_left_wheel_est_vel + back_right_wheel_est_vel) * left_wheel_radius_ / (4* wheel_separation_);
+  const double angular = (front_right_wheel_est_vel - back_left_wheel_est_vel - front_left_wheel_est_vel + back_right_wheel_est_vel) * left_wheel_radius_ / (4  * (wheel_separation_width_ + wheel_separation_length_));
 
   // Integrate odometry:
   integrateExact(linear_x, linear_y, angular);
@@ -126,9 +127,10 @@ void Odometry::resetOdometry()
 }
 
 void Odometry::setWheelParams(
-  double wheel_separation, double left_wheel_radius, double right_wheel_radius)
+  double wheel_separation_length, double wheel_separation_width, double left_wheel_radius, double right_wheel_radius)
 {
-  wheel_separation_ = wheel_separation;
+  wheel_separation_width_ = wheel_separation_width;
+  wheel_separation_length_ = wheel_separation_length;
   left_wheel_radius_ = left_wheel_radius;
   right_wheel_radius_ = right_wheel_radius;
 }

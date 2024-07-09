@@ -65,7 +65,9 @@ controller_interface::return_type MechDriveController::init(const std::string & 
     auto_declare<std::vector<std::string>>("back_left_wheel_name", std::vector<std::string>());
     auto_declare<std::vector<std::string>>("back_right_wheel_name", std::vector<std::string>());
 
-    auto_declare<double>("wheel_separation", wheel_params_.separation);
+    auto_declare<double>("wheel_separation_width_", wheel_params_.separation_width);
+    auto_declare<double>("wheel_separation_length_", wheel_params_.separation_length);
+
     auto_declare<int>("wheels_per_side", wheel_params_.wheels_per_side);
     auto_declare<double>("wheel_radius", wheel_params_.radius);
     auto_declare<double>("wheel_separation_multiplier", wheel_params_.separation_multiplier);
@@ -203,7 +205,8 @@ controller_interface::return_type MechDriveController::update()
 
   // Apply (possibly new) multipliers:
   const auto wheels = wheel_params_;
-  const double wheel_separation = wheels.separation_multiplier * wheels.separation;
+  const double wheel_separation_length = wheels.separation_multiplier * wheels.separation_length;
+  const double wheel_separation_width = wheels.separation_multiplier * wheels.separation_width;
   const double left_wheel_radius = wheels.left_radius_multiplier * wheels.radius;
   const double right_wheel_radius = wheels.right_radius_multiplier * wheels.radius;
 
@@ -307,13 +310,13 @@ controller_interface::return_type MechDriveController::update()
 
   // Compute wheels velocities:
   const double velocity_front_left =
-    (x - y - z * wheel_separation * 2) / left_wheel_radius;
+    (x - y - z * (wheel_separation_length + wheel_separation_width) * 2) / left_wheel_radius;
   const double velocity_front_right =
-    (x + y + z * wheel_separation * 2) / right_wheel_radius;
+    (x + y + z * (wheel_separation_length + wheel_separation_width) * 2) / right_wheel_radius;
     const double velocity_back_left =
-    (x + y - z * wheel_separation * 2) / left_wheel_radius;
+    (x + y - z * (wheel_separation_length + wheel_separation_width) * 2) / left_wheel_radius;
   const double velocity_back_right =
-    (x - y + z * wheel_separation * 2) / right_wheel_radius;
+    (x - y + z * (wheel_separation_length + wheel_separation_width) * 2) / right_wheel_radius;
 
   // Set wheels velocities:
 
@@ -351,7 +354,8 @@ CallbackReturn MechDriveController::on_configure(const rclcpp_lifecycle::State &
     return CallbackReturn::ERROR;
   }
 
-  wheel_params_.separation = node_->get_parameter("wheel_separation").as_double();
+  wheel_params_.separation_length = node_->get_parameter("wheel_separation_length").as_double();
+  wheel_params_.separation_width = node_->get_parameter("wheel_separation_width").as_double();
   wheel_params_.wheels_per_side =
     static_cast<size_t>(node_->get_parameter("wheels_per_side").as_int());
   wheel_params_.radius = node_->get_parameter("wheel_radius").as_double();
@@ -364,11 +368,12 @@ CallbackReturn MechDriveController::on_configure(const rclcpp_lifecycle::State &
 
   const auto wheels = wheel_params_;
 
-  const double wheel_separation = wheels.separation_multiplier * wheels.separation;
+  const double wheel_separation_length = wheels.separation_multiplier * wheels.separation_length;
+  const double wheel_separation_width = wheels.separation_multiplier * wheels.separation_width;
   const double left_wheel_radius = wheels.left_radius_multiplier * wheels.radius;
   const double right_wheel_radius = wheels.right_radius_multiplier * wheels.radius;
 
-  odometry_.setWheelParams(wheel_separation, left_wheel_radius, right_wheel_radius);
+  odometry_.setWheelParams(wheel_separation_length, wheel_separation_width, left_wheel_radius, right_wheel_radius);
   odometry_.setVelocityRollingWindowSize(
     node_->get_parameter("velocity_rolling_window_size").as_int());
 

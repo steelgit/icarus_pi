@@ -18,7 +18,8 @@ mech_cont:
     front_right_wheel_name: ["frontRight_joint"]
     back_left_wheel_name: ["backLeft_joint"]
     back_right_wheel_name: ["backRight_joint"]
-    wheel_separation: .203
+    wheel_separation_width: 0.19
+    wheel_seperation_length: 0.1143
     wheel_radius: .024
     
 

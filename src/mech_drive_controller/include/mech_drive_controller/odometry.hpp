@@ -46,7 +46,7 @@ public:
   double getLinear_y() const { return linear_y_; }
   double getAngular() const { return angular_; }
 
-  void setWheelParams(double wheel_separation, double left_wheel_radius, double right_wheel_radius);
+  void setWheelParams(double wheel_separation_length, double wheel_seperation_width, double left_wheel_radius, double right_wheel_radius);
   void setVelocityRollingWindowSize(size_t velocity_rolling_window_size);
 
 private:
@@ -70,7 +70,8 @@ private:
   double angular_;  // [rad/s]
 
   // Wheel kinematic parameters [m]:
-  double wheel_separation_;
+  double wheel_separation_length_;
+  double wheel_separation_width_;
   double left_wheel_radius_;
   double right_wheel_radius_;
 
