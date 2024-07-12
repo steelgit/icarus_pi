@@ -4,20 +4,20 @@
 	<!--lidar intrinsics-->
 	<link name="lidar_link">
 		<inertial>
-			<origin xyz="${-chassis_length/2 + 2*lidar_radius} 0 ${chassis_height/2}" rpy="0 0 0"/>
+			<origin xyz = "0 0 0" rpy="0 0 0"/>
 			<mass value=".17"/>
 			<inertia ixx="0.001"  ixy="0"  ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
 		</inertial>
 
 		<collision>
-			<origin xyz="${-chassis_length/2 + 2*lidar_radius} 0 ${chassis_height/2}"/>
+			<origin xyz = "0 0 0"/>
 			<geometry>
 				<cylinder radius="${lidar_radius}" length=".06"/>
 			</geometry>
 		</collision>
 
 		<visual>
-			<origin xyz = "0 0 ${chassis_height/2}" rpy="0 0 0"/>
+			<origin xyz = "0 0 0" rpy="0 0 0"/>
 			<geometry>
 				<cylinder radius="${lidar_radius}" length=".06"/>
 			</geometry>
@@ -32,7 +32,7 @@
 	<!--^^make joint continuous to mimic spinning lidar?-->
 		<parent link="chassis"/>
 		<child link="lidar_link"/>
-		<origin xyz="${-chassis_length/2 + lidar_radius} 0 ${chassis_height/2+.02}" rpy="0 0 0"/>
+		<origin xyz="${lidar_radius} 0 ${chassis_height+.03}" rpy="0 0 0"/>
 	</joint>
 	
 	<!--adding gazebo plugins to the sim-->
