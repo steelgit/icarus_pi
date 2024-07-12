@@ -53,6 +53,14 @@ def generate_launch_description():
         arguments=["mech_cont"],
     )
 
+    twist_mux_params = os.path.join(get_package_share_directory(package_name),'config','mux.yaml')
+    twist_mux = Node(
+        package='twist_mux',
+        executable='twist_mux',
+        parameters=[twist_mux_params],
+        remappings=[('/cmd_vel_out','/mech_cont/cmd_vel_unstamped')]
+        )
+
     joint_broad_spawner = Node(
         package="controller_manager",
         executable="spawner.py",   #on humble it is no longer spawner.py
@@ -79,7 +87,8 @@ def generate_launch_description():
         joint_state_publisher_node,
         gazebo,
         spawn_entity,
-        #joystick,
-        #controller_drive_spawner,
+        twist_mux,
+        joystick,
+        controller_drive_spawner,
         joint_broad_spawner
     ])

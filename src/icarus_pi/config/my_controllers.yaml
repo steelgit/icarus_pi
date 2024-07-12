@@ -13,6 +13,8 @@ mech_cont:
   ros__parameters:
     publish_rate: 50.0
     base_frame_id: base_link
+    odom_frame_id: odom
+
     wheels_per_side: 2
     front_left_wheel_name: ["frontLeft_joint"]
     front_right_wheel_name: ["frontRight_joint"]
@@ -37,7 +39,7 @@ mech_cont:
         topic: "/backLeft_joint" # Adjust topic names as per your actual topics
         ignore_timestamp: true
       back_right_wheel:
-        topic: "/backLeft_joint" # Adjust topic names as per your actual topics
+        topic: "/backRight_joint" # Adjust topic names as per your actual topics
         ignore_timestamp: true
 
 
