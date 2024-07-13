@@ -310,13 +310,13 @@ controller_interface::return_type MechDriveController::update()
 
   // Compute wheels velocities:
   const double velocity_front_left =
-    (x - y - z * (wheel_separation_length + wheel_separation_width) * 2) / left_wheel_radius;
+    (x - y - z * (wheel_separation_length + wheel_separation_width) / 2) / left_wheel_radius;
   const double velocity_front_right =
-    (x + y + z * (wheel_separation_length + wheel_separation_width) * 2) / right_wheel_radius;
+    (x + y + z * (wheel_separation_length + wheel_separation_width) / 2) / right_wheel_radius;
     const double velocity_back_left =
-    (x + y - z * (wheel_separation_length + wheel_separation_width) * 2) / left_wheel_radius;
+    (x + y - z * (wheel_separation_length + wheel_separation_width) / 2) / left_wheel_radius;
   const double velocity_back_right =
-    (x - y + z * (wheel_separation_length + wheel_separation_width) * 2) / right_wheel_radius;
+    (x - y + z * (wheel_separation_length + wheel_separation_width) / 2) / right_wheel_radius;
 
   // Set wheels velocities:
 

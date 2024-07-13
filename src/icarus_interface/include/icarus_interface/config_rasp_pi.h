@@ -1,3 +1,5 @@
+
+
 #ifndef ICARUSINTERFACE_CONFIG_RASP_PI_H
 #define ICARUSINTERFACE_CONFIG_RASP_PI_H    
 #include "wheel.h"
@@ -35,18 +37,18 @@ const uint16_t PWM_MAX = 1000;
 const uint8_t FREQ = 200;
 const uint16_t RANGE = 1000;
 
-const motor MOTOR_FL = {PWM_MAX, 21, 20, 16, FREQ, RANGE};
-const motor MOTOR_FR = {PWM_MAX, 13, 6, 5, FREQ, RANGE};
+const motor MOTOR_FR = {PWM_MAX, 21, 20, 16, FREQ, RANGE};
+const motor MOTOR_FL = {PWM_MAX, 13, 6, 5, FREQ, RANGE};
 const motor MOTOR_BL = {PWM_MAX, 2, 3, 4, FREQ, RANGE};
 const motor MOTOR_BR = {PWM_MAX, 25, 24, 23, FREQ, RANGE};
 
 // encoder = {OptA, OptB, Glitch}
 const uint8_t OPTGLITCH_DEFAULT = 250;
 
-const encoder ENCODER_FL = {7, 8, OPTGLITCH_DEFAULT};
-const encoder ENCODER_FR = {27, 17, OPTGLITCH_DEFAULT};
-const encoder ENCODER_BL = {12, 1, OPTGLITCH_DEFAULT};
-const encoder ENCODER_BR = {26, 19, OPTGLITCH_DEFAULT};
+const encoder ENCODER_FL = {19, 26, OPTGLITCH_DEFAULT};
+const encoder ENCODER_FR = {1, 12, OPTGLITCH_DEFAULT};
+const encoder ENCODER_BL = {17, 27, OPTGLITCH_DEFAULT};
+const encoder ENCODER_BR = {8, 7, OPTGLITCH_DEFAULT};
 
 
 //===============================================================

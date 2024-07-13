@@ -19,7 +19,7 @@ mech_cont:
     back_left_wheel_name: ["backLeft_joint"]
     back_right_wheel_name: ["backRight_joint"]
     wheel_separation_width: 0.19
-    wheel_seperation_length: 0.1143
+    wheel_separation_length: 0.1143
     wheel_radius: .024
     
 
@@ -37,10 +37,10 @@ mech_cont:
         topic: "/backLeft_joint" # Adjust topic names as per your actual topics
         ignore_timestamp: true
       back_right_wheel:
-        topic: "/backLeft_joint" # Adjust topic names as per your actual topics
+        topic: "/backRight_joint" # Adjust topic names as per your actual topics
         ignore_timestamp: true
 
 
 joint_broad:
   ros__parameters:
-    joints: ["backLeft_joint", "frontLeft_joint", "backRight_joint", "frontRight_joint"]
+    joints: ["frontLeft_joint", "backLeft_joint", "frontRight_joint", "backRight_joint"]
