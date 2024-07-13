@@ -65,8 +65,8 @@ controller_interface::return_type MechDriveController::init(const std::string & 
     auto_declare<std::vector<std::string>>("back_left_wheel_name", std::vector<std::string>());
     auto_declare<std::vector<std::string>>("back_right_wheel_name", std::vector<std::string>());
 
-    auto_declare<double>("wheel_separation_width_", wheel_params_.separation_width);
-    auto_declare<double>("wheel_separation_length_", wheel_params_.separation_length);
+    auto_declare<double>("wheel_separation_width", wheel_params_.separation_width);
+    auto_declare<double>("wheel_separation_length", wheel_params_.separation_length);
 
     auto_declare<int>("wheels_per_side", wheel_params_.wheels_per_side);
     auto_declare<double>("wheel_radius", wheel_params_.radius);
