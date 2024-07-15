@@ -36,23 +36,24 @@ public:
 
   void init(const rclcpp::Time & time);
   bool update(double front_left_pos, double front_right_pos, double back_left_pos, double back_right_pos, const rclcpp::Time & time);
-  void updateOpenLoop(double linear, double angular, const rclcpp::Time & time);
+  void updateOpenLoop(double linear_x, double linear_y, double angular, const rclcpp::Time & time);
   void resetOdometry();
 
   double getX() const { return x_; }
   double getY() const { return y_; }
   double getHeading() const { return heading_; }
-  double getLinear() const { return linear_; }
+  double getLinear_x() const { return linear_x_; }
+  double getLinear_y() const { return linear_y_; }
   double getAngular() const { return angular_; }
 
-  void setWheelParams(double wheel_separation, double left_wheel_radius, double right_wheel_radius);
+  void setWheelParams(double wheel_separation_length, double wheel_seperation_width, double left_wheel_radius, double right_wheel_radius);
   void setVelocityRollingWindowSize(size_t velocity_rolling_window_size);
 
 private:
   using RollingMeanAccumulator = mech_drive_controller::RollingMeanAccumulator<double>;
 
-  void integrateRungeKutta2(double linear, double angular);
-  void integrateExact(double linear, double angular);
+  void integrateRungeKutta2(double linear_x, double linear_y, double angular);
+  void integrateExact(double linear_x, double linear_y, double angular);
   void resetAccumulators();
 
   // Current timestamp:
@@ -64,11 +65,13 @@ private:
   double heading_;  // [rad]
 
   // Current velocity:
-  double linear_;   //   [m/s]
+  double linear_x_;   //   [m/s]
+  double linear_y_;
   double angular_;  // [rad/s]
 
   // Wheel kinematic parameters [m]:
-  double wheel_separation_;
+  double wheel_separation_length_;
+  double wheel_separation_width_;
   double left_wheel_radius_;
   double right_wheel_radius_;
 
@@ -80,7 +83,8 @@ private:
 
   // Rolling mean accumulators for the linear and angular velocities:
   size_t velocity_rolling_window_size_;
-  RollingMeanAccumulator linear_accumulator_;
+  RollingMeanAccumulator linear_accumulator_x;
+  RollingMeanAccumulator linear_accumulator_y;
   RollingMeanAccumulator angular_accumulator_;
 };
 
