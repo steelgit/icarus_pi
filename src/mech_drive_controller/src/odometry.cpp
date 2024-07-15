@@ -29,8 +29,8 @@ Odometry::Odometry(size_t velocity_rolling_window_size)
   linear_x_(0.0),
   linear_y_(0.0),
   angular_(0.0),
-  wheel_separation_width_(0.0),
   wheel_separation_length_(0.0),
+  wheel_separation_width_(0.0),
   left_wheel_radius_(0.0),
   right_wheel_radius_(0.0),
   front_left_wheel_old_pos_(0.0),
@@ -84,7 +84,7 @@ bool Odometry::update(double front_left_pos, double front_right_pos, double back
   const double linear_x = (front_left_wheel_est_vel + front_right_wheel_est_vel + back_left_wheel_est_vel + back_right_wheel_est_vel) * left_wheel_radius_ / 4;
   const double linear_y = (-front_left_wheel_est_vel + front_right_wheel_est_vel + back_left_wheel_est_vel - back_right_wheel_est_vel) * left_wheel_radius_ / 4; 
   // Now there is a bug about scout angular velocity
-  const double angular = (front_right_wheel_est_vel - back_left_wheel_est_vel - front_left_wheel_est_vel + back_right_wheel_est_vel) * left_wheel_radius_ / (4  * (wheel_separation_width_ + wheel_separation_length_));
+  const double angular = (-front_right_wheel_est_vel + back_left_wheel_est_vel + front_left_wheel_est_vel - back_right_wheel_est_vel) * left_wheel_radius_ / (4  * (wheel_separation_width_ + wheel_separation_length_)/2);
 
   // Integrate odometry:
   integrateExact(linear_x, linear_y, angular);
@@ -144,7 +144,7 @@ void Odometry::setVelocityRollingWindowSize(size_t velocity_rolling_window_size)
 
 void Odometry::integrateRungeKutta2(double linear_x, double linear_y, double angular)
 {
-  const double direction = heading_ + angular ;
+  const double direction = heading_ + angular * 0.5 ;
 
   /// Runge-Kutta 2nd order integration:
   x_ += (linear_x * cos(direction) - linear_y*sin(direction));
