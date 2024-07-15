@@ -2,7 +2,7 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
     <!--constants to use for the robot dimensions-->
     <xacro:property name="chassis_length" value = ".18"/>
-    <xacro:property name="chassis_width" value = ".203"/>
+    <xacro:property name="chassis_width" value = ".19"/>
     <xacro:property name="chassis_height" value = ".16"/>
     <xacro:property name="chassis_mass" value = "1"/>
 
