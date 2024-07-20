@@ -1,3 +1,4 @@
+
 // Copyright 2020 PAL Robotics S.L.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -95,12 +96,11 @@ bool Odometry::update(double front_left_pos, double front_right_pos, double back
   // TODO: Make linear accumaltor definition into a vector to store x and y vals 
   linear_accumulator_x.accumulate(linear_x); 
   linear_x_ = linear_accumulator_x.getRollingMean();
+
   linear_accumulator_y.accumulate(linear_y);
   linear_y_ = linear_accumulator_y.getRollingMean();
+  
   angular_accumulator_.accumulate(angular);
-
- 
-
   angular_ = angular_accumulator_.getRollingMean();
 
 
@@ -144,7 +144,7 @@ void Odometry::setVelocityRollingWindowSize(size_t velocity_rolling_window_size)
 
 void Odometry::integrateRungeKutta2(double linear_x, double linear_y, double angular)
 {
-  const double direction = heading_ + angular * 0.5 ;
+  const double direction = heading_ + angular ;
 
   /// Runge-Kutta 2nd order integration:
   x_ += (linear_x * cos(direction) - linear_y*sin(direction));
