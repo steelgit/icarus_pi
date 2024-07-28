@@ -160,14 +160,22 @@ hardware_interface::return_type IcarusInterface::write()
 
   if (1==0)  //check connection
   {
-    return return_type::ERROR;
+    return return_type::ERROR;setMotor
   }
 
   //wire to motors
-  motor_ctr.setMotor(fl_wheel_.cmd / fl_wheel_.rads_per_count / cfg_.loop_rate, MOTOR_FL);
-  motor_ctr.setMotor(bl_wheel_.cmd / bl_wheel_.rads_per_count / cfg_.loop_rate, MOTOR_BL);
-  motor_ctr.setMotor(fr_wheel_.cmd / fr_wheel_.rads_per_count / cfg_.loop_rate, MOTOR_FR);
-  motor_ctr.setMotor(br_wheel_.cmd / br_wheel_.rads_per_count / cfg_.loop_rate, MOTOR_BR);
+  
+  fl_wheel_.desired_speed = fl_wheel_.cmd / fl_wheel_.rads_per_count / cfg_.loop_rate;
+  bl_wheel_.desired_speed = bl_wheel_.cmd / bl_wheel_.rads_per_count / cfg_.loop_rate;
+  fr_wheel_.desired_speed = fr_wheel_.cmd / fr_wheel_.rads_per_count / cfg_.loop_rate;
+  br_wheel_.desired_speed = br_wheel_.cmd / br_wheel_.rads_per_count / cfg_.loop_rate;
+
+
+
+  motor_ctr.setMotor(fl_wheel.eff, MOTOR_FL);
+  motor_ctr.setMotor(bl_wheel.eff, MOTOR_BL);
+  motor_ctr.setMotor(fr_wheel.eff, MOTOR_FR);
+  motor_ctr.setMotor(br_wheel.eff, MOTOR_BR);
   //RCLCPP_INFO(logger_, "  Write Motor Value:  %f", (fl_wheel_.cmd / fl_wheel_.rads_per_count / cfg_.loop_rate));
   //RCLCPP_INFO(logger_, "  Write Motor raw:  %f", fl_wheel_.cmd);
 
