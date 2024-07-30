@@ -160,7 +160,7 @@ hardware_interface::return_type IcarusInterface::write()
 
   if (1==0)  //check connection
   {
-    return return_type::ERROR;setMotor
+    return return_type::ERROR;
   }
 
   //wire to motors
@@ -170,12 +170,16 @@ hardware_interface::return_type IcarusInterface::write()
   fr_wheel_.desired_speed = fr_wheel_.cmd / fr_wheel_.rads_per_count / cfg_.loop_rate;
   br_wheel_.desired_speed = br_wheel_.cmd / br_wheel_.rads_per_count / cfg_.loop_rate;
 
+  fl_wheel_.eff = pidFL.computeCommand(fl_wheel_.desired_speed - fl_wheel_.vel, fl_wheel_.time_difference);
+  bl_wheel_.eff = pidBL.computeCommand(bl_wheel_.desired_speed - bl_wheel_.vel, bl_wheel_.time_difference);
+  fr_wheel_.eff = pidFR.computeCommand(fr_wheel_.desired_speed - fr_wheel_.vel, fr_wheel_.time_difference);
+  br_wheel_.eff = pidBR.computeCommand(br_wheel_.desired_speed - br_wheel_.vel, br_wheel_.time_difference);
+  RCLCPP_INFO(logger_, "  Front Left motor Effort:  %f", fl_wheel_.eff);
 
-
-  motor_ctr.setMotor(fl_wheel.eff, MOTOR_FL);
-  motor_ctr.setMotor(bl_wheel.eff, MOTOR_BL);
-  motor_ctr.setMotor(fr_wheel.eff, MOTOR_FR);
-  motor_ctr.setMotor(br_wheel.eff, MOTOR_BR);
+  motor_ctr.setMotor(fl_wheel_.eff, MOTOR_FL);
+  motor_ctr.setMotor(bl_wheel_.eff, MOTOR_BL);
+  motor_ctr.setMotor(fr_wheel_.eff, MOTOR_FR);
+  motor_ctr.setMotor(br_wheel_.eff, MOTOR_BR);
   //RCLCPP_INFO(logger_, "  Write Motor Value:  %f", (fl_wheel_.cmd / fl_wheel_.rads_per_count / cfg_.loop_rate));
   //RCLCPP_INFO(logger_, "  Write Motor raw:  %f", fl_wheel_.cmd);
 

@@ -19,6 +19,7 @@ class Wheel
     double rads_per_count = 0;
     double desired_speed = 0;
     double pos_prev = 0;
+    double time_difference = 0;
 
     Wheel() = default;
 

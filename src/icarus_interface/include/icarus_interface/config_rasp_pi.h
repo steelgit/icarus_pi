@@ -3,6 +3,9 @@
 #ifndef ICARUSINTERFACE_CONFIG_RASP_PI_H
 #define ICARUSINTERFACE_CONFIG_RASP_PI_H    
 #include "wheel.h"
+#include "control_toolbox/pid.hpp"
+
+using control_toolbox::Pid;
 //===============================================================
 //  STRUCTS
 //===============================================================
@@ -61,5 +64,10 @@ extern Wheel fr_wheel_;
 extern Wheel bl_wheel_;
 extern Wheel br_wheel_;
 extern int effortFL;
+
+extern control_toolbox::Pid pidFL;
+extern control_toolbox::Pid pidBL;
+extern control_toolbox::Pid pidFR;
+extern control_toolbox::Pid pidBR;
 
 #endif // ICARUSINTERFACE_CONFIG_RASP_PI_H
