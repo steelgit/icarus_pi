@@ -119,7 +119,7 @@ hardware_interface::return_type IcarusInterface::read()
 {
 
   // Calculate time delta
-  auto new_time = std::chrono::system_clock::now();
+ /*  auto new_time = std::chrono::system_clock::now();
   std::chrono::duration<double> diff = new_time - time_;
   double deltaSeconds = diff.count();
   time_ = new_time;
@@ -143,7 +143,7 @@ hardware_interface::return_type IcarusInterface::read()
   pos_prev = br_wheel_.pos;
   br_wheel_.pos = br_wheel_.calcEncAngle();
   br_wheel_.vel = (br_wheel_.pos - pos_prev) / deltaSeconds;
-
+ */
   //debug.push_back(fl_wheel_.vel);
   //debug.push_back(fl_wheel_.cmd);
   //debug.push_back(fl_wheel_.cmd / fl_wheel_.rads_per_count / cfg_.loop_rate);

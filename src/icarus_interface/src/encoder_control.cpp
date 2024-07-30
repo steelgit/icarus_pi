@@ -20,10 +20,10 @@ control_toolbox::Pid pidBR;
 
 void callbackFL(int currentPosition)
 {   
-    double pos_prev = fl_wheel_.pos;
+    static double pos_prev = fl_wheel_.pos;
 
     static rclcpp::Time now_time = EncoderClock->get_clock()->now();
-    auto deltaSeconds = (now_time - last_timeFL).nanoseconds();
+    static auto deltaSeconds = (now_time - last_timeFL).nanoseconds();
     fl_wheel_.time_difference = (now_time - last_timeFL).nanoseconds();
     fl_wheel_.pos = fl_wheel_.calcEncAngle();
     fl_wheel_.vel = (fl_wheel_.pos - pos_prev) / deltaSeconds;
@@ -34,11 +34,11 @@ void callbackFL(int currentPosition)
 
 void callbackFR(int currentPosition)
 {   
-    double pos_prev = fr_wheel_.pos;
+    static double pos_prev = fr_wheel_.pos;
 
     pos_prev = fr_wheel_.pos;
     static rclcpp::Time now_time = EncoderClock->get_clock()->now();
-    auto deltaSeconds = (now_time - last_timeFL).nanoseconds();
+    static auto deltaSeconds = (now_time - last_timeFL).nanoseconds();
     fr_wheel_.time_difference = (now_time - last_timeFR).nanoseconds();
     fr_wheel_.pos = fr_wheel_.calcEncAngle();
     fr_wheel_.vel = (fr_wheel_.pos - pos_prev) / deltaSeconds;
@@ -48,7 +48,7 @@ void callbackFR(int currentPosition)
 }
 void callbackBL(int currentPosition)
 {
-    double pos_prev = bl_wheel_.pos;
+    static double pos_prev = bl_wheel_.pos;
 
     static rclcpp::Time now_time = EncoderClock->get_clock()->now();
     bl_wheel_.time_difference = (now_time - last_timeBL).nanoseconds();
@@ -61,10 +61,10 @@ void callbackBL(int currentPosition)
 }
 void callbackBR(int currentPosition)
 {
-    double pos_prev = br_wheel_.pos;
+    static double pos_prev = br_wheel_.pos;
 
     static rclcpp::Time now_time = EncoderClock->get_clock()->now();
-    auto deltaSeconds = (now_time - last_timeFL).nanoseconds();
+    static auto deltaSeconds = (now_time - last_timeFL).nanoseconds();
     br_wheel_.time_difference = (now_time - last_timeBR).nanoseconds();
     br_wheel_.pos = br_wheel_.calcEncAngle();
     br_wheel_.vel = (br_wheel_.pos - pos_prev) / deltaSeconds;
@@ -103,6 +103,7 @@ int encoder_control::start_encoders()
     RED_set_glitch_filter(REDencFR, ENCODER_FR.OPTGLITCH);
     RED_set_glitch_filter(REDencBL, ENCODER_BL.OPTGLITCH);
     RED_set_glitch_filter(REDencBR, ENCODER_BR.OPTGLITCH);
+
     return 0;
 }
 

@@ -2,7 +2,7 @@
 #define ICARUSINTERFACE_WHEEL_H
 
 #include <string>
-
+#include "rclcpp/rclcpp.hpp"
 
 
 class Wheel
@@ -19,7 +19,7 @@ class Wheel
     double rads_per_count = 0;
     double desired_speed = 0;
     double pos_prev = 0;
-    double time_difference = 0;
+    rcl_duration_value_t time_difference = 10;
 
     Wheel() = default;
 

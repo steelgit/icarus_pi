@@ -28,7 +28,7 @@ struct motor{
 //  CONSTANTS
 //===============================================================
 //encoder PID value
-const double PROPORTIONAL_GAIN = 5.0;
+const double PROPORTIONAL_GAIN = .65;
 const double INTERGRAL_GAIN = .1;
 const double DERIVATIVE_GAIN = .005;
 const double I_MIN = 0.3;
