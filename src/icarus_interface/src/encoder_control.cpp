@@ -13,6 +13,10 @@ control_toolbox::Pid pidBL;
 control_toolbox::Pid pidFR;
 control_toolbox::Pid pidBR;
 
+auto targetVelocityFL = EncoderClock->create_publisher<sensor_msgs::msg::JointState>("encoder_fl", 10);
+auto targetVelocityBL = EncoderClock->create_publisher<sensor_msgs::msg::JointState>("encoder_bl", 10);
+auto targetVelocityFR = EncoderClock->create_publisher<sensor_msgs::msg::JointState>("encoder_fr", 10);
+auto targetVelocityBR = EncoderClock->create_publisher<sensor_msgs::msg::JointState>("encoder_br", 10);
   //setup motor encoder
   //fl_wheel_.enc = enc_ctr.read_encoders();
   //RCLCPP_INFO(logger_, "  Read Encoder Values:  %f", val);
@@ -30,6 +34,15 @@ void callbackFL(int currentPosition)
     fl_wheel_.eff = pidFL.computeCommand(fl_wheel_.desired_speed - fl_wheel_.vel, fl_wheel_.time_difference);
     last_timeFL = EncoderClock->get_clock()->now();
     fl_wheel_.enc = currentPosition; //negative to fix
+
+    auto msg = sensor_msgs::msg::JointState();
+    msg.header.stamp = now_time;
+    msg.name = {"fl_wheel"};
+    msg.position = {fl_wheel_.pos};
+    msg.velocity = {fl_wheel_.vel};
+    msg.effort = {fl_wheel_.eff};
+
+    targetVelocityFL->publish(msg);
 }
 
 void callbackFR(int currentPosition)
@@ -45,6 +58,15 @@ void callbackFR(int currentPosition)
     fr_wheel_.eff = pidFR.computeCommand(fr_wheel_.desired_speed - fr_wheel_.vel, fr_wheel_.time_difference);
     last_timeFR = EncoderClock->get_clock()->now();
     fr_wheel_.enc = -currentPosition;
+
+    auto msg = sensor_msgs::msg::JointState();
+    msg.header.stamp = now_time;
+    msg.name = {"fr_wheel"};
+    msg.position = {fr_wheel_.pos};
+    msg.velocity = {fr_wheel_.vel};
+    msg.effort = {fr_wheel_.eff};
+
+    targetVelocityFR->publish(msg);
 }
 void callbackBL(int currentPosition)
 {
@@ -58,6 +80,15 @@ void callbackBL(int currentPosition)
     bl_wheel_.eff = pidBL.computeCommand(bl_wheel_.desired_speed - bl_wheel_.vel, bl_wheel_.time_difference);
     last_timeBL = EncoderClock->get_clock()->now();
     bl_wheel_.enc = currentPosition;
+
+    auto msg = sensor_msgs::msg::JointState();
+    msg.header.stamp = now_time;
+    msg.name = {"bl_wheel"};
+    msg.position = {bl_wheel_.pos};
+    msg.velocity = {bl_wheel_.vel};
+    msg.effort = {bl_wheel_.eff};
+
+    targetVelocityBL->publish(msg);
 }
 void callbackBR(int currentPosition)
 {
@@ -71,6 +102,15 @@ void callbackBR(int currentPosition)
     br_wheel_.eff = pidBR.computeCommand(br_wheel_.desired_speed - br_wheel_.vel, br_wheel_.time_difference);
     last_timeBR = EncoderClock->get_clock()->now();
     br_wheel_.enc = -currentPosition;
+
+    auto msg = sensor_msgs::msg::JointState();
+    msg.header.stamp = now_time;
+    msg.name = {"br_wheel"};
+    msg.position = {br_wheel_.pos};
+    msg.velocity = {br_wheel_.vel};
+    msg.effort = {br_wheel_.eff};
+
+    targetVelocityBR->publish(msg);
 }
 
 encoder_control::encoder_control()
