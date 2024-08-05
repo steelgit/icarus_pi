@@ -44,77 +44,89 @@ void callbackFL(int currentPosition)
 
     fl_wheel_.vel = -deltaDistanceFL/deltaSecondsFL;
 
-    fl_wheel_.eff = pidFR.computeCommand(fl_wheel_.desired_speed - fl_wheel_.vel, deltaSecondsFL);
+    //fl_wheel_.eff = pidFR.computeCommand(fl_wheel_.desired_speed - fl_wheel_.vel, deltaSecondsFL);
 
     fl_wheel_.enc = currentPosition; //negative to fix
 }
 
 void callbackFR(int currentPosition)
 {   
-    static double pos_prev = fr_wheel_.pos;
+    static double old_positionFR;
+    static double old_timeFR;
+    double currentTimeFR;
+    double currentPositionFR;
+    rclcpp::Time currentTime = EncoderClock->get_clock()->now();
+    currentTimeFR = currentTime.seconds();
 
-    pos_prev = fr_wheel_.pos;
-    static rclcpp::Time now_time = EncoderClock->get_clock()->now();
-    static auto deltaSeconds = (now_time - last_timeFR).nanoseconds();
-    fr_wheel_.time_difference = (now_time - last_timeFR).nanoseconds();
     fr_wheel_.pos = fr_wheel_.calcEncAngle(currentPosition);
-    fr_wheel_.vel = (fr_wheel_.pos - pos_prev) / deltaSeconds;
-    fr_wheel_.eff = pidFR.computeCommand(fr_wheel_.desired_speed - fr_wheel_.vel, fr_wheel_.time_difference);
-    last_timeFR = EncoderClock->get_clock()->now();
-    fr_wheel_.enc = -currentPosition;
+    currentPositionFR = fr_wheel_.calcEncAngle(currentPosition);
+    double deltaDistanceFR =currentPositionFR - old_positionFR;
+    old_positionFR = currentPositionFR;
 
-    auto msg = sensor_msgs::msg::JointState();
-    msg.header.stamp = now_time;
-    msg.name = {"fr_wheel"};
-    msg.position = {fr_wheel_.pos};
-    msg.velocity = {fr_wheel_.vel};
-    msg.effort = {fr_wheel_.eff};
+    double deltaSecondsFR = currentTimeFR - old_timeFR;
+    //RCLCPP_INFO(EncoderClock->get_logger()," current time: %f , old time: %f delta time: %f", currentTimeFR, old_timeFR, deltaSecondsFR);
+    //RCLCPP_INFO(EncoderClock->get_logger()," current position: %f , old position: %f delta position: %f", currentPositionFR, old_positionFR, deltaDistanceFR);
+    old_timeFR = currentTimeFR;
 
-    targetVelocityFR->publish(msg);
+    fr_wheel_.vel = deltaDistanceFR/deltaSecondsFR;
+
+    //FR_wheel_.eff = pidFR.computeCommand(FR_wheel_.desired_speed - FR_wheel_.vel, deltaSecondsFR);
+
+    fr_wheel_.enc = currentPosition; //negative to fix
 }
+
 void callbackBL(int currentPosition)
 {
-    static double pos_prev = bl_wheel_.pos;
+static double old_positionBL;
+static double old_timeBL;
+double currentTimeBL;
+double currentPositionBL;
+rclcpp::Time currentTime = EncoderClock->get_clock()->now();
+currentTimeBL = currentTime.seconds();
 
-    static rclcpp::Time now_time = EncoderClock->get_clock()->now();
-    bl_wheel_.time_difference = (now_time - last_timeBL).nanoseconds();
-    auto deltaSeconds = (now_time - last_timeBL).nanoseconds();
-    bl_wheel_.pos = bl_wheel_.calcEncAngle(currentPosition);
-    bl_wheel_.vel = (bl_wheel_.pos - pos_prev) / deltaSeconds;
-    bl_wheel_.eff = pidBL.computeCommand(bl_wheel_.desired_speed - bl_wheel_.vel, bl_wheel_.time_difference);
-    last_timeBL = EncoderClock->get_clock()->now();
-    bl_wheel_.enc = currentPosition;
+bl_wheel_.pos = bl_wheel_.calcEncAngle(currentPosition);
+currentPositionBL = bl_wheel_.calcEncAngle(currentPosition);
+double deltaDistanceBL = currentPositionBL - old_positionBL;
+old_positionBL = currentPositionBL;
 
-    auto msg = sensor_msgs::msg::JointState();
-    msg.header.stamp = now_time;
-    msg.name = {"bl_wheel"};
-    msg.position = {bl_wheel_.pos};
-    msg.velocity = {bl_wheel_.vel};
-    msg.effort = {bl_wheel_.eff};
+double deltaSecondsBL = currentTimeBL - old_timeBL;
+//RCLCPP_INFO(EncoderClock->get_logger()," current time: %f , old time: %f delta time: %f", currentTimeBL, old_timeBL, deltaSecondsBL);
+//RCLCPP_INFO(EncoderClock->get_logger()," current position: %f , old position: %f delta position: %f", currentPositionBL, old_positionBL, deltaDistanceBL);
+old_timeBL = currentTimeBL;
 
-    targetVelocityBL->publish(msg);
+bl_wheel_.vel = -deltaDistanceBL / deltaSecondsBL;
+
+//BL_wheel_.eff = pidBL.computeCommand(BL_wheel_.desired_speed - BL_wheel_.vel, deltaSecondsBL);
+
+bl_wheel_.enc = currentPosition; //negative to fix
+
 }
+
 void callbackBR(int currentPosition)
 {
-    static double pos_prev = br_wheel_.pos;
+static double old_positionBR;
+static double old_timeBR;
+double currentTimeBR;
+double currentPositionBR;
+rclcpp::Time currentTime = EncoderClock->get_clock()->now();
+currentTimeBR = currentTime.seconds();
 
-    static rclcpp::Time now_time = EncoderClock->get_clock()->now();
-    static auto deltaSeconds = (now_time - last_timeBR).nanoseconds();
-    br_wheel_.time_difference = (now_time - last_timeBR).nanoseconds();
-    br_wheel_.pos = br_wheel_.calcEncAngle(currentPosition);
-    br_wheel_.vel = (br_wheel_.pos - pos_prev) / deltaSeconds;
-    br_wheel_.eff = pidBR.computeCommand(br_wheel_.desired_speed - br_wheel_.vel, br_wheel_.time_difference);
-    last_timeBR = EncoderClock->get_clock()->now();
-    br_wheel_.enc = -currentPosition;
+br_wheel_.pos = br_wheel_.calcEncAngle(currentPosition);
+currentPositionBR = br_wheel_.calcEncAngle(currentPosition);
+double deltaDistanceBR = currentPositionBR - old_positionBR;
+old_positionBR = currentPositionBR;
 
-    auto msg = sensor_msgs::msg::JointState();
-    msg.header.stamp = now_time;
-    msg.name = {"br_wheel"};
-    msg.position = {br_wheel_.pos};
-    msg.velocity = {br_wheel_.vel};
-    msg.effort = {br_wheel_.eff};
+double deltaSecondsBR = currentTimeBR - old_timeBR;
+//RCLCPP_INFO(EncoderClock->get_logger()," current time: %f , old time: %f delta time: %f", currentTimeBR, old_timeBR, deltaSecondsBR);
+//RCLCPP_INFO(EncoderClock->get_logger()," current position: %f , old position: %f delta position: %f", currentPositionBR, old_positionBR, deltaDistanceBR);
+old_timeBR = currentTimeBR;
 
-    targetVelocityBR->publish(msg);
+br_wheel_.vel = deltaDistanceBR / deltaSecondsBR;
+
+//BR_wheel_.eff = pidBR.computeCommand(BR_wheel_.desired_speed - BR_wheel_.vel, deltaSecondsBR);
+
+br_wheel_.enc = currentPosition; //negative to fix
+
 }
 
 encoder_control::encoder_control()
