@@ -22,27 +22,31 @@ auto targetVelocityBR = EncoderClock->create_publisher<sensor_msgs::msg::JointSt
   //RCLCPP_INFO(logger_, "  Read Encoder Values:  %f", val);
 
 
+
 void callbackFL(int currentPosition)
-{   
-    static double pos_prev = fl_wheel_.pos;
+{
+    static double old_positionFL;
+    static double old_timeFL;
+    double currentTimeFL;
+    double currentPositionFL;
+    rclcpp::Time currentTime = EncoderClock->get_clock()->now();
+    currentTimeFL = currentTime.seconds();
 
-    static rclcpp::Time now_time = EncoderClock->get_clock()->now();
-    static auto deltaSeconds = (now_time - last_timeFL).nanoseconds();
-    fl_wheel_.time_difference = (now_time - last_timeFL).nanoseconds();
-    fl_wheel_.pos = fl_wheel_.calcEncAngle();
-    fl_wheel_.vel = (fl_wheel_.pos - pos_prev) / deltaSeconds;
-    fl_wheel_.eff = pidFL.computeCommand(fl_wheel_.desired_speed - fl_wheel_.vel, fl_wheel_.time_difference);
-    last_timeFL = EncoderClock->get_clock()->now();
+    fl_wheel_.pos = fl_wheel_.calcEncAngle(currentPosition);
+    currentPositionFL = fl_wheel_.calcEncAngle(currentPosition);
+    double deltaDistanceFL =currentPositionFL - old_positionFL;
+    old_positionFL = currentPositionFL;
+
+    double deltaSecondsFL = currentTimeFL - old_timeFL;
+    //RCLCPP_INFO(EncoderClock->get_logger()," current time: %f , old time: %f delta time: %f", currentTimeFL, old_timeFL, deltaSecondsFL);
+    //RCLCPP_INFO(EncoderClock->get_logger()," current position: %f , old position: %f delta position: %f", currentPositionFL, old_positionFL, deltaDistanceFL);
+    old_timeFL = currentTimeFL;
+
+    fl_wheel_.vel = -deltaDistanceFL/deltaSecondsFL;
+
+    fl_wheel_.eff = pidFR.computeCommand(fl_wheel_.desired_speed - fl_wheel_.vel, deltaSecondsFL);
+
     fl_wheel_.enc = currentPosition; //negative to fix
-
-    auto msg = sensor_msgs::msg::JointState();
-    msg.header.stamp = now_time;
-    msg.name = {"fl_wheel"};
-    msg.position = {fl_wheel_.pos};
-    msg.velocity = {fl_wheel_.vel};
-    msg.effort = {fl_wheel_.eff};
-
-    targetVelocityFL->publish(msg);
 }
 
 void callbackFR(int currentPosition)
@@ -51,9 +55,9 @@ void callbackFR(int currentPosition)
 
     pos_prev = fr_wheel_.pos;
     static rclcpp::Time now_time = EncoderClock->get_clock()->now();
-    static auto deltaSeconds = (now_time - last_timeFL).nanoseconds();
+    static auto deltaSeconds = (now_time - last_timeFR).nanoseconds();
     fr_wheel_.time_difference = (now_time - last_timeFR).nanoseconds();
-    fr_wheel_.pos = fr_wheel_.calcEncAngle();
+    fr_wheel_.pos = fr_wheel_.calcEncAngle(currentPosition);
     fr_wheel_.vel = (fr_wheel_.pos - pos_prev) / deltaSeconds;
     fr_wheel_.eff = pidFR.computeCommand(fr_wheel_.desired_speed - fr_wheel_.vel, fr_wheel_.time_difference);
     last_timeFR = EncoderClock->get_clock()->now();
@@ -74,8 +78,8 @@ void callbackBL(int currentPosition)
 
     static rclcpp::Time now_time = EncoderClock->get_clock()->now();
     bl_wheel_.time_difference = (now_time - last_timeBL).nanoseconds();
-    auto deltaSeconds = (now_time - last_timeFL).nanoseconds();
-    bl_wheel_.pos = bl_wheel_.calcEncAngle();
+    auto deltaSeconds = (now_time - last_timeBL).nanoseconds();
+    bl_wheel_.pos = bl_wheel_.calcEncAngle(currentPosition);
     bl_wheel_.vel = (bl_wheel_.pos - pos_prev) / deltaSeconds;
     bl_wheel_.eff = pidBL.computeCommand(bl_wheel_.desired_speed - bl_wheel_.vel, bl_wheel_.time_difference);
     last_timeBL = EncoderClock->get_clock()->now();
@@ -95,9 +99,9 @@ void callbackBR(int currentPosition)
     static double pos_prev = br_wheel_.pos;
 
     static rclcpp::Time now_time = EncoderClock->get_clock()->now();
-    static auto deltaSeconds = (now_time - last_timeFL).nanoseconds();
+    static auto deltaSeconds = (now_time - last_timeBR).nanoseconds();
     br_wheel_.time_difference = (now_time - last_timeBR).nanoseconds();
-    br_wheel_.pos = br_wheel_.calcEncAngle();
+    br_wheel_.pos = br_wheel_.calcEncAngle(currentPosition);
     br_wheel_.vel = (br_wheel_.pos - pos_prev) / deltaSeconds;
     br_wheel_.eff = pidBR.computeCommand(br_wheel_.desired_speed - br_wheel_.vel, br_wheel_.time_difference);
     last_timeBR = EncoderClock->get_clock()->now();

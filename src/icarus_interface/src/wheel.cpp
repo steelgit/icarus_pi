@@ -15,7 +15,7 @@ void Wheel::setup(const std::string &wheel_name, int counts_per_rev)
   rads_per_count = (2*M_PI)/counts_per_rev;
 }
 
-double Wheel::calcEncAngle()
+double Wheel::calcEncAngle(int enc)
 {
   return enc * rads_per_count;
 }

@@ -28,20 +28,20 @@ struct motor{
 //  CONSTANTS
 //===============================================================
 //encoder PID value
-const double PROPORTIONAL_GAIN = .65;
-const double INTERGRAL_GAIN = .1;
-const double DERIVATIVE_GAIN = .005;
+const double PROPORTIONAL_GAIN = 20;
+const double INTERGRAL_GAIN = 0;
+const double DERIVATIVE_GAIN = 0;
 const double I_MIN = 0.3;
 const double I_MAX = -0.3;
 const bool ANTIWINDUP = true;
 
 // motor = {PWM_MAX, ENA, IN1, IN2, FREQ, RANGE}
-const uint16_t PWM_MAX = 1000;
+const uint16_t PWM_MAX = 255;
 const uint8_t FREQ = 200;
-const uint16_t RANGE = 1000;
+const uint16_t RANGE = 255;
 
-const motor MOTOR_FR = {PWM_MAX, 21, 20, 16, FREQ, RANGE};
-const motor MOTOR_FL = {PWM_MAX, 13, 6, 5, FREQ, RANGE};
+const motor MOTOR_FR = {PWM_MAX, 21, 5, 6, FREQ, RANGE};
+const motor MOTOR_FL = {PWM_MAX, 13, 20, 16, FREQ, RANGE};
 const motor MOTOR_BL = {PWM_MAX, 2, 3, 4, FREQ, RANGE};
 const motor MOTOR_BR = {PWM_MAX, 25, 24, 23, FREQ, RANGE};
 

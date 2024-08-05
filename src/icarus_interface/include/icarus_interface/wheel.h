@@ -19,6 +19,7 @@ class Wheel
     double rads_per_count = 0;
     double desired_speed = 0;
     double pos_prev = 0;
+    double curr_pwm = 0;
     rcl_duration_value_t time_difference = 10;
 
     Wheel() = default;
@@ -27,7 +28,7 @@ class Wheel
     
     void setup(const std::string &wheel_name, int counts_per_rev);
 
-    double calcEncAngle();
+    double calcEncAngle(int enc);
 
 
 
