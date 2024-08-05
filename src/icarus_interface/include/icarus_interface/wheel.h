@@ -20,7 +20,7 @@ class Wheel
     double desired_speed = 0;
     double pos_prev = 0;
     double curr_pwm = 0;
-    rcl_duration_value_t time_difference = 10;
+    double time_difference = 10;
 
     Wheel() = default;
 
