@@ -45,9 +45,9 @@ void callbackFL(int currentPosition)
     fl_wheel_.vel = -deltaDistanceFL/fl_wheel_.time_difference;
 
     fl_wheel_.eff = pidFR.computeCommand(fl_wheel_.desired_speed - fl_wheel_.vel, fl_wheel_.time_difference);
+    RCLCPP_INFO(EncoderClock ->get_logger()," current effort: %f", fl_wheel_.eff);
 
     fl_wheel_.enc = currentPosition; //negative to fix
-    fl_wheel_.eff = 0;
 }
 
 void callbackFR(int currentPosition)
