@@ -51,6 +51,8 @@ class IcarusInterface : public hardware_interface::BaseInterface<hardware_interf
 
     rclcpp::Logger logger_;
 
+    rclcpp::Time currentTime_;
+    rclcpp::Time previousTime_ ;
     std::chrono::time_point<std::chrono::system_clock> time_;
 
     std::vector<double> debug;

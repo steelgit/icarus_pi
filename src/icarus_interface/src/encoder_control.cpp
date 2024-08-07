@@ -25,29 +25,9 @@ auto targetVelocityBR = EncoderClock->create_publisher<sensor_msgs::msg::JointSt
 
 void callbackFL(int currentPosition)
 {
-    static double old_positionFL;
-    static double old_timeFL;
-    double currentTimeFL;
-    double currentPositionFL;
-    rclcpp::Time currentTime = EncoderClock->get_clock()->now();
-    currentTimeFL = currentTime.seconds();
-
     fl_wheel_.pos = fl_wheel_.calcEncAngle(currentPosition);
-    currentPositionFL = fl_wheel_.calcEncAngle(currentPosition);
-    double deltaDistanceFL =currentPositionFL - old_positionFL;
-    old_positionFL = currentPositionFL;
-
-    fl_wheel_.time_difference = currentTimeFL - old_timeFL;
     //RCLCPP_INFO(EncoderClock->get_logger()," current time: %f , old time: %f delta time: %f", currentTimeFL, old_timeFL, fl_wheel_.time_difference);
     //RCLCPP_INFO(EncoderClock->get_logger()," current position: %f , old position: %f delta position: %f", currentPositionFL, old_positionFL, deltaDistanceFL);
-    old_timeFL = currentTimeFL;
-
-    fl_wheel_.vel = -deltaDistanceFL/fl_wheel_.time_difference;
-
-    fl_wheel_.eff = pidFR.computeCommand(fl_wheel_.desired_speed - fl_wheel_.vel, fl_wheel_.time_difference);
-    RCLCPP_INFO(EncoderClock ->get_logger()," current effort: %f", fl_wheel_.eff);
-
-    fl_wheel_.enc = currentPosition; //negative to fix
 }
 
 void callbackFR(int currentPosition)

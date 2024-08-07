@@ -10,8 +10,13 @@ Wheel br_wheel_;
 
 static rclcpp::Time now_time;
 
+static double oldPositionFL = 0;
+double deltaPosition = 0;
+
 IcarusInterface::IcarusInterface()
-    : logger_(rclcpp::get_logger("IcarusInterface"))
+    : logger_(rclcpp::get_logger("IcarusInterface")),
+    currentTime_(rclcpp::Clock().now()),
+    previousTime_(currentTime_)
 {}
 
 IcarusInterface::~IcarusInterface()
@@ -160,18 +165,35 @@ hardware_interface::return_type IcarusInterface::read()
 hardware_interface::return_type IcarusInterface::write()
 {
 
-
   if (1==0)  //check connection
   {
     return return_type::ERROR;
   }
+
+
   //RCLCPP_INFO(logger_, "  Front Left motor velocity:  %f", fl_wheel_.vel);
-  //RCLCPP_INFO(logger_, "  back Left motor pos:  %f, front Left motor pos:  %f, back right motor pos: %f, front right motor pos:  %f ", bl_wheel_.pos,fl_wheel_.pos, br_wheel_.pos, fr_wheel_.pos);
-  //RCLCPP_INFO(logger_, "  back Left motor vel:  %f, front Left motor vel:  %f, back right motor vel: %f, front right motor vel:  %f ", bl_wheel_.vel,fl_wheel_.vel, br_wheel_.vel, fr_wheel_.vel);
+  RCLCPP_INFO(logger_, "  back Left motor pos:  %f, front Left motor pos:  %f, back right motor pos: %f, front right motor pos:  %f ", bl_wheel_.pos,fl_wheel_.pos, br_wheel_.pos, fr_wheel_.pos);
+  RCLCPP_INFO(logger_, "  back Left motor vel:  %f, front Left motor vel:  %f, back right motor vel: %f, front right motor vel:  %f ", bl_wheel_.vel,fl_wheel_.vel, br_wheel_.vel, fr_wheel_.vel);
   //RCLCPP_INFO(logger_, "  back Left motor dsp:  %f, front Left motor dsp:  %f, back right motor dsp: %f, front right motor dsp:  %f ", bl_wheel_.desired_speed,fl_wheel_.desired_speed, br_wheel_.desired_speed, fr_wheel_.desired_speed);
-  //RCLCPP_INFO(logger_, "  back Left motor eff:  %f, front Left motor eff:  %f, back right motor eff: %f, front right motor eff:  %f ", bl_wheel_.eff,fl_wheel_.eff, br_wheel_.eff, fr_wheel_.eff);
-  //RCLCPP_INFO(logger_, "  back Left motor pwm:  %f, front Left motor pwm:  %f, back right motor pwm: %f, front right motor pwm:  %f ", bl_wheel_.curr_pwm,fl_wheel_.curr_pwm, br_wheel_.curr_pwm, fr_wheel_.curr_pwm);
+  RCLCPP_INFO(logger_, "  back Left motor eff:  %f, front Left motor eff:  %f, back right motor eff: %f, front right motor eff:  %f ", bl_wheel_.eff,fl_wheel_.eff, br_wheel_.eff, fr_wheel_.eff);
+  RCLCPP_INFO(logger_, "  back Left motor pwm:  %f, front Left motor pwm:  %f, back right motor pwm: %f, front right motor pwm:  %f ", bl_wheel_.curr_pwm,fl_wheel_.curr_pwm, br_wheel_.curr_pwm, fr_wheel_.curr_pwm);
   //RCLCPP_INFO(logger_, "  Front Left motor rads per count %f, Front left motor loop rate %f", fl_wheel_.rads_per_count, cfg_.loop_rate);
+
+
+  //track position
+  //current position is already traked by encoder cojntrol file
+  deltaPosition = fl_wheel_.pos - oldPositionFL;
+  oldPositionFL = fl_wheel_.pos;
+
+  //track Time
+  currentTime_ = rclcpp::Clock().now();
+  fl_wheel_.time_difference = (currentTime_ - previousTime_).seconds();
+  previousTime_ = currentTime_;
+
+
+  //track velocity
+  fl_wheel_.vel = deltaPosition/fl_wheel_.time_difference;
+
 
   //wire to motors
   fl_wheel_.desired_speed = fl_wheel_.cmd / fl_wheel_.rads_per_count / cfg_.loop_rate;
@@ -191,9 +213,8 @@ hardware_interface::return_type IcarusInterface::write()
   msg.velocity = {fl_wheel_.vel};
   msg.effort = {fl_wheel_.eff};
 
-  motor_ctr.setMotor(fl_wheel_.eff + fl_wheel_.curr_pwm, MOTOR_FL); 
-
-  fl_wheel_.curr_pwm = fl_wheel_.eff + fl_wheel_.curr_pwm;
+  motor_ctr.setMotor(fl_wheel_.curr_pwm, MOTOR_FL); 
+  fl_wheel_.curr_pwm += fl_wheel_.eff; 
   
   motor_ctr.setMotor(-(bl_wheel_.eff + bl_wheel_.curr_pwm), MOTOR_BL);
 
