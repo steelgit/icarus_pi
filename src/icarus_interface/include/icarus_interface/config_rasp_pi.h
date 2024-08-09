@@ -46,7 +46,7 @@ const motor MOTOR_BL = {0, 2, 3, 4, FREQ, RANGE};
 const motor MOTOR_BR = {0, 25, 24, 23, FREQ, RANGE};
 
 // encoder = {OptA, OptB, Glitch}
-const uint8_t OPTGLITCH_DEFAULT = 500;
+const uint8_t OPTGLITCH_DEFAULT = 250;
 
 const encoder ENCODER_FL = {19, 26, OPTGLITCH_DEFAULT};
 const encoder ENCODER_FR = {1, 12, OPTGLITCH_DEFAULT};
