@@ -19,3 +19,12 @@ double Wheel::calcEncAngle(int enc)
 {
   return enc * rads_per_count;
 }
+
+double Wheel::calculatePID(double desiredValue, double currentValue)
+{
+  error = desiredValue - currentValue;
+  integralError = oldIntegralError + (time_difference*(error + oldError)/2);
+  double pidValue = proportionalGain * error + integralGain * integralError + (derivativeGain * (error - oldError) / time_difference);
+
+  return pidValue;
+}

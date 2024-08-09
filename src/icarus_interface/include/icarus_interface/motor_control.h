@@ -23,6 +23,7 @@ class motor_control
         void setMotorMode(const string &mode, motor m);
         void setMotor(const double &power, motor m); 
 
+
     private:
         rclcpp::Logger logger_;
 };

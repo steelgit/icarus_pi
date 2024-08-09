@@ -13,6 +13,7 @@ control_toolbox::Pid pidBL;
 control_toolbox::Pid pidFR;
 control_toolbox::Pid pidBR;
 
+
 auto targetVelocityFL = EncoderClock->create_publisher<sensor_msgs::msg::JointState>("encoder_fl", 10);
 auto targetVelocityBL = EncoderClock->create_publisher<sensor_msgs::msg::JointState>("encoder_bl", 10);
 auto targetVelocityFR = EncoderClock->create_publisher<sensor_msgs::msg::JointState>("encoder_fr", 10);
@@ -20,12 +21,34 @@ auto targetVelocityBR = EncoderClock->create_publisher<sensor_msgs::msg::JointSt
   //setup motor encoder
   //fl_wheel_.enc = enc_ctr.read_encoders();
   //RCLCPP_INFO(logger_, "  Read Encoder Values:  %f", val);
-
-
+double deltaTime;
 
 void callbackFL(int currentPosition)
 {
+    static double old_positionFL;
+    static double old_timeFL;
+    double currentTimeFL;
+    double currentPositionFL;
+ 
+    rclcpp::Time currentTime = EncoderClock->get_clock()->now();
+    currentTimeFL = currentTime.seconds();
+
     fl_wheel_.pos = fl_wheel_.calcEncAngle(currentPosition);
+    currentPositionFL = fl_wheel_.calcEncAngle(currentPosition);
+    double deltaDistanceFL =currentPositionFL - old_positionFL;
+    old_positionFL = currentPositionFL;
+
+    deltaTime = currentTimeFL - old_timeFL;
+    //RCLCPP_INFO(EncoderClock->get_logger()," current time: %f , old time: %f delta time: %f", currentTimeFR, old_timeFR, fl_wheel_.time_difference);
+    //RCLCPP_INFO(EncoderClock->get_logger()," current position: %f , old position: %f delta position: %f", currentPositionFR, old_positionFR, deltaDistanceFR);
+    old_timeFL = currentTimeFL;
+    RCLCPP_INFO(EncoderClock->get_logger(), " dt: %f, dPos: %f vel: %f", deltaTime, deltaDistanceFL, fl_wheel_.vel);
+    fl_wheel_.vel = -deltaDistanceFL/deltaTime;
+
+    fl_wheel_.eff = fl_wheel_.calculatePID(fl_wheel_.desired_speed, fl_wheel_.vel);
+    //RCLCPP_INFO(EncoderClock->get_logger()," pos: %f, effort: %f, desired: %f, actual: %f",fl_wheel_.pos, fl_wheel_.eff, fl_wheel_.desired_speed,fl_wheel_.vel);
+
+    fl_wheel_.enc = currentPosition; //negative to fix
     //RCLCPP_INFO(EncoderClock->get_logger()," current time: %f , old time: %f delta time: %f", currentTimeFL, old_timeFL, fl_wheel_.time_difference);
     //RCLCPP_INFO(EncoderClock->get_logger()," current position: %f , old position: %f delta position: %f", currentPositionFL, old_positionFL, deltaDistanceFL);
 }

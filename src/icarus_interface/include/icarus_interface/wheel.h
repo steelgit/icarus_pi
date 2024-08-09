@@ -21,6 +21,15 @@ class Wheel
     double pos_prev = 0;
     double curr_pwm = 0;
     double time_difference = 10;
+    double error = 0;
+    double oldError = 0;
+    double integralError = 0;
+    double oldIntegralError = 0;
+    double proportionalGain = 1;
+    double integralGain = 0;
+    double derivativeGain = 0;
+
+
 
     Wheel() = default;
 
@@ -29,6 +38,8 @@ class Wheel
     void setup(const std::string &wheel_name, int counts_per_rev);
 
     double calcEncAngle(int enc);
+
+    double calculatePID(double desiredValue, double currentValue);
 
 
 
