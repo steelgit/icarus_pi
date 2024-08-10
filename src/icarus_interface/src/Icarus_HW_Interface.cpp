@@ -16,6 +16,10 @@ double deltaPositionFR = 0;
 double deltaPositionBL = 0;
 double deltaPositionBR = 0;
 
+//create a node specifically for tracking PID efficiency
+auto pidTracker = std::make_shared<rclcpp::Node>("pidTracker");
+auto pidTracking =  pidTracker->create_publisher<pid_messages::msg::Pid>("pidTracker", 10);
+
 IcarusInterface::IcarusInterface()
     : logger_(rclcpp::get_logger("IcarusInterface")),
     currentTime_(rclcpp::Clock().now()),
@@ -212,10 +216,10 @@ hardware_interface::return_type IcarusInterface::write()
   fr_wheel_.vel = deltaPositionFR/fr_wheel_.time_difference;
   bl_wheel_.vel = -deltaPositionBL/bl_wheel_.time_difference;
   br_wheel_.vel = -deltaPositionBR/br_wheel_.time_difference;
-  //RCLCPP_INFO(logger_, " dt: %f, dPos: %f", fl_wheel_.time_difference, deltaPositionFL);
+  RCLCPP_INFO(logger_, " dt: %f, dvel: %f", fl_wheel_.time_difference, fl_wheel_.vel);
   //RCLCPP_INFO(logger_, " dt: %f, dPos: %f", fr_wheel_.time_difference, deltaPositionFR);
   //RCLCPP_INFO(logger_, " dt: %f, dPos: %f", bl_wheel_.time_difference, deltaPositionBL);
-  RCLCPP_INFO(logger_, " dt: %f, dPos: %f", br_wheel_.time_difference, deltaPositionBR);
+  //RCLCPP_INFO(logger_, " dt: %f, dPos: %f", br_wheel_.time_difference, deltaPositionBR);
 
 
   //wire to motors
@@ -232,9 +236,10 @@ hardware_interface::return_type IcarusInterface::write()
   auto msg = pid_messages::msg::Pid();
   msg.header.stamp = currentTime_;
   msg.name = {"fl_wheel"};
-  msg.position = {fl_wheel_.pos};
-  msg.velocity = {fl_wheel_.vel};
-  msg.effort = {fl_wheel_.eff};
+  msg.desired_value = {fl_wheel_.desired_speed};
+  msg.measured_value = {fl_wheel_.vel};
+  msg.error = {fl_wheel_.eff};
+  pidTracking->publish(msg);
 
   motor_ctr.setMotor(fl_wheel_.curr_pwm, MOTOR_FL); 
   fl_wheel_.curr_pwm += fl_wheel_.eff; 

@@ -58,7 +58,7 @@ void callbackFL(int currentPosition)
     //RCLCPP_INFO(EncoderClock->get_logger()," current position: %f , old position: %f delta position: %f", currentPositionFR, old_positionFR, deltaDistanceFR);
     old_timeFL = currentTimeFL;
     //RCLCPP_INFO(EncoderClock->get_logger(), " dt: %f, dPos: %f vel: %f", deltaTime, deltaDistanceFL, fl_wheel_.vel);
-    fl_wheel_.vel = -deltaDistanceFL/deltaTime;
+   // fl_wheel_.vel = -deltaDistanceFL/deltaTime;
 
     //fl_wheel_.eff = fl_wheel_.calculatePID(fl_wheel_.desired_speed, fl_wheel_.vel);
     //RCLCPP_INFO(EncoderClock->get_logger()," pos: %f, effort: %f, desired: %f, actual: %f",fl_wheel_.pos, fl_wheel_.eff, fl_wheel_.desired_speed,fl_wheel_.vel);

@@ -28,7 +28,7 @@ struct motor{
 //  CONSTANTS
 //===============================================================
 //encoder PID value
-const double PROPORTIONAL_GAIN = 1;
+const double PROPORTIONAL_GAIN = 0;
 const double INTERGRAL_GAIN = 0;
 const double DERIVATIVE_GAIN = 0;
 const double I_MIN = 0.3;
@@ -42,7 +42,7 @@ const uint16_t RANGE = 255;
 
 const motor MOTOR_FL = {PWM_MAX, 21, 16, 20, FREQ, RANGE};
 const motor MOTOR_FR = {PWM_MAX, 13, 6, 5, FREQ, RANGE};
-const motor MOTOR_BL = {0, 2, 3, 4, FREQ, RANGE};
+const motor MOTOR_BL = {PWM_MAX, 2, 3, 4, FREQ, RANGE};
 const motor MOTOR_BR = {PWM_MAX, 25, 24, 23, FREQ, RANGE};
 
 // encoder = {OptA, OptB, Glitch}
