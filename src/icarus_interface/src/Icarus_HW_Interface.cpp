@@ -1,5 +1,6 @@
 #include "icarus_interface/Icarus_HW_Interface.h"
 #include "hardware_interface/types/hardware_interface_type_values.hpp"
+#include "pid_messages/msg/pid.hpp"
 
 //GLOBALS
 int pi_;
@@ -228,8 +229,8 @@ hardware_interface::return_type IcarusInterface::write()
   fr_wheel_.eff = fr_wheel_.calculatePID(fr_wheel_.desired_speed,fr_wheel_.vel);
   br_wheel_.eff = br_wheel_.calculatePID(br_wheel_.desired_speed,br_wheel_.vel);
   
-  auto msg = sensor_msgs::msg::JointState();
-  msg.header.stamp = now_time;
+  auto msg = pid_messages::msg::Pid();
+  msg.header.stamp = currentTime_;
   msg.name = {"fl_wheel"};
   msg.position = {fl_wheel_.pos};
   msg.velocity = {fl_wheel_.vel};
