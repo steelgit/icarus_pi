@@ -189,15 +189,19 @@ hardware_interface::return_type IcarusInterface::write()
 
   //track position for each wheel
   //current position is already tracked by encoder control file
+  fl_wheel_.pos = fl_wheel_.calcEncAngle(fl_wheel_.enc)
   deltaPositionFL = fl_wheel_.pos - fl_wheel_.pos_prev;
   fl_wheel_.pos_prev = fl_wheel_.pos;
 
+  fr_wheel_.pos = fl_wheel_.calcEncAngle(fr_wheel_.enc)
   deltaPositionFR = fr_wheel_.pos - fr_wheel_.pos_prev;
   fr_wheel_.pos_prev = fr_wheel_.pos;
 
+  bl_wheel_.pos = fl_wheel_.calcEncAngle(bl_wheel_.enc)
   deltaPositionBL = bl_wheel_.pos - bl_wheel_.pos_prev;
   bl_wheel_.pos_prev = bl_wheel_.pos;
 
+  br_wheel_.pos = fl_wheel_.calcEncAngle(br_wheel_.enc)
   deltaPositionBR = br_wheel_.pos - br_wheel_.pos_prev;
   br_wheel_.pos_prev = br_wheel_.pos;
 
