@@ -48,7 +48,8 @@ void callbackFL(int currentPosition)
     //rclcpp::Time currentTime = EncoderClock->get_clock()->now();
     //currentTimeFL = currentTime.seconds();
 
-    //fl_wheel_.pos = fl_wheel_.calcEncAngle(currentPosition);
+
+    fl_wheel_.pos = fl_wheel_.calcEncAngle(currentPosition);
     //currentPositionFL = fl_wheel_.calcEncAngle(currentPosition);
     //double deltaDistanceFL =currentPositionFL - old_positionFL;
     //old_positionFL = currentPositionFL;
@@ -70,11 +71,10 @@ void callbackFL(int currentPosition)
 
 void callbackFR(int currentPosition)
 {   
+   //rclcpp::Time currentTime = EncoderClock->get_clock()->now();
+   //currentTimeFR = currentTime.seconds();
 
-    //rclcpp::Time currentTime = EncoderClock->get_clock()->now();
-    //currentTimeFR = currentTime.seconds();
-
-    //fr_wheel_.pos = fr_wheel_.calcEncAngle(currentPosition);
+    fr_wheel_.pos = fr_wheel_.calcEncAngle(currentPosition);
     //currentPositionFR = fr_wheel_.calcEncAngle(currentPosition);
     //double deltaDistanceFR =currentPositionFR - old_positionFR;
     //old_positionFR = currentPositionFR;
@@ -99,7 +99,8 @@ void callbackBL(int currentPosition)
     //rclcpp::Time currentTime = EncoderClock->get_clock()->now();
     //currentTimeBL = currentTime.seconds();
 
-    //bl_wheel_.pos = bl_wheel_.calcEncAngle(currentPosition);
+
+    bl_wheel_.pos = bl_wheel_.calcEncAngle(currentPosition);
     //currentPositionBL = bl_wheel_.calcEncAngle(currentPosition);
     //double deltaDistanceBL =currentPositionBL - old_positionBL;
     //old_positionBL = currentPositionBL;
@@ -125,8 +126,8 @@ void callbackBR(int currentPosition)
  
     //rclcpp::Time currentTime = EncoderClock->get_clock()->now();
     //currentTimeBR = currentTime.seconds();
-
-    //br_wheel_.pos = br_wheel_.calcEncAngle(currentPosition);
+  
+    br_wheel_.pos = br_wheel_.calcEncAngle(currentPosition);
     //currentPositionBR = br_wheel_.calcEncAngle(currentPosition);
     //double deltaDistanceBR =currentPositionBR - old_positionBR;
     //old_positionBR = currentPositionBR;

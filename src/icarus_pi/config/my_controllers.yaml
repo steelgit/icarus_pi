@@ -1,6 +1,6 @@
 controller_manager:
   ros__parameters:
-    update_rate: 50
+    update_rate: 15
     #use_sim_time: true
 
     mech_cont:
@@ -11,7 +11,7 @@ controller_manager:
 
 mech_cont:
   ros__parameters:
-    publish_rate: 50.0
+    publish_rate: 1000.0
     base_frame_id: base_link
     odom_frame_id: odom
 
