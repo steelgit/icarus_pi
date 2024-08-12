@@ -48,6 +48,7 @@ void callbackFL(int currentPosition)
     //rclcpp::Time currentTime = EncoderClock->get_clock()->now();
     //currentTimeFL = currentTime.seconds();
 
+
     fl_wheel_.pos = fl_wheel_.calcEncAngle(currentPosition);
     //currentPositionFL = fl_wheel_.calcEncAngle(currentPosition);
     //double deltaDistanceFL =currentPositionFL - old_positionFL;
@@ -63,14 +64,13 @@ void callbackFL(int currentPosition)
     //fl_wheel_.eff = fl_wheel_.calculatePID(fl_wheel_.desired_speed, fl_wheel_.vel);
     //RCLCPP_INFO(EncoderClock->get_logger()," pos: %f, effort: %f, desired: %f, actual: %f",fl_wheel_.pos, fl_wheel_.eff, fl_wheel_.desired_speed,fl_wheel_.vel);
 
-    //fl_wheel_.enc = currentPosition; //negative to fix
+    fl_wheel_.enc = currentPosition; //negative to fix
     //RCLCPP_INFO(EncoderClock->get_logger()," current time: %f , old time: %f delta time: %f", currentTimeFL, old_timeFL, fl_wheel_.time_difference);
     //RCLCPP_INFO(EncoderClock->get_logger()," current position: %f , old position: %f delta position: %f", currentPositionFL, old_positionFL, deltaDistanceFL);
 }
 
 void callbackFR(int currentPosition)
 {   
-
    //rclcpp::Time currentTime = EncoderClock->get_clock()->now();
    //currentTimeFR = currentTime.seconds();
 
@@ -89,7 +89,7 @@ void callbackFR(int currentPosition)
     //fl_wheel_.eff = fl_wheel_.calculatePID(fl_wheel_.desired_speed, fl_wheel_.vel);
     //RCLCPP_INFO(EncoderClock->get_logger()," pos: %f, effort: %f, desired: %f, actual: %f",fl_wheel_.pos, fl_wheel_.eff, fl_wheel_.desired_speed,fl_wheel_.vel);
 
-    //fl_wheel_.enc = currentPosition; //negative to fix
+    fl_wheel_.enc = currentPosition; //negative to fix
     //RCLCPP_INFO(EncoderClock->get_logger()," current time: %f , old time: %f delta time: %f", currentTimeFL, old_timeFL, fl_wheel_.time_difference);
     //RCLCPP_INFO(EncoderClock->get_logger()," current position: %f , old position: %f delta position: %f", currentPositionFL, old_positionFL, deltaDistanceFL);
 }
@@ -98,6 +98,7 @@ void callbackBL(int currentPosition)
 {
     //rclcpp::Time currentTime = EncoderClock->get_clock()->now();
     //currentTimeBL = currentTime.seconds();
+
 
     bl_wheel_.pos = bl_wheel_.calcEncAngle(currentPosition);
     //currentPositionBL = bl_wheel_.calcEncAngle(currentPosition);
@@ -114,7 +115,7 @@ void callbackBL(int currentPosition)
     //bl_wheel_.eff = bl_wheel_.calculatePID(bl_wheel_.desired_speed, bl_wheel_.vel);
     //RCLCPP_INFO(EncoderClock->get_logger()," pos: %f, effort: %f, desired: %f, actual: %f",bl_wheel_.pos, fl_wheel_.eff, fl_wheel_.desired_speed,fl_wheel_.vel);
 
-    //bl_wheel_.enc = currentPosition; //negative to fix
+    bl_wheel_.enc = currentPosition; //negative to fix
     //RCLCPP_INFO(EncoderClock->get_logger()," current time: %f , old time: %f delta time: %f", currentTimeFL, old_timeFL, fl_wheel_.time_difference);
     //RCLCPP_INFO(EncoderClock->get_logger()," current position: %f , old position: %f delta position: %f", currentPositionFL, old_positionFL, deltaDistanceFL);
 }
@@ -125,7 +126,7 @@ void callbackBR(int currentPosition)
  
     //rclcpp::Time currentTime = EncoderClock->get_clock()->now();
     //currentTimeBR = currentTime.seconds();
-
+  
     br_wheel_.pos = br_wheel_.calcEncAngle(currentPosition);
     //currentPositionBR = br_wheel_.calcEncAngle(currentPosition);
     //double deltaDistanceBR =currentPositionBR - old_positionBR;
@@ -141,7 +142,7 @@ void callbackBR(int currentPosition)
     //br_wheel_.eff = br_wheel_.calculatePID(br_wheel_.desired_speed, br_wheel_.vel);
     //RCLCPP_INFO(EncoderClock->get_logger()," pos: %f, effort: %f, desired: %f, actual: %f",br_wheel_.pos, br_wheel_.eff, br_wheel_.desired_speed,br_wheel_.vel);
 
-    //br_wheel_.enc = currentPosition; //negative to fix
+    br_wheel_.enc = currentPosition; //negative to fix
     //RCLCPP_INFO(EncoderClock->get_logger()," current time: %f , old time: %f delta time: %f", currentTimeBR, old_timeBR, br_wheel_.time_difference);
     //RCLCPP_INFO(EncoderClock->get_logger()," current position: %f , old position: %f delta position: %f", currentPositionBR, old_positionBR, deltaDistanceBR);
 }
