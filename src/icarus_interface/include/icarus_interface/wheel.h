@@ -20,14 +20,14 @@ class Wheel
     double desired_speed = 0;
     double pos_prev = 0;
     double curr_pwm = 0;
-    double time_difference = 10;
+    const double time_difference = .067;
     double error = 0;
     double oldError = 0;
     double integralError = 0;
     double oldIntegralError = 0;
-    double proportionalGain = 0.025;
-    double integralGain = 0;
-    double derivativeGain = 0;
+    double proportionalGain = 2.8;
+    double integralGain = .005;
+    double derivativeGain = 0.00125;
 
 
 

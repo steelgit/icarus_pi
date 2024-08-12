@@ -204,11 +204,11 @@ hardware_interface::return_type IcarusInterface::write()
   //track elapsed time between measurements
   currentTime_ = rclcpp::Clock().now();
 
-  fl_wheel_.time_difference = (currentTime_ - previousTime_).seconds();
-  fr_wheel_.time_difference = (currentTime_ - previousTime_).seconds();
-  bl_wheel_.time_difference = (currentTime_ - previousTime_).seconds();
-  br_wheel_.time_difference = (currentTime_ - previousTime_).seconds();
-  previousTime_ = currentTime_;
+ // fl_wheel_.time_difference = (currentTime_ - previousTime_).seconds();
+ // fr_wheel_.time_difference = (currentTime_ - previousTime_).seconds();
+ // bl_wheel_.time_difference = (currentTime_ - previousTime_).seconds();
+ // br_wheel_.time_difference = (currentTime_ - previousTime_).seconds();
+ // previousTime_ = currentTime_;
 
 
   //track velocity for each wheel
@@ -216,7 +216,7 @@ hardware_interface::return_type IcarusInterface::write()
   fr_wheel_.vel = deltaPositionFR/fr_wheel_.time_difference;
   bl_wheel_.vel = -deltaPositionBL/bl_wheel_.time_difference;
   br_wheel_.vel = -deltaPositionBR/br_wheel_.time_difference;
-  RCLCPP_INFO(logger_, " dt: %f, dvel: %f", fl_wheel_.time_difference, fl_wheel_.vel);
+  //RCLCPP_INFO(logger_, " dt: %f, dvel: %f", fl_wheel_.time_difference, fl_wheel_.vel);
   //RCLCPP_INFO(logger_, " dt: %f, dPos: %f", fr_wheel_.time_difference, deltaPositionFR);
   //RCLCPP_INFO(logger_, " dt: %f, dPos: %f", bl_wheel_.time_difference, deltaPositionBL);
   //RCLCPP_INFO(logger_, " dt: %f, dPos: %f", br_wheel_.time_difference, deltaPositionBR);
