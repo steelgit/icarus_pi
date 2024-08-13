@@ -49,7 +49,7 @@ const motor MOTOR_BR = {PWM_MAX, 25, 24, 23, FREQ, RANGE};
 const uint8_t OPTGLITCH_DEFAULT = 250;
 
 const encoder ENCODER_FL = {19, 26, OPTGLITCH_DEFAULT};
-const encoder ENCODER_FR = {1, 12, OPTGLITCH_DEFAULT};
+const encoder ENCODER_FR = {12, 1, OPTGLITCH_DEFAULT};
 const encoder ENCODER_BL = {17, 27, OPTGLITCH_DEFAULT};
 const encoder ENCODER_BR = {7, 8, OPTGLITCH_DEFAULT};
 

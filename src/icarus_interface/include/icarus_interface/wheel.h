@@ -25,9 +25,9 @@ class Wheel
     double oldError = 0;
     double integralError = 0;
     double oldIntegralError = 0;
-    double proportionalGain = 2.8;
-    double integralGain = .005;
-    double derivativeGain = 0.00125;
+    double proportionalGain = 4;
+    double integralGain = 0;
+    double derivativeGain = 0;
 
 
 

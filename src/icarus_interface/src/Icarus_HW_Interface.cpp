@@ -185,7 +185,7 @@ hardware_interface::return_type IcarusInterface::write()
   //RCLCPP_INFO(logger_, "  back Left motor eff:  %f, front Left motor eff:  %f, back right motor eff: %f, front right motor eff:  %f ", bl_wheel_.eff,fl_wheel_.eff, br_wheel_.eff, fr_wheel_.eff);
   //RCLCPP_INFO(logger_, "  back Left motor pwm:  %f, front Left motor pwm:  %f, back right motor pwm: %f, front right motor pwm:  %f ", bl_wheel_.curr_pwm,fl_wheel_.curr_pwm, br_wheel_.curr_pwm, fr_wheel_.curr_pwm);
   //RCLCPP_INFO(logger_, "  Front Left motor rads per count %f, Front left motor loop rate %f", fl_wheel_.rads_per_count, cfg_.loop_rate);
-
+  RCLCPP_INFO(logger_," Front Left motor cmd: %f ", fl_wheel_.cmd);
 
   //track position for each wheel
   //current position is already tracked by encoder control file
@@ -193,15 +193,15 @@ hardware_interface::return_type IcarusInterface::write()
   deltaPositionFL = fl_wheel_.pos - fl_wheel_.pos_prev;
   fl_wheel_.pos_prev = fl_wheel_.pos;
 
-  fr_wheel_.pos = fl_wheel_.calcEncAngle(fr_wheel_.enc);
+  fr_wheel_.pos = fr_wheel_.calcEncAngle(fr_wheel_.enc);
   deltaPositionFR = fr_wheel_.pos - fr_wheel_.pos_prev;
   fr_wheel_.pos_prev = fr_wheel_.pos;
 
-  bl_wheel_.pos = fl_wheel_.calcEncAngle(bl_wheel_.enc);
+  bl_wheel_.pos = bl_wheel_.calcEncAngle(bl_wheel_.enc);
   deltaPositionBL = bl_wheel_.pos - bl_wheel_.pos_prev;
   bl_wheel_.pos_prev = bl_wheel_.pos;
 
-  br_wheel_.pos = fl_wheel_.calcEncAngle(br_wheel_.enc);
+  br_wheel_.pos = br_wheel_.calcEncAngle(br_wheel_.enc);
   deltaPositionBR = br_wheel_.pos - br_wheel_.pos_prev;
   br_wheel_.pos_prev = br_wheel_.pos;
 
@@ -217,20 +217,20 @@ hardware_interface::return_type IcarusInterface::write()
 
   //track velocity for each wheel
   fl_wheel_.vel = -deltaPositionFL/fl_wheel_.time_difference;
-  fr_wheel_.vel = deltaPositionFR/fr_wheel_.time_difference;
+  fr_wheel_.vel = -deltaPositionFR/fr_wheel_.time_difference;
   bl_wheel_.vel = -deltaPositionBL/bl_wheel_.time_difference;
   br_wheel_.vel = -deltaPositionBR/br_wheel_.time_difference;
   //RCLCPP_INFO(logger_, " dt: %f, dvel: %f", fl_wheel_.time_difference, fl_wheel_.vel);
-  //RCLCPP_INFO(logger_, " dt: %f, dPos: %f", fr_wheel_.time_difference, deltaPositionFR);
+  //RCLCPP_INFO(logger_, " dv: %f, dPos: %f", fr_wheel_.vel, deltaPositionFR);
   //RCLCPP_INFO(logger_, " dt: %f, dPos: %f", bl_wheel_.time_difference, deltaPositionBL);
   //RCLCPP_INFO(logger_, " dt: %f, dPos: %f", br_wheel_.time_difference, deltaPositionBR);
 
 
   //wire to motors
-  fl_wheel_.desired_speed = fl_wheel_.cmd / fl_wheel_.rads_per_count / cfg_.loop_rate;
-  bl_wheel_.desired_speed = bl_wheel_.cmd / bl_wheel_.rads_per_count / cfg_.loop_rate;
-  fr_wheel_.desired_speed = fr_wheel_.cmd / fr_wheel_.rads_per_count / cfg_.loop_rate;
-  br_wheel_.desired_speed = br_wheel_.cmd / br_wheel_.rads_per_count / cfg_.loop_rate;
+  fl_wheel_.desired_speed = std::clamp( fl_wheel_.cmd , -10.0 , 10.0);
+  bl_wheel_.desired_speed = std::clamp( bl_wheel_.cmd , -10.0 , 10.0);
+  fr_wheel_.desired_speed = std::clamp( fr_wheel_.cmd , -10.0 , 10.0);
+  br_wheel_.desired_speed = std::clamp( br_wheel_.cmd , -10.0 , 10.0);
 
   fl_wheel_.eff = fl_wheel_.calculatePID(fl_wheel_.desired_speed,fl_wheel_.vel);
   bl_wheel_.eff = bl_wheel_.calculatePID(bl_wheel_.desired_speed,bl_wheel_.vel);
@@ -242,21 +242,21 @@ hardware_interface::return_type IcarusInterface::write()
   msg.name = {"fl_wheel"};
   msg.desired_value = {fl_wheel_.desired_speed};
   msg.measured_value = {fl_wheel_.vel};
-  msg.error = {fl_wheel_.eff};
+  msg.effort = {fl_wheel_.eff};
   pidTracking->publish(msg);
 
-  motor_ctr.setMotor(fl_wheel_.curr_pwm, MOTOR_FL); 
   fl_wheel_.curr_pwm += fl_wheel_.eff; 
+  motor_ctr.setMotor(fl_wheel_.curr_pwm, MOTOR_FL); 
   
-  motor_ctr.setMotor(-(bl_wheel_.curr_pwm), MOTOR_BL);
   bl_wheel_.curr_pwm += bl_wheel_.eff;
+  motor_ctr.setMotor(-(bl_wheel_.curr_pwm), MOTOR_BL);
 
+  fr_wheel_.curr_pwm += fr_wheel_.eff;
   motor_ctr.setMotor(-(fr_wheel_.curr_pwm), MOTOR_FR);  
   
-  fr_wheel_.curr_pwm += fr_wheel_.eff;
-  
-  motor_ctr.setMotor(-(br_wheel_.curr_pwm), MOTOR_BR);
   br_wheel_.curr_pwm += br_wheel_.eff;
+  motor_ctr.setMotor(-(br_wheel_.curr_pwm), MOTOR_BR);
+  
 
   //RCLCPP_INFO(logger_, "  Write Motor Value:  %f", (fl_wheel_.cmd / fl_wheel_.rads_per_count / cfg_.loop_rate));
   //RCLCPP_INFO(logger_, "  Write Motor raw:  %f", fl_wheel_.cmd);
