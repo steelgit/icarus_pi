@@ -85,7 +85,7 @@ bool Odometry::update(double front_left_pos, double front_right_pos, double back
   const double linear_x = (front_left_wheel_est_vel + front_right_wheel_est_vel + back_left_wheel_est_vel + back_right_wheel_est_vel) * left_wheel_radius_ / 4;
   const double linear_y = (-front_left_wheel_est_vel + front_right_wheel_est_vel + back_left_wheel_est_vel - back_right_wheel_est_vel) * left_wheel_radius_ / 4; 
   // Now there is a bug about scout angular velocity
-  const double angular = (-front_right_wheel_est_vel + back_left_wheel_est_vel + front_left_wheel_est_vel - back_right_wheel_est_vel) * left_wheel_radius_ / (4  * (wheel_separation_width_ + wheel_separation_length_)/2);
+  const double angular = (-front_left_wheel_est_vel + front_right_wheel_est_vel - back_left_wheel_est_vel - back_right_wheel_est_vel) * left_wheel_radius_ / (4  * (wheel_separation_width_ + wheel_separation_length_) / 2);
 
   // Integrate odometry:
   integrateExact(linear_x, linear_y, angular);
