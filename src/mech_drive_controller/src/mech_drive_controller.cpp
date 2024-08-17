@@ -210,45 +210,52 @@ controller_interface::return_type MechDriveController::update()
   const double left_wheel_radius = wheels.left_radius_multiplier * wheels.radius;
   const double right_wheel_radius = wheels.right_radius_multiplier * wheels.radius;
 
+  //RCLCPP_INFO(logger, "length: %f, width: %f, radius: %f", wheel_separation_length, wheel_separation_width, left_wheel_radius);
+  //RCLCPP_INFO(logger, "pos_old: %f", odometry_.getOld());
+
   if (odom_params_.open_loop)
   {
     odometry_.updateOpenLoop(x, y, z, current_time);
   }
   else
   {
+    /*
     double front_left_position_mean = 0.0;
     double front_right_position_mean = 0.0;
     double back_left_position_mean = 0.0;
     double back_right_position_mean = 0.0;
+    */
 
-      const double front_left_position = registered_front_left_wheel_handle_[0].position.get().get_value();
-      const double front_right_position = registered_front_right_wheel_handle_[0].position.get().get_value();
-      const double back_left_position = registered_back_left_wheel_handle_[0].position.get().get_value();
-      const double back_right_position = registered_back_right_wheel_handle_[0].position.get().get_value();      
+    const double front_left_position = registered_front_left_wheel_handle_[0].position.get().get_value();
+    const double front_right_position = registered_front_right_wheel_handle_[0].position.get().get_value();
+    const double back_left_position = registered_back_left_wheel_handle_[0].position.get().get_value();
+    const double back_right_position = registered_back_right_wheel_handle_[0].position.get().get_value();      
+    
+    //RCLCPP_INFO(logger, "fr_pos: %f", front_left_position);
 
-      if (std::isnan(front_left_position) || std::isnan(front_right_position) || std::isnan(back_left_position) || std::isnan(back_right_position))
-      {
-        RCLCPP_ERROR(
-          logger, "Either the left or right wheel positions are invalid");
-        return controller_interface::return_type::ERROR;
-      }
-
-      front_left_position_mean += front_left_position;
-      front_right_position_mean += front_right_position;
-      back_left_position_mean += back_left_position;
-      back_right_position_mean += back_right_position;
+    if (std::isnan(front_left_position) || std::isnan(front_right_position) || std::isnan(back_left_position) || std::isnan(back_right_position))
+    {
+      RCLCPP_ERROR(
+        logger, "Either the left or right wheel positions are invalid");
+      return controller_interface::return_type::ERROR;
+    }
+  /*
+    front_left_position_mean += front_left_position;
+    front_right_position_mean += front_right_position;
+    back_left_position_mean += back_left_position;
+    back_right_position_mean += back_right_position;
     
     front_left_position_mean /= wheels.wheels_per_side;
     front_right_position_mean /= wheels.wheels_per_side;
     back_left_position_mean /= wheels.wheels_per_side;
     back_right_position_mean /= wheels.wheels_per_side;
-    
+    */
 
-    odometry_.update(front_left_position_mean, front_right_position_mean, back_left_position_mean, back_right_position_mean, current_time);
+    odometry_.update(front_left_position, front_right_position, back_left_position, back_right_position, current_time);
   }
 
   tf2::Quaternion orientation;
-  orientation.setRPY(0.0, 0.0, odometry_.getHeading());
+  orientation.setRPY(0.0, 0.0, M_PI);
 
   if (previous_publish_timestamp_ + publish_period_ < current_time)
   {
