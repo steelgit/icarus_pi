@@ -255,7 +255,7 @@ controller_interface::return_type MechDriveController::update()
   }
 
   tf2::Quaternion orientation;
-  orientation.setRPY(0.0, 0.0, M_PI);
+  orientation.setRPY(0.0, 0.0, odometry_.getHeading());
 
   if (previous_publish_timestamp_ + publish_period_ < current_time)
   {

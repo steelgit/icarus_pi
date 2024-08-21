@@ -11,7 +11,7 @@ controller_manager:
 
 mech_cont:
   ros__parameters:
-    publish_rate: 30.0
+    publish_rate: 45.0
     base_frame_id: base_link
     odom_frame_id: odom
 
@@ -20,8 +20,8 @@ mech_cont:
     front_right_wheel_name: ["frontRight_joint"]
     back_left_wheel_name: ["backLeft_joint"]
     back_right_wheel_name: ["backRight_joint"]
-    wheel_separation_width: 0.2100
-    wheel_separation_length: 0.162
+    wheel_separation_width: 0.22
+    wheel_separation_length: 0.1665
     wheel_radius: .024
     
 
