@@ -2,7 +2,7 @@
 #define ICARUSINTERFACE_WHEEL_H
 
 #include <string>
-
+#include "rclcpp/rclcpp.hpp"
 
 
 class Wheel
@@ -19,6 +19,17 @@ class Wheel
     double rads_per_count = 0;
     double desired_speed = 0;
     double pos_prev = 0;
+    double curr_pwm = 0;
+    const double time_difference = .067;
+    double error = 0;
+    double oldError = 0;
+    double integralError = 0;
+    double oldIntegralError = 0;
+    double proportionalGain = 4;
+    double integralGain = 0;
+    double derivativeGain = 0;
+
+
 
     Wheel() = default;
 
@@ -26,7 +37,9 @@ class Wheel
     
     void setup(const std::string &wheel_name, int counts_per_rev);
 
-    double calcEncAngle();
+    double calcEncAngle(int enc);
+
+    double calculatePID(double desiredValue, double currentValue);
 
 
 

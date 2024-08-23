@@ -27,6 +27,7 @@
 #include "mech_drive_controller/rolling_mean_accumulator.hpp"
 #include "rclcpp/time.hpp"
 
+
 namespace mech_drive_controller
 {
 class Odometry
@@ -45,6 +46,7 @@ public:
   double getLinear_x() const { return linear_x_; }
   double getLinear_y() const { return linear_y_; }
   double getAngular() const { return angular_; }
+  double getOld() const {return front_left_wheel_old_pos_; }
 
   void setWheelParams(double wheel_separation_length, double wheel_seperation_width, double left_wheel_radius, double right_wheel_radius);
   void setVelocityRollingWindowSize(size_t velocity_rolling_window_size);
@@ -80,6 +82,11 @@ private:
   double front_right_wheel_old_pos_;
   double back_left_wheel_old_pos_;
   double back_right_wheel_old_pos_;
+
+  //loggers
+  double calc_x;
+  double calc_y;
+  double calc_ang;
 
   // Rolling mean accumulators for the linear and angular velocities:
   size_t velocity_rolling_window_size_;

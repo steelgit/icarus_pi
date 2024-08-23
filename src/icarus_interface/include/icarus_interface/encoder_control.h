@@ -11,6 +11,7 @@
 #include "rotary_encoder.h"
 #include "config_rasp_pi.h"
 #include "wheel.h"
+#include "sensor_msgs/msg/joint_state.hpp"
 
 #include<unistd.h> 
 

@@ -6,7 +6,7 @@
 #include "rclcpp/rclcpp.hpp"
 #include <pigpiod_if2.h>
 
-#include<unistd.h> 
+#include <unistd.h> 
 
 #include "config_rasp_pi.h"
 
@@ -22,6 +22,7 @@ class motor_control
         int start_motors();
         void setMotorMode(const string &mode, motor m);
         void setMotor(const double &power, motor m); 
+
 
     private:
         rclcpp::Logger logger_;

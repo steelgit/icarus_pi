@@ -19,7 +19,12 @@
 
 #include "mech_drive_controller/odometry.hpp"
 #include "iostream"
+#include "rclcpp/logging.hpp"
+#include "rclcpp/rclcpp.hpp"
 
+
+
+auto logger = rclcpp::get_logger("my_logger");
 namespace mech_drive_controller
 {
 Odometry::Odometry(size_t velocity_rolling_window_size)
@@ -41,7 +46,10 @@ Odometry::Odometry(size_t velocity_rolling_window_size)
   velocity_rolling_window_size_(velocity_rolling_window_size),
   linear_accumulator_x(velocity_rolling_window_size),
   linear_accumulator_y(velocity_rolling_window_size),
-  angular_accumulator_(velocity_rolling_window_size)
+  angular_accumulator_(velocity_rolling_window_size),
+  calc_x(0.0),
+  calc_y(0.0),
+  calc_ang(0.0)
 {
 }
 
@@ -68,10 +76,10 @@ bool Odometry::update(double front_left_pos, double front_right_pos, double back
   const double back_right_wheel_cur_pos = back_right_pos * right_wheel_radius_;
 
   // Estimate velocity of wheels using old and current position:
-  const double front_left_wheel_est_vel = (front_left_wheel_cur_pos - front_left_wheel_old_pos_) / dt;
-  const double front_right_wheel_est_vel = (front_right_wheel_cur_pos - front_right_wheel_old_pos_) / dt;
-  const double back_left_wheel_est_vel = (back_left_wheel_cur_pos - back_left_wheel_old_pos_) / dt;
-  const double back_right_wheel_est_vel = (back_right_wheel_cur_pos - back_right_wheel_old_pos_) / dt;
+  const double front_left_wheel_est_vel = (front_left_wheel_cur_pos - front_left_wheel_old_pos_);
+  const double front_right_wheel_est_vel = (front_right_wheel_cur_pos - front_right_wheel_old_pos_);
+  const double back_left_wheel_est_vel = (back_left_wheel_cur_pos - back_left_wheel_old_pos_);
+  const double back_right_wheel_est_vel = (back_right_wheel_cur_pos - back_right_wheel_old_pos_);
 
   // Update old position with current:
   front_left_wheel_old_pos_ = front_left_wheel_cur_pos;
@@ -82,11 +90,15 @@ bool Odometry::update(double front_left_pos, double front_right_pos, double back
 
   // Compute linear and angular diff:
   //x[0], y[1]
-  const double linear_x = (front_left_wheel_est_vel + front_right_wheel_est_vel + back_left_wheel_est_vel + back_right_wheel_est_vel) * left_wheel_radius_ / 4;
-  const double linear_y = (-front_left_wheel_est_vel + front_right_wheel_est_vel + back_left_wheel_est_vel - back_right_wheel_est_vel) * left_wheel_radius_ / 4; 
+  const double linear_x = (front_left_wheel_est_vel + front_right_wheel_est_vel + back_left_wheel_est_vel + back_right_wheel_est_vel) / 4;
+  const double linear_y = (-front_left_wheel_est_vel + front_right_wheel_est_vel + back_left_wheel_est_vel - back_right_wheel_est_vel) / 4;
   // Now there is a bug about scout angular velocity
-  const double angular = (-front_right_wheel_est_vel + back_left_wheel_est_vel + front_left_wheel_est_vel - back_right_wheel_est_vel) * left_wheel_radius_ / (4  * (wheel_separation_width_ + wheel_separation_length_)/2);
-
+  const double angular = (-front_left_wheel_est_vel + front_right_wheel_est_vel - back_left_wheel_est_vel + back_right_wheel_est_vel) / (4  * (wheel_separation_width_ + wheel_separation_length_) / 2);
+  
+  //calc_x += linear_x * dt;
+  //calc_y += linear_y * dt;
+  //calc_ang += angular;
+  //RCLCPP_INFO(logger, "x: %f, y: %f, angular: %f", front_right_wheel_cur_pos, linear_y, calc_ang);
   // Integrate odometry:
   integrateExact(linear_x, linear_y, angular);
 
@@ -103,6 +115,7 @@ bool Odometry::update(double front_left_pos, double front_right_pos, double back
   angular_accumulator_.accumulate(angular);
   angular_ = angular_accumulator_.getRollingMean();
 
+  //RCLCPP_WARN(logger, "linear_x: %f linear_x_: %f", linear_x, linear_x_);
 
   return true;
 }
@@ -111,6 +124,8 @@ void Odometry::updateOpenLoop(double linear_x, double linear_y, double angular, 
 {
   /// Save last linear and angular velocity:
   angular_ = angular;
+  linear_x_ = linear_x;
+  linear_y_ = linear_y;
 
   /// Integrate odometry:
   const double dt = time.seconds() - timestamp_.seconds();
@@ -138,17 +153,15 @@ void Odometry::setWheelParams(
 void Odometry::setVelocityRollingWindowSize(size_t velocity_rolling_window_size)
 {
   velocity_rolling_window_size_ = velocity_rolling_window_size;
-
   resetAccumulators();
 }
 
 void Odometry::integrateRungeKutta2(double linear_x, double linear_y, double angular)
 {
-  const double direction = heading_ + angular ;
-
+  const double direction = heading_ + angular;
   /// Runge-Kutta 2nd order integration:
-  x_ += (linear_x * cos(direction) - linear_y*sin(direction));
-  y_ += (linear_x * sin(direction) + linear_y*cos(direction));
+  x_ += (linear_x * cos(direction) - linear_y * sin(direction));
+  y_ += (linear_x * sin(direction) + linear_y * cos(direction));
   //x_ += linear_x;
   //y_ += linear_y;
   heading_ += angular;
@@ -166,8 +179,9 @@ void Odometry::integrateExact(double linear_x, double linear_y, double angular)
     const double heading_old = heading_;
     const double rx = linear_x / angular;
     const double ry = linear_y / angular;
+    //RCLCPP_INFO(logger, "rx: %f, ry: %f, heading_: %f, heading old: %f", rx, ry, heading_, heading_old);
     heading_ += angular;
-    x_ += rx* (sin(heading_) - sin(heading_old));
+    x_ += rx * (sin(heading_) - sin(heading_old));
     y_ += ry * (cos(heading_) - cos(heading_old));
 
   }
