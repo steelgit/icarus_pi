@@ -90,8 +90,8 @@ bool Odometry::update(double front_left_pos, double front_right_pos, double back
 
   // Compute linear and angular diff:
   //x[0], y[1]
-  const double linear_x = (front_left_wheel_est_vel + front_right_wheel_est_vel + back_left_wheel_est_vel + back_right_wheel_est_vel) / 4;
-  const double linear_y = (-front_left_wheel_est_vel + front_right_wheel_est_vel + back_left_wheel_est_vel - back_right_wheel_est_vel) / 4;
+  const double linear_x = -(front_left_wheel_est_vel + front_right_wheel_est_vel + back_left_wheel_est_vel + back_right_wheel_est_vel) / 4;
+  const double linear_y = -(-front_left_wheel_est_vel + front_right_wheel_est_vel + back_left_wheel_est_vel - back_right_wheel_est_vel) / 4;
   // Now there is a bug about scout angular velocity
   const double angular = (-front_left_wheel_est_vel + front_right_wheel_est_vel - back_left_wheel_est_vel + back_right_wheel_est_vel) / (4  * (wheel_separation_width_ + wheel_separation_length_) / 2);
   

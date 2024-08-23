@@ -2,8 +2,8 @@ twist_mux:
   ros__parameters:
     topics:
       autonomous:
-        topic: nav_vel
-        timeout: 0.0
+        topic: cmd_vel
+        timeout: 5.0
         priority: 100
       
       joy:
