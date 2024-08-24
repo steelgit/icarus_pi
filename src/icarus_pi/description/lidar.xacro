@@ -32,7 +32,7 @@
 	<!--^^make joint continuous to mimic spinning lidar?-->
 		<parent link="chassis"/>
 		<child link="lidar_link"/>
-		<origin xyz="${chassis_length-lidar_radius} 0 ${chassis_height + 0.03}" rpy="0 0 0"/>
+		<origin xyz="${chassis_length-lidar_radius} 0 ${chassis_height + 0.03}" rpy="0 0 ${pi}"/>
 	</joint>
 	
 	<!--adding gazebo plugins to the sim-->
