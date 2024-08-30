@@ -90,8 +90,8 @@ bool Odometry::update(double front_left_pos, double front_right_pos, double back
 
   // Compute linear and angular diff:
   //x[0], y[1]
-  const double linear_x = -(front_left_wheel_est_vel + front_right_wheel_est_vel + back_left_wheel_est_vel + back_right_wheel_est_vel) / 4;
-  const double linear_y = -(-front_left_wheel_est_vel + front_right_wheel_est_vel + back_left_wheel_est_vel - back_right_wheel_est_vel) / 4;
+  const double linear_x = (front_left_wheel_est_vel + front_right_wheel_est_vel + back_left_wheel_est_vel + back_right_wheel_est_vel) / 4;
+  const double linear_y = (-front_left_wheel_est_vel + front_right_wheel_est_vel + back_left_wheel_est_vel - back_right_wheel_est_vel) / 4;
   // Now there is a bug about scout angular velocity
   const double angular = (-front_left_wheel_est_vel + front_right_wheel_est_vel - back_left_wheel_est_vel + back_right_wheel_est_vel) / (4  * (wheel_separation_width_ + wheel_separation_length_) / 2);
   
@@ -177,12 +177,12 @@ void Odometry::integrateExact(double linear_x, double linear_y, double angular)
   {
     /// Exact integration (should solve problems when angular is zero):
     const double heading_old = heading_;
-    const double rx = linear_x / angular;
-    const double ry = linear_y / angular;
+    const double rx = linear_x;
+    const double ry = linear_y;
     //RCLCPP_INFO(logger, "rx: %f, ry: %f, heading_: %f, heading old: %f", rx, ry, heading_, heading_old);
     heading_ += angular;
-    x_ += rx * (sin(heading_) - sin(heading_old));
-    y_ += ry * (cos(heading_) - cos(heading_old));
+    x_ += ((rx * cos(heading_)) - (ry * sin(heading_)));
+    y_ += ((rx * sin(heading_)) + (ry * cos(heading_)));
 
   }
 }

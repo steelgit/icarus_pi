@@ -301,7 +301,7 @@ controller_interface::return_type MechDriveController::update()
   limiter_angular_.limit(
     z, last_command.angular.z, second_to_last_command.angular.z, update_dt.seconds());
   limiter_linear_.limit(
-    y, last_command.angular.y, second_to_last_command.angular.y, update_dt.seconds());
+    y, last_command.linear.y, second_to_last_command.linear.y, update_dt.seconds());
 
   previous_commands_.pop();
   previous_commands_.emplace(command);
