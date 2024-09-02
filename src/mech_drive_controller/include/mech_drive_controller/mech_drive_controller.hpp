@@ -111,9 +111,6 @@ protected:
     double separation_length = 0.0; 
     double separation_width = 0.0;// w.r.t. the midpoint of the wheel width
     double radius = 0.0;      // Assumed to be the same for both wheels
-    double separation_multiplier = 1.0;
-    double left_radius_multiplier = 1.0;
-    double right_radius_multiplier = 1.0;
   } wheel_params_;
 
   struct OdometryParams

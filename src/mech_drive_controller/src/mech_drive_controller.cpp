@@ -70,9 +70,6 @@ controller_interface::return_type MechDriveController::init(const std::string & 
 
     auto_declare<int>("wheels_per_side", wheel_params_.wheels_per_side);
     auto_declare<double>("wheel_radius", wheel_params_.radius);
-    auto_declare<double>("wheel_separation_multiplier", wheel_params_.separation_multiplier);
-    auto_declare<double>("left_wheel_radius_multiplier", wheel_params_.left_radius_multiplier);
-    auto_declare<double>("right_wheel_radius_multiplier", wheel_params_.right_radius_multiplier);
 
     auto_declare<std::string>("odom_frame_id", odom_params_.odom_frame_id);
     auto_declare<std::string>("base_frame_id", odom_params_.base_frame_id);
@@ -86,27 +83,6 @@ controller_interface::return_type MechDriveController::init(const std::string & 
     auto_declare<int>("velocity_rolling_window_size", 50);
     auto_declare<bool>("use_stamped_vel", use_stamped_vel_);
 
-    auto_declare<bool>("linear.x.has_velocity_limits", false);
-    auto_declare<bool>("linear.x.has_acceleration_limits", false);
-    auto_declare<bool>("linear.x.has_jerk_limits", false);
-    auto_declare<double>("linear.x.max_velocity", NAN);
-    auto_declare<double>("linear.x.min_velocity", NAN);
-    auto_declare<double>("linear.x.max_acceleration", NAN);
-    auto_declare<double>("linear.x.min_acceleration", NAN);
-    auto_declare<double>("linear.x.max_jerk", NAN);
-    auto_declare<double>("linear.x.min_jerk", NAN);
-
-
-
-    auto_declare<bool>("angular.z.has_velocity_limits", false);
-    auto_declare<bool>("angular.z.has_acceleration_limits", false);
-    auto_declare<bool>("angular.z.has_jerk_limits", false);
-    auto_declare<double>("angular.z.max_velocity", NAN);
-    auto_declare<double>("angular.z.min_velocity", NAN);
-    auto_declare<double>("angular.z.max_acceleration", NAN);
-    auto_declare<double>("angular.z.min_acceleration", NAN);
-    auto_declare<double>("angular.z.max_jerk", NAN);
-    auto_declare<double>("angular.z.min_jerk", NAN);
     auto_declare<double>("publish_rate", publish_rate_);
   }
   catch (const std::exception & e)
@@ -205,13 +181,10 @@ controller_interface::return_type MechDriveController::update()
 
   // Apply (possibly new) multipliers:
   const auto wheels = wheel_params_;
-  const double wheel_separation_length = wheels.separation_multiplier * wheels.separation_length;
-  const double wheel_separation_width = wheels.separation_multiplier * wheels.separation_width;
-  const double left_wheel_radius = wheels.left_radius_multiplier * wheels.radius;
-  const double right_wheel_radius = wheels.right_radius_multiplier * wheels.radius;
-
-  //RCLCPP_INFO(logger, "length: %f, width: %f, radius: %f", wheel_separation_length, wheel_separation_width, left_wheel_radius);
-  //RCLCPP_INFO(logger, "pos_old: %f", odometry_.getOld());
+  const double wheel_separation_length =wheels.separation_length;
+  const double wheel_separation_width =wheels.separation_width;
+  const double left_wheel_radius = wheels.radius;
+  const double right_wheel_radius = wheels.radius;
 
   if (odom_params_.open_loop)
   {
@@ -219,19 +192,10 @@ controller_interface::return_type MechDriveController::update()
   }
   else
   {
-    /*
-    double front_left_position_mean = 0.0;
-    double front_right_position_mean = 0.0;
-    double back_left_position_mean = 0.0;
-    double back_right_position_mean = 0.0;
-    */
-
     const double front_left_position = registered_front_left_wheel_handle_[0].position.get().get_value();
     const double front_right_position = registered_front_right_wheel_handle_[0].position.get().get_value();
     const double back_left_position = registered_back_left_wheel_handle_[0].position.get().get_value();
     const double back_right_position = registered_back_right_wheel_handle_[0].position.get().get_value();      
-    
-    //RCLCPP_INFO(logger, "fr_pos: %f", front_left_position);
 
     if (std::isnan(front_left_position) || std::isnan(front_right_position) || std::isnan(back_left_position) || std::isnan(back_right_position))
     {
@@ -239,17 +203,6 @@ controller_interface::return_type MechDriveController::update()
         logger, "Either the left or right wheel positions are invalid");
       return controller_interface::return_type::ERROR;
     }
-  /*
-    front_left_position_mean += front_left_position;
-    front_right_position_mean += front_right_position;
-    back_left_position_mean += back_left_position;
-    back_right_position_mean += back_right_position;
-    
-    front_left_position_mean /= wheels.wheels_per_side;
-    front_right_position_mean /= wheels.wheels_per_side;
-    back_left_position_mean /= wheels.wheels_per_side;
-    back_right_position_mean /= wheels.wheels_per_side;
-    */
 
     odometry_.update(front_left_position, front_right_position, back_left_position, back_right_position, current_time);
   }
@@ -294,19 +247,10 @@ controller_interface::return_type MechDriveController::update()
   const auto update_dt = current_time - previous_update_timestamp_;
   previous_update_timestamp_ = current_time;
 
-  auto & last_command = previous_commands_.back().twist;
-  auto & second_to_last_command = previous_commands_.front().twist;
-  limiter_linear_.limit(
-    x, last_command.linear.x, second_to_last_command.linear.x, update_dt.seconds());
-  limiter_angular_.limit(
-    z, last_command.angular.z, second_to_last_command.angular.z, update_dt.seconds());
-  limiter_linear_.limit(
-    y, last_command.linear.y, second_to_last_command.linear.y, update_dt.seconds());
-
   previous_commands_.pop();
   previous_commands_.emplace(command);
 
-  //    Publish limited velocity
+  //Publish limited velocity
   if (publish_limited_velocity_ && realtime_limited_velocity_publisher_->trylock())
   {
     auto & limited_velocity_command = realtime_limited_velocity_publisher_->msg_;
@@ -326,8 +270,6 @@ controller_interface::return_type MechDriveController::update()
     (x - y + z * (wheel_separation_length + wheel_separation_width) / 2) / right_wheel_radius;
 
   // Set wheels velocities:
-
-
     registered_front_left_wheel_handle_[0].velocity.get().set_value(velocity_front_left);
     registered_front_right_wheel_handle_[0].velocity.get().set_value(velocity_front_right);
     registered_back_left_wheel_handle_[0].velocity.get().set_value(velocity_back_left);
@@ -366,19 +308,13 @@ CallbackReturn MechDriveController::on_configure(const rclcpp_lifecycle::State &
   wheel_params_.wheels_per_side =
     static_cast<size_t>(node_->get_parameter("wheels_per_side").as_int());
   wheel_params_.radius = node_->get_parameter("wheel_radius").as_double();
-  wheel_params_.separation_multiplier =
-    node_->get_parameter("wheel_separation_multiplier").as_double();
-  wheel_params_.left_radius_multiplier =
-    node_->get_parameter("left_wheel_radius_multiplier").as_double();
-  wheel_params_.right_radius_multiplier =
-    node_->get_parameter("right_wheel_radius_multiplier").as_double();
 
   const auto wheels = wheel_params_;
 
-  const double wheel_separation_length = wheels.separation_multiplier * wheels.separation_length;
-  const double wheel_separation_width = wheels.separation_multiplier * wheels.separation_width;
-  const double left_wheel_radius = wheels.left_radius_multiplier * wheels.radius;
-  const double right_wheel_radius = wheels.right_radius_multiplier * wheels.radius;
+  const double wheel_separation_length =wheels.separation_length;
+  const double wheel_separation_width =wheels.separation_width;
+  const double left_wheel_radius = wheels.radius;
+  const double right_wheel_radius = wheels.radius;
 
   odometry_.setWheelParams(wheel_separation_length, wheel_separation_width, left_wheel_radius, right_wheel_radius);
   odometry_.setVelocityRollingWindowSize(
@@ -403,41 +339,6 @@ CallbackReturn MechDriveController::on_configure(const rclcpp_lifecycle::State &
   publish_limited_velocity_ = node_->get_parameter("publish_limited_velocity").as_bool();
   use_stamped_vel_ = node_->get_parameter("use_stamped_vel").as_bool();
 
-  try
-  {
-    limiter_linear_ = SpeedLimiter(
-      node_->get_parameter("linear.x.has_velocity_limits").as_bool(),
-      node_->get_parameter("linear.x.has_acceleration_limits").as_bool(),
-      node_->get_parameter("linear.x.has_jerk_limits").as_bool(),
-      node_->get_parameter("linear.x.min_velocity").as_double(),
-      node_->get_parameter("linear.x.max_velocity").as_double(),
-      node_->get_parameter("linear.x.min_acceleration").as_double(),
-      node_->get_parameter("linear.x.max_acceleration").as_double(),
-      node_->get_parameter("linear.x.min_jerk").as_double(),
-      node_->get_parameter("linear.x.max_jerk").as_double());
-  }
-  catch (const std::runtime_error & e)
-  {
-    RCLCPP_ERROR(node_->get_logger(), "Error configuring linear speed limiter: %s", e.what());
-  }
-
-  try
-  {
-    limiter_angular_ = SpeedLimiter(
-      node_->get_parameter("angular.z.has_velocity_limits").as_bool(),
-      node_->get_parameter("angular.z.has_acceleration_limits").as_bool(),
-      node_->get_parameter("angular.z.has_jerk_limits").as_bool(),
-      node_->get_parameter("angular.z.min_velocity").as_double(),
-      node_->get_parameter("angular.z.max_velocity").as_double(),
-      node_->get_parameter("angular.z.min_acceleration").as_double(),
-      node_->get_parameter("angular.z.max_acceleration").as_double(),
-      node_->get_parameter("angular.z.min_jerk").as_double(),
-      node_->get_parameter("angular.z.max_jerk").as_double());
-  }
-  catch (const std::runtime_error & e)
-  {
-    RCLCPP_ERROR(node_->get_logger(), "Error configuring angular speed limiter: %s", e.what());
-  }
 
   if (!reset())
   {

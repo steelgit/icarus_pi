@@ -18,7 +18,10 @@ double deltaPositionBR = 0;
 
 //create a node specifically for tracking PID efficiency
 auto pidTracker = std::make_shared<rclcpp::Node>("pidTracker");
-auto pidTracking =  pidTracker->create_publisher<pid_messages::msg::Pid>("pidTracker", 10);
+auto pidTrackingFl =  pidTracker->create_publisher<pid_messages::msg::Pid>("pidTracker", 10);
+auto pidTrackingFr =  pidTracker->create_publisher<pid_messages::msg::Pid>("pidTracker", 10);
+auto pidTrackingBl =  pidTracker->create_publisher<pid_messages::msg::Pid>("pidTracker", 10);
+auto pidTrackingBr =  pidTracker->create_publisher<pid_messages::msg::Pid>("pidTracker", 10);
 
 IcarusInterface::IcarusInterface()
     : logger_(rclcpp::get_logger("IcarusInterface")),
@@ -28,14 +31,6 @@ IcarusInterface::IcarusInterface()
 
 IcarusInterface::~IcarusInterface()
 {
-  /*
-  for(unsigned long int iter = 1; iter < debug.size(); iter=iter+2) 
-  { 
-    double input = debug[iter];
-    double output = debug[iter-1];
-    RCLCPP_INFO(logger_, "  Speed - input:  %f    output: %f", input, output);
-  }
-  */
 }
 
 return_type IcarusInterface::configure(const hardware_interface::HardwareInfo & info)
@@ -131,42 +126,7 @@ return_type IcarusInterface::stop()
 
 hardware_interface::return_type IcarusInterface::read()
 {
-
-  // Calculate time delta
- /*  auto new_time = std::chrono::system_clock::now();
-  std::chrono::duration<double> diff = new_time - time_;
-  double deltaSeconds = diff.count();
-  time_ = new_time;
-
-  //setup motor encoder
-  //fl_wheel_.enc = enc_ctr.read_encoders();
-  //RCLCPP_INFO(logger_, "  Read Encoder Values:  %f", val);
-
-  double pos_prev = fl_wheel_.pos;
-  fl_wheel_.pos = fl_wheel_.calcEncAngle();
-  fl_wheel_.vel = (fl_wheel_.pos - pos_prev) / deltaSeconds;
-
-  pos_prev = bl_wheel_.pos;
-  bl_wheel_.pos = bl_wheel_.calcEncAngle();
-  bl_wheel_.vel = (bl_wheel_.pos - pos_prev) / deltaSeconds;
-
-  pos_prev = fr_wheel_.pos;
-  fr_wheel_.pos = fr_wheel_.calcEncAngle();
-  fr_wheel_.vel = (fr_wheel_.pos - pos_prev) / deltaSeconds;
-
-  pos_prev = br_wheel_.pos;
-  br_wheel_.pos = br_wheel_.calcEncAngle();
-  br_wheel_.vel = (br_wheel_.pos - pos_prev) / deltaSeconds;
- */
-  //debug.push_back(fl_wheel_.vel);
-  //debug.push_back(fl_wheel_.cmd);
-  //debug.push_back(fl_wheel_.cmd / fl_wheel_.rads_per_count / cfg_.loop_rate);
-  //debug.push_back(fl_wheel_.enc);
-  
-
   return return_type::OK;
-
-  
 }
 
 hardware_interface::return_type IcarusInterface::write()
@@ -177,16 +137,6 @@ hardware_interface::return_type IcarusInterface::write()
     return return_type::ERROR;
   }
   
-  
-  //RCLCPP_INFO(logger_, "  Front Left motor velocity:  %f", fl_wheel_.vel);
-  //RCLCPP_INFO(logger_, "  back Left motor pos:  %f, front Left motor pos:  %f, back right motor pos: %f, front right motor pos:  %f ", bl_wheel_.pos,fl_wheel_.pos, br_wheel_.pos, fr_wheel_.pos);
-  //RCLCPP_INFO(logger_, "  back Left motor vel:  %f, front Left motor vel:  %f, back right motor vel: %f, front right motor vel:  %f ", bl_wheel_.vel,fl_wheel_.vel, br_wheel_.vel, fr_wheel_.vel);
-  //RCLCPP_INFO(logger_, "  back Left motor dsp:  %f, front Left motor dsp:  %f, back right motor dsp: %f, front right motor dsp:  %f ", bl_wheel_.desired_speed,fl_wheel_.desired_speed, br_wheel_.desired_speed, fr_wheel_.desired_speed);
-  //RCLCPP_INFO(logger_, "  back Left motor eff:  %f, front Left motor eff:  %f, back right motor eff: %f, front right motor eff:  %f ", bl_wheel_.eff,fl_wheel_.eff, br_wheel_.eff, fr_wheel_.eff);
-  //RCLCPP_INFO(logger_, "  back Left motor pwm:  %f, front Left motor pwm:  %f, back right motor pwm: %f, front right motor pwm:  %f ", bl_wheel_.curr_pwm,fl_wheel_.curr_pwm, br_wheel_.curr_pwm, fr_wheel_.curr_pwm);
-  //RCLCPP_INFO(logger_, "  Front Left motor rads per count %f, Front left motor loop rate %f", fl_wheel_.rads_per_count, cfg_.loop_rate);
-  //RCLCPP_INFO(logger_," Front Left motor cmd: %f ", fl_wheel_.cmd);
-
   //track position for each wheel
   //current position is already tracked by encoder control file
   fl_wheel_.pos = fl_wheel_.calcEncAngle(fl_wheel_.enc);
@@ -210,23 +160,11 @@ hardware_interface::return_type IcarusInterface::write()
   double deltaSeconds = (currentTime_ - previousTime_).seconds();
   previousTime_ = currentTime_;
 
- // fl_wheel_.time_difference = (currentTime_ - previousTime_).seconds();
- // fr_wheel_.time_difference = (currentTime_ - previousTime_).seconds();
- // bl_wheel_.time_difference = (currentTime_ - previousTime_).seconds();
- // br_wheel_.time_difference = (currentTime_ - previousTime_).seconds();
- // previousTime_ = currentTime_;
-
-
   //track velocity for each wheel
   fl_wheel_.vel = deltaPositionFL/ deltaSeconds;
   fr_wheel_.vel = deltaPositionFR/ deltaSeconds;
   bl_wheel_.vel = deltaPositionBL/ deltaSeconds;
   br_wheel_.vel = deltaPositionBR/ deltaSeconds;
-  //RCLCPP_INFO(logger_, " dt: %f, dvel: %f", fl_wheel_.time_difference, fl_wheel_.vel);
-  //RCLCPP_INFO(logger_, " dv: %f, dPos: %f", fr_wheel_.vel, deltaPositionFR);
-  //RCLCPP_INFO(logger_, " dt: %f, dPos: %f", bl_wheel_.time_difference, deltaPositionBL);
-  //RCLCPP_INFO(logger_, " dt: %f, dPos: %f", br_wheel_.time_difference, deltaPositionBR);
-
 
   //wire to motors
   fl_wheel_.desired_speed = std::clamp( fl_wheel_.cmd , -10.0 , 10.0);
@@ -239,13 +177,38 @@ hardware_interface::return_type IcarusInterface::write()
   fr_wheel_.eff = fr_wheel_.calculatePID(fr_wheel_.desired_speed,fr_wheel_.vel);
   br_wheel_.eff = br_wheel_.calculatePID(br_wheel_.desired_speed,br_wheel_.vel);
   
-  auto msg = pid_messages::msg::Pid();
-  msg.header.stamp = currentTime_;
-  msg.name = {"fl_wheel"};
-  msg.desired_value = {fl_wheel_.desired_speed};
-  msg.measured_value = {fl_wheel_.vel};
-  msg.effort = {fl_wheel_.eff};
-  pidTracking->publish(msg);
+  auto msgFl = pid_messages::msg::Pid();
+  msgFl.header.stamp = currentTime_;
+  msgFl.name = {"fl_wheel"};
+  msgFl.desired_value = {fl_wheel_.desired_speed};
+  msgFl.measured_value = {fl_wheel_.vel};
+  msgFl.effort = {fl_wheel_.eff};
+  
+  auto msgFr = pid_messages::msg::Pid();
+  msgFr.header.stamp = currentTime_;
+  msgFr.name = {"fr_wheel"};
+  msgFr.desired_value = {fr_wheel_.desired_speed};
+  msgFr.measured_value = {fr_wheel_.vel};
+  msgFr.effort = {fr_wheel_.eff};
+
+  auto msgBl = pid_messages::msg::Pid();
+  msgBl.header.stamp = currentTime_;
+  msgBl.name = {"bl_wheel"};
+  msgBl.desired_value = {bl_wheel_.desired_speed};
+  msgBl.measured_value = {bl_wheel_.vel};
+  msgBl.effort = {bl_wheel_.eff};
+
+  auto msgBr = pid_messages::msg::Pid();
+  msgBr.header.stamp = currentTime_;
+  msgBr.name = {"br_wheel"};
+  msgBr.desired_value = {br_wheel_.desired_speed};
+  msgBr.measured_value = {br_wheel_.vel};
+  msgBr.effort = {br_wheel_.eff};
+
+  pidTrackingFl->publish(msgFl);
+  pidTrackingFr->publish(msgFr);
+  pidTrackingBl->publish(msgBl);
+  pidTrackingBr->publish(msgBr);
 
   fl_wheel_.curr_pwm += fl_wheel_.eff; 
   motor_ctr.setMotor(fl_wheel_.curr_pwm, MOTOR_FL); 
@@ -259,10 +222,6 @@ hardware_interface::return_type IcarusInterface::write()
   br_wheel_.curr_pwm += br_wheel_.eff;
   motor_ctr.setMotor((br_wheel_.curr_pwm), MOTOR_BR);
   
-
-  //RCLCPP_INFO(logger_, "  Write Motor Value:  %f", (fl_wheel_.cmd / fl_wheel_.rads_per_count / cfg_.loop_rate));
-  //RCLCPP_INFO(logger_, "  Write Motor raw:  %f", fl_wheel_.cmd);
-
   return return_type::OK;
 
 
