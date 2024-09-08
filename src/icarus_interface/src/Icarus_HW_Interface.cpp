@@ -16,7 +16,7 @@ double deltaPositionFR = 0;
 double deltaPositionBL = 0;
 double deltaPositionBR = 0;
 
-//create a node specifically for tracking PID efficiency
+//create a node for tracking PID response
 auto pidTracker = std::make_shared<rclcpp::Node>("pidTracker");
 auto pidTrackingFl =  pidTracker->create_publisher<pid_messages::msg::Pid>("pidTracker", 10);
 auto pidTrackingFr =  pidTracker->create_publisher<pid_messages::msg::Pid>("pidTracker", 10);
@@ -43,6 +43,7 @@ return_type IcarusInterface::configure(const hardware_interface::HardwareInfo & 
 
   time_ = std::chrono::system_clock::now();
 
+  //taken from URDF information published by robot_satte_publisher
   cfg_.front_left_wheel_name = info_.hardware_parameters["front_left_wheel_name"];
   cfg_.back_left_wheel_name = info_.hardware_parameters["back_left_wheel_name"];
   cfg_.front_right_wheel_name = info_.hardware_parameters["front_right_wheel_name"];
@@ -77,10 +78,10 @@ return_type IcarusInterface::configure(const hardware_interface::HardwareInfo & 
 
 std::vector<hardware_interface::StateInterface> IcarusInterface::export_state_interfaces()
 {
-  // We need to set up a position and a velocity interface for each wheel
-
+  //set up state interfaces to monitor wheel velocity and position
   std::vector<hardware_interface::StateInterface> state_interfaces;
 
+  //hardware_interface::StateInterface(name, interface type, value)
   state_interfaces.emplace_back(hardware_interface::StateInterface(fl_wheel_.name, hardware_interface::HW_IF_VELOCITY, &fl_wheel_.vel));
   state_interfaces.emplace_back(hardware_interface::StateInterface(fl_wheel_.name, hardware_interface::HW_IF_POSITION, &fl_wheel_.pos));
   state_interfaces.emplace_back(hardware_interface::StateInterface(fr_wheel_.name, hardware_interface::HW_IF_VELOCITY, &fr_wheel_.vel));
@@ -94,10 +95,11 @@ std::vector<hardware_interface::StateInterface> IcarusInterface::export_state_in
 
 std::vector<hardware_interface::CommandInterface> IcarusInterface::export_command_interfaces()
 {
-  // We need to set up a velocity command interface for each wheel
+  //set up a command interface to set desired velocity for each wheel
 
   std::vector<hardware_interface::CommandInterface> command_interfaces;
 
+  //hardware_interface::CommandInterface(name, interface type, value)
   command_interfaces.emplace_back(hardware_interface::CommandInterface(fl_wheel_.name, hardware_interface::HW_IF_VELOCITY, &fl_wheel_.cmd));
   command_interfaces.emplace_back(hardware_interface::CommandInterface(fr_wheel_.name, hardware_interface::HW_IF_VELOCITY, &fr_wheel_.cmd));
   command_interfaces.emplace_back(hardware_interface::CommandInterface(bl_wheel_.name, hardware_interface::HW_IF_VELOCITY, &bl_wheel_.cmd));
@@ -157,26 +159,31 @@ hardware_interface::return_type IcarusInterface::write()
 
   //track elapsed time between measurements
   currentTime_ = rclcpp::Clock().now();
-  double deltaSeconds = (currentTime_ - previousTime_).seconds();
+  fr_wheel_.time_difference = (currentTime_ - previousTime_).seconds();
+  fl_wheel_.time_difference = (currentTime_ - previousTime_).seconds();
+  br_wheel_.time_difference = (currentTime_ - previousTime_).seconds();
+  bl_wheel_.time_difference = (currentTime_ - previousTime_).seconds();
   previousTime_ = currentTime_;
 
   //track velocity for each wheel
-  fl_wheel_.vel = deltaPositionFL/ deltaSeconds;
-  fr_wheel_.vel = deltaPositionFR/ deltaSeconds;
-  bl_wheel_.vel = deltaPositionBL/ deltaSeconds;
-  br_wheel_.vel = deltaPositionBR/ deltaSeconds;
+  fl_wheel_.vel = deltaPositionFL/ fr_wheel_.time_difference;
+  fr_wheel_.vel = deltaPositionFR/ fl_wheel_.time_difference;
+  bl_wheel_.vel = deltaPositionBL/ br_wheel_.time_difference;
+  br_wheel_.vel = deltaPositionBR/ bl_wheel_.time_difference;
 
-  //wire to motors
+  //constrain our desired speed to be between two values
   fl_wheel_.desired_speed = std::clamp( fl_wheel_.cmd , -10.0 , 10.0);
   bl_wheel_.desired_speed = std::clamp( bl_wheel_.cmd , -10.0 , 10.0);
   fr_wheel_.desired_speed = std::clamp( fr_wheel_.cmd , -10.0 , 10.0);
   br_wheel_.desired_speed = std::clamp( br_wheel_.cmd , -10.0 , 10.0);
 
+  //calcualte the effort needed to reach desired speed
   fl_wheel_.eff = fl_wheel_.calculatePID(fl_wheel_.desired_speed,fl_wheel_.vel);
   bl_wheel_.eff = bl_wheel_.calculatePID(bl_wheel_.desired_speed,bl_wheel_.vel);
   fr_wheel_.eff = fr_wheel_.calculatePID(fr_wheel_.desired_speed,fr_wheel_.vel);
   br_wheel_.eff = br_wheel_.calculatePID(br_wheel_.desired_speed,br_wheel_.vel);
   
+  //create topics to track and tune PID response
   auto msgFl = pid_messages::msg::Pid();
   msgFl.header.stamp = currentTime_;
   msgFl.name = {"fl_wheel"};
@@ -205,11 +212,13 @@ hardware_interface::return_type IcarusInterface::write()
   msgBr.measured_value = {br_wheel_.vel};
   msgBr.effort = {br_wheel_.eff};
 
+  //publish topic messages
   pidTrackingFl->publish(msgFl);
   pidTrackingFr->publish(msgFr);
   pidTrackingBl->publish(msgBl);
   pidTrackingBr->publish(msgBr);
 
+  //apply PID calculations to motor pwm
   fl_wheel_.curr_pwm += fl_wheel_.eff; 
   motor_ctr.setMotor(fl_wheel_.curr_pwm, MOTOR_FL); 
   

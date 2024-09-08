@@ -96,6 +96,7 @@ controller_interface::return_type MechDriveController::init(const std::string & 
 
 InterfaceConfiguration MechDriveController::command_interface_configuration() const
 {
+  //declare each joint to be claimed by the velocity command interface
   std::vector<std::string> conf_names;
   for (const auto & joint_name : front_left_wheel_name)
   {
@@ -118,6 +119,7 @@ InterfaceConfiguration MechDriveController::command_interface_configuration() co
 
 InterfaceConfiguration MechDriveController::state_interface_configuration() const
 {
+  //declare each joint to be claimed by the position state interface
   std::vector<std::string> conf_names;
   for (const auto & joint_name : back_left_wheel_name)
   {
@@ -179,7 +181,7 @@ controller_interface::return_type MechDriveController::update()
   double & z = command.twist.angular.z;
   double & y = command.twist.linear.y;  
 
-  // Apply (possibly new) multipliers:
+  // Apply wheel params from my_controller.yaml:
   const auto wheels = wheel_params_;
   const double wheel_separation_length =wheels.separation_length;
   const double wheel_separation_width =wheels.separation_width;
@@ -188,10 +190,12 @@ controller_interface::return_type MechDriveController::update()
 
   if (odom_params_.open_loop)
   {
+    //in the case of no encoders:
     odometry_.updateOpenLoop(x, y, z, current_time);
   }
   else
   {
+    //track position to be used for runga-kutta integration
     const double front_left_position = registered_front_left_wheel_handle_[0].position.get().get_value();
     const double front_right_position = registered_front_right_wheel_handle_[0].position.get().get_value();
     const double back_left_position = registered_back_left_wheel_handle_[0].position.get().get_value();
@@ -203,17 +207,18 @@ controller_interface::return_type MechDriveController::update()
         logger, "Either the left or right wheel positions are invalid");
       return controller_interface::return_type::ERROR;
     }
-
     odometry_.update(front_left_position, front_right_position, back_left_position, back_right_position, current_time);
   }
 
   tf2::Quaternion orientation;
+  //rotate robot as heading is updated within odometry
   orientation.setRPY(0.0, 0.0, odometry_.getHeading());
 
   if (previous_publish_timestamp_ + publish_period_ < current_time)
   {
     previous_publish_timestamp_ += publish_period_;
 
+    //messages published to odom topic
     if (realtime_odometry_publisher_->trylock())
     {
       auto & odometry_message = realtime_odometry_publisher_->msg_;
@@ -289,6 +294,7 @@ CallbackReturn MechDriveController::on_configure(const rclcpp_lifecycle::State &
   front_left_wheel_name = node_->get_parameter("front_left_wheel_name").as_string_array();
   front_right_wheel_name = node_->get_parameter("front_right_wheel_name").as_string_array();
 
+  //confirm that amount of wheels on both sides are equal
   if (back_left_wheel_name.size() + front_left_wheel_name.size()  != front_right_wheel_name.size() + back_right_wheel_name.size())
   {
     RCLCPP_ERROR(
@@ -302,23 +308,21 @@ CallbackReturn MechDriveController::on_configure(const rclcpp_lifecycle::State &
     RCLCPP_ERROR(logger, "Wheel names parameters are empty!");
     return CallbackReturn::ERROR;
   }
-
+  //wheel parameters are taken from the my controller config file within this node package
   wheel_params_.separation_length = node_->get_parameter("wheel_separation_length").as_double();
   wheel_params_.separation_width = node_->get_parameter("wheel_separation_width").as_double();
-  wheel_params_.wheels_per_side =
-    static_cast<size_t>(node_->get_parameter("wheels_per_side").as_int());
+  wheel_params_.wheels_per_side = static_cast<size_t>(node_->get_parameter("wheels_per_side").as_int());
   wheel_params_.radius = node_->get_parameter("wheel_radius").as_double();
 
+  //apply wheel params from my_controller.yaml
   const auto wheels = wheel_params_;
-
   const double wheel_separation_length =wheels.separation_length;
   const double wheel_separation_width =wheels.separation_width;
   const double left_wheel_radius = wheels.radius;
   const double right_wheel_radius = wheels.radius;
 
   odometry_.setWheelParams(wheel_separation_length, wheel_separation_width, left_wheel_radius, right_wheel_radius);
-  odometry_.setVelocityRollingWindowSize(
-    node_->get_parameter("velocity_rolling_window_size").as_int());
+  odometry_.setVelocityRollingWindowSize(node_->get_parameter("velocity_rolling_window_size").as_int());
 
   odom_params_.odom_frame_id = node_->get_parameter("odom_frame_id").as_string();
   odom_params_.base_frame_id = node_->get_parameter("base_frame_id").as_string();
@@ -345,15 +349,13 @@ CallbackReturn MechDriveController::on_configure(const rclcpp_lifecycle::State &
     return CallbackReturn::ERROR;
   }
 
-  // left and right sides are both equal at this point
+  // verify that the number of wheels on each side are
   wheel_params_.wheels_per_side = front_left_wheel_name.size() + back_left_wheel_name.size();
 
   if (publish_limited_velocity_)
   {
-    limited_velocity_publisher_ =
-      node_->create_publisher<Twist>(DEFAULT_COMMAND_OUT_TOPIC, rclcpp::SystemDefaultsQoS());
-    realtime_limited_velocity_publisher_ =
-      std::make_shared<realtime_tools::RealtimePublisher<Twist>>(limited_velocity_publisher_);
+    limited_velocity_publisher_ = node_->create_publisher<Twist>(DEFAULT_COMMAND_OUT_TOPIC, rclcpp::SystemDefaultsQoS());
+    realtime_limited_velocity_publisher_ = std::make_shared<realtime_tools::RealtimePublisher<Twist>>(limited_velocity_publisher_);
   }
 
   const Twist empty_twist;
@@ -453,14 +455,10 @@ CallbackReturn MechDriveController::on_configure(const rclcpp_lifecycle::State &
 
 CallbackReturn MechDriveController::on_activate(const rclcpp_lifecycle::State &)
 {
-  const auto front_left_result =
-    configure_side("front_left", front_left_wheel_name, registered_front_left_wheel_handle_);
-  const auto front_right_result =
-    configure_side("front_right", front_right_wheel_name, registered_front_right_wheel_handle_);
-  const auto back_left_result =
-    configure_side("back_left", back_left_wheel_name, registered_back_left_wheel_handle_);
-  const auto back_right_result =
-    configure_side("back_right", back_right_wheel_name, registered_back_right_wheel_handle_);
+  const auto front_left_result = configure_side("front_left", front_left_wheel_name, registered_front_left_wheel_handle_);
+  const auto front_right_result = configure_side("front_right", front_right_wheel_name, registered_front_right_wheel_handle_);
+  const auto back_left_result = configure_side("back_left", back_left_wheel_name, registered_back_left_wheel_handle_);
+  const auto back_right_result = configure_side("back_right", back_right_wheel_name, registered_back_right_wheel_handle_);
 
   if (front_left_result == CallbackReturn::ERROR || front_right_result == CallbackReturn::ERROR || back_left_result == CallbackReturn::ERROR || back_right_result == CallbackReturn::ERROR)
   {
@@ -469,8 +467,7 @@ CallbackReturn MechDriveController::on_activate(const rclcpp_lifecycle::State &)
 
   if (registered_front_left_wheel_handle_.empty() || registered_front_right_wheel_handle_.empty() || registered_back_left_wheel_handle_.empty() || registered_back_right_wheel_handle_.empty())
   {
-    RCLCPP_ERROR(
-      node_->get_logger(), "Either left wheel interfaces, right wheel interfaces are non existent");
+    RCLCPP_ERROR(node_->get_logger(), "Either left wheel interfaces, right wheel interfaces are non existent");
     return CallbackReturn::ERROR;
   }
 
@@ -549,9 +546,7 @@ void MechDriveController::halt()
   halt_wheels(registered_back_right_wheel_handle_);
 }
 
-CallbackReturn MechDriveController::configure_side(
-  const std::string & side, const std::vector<std::string> & wheel_name,
-  std::vector<WheelHandle> & registered_handles)
+CallbackReturn MechDriveController::configure_side(const std::string & side, const std::vector<std::string> & wheel_name,std::vector<WheelHandle> & registered_handles)
 {
   auto logger = node_->get_logger();
 

@@ -91,9 +91,7 @@ protected:
     std::reference_wrapper<hardware_interface::LoanedCommandInterface> velocity;
   };
 
-  CallbackReturn configure_side(
-    const std::string & side, const std::vector<std::string> & wheel_name,
-    std::vector<WheelHandle> & registered_handles);
+  CallbackReturn configure_side(const std::string & side, const std::vector<std::string> & wheel_name, std::vector<WheelHandle> & registered_handles);
 
   std::vector<std::string> back_left_wheel_name;
   std::vector<std::string> back_right_wheel_name;
@@ -108,9 +106,9 @@ protected:
   struct WheelParams
   {
     size_t wheels_per_side = 0;
-    double separation_length = 0.0; 
-    double separation_width = 0.0;// w.r.t. the midpoint of the wheel width
-    double radius = 0.0;      // Assumed to be the same for both wheels
+    double separation_length = 0.0; //w.r.t. the midpoint of the wheel length
+    double separation_width = 0.0; // w.r.t. the midpoint of the wheel width
+    double radius = 0.0; //[m]
   } wheel_params_;
 
   struct OdometryParams
