@@ -59,7 +59,7 @@ controller_interface::return_type MechDriveController::init(const std::string & 
 
   try
   {
-    // with the lifecycle node being initialized, we can declare parameters
+    // with the lifecycle node being initialized, we can declare parameters that are called out in the yaml
     auto_declare<std::vector<std::string>>("front_left_wheel_name", std::vector<std::string>());
     auto_declare<std::vector<std::string>>("front_right_wheel_name", std::vector<std::string>());
     auto_declare<std::vector<std::string>>("back_left_wheel_name", std::vector<std::string>());
@@ -98,6 +98,7 @@ InterfaceConfiguration MechDriveController::command_interface_configuration() co
 {
   //declare each joint to be claimed by the velocity command interface
   std::vector<std::string> conf_names;
+  //joint name inherits the value within _wheel name
   for (const auto & joint_name : front_left_wheel_name)
   {
     conf_names.push_back(joint_name + "/" + HW_IF_VELOCITY);
@@ -121,6 +122,7 @@ InterfaceConfiguration MechDriveController::state_interface_configuration() cons
 {
   //declare each joint to be claimed by the position state interface
   std::vector<std::string> conf_names;
+
   for (const auto & joint_name : back_left_wheel_name)
   {
     conf_names.push_back(joint_name + "/" + HW_IF_POSITION);
@@ -219,6 +221,7 @@ controller_interface::return_type MechDriveController::update()
     previous_publish_timestamp_ += publish_period_;
 
     //messages published to odom topic
+    //the odom topic has an unmoving fixed frame. the messages sent are the distance between the robot and the odom frame
     if (realtime_odometry_publisher_->trylock())
     {
       auto & odometry_message = realtime_odometry_publisher_->msg_;
@@ -235,6 +238,7 @@ controller_interface::return_type MechDriveController::update()
       realtime_odometry_publisher_->unlockAndPublish();
     }
 
+    // this is used if we want odometry to publish directly to TF 
     if (odom_params_.enable_odom_tf && realtime_odometry_transform_publisher_->trylock())
     {
       auto & transform = realtime_odometry_transform_publisher_->msg_.transforms.front();
@@ -349,8 +353,8 @@ CallbackReturn MechDriveController::on_configure(const rclcpp_lifecycle::State &
     return CallbackReturn::ERROR;
   }
 
-  // verify that the number of wheels on each side are
-  wheel_params_.wheels_per_side = front_left_wheel_name.size() + back_left_wheel_name.size();
+  //set the amount of expected wheels per side for the robot
+  wheel_params_.wheels_per_side = node_->get_parameter("wheels_per_side").as_int();
 
   if (publish_limited_velocity_)
   {
@@ -453,6 +457,7 @@ CallbackReturn MechDriveController::on_configure(const rclcpp_lifecycle::State &
   return CallbackReturn::SUCCESS;
 }
 
+//set the wheel joints upon node activation
 CallbackReturn MechDriveController::on_activate(const rclcpp_lifecycle::State &)
 {
   const auto front_left_result = configure_side("front_left", front_left_wheel_name, registered_front_left_wheel_handle_);

@@ -26,7 +26,7 @@
 
 auto logger = rclcpp::get_logger("my_logger");
 namespace mech_drive_controller
-{
+{ 
 Odometry::Odometry(size_t velocity_rolling_window_size)
 : timestamp_(0.0),
   x_(0.0),
@@ -72,11 +72,11 @@ bool Odometry::update(double front_left_pos, double front_right_pos, double back
   const double back_left_wheel_cur_pos = back_left_pos * left_wheel_radius_;
   const double back_right_wheel_cur_pos = back_right_pos * right_wheel_radius_;
 
-  // Estimate velocity of wheels using old and current position:
-  const double front_left_wheel_est_vel = (front_left_wheel_cur_pos - front_left_wheel_old_pos_);
-  const double front_right_wheel_est_vel = (front_right_wheel_cur_pos - front_right_wheel_old_pos_);
-  const double back_left_wheel_est_vel = (back_left_wheel_cur_pos - back_left_wheel_old_pos_);
-  const double back_right_wheel_est_vel = (back_right_wheel_cur_pos - back_right_wheel_old_pos_);
+  // Estimate position of wheels using old and current position for odometry update:
+  const double front_left_wheel_est_pos = (front_left_wheel_cur_pos - front_left_wheel_old_pos_);
+  const double front_right_wheel_est_pos = (front_right_wheel_cur_pos - front_right_wheel_old_pos_);
+  const double back_left_wheel_est_pos = (back_left_wheel_cur_pos - back_left_wheel_old_pos_);
+  const double back_right_wheel_est_pos = (back_right_wheel_cur_pos - back_right_wheel_old_pos_);
 
   // Update old position with current:
   front_left_wheel_old_pos_ = front_left_wheel_cur_pos;
@@ -86,9 +86,9 @@ bool Odometry::update(double front_left_pos, double front_right_pos, double back
   
 
   // Compute linear and angular diff:
-  const double linear_x = (front_left_wheel_est_vel + front_right_wheel_est_vel + back_left_wheel_est_vel + back_right_wheel_est_vel) / 4;
-  const double linear_y = (-front_left_wheel_est_vel + front_right_wheel_est_vel + back_left_wheel_est_vel - back_right_wheel_est_vel) / 4;
-  const double angular = (-front_left_wheel_est_vel + front_right_wheel_est_vel - back_left_wheel_est_vel + back_right_wheel_est_vel) / (4  * (wheel_separation_width_ + wheel_separation_length_) / 2);
+  const double linear_x = (front_left_wheel_est_pos + front_right_wheel_est_pos + back_left_wheel_est_pos + back_right_wheel_est_pos) / 4;
+  const double linear_y = (-front_left_wheel_est_pos + front_right_wheel_est_pos + back_left_wheel_est_pos - back_right_wheel_est_pos) / 4;
+  const double angular = (-front_left_wheel_est_pos + front_right_wheel_est_pos - back_left_wheel_est_pos + back_right_wheel_est_pos) / (4  * (wheel_separation_width_ + wheel_separation_length_) / 2);
   
   // Integrate velocity to update pose:
   integrateExact(linear_x, linear_y, angular);
