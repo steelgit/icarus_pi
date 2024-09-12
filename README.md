@@ -13,20 +13,26 @@ Embed Video here
 
 # Initial Run
 
->To install all of the required dependencies:
+>[Install the pigpio library](https://abyz.me.uk/rpi/pigpio/download.html)
 
-    rosdep install --from-paths src -y --ignore-src
+>To install all of the required dependencies from the package.xml run:
 
->To install PiGPIO-d
+    rosdep update --include-eol-distros    
+<br />
 
-    install the pigpio library using sent info
+    rosdep install --from-paths src -y --ignore-src --rosdistro foxy
 
 <br />
 <br />
 
 # To Launch Icarus
-    
+
+>On startup, launch the PiGPIO Daemon using:
+
     sudo pigpiod
+
+>Launch the robot!
+
     ros2 launch icarus_pi launch_robot.launch.py 
 
 <br />
@@ -87,6 +93,8 @@ Mechanical Summary.
 
 #### Mechanical Diagram
 
+embed a mechanical pic/diagram
+
 <br />
 
 A more in-depth description of our mechanical design, as well as CAD files, can be found in our [Mechanical Documentation](https://github.com/steelgit/icarus_pi/blob/daedalus_main/docs/Mechanical/Mechanical%20README.md).
@@ -94,6 +102,27 @@ A more in-depth description of our mechanical design, as well as CAD files, can 
 <br />
 <br />
 
-# Helpful Resources
+# Mecanum Wheels
 
-1. 
+Mecanum wheel summary.
+
+<br />
+
+#### Mecanum Wheel Model
+
+embed a mecanum wheel cad model pic or kinematics drawing
+
+<br />
+
+A more in-depth description of the various software challenges we faced with mecanum wheels can be found in our [Mecanum Wheel Documentation](https://github.com/steelgit/icarus_pi/blob/daedalus_main/docs/Mecanum%20Wheel%20README.md).
+
+<br />
+<br />
+
+# References
+
+- [ROS2 Foxy Official Documentation](https://docs.ros.org/en/foxy/index.html)
+- [The PiGPIO Library](https://abyz.me.uk/rpi/pigpio/index.html)
+- [Articulated Robotics - Build a Mobile Robot with ROS](https://articulatedrobotics.xyz/tutorials/mobile-robot/project-overview)
+- [ECAM Eurobot - Mecanum Wheels](https://ecam-eurobot.github.io/Tutorials/mechanical/mecanum.html)
+- [Turtlebot3](https://www.turtlebot.com/turtlebot3/)
