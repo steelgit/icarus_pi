@@ -4,7 +4,7 @@ The following parts will need to have brass inserts melted into them. We accompl
 - Raspberry Pi Holder (only where the pi mounts to the board)
 - Motor Holders
 - L298N Holder (where L298N mounts to board)
-- Supports for each layer
+- Supports for each level
 - Switch Carriages
 - Nano mount
 - RPLiDAR mount (where LiDAR mounts to the board, may need a smaller brass insert)
