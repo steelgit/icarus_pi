@@ -11,16 +11,15 @@ class Wheel
 
     std::string name = "";
     int enc = 0;
-    double cmd = 0;
-    double pos = 0;
-    double vel = 0;
-    double eff = 0;
-    double velSetPt = 0;
+    double cmd = 0; //[rad/s]
+    double pos = 0; //[m]
+    double vel = 0; //[rad/s]
+    double eff = 0; //[pwm]
+    double velSetPt = 0; //[rad/s]
     double rads_per_count = 0;
-    double desired_speed = 0;
-    double pos_prev = 0;
+    double desired_speed = 0; //[rad/s]
+    double pos_prev = 0; //[m]
     double curr_pwm = 0;
-    const double time_difference = .067;
     double error = 0;
     double oldError = 0;
     double integralError = 0;
@@ -28,6 +27,7 @@ class Wheel
     double proportionalGain = 2.8;
     double integralGain = .01;
     double derivativeGain = .002;
+    double time_difference = 0; //[s]
 
 
 

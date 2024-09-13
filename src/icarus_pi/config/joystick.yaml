@@ -11,7 +11,7 @@ teleop_node:
     axis_linear:  # Left thumb stick vertical
       x: 1
     scale_linear:
-      x: .12
+      x: .12 #m/s
     scale_linear_turbo:
       x: .24
 
