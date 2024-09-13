@@ -6,7 +6,7 @@ Icarus is an open-source project that students or hobbyists can recreate to gain
 
 <br />
 
-Embed Video here
+❗Embed Video here
 
 <br />
 <br />
@@ -60,17 +60,35 @@ Some of our core components include:
 - Motors with Quadrature Encoders
 - 2-D LiDAR
 - Raspberry Pi Camera V2
+- Mecanum Wheels
 
 <br />
 
-A full list of our materials can be found on our [Materials List ](https://github.com/steelgit/icarus_pi/blob/daedalus_main/docs/Materials%20List.pdf).
+A full list of our materials can be found on our [Materials List ](/docs/Materials%20List.pdf).
+
+<br />
+<br />
+
+# Mechanical
+
+❗Mechanical Summary.
+
+<br />
+
+#### Mechanical Assembly
+
+![Icarus Mechanical Design](/docs/Mechanical/Mechanical%20Assembly.png "Icarus Mechanical Design")
+
+<br />
+
+A more in-depth description of our mechanical design, as well as our STL files, can be found in our [Mechanical Documentation](/docs/Mechanical/Mechanical%20README.md).
 
 <br />
 <br />
 
 # Electrical
 
-Electrical Summary.
+❗Electrical Summary.
 
 <br />
 
@@ -80,41 +98,49 @@ Electrical Summary.
 
 <br />
 
-A more in-depth description of our electrical design, as well as electrical schematics and pinout descriptions, can be found in our [Electrical Documentation](https://github.com/steelgit/icarus_pi/blob/daedalus_main/docs/Electrical/Electrical%20README.md).
-
-<br />
-<br />
-
-# Mechanical
-
-Mechanical Summary.
-
-<br />
-
-#### Mechanical Diagram
-
-embed a mechanical pic/diagram
-
-<br />
-
-A more in-depth description of our mechanical design, as well as CAD files, can be found in our [Mechanical Documentation](https://github.com/steelgit/icarus_pi/blob/daedalus_main/docs/Mechanical/Mechanical%20README.md).
+A more in-depth description of our electrical design, as well as our electrical schematic and pinout descriptions, can be found in our [Electrical Documentation](/docs/Electrical/Electrical%20README.md).
 
 <br />
 <br />
 
 # Mecanum Wheels
 
-Mecanum wheel summary.
+❗Mecanum wheel summary.
 
 <br />
 
 #### Mecanum Wheel Model
 
-embed a mecanum wheel cad model pic or kinematics drawing
+❗embed a mecanum wheel cad model pic or kinematics drawing
 
 <br />
 
-A more in-depth description of the various software challenges we faced with mecanum wheels can be found in our [Mecanum Wheel Documentation](https://github.com/steelgit/icarus_pi/blob/daedalus_main/docs/Mecanum%20Wheel%20README.md).
+A more in-depth description of the various software challenges we faced with mecanum wheels can be found in our [Mecanum Wheel Documentation](/docs/Mecanum%20Wheel%20README.md).
+
+<br />
+<br />
+
+# Lessons Learned & Future Improvements
+
+❗Overall blurb
+
+<br />
+
+### Software
+
+❗blurb
+
+<br />
+
+### Electrical
+
+❗blurb
+
+<br />
+
+### Mechanical
+
+❗blurb
 
 <br />
 <br />
