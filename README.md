@@ -6,7 +6,7 @@ Icarus is an open-source project that students or hobbyists can recreate to gain
 
 <br />
 
-<img src="docs/Icarus.gif" width="250" height="180" />
+![Icarus Electrical Diagram](docs/Icarus.gif "Icarus Electrical Diagram")
 
 <br />
 <br />
