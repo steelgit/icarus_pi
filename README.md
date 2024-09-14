@@ -71,7 +71,9 @@ A full list of our materials can be found on our [Materials List ](/docs/Materia
 
 # Mechanical
 
-❗Mechanical Summary.
+The design of this robot was inspired by the turtlebot-burger educational platform. This design allows for a high degree of felxibility in the placement of components. Addtionally, due to the modular design philosphy here, its possble to add, remove, or swap out new parts and sensors as you see fit. If desired, you can create your own custom fixtures and components to mount onto your robot as you see fit.
+The mounting holes on the base plates have an intial diameter of 4.5mm in order for m3 flathead screws to sit flush within the plate, and then we have a 3.5mm diameter hole thats also designed for m3 screws; With a center to center distance of 20mm between each hole.
+for a more vibration resistant fit, add in threaded brass inserts to your mounting components by melting them in via soldering iron.
 
 <br />
 
@@ -112,7 +114,7 @@ A more in-depth description of our electrical design, as well as our electrical 
 #### Mecanum Wheel Model
 
 ❗embed a mecanum wheel cad model pic or kinematics drawing
-
+![alt text](image.png)
 <br />
 
 A more in-depth description of the various software challenges we faced with mecanum wheels can be found in our [Mecanum Wheel Documentation](/docs/Mecanum%20Wheel%20README.md).
@@ -140,8 +142,10 @@ A more in-depth description of the various software challenges we faced with mec
 
 ### Mechanical
 
-❗blurb
+It was never a wise decision to design something with the idea that we would never move the component from its position, or that it would need to be removed from its mounting area. Always design with ease of assembly and disassembly in mind
 
+Make use of not only the horizontal space available on a given surface. If its more convenient for assembly, create designs that take advantage of the vertical space given.
+i.e: moutning this vertically, upside down, stacked, etc.
 <br />
 <br />
 
