@@ -6,7 +6,7 @@ Icarus is an open-source project that students or hobbyists can recreate to gain
 
 <br />
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/v_dwPqaW4c0?si=3k0A_zUnLXxxweTQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+![Icarus Video](/docs/Icarus_Video.gif "Video of Icarus Operating Autonomously")
 
 <br />
 <br />
