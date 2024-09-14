@@ -22,6 +22,7 @@ find_package(controller_manager REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(pluginlib REQUIRED)
 find_package(control_toolbox REQUIRED)
+find_package(pid_messages REQUIRED)
 
 
 
@@ -46,6 +47,7 @@ ament_target_dependencies(
   rclcpp
   pluginlib
   control_toolbox
+  pid_messages
 )
 
 pluginlib_export_plugin_description_file(hardware_interface robot_hardware.xml)
@@ -57,7 +59,7 @@ install(
 )
 
 install(
-  DIRECTORY controllers launch/
+  DIRECTORY launch/
   DESTINATION share/${PROJECT_NAME}
 )
 

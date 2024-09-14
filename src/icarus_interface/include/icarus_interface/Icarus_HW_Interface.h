@@ -2,6 +2,7 @@
 #define ICARUSINTERFACE_REAL_ROBOT_H
 
 #include <cstring>
+#include <cmath>
 #include <pigpiod_if2.h>
 #include "rclcpp/rclcpp.hpp"
 
@@ -20,6 +21,7 @@
 
 
 using hardware_interface::return_type;
+using namespace std;
 
 class IcarusInterface : public hardware_interface::BaseInterface<hardware_interface::SystemInterface>
 {
@@ -51,6 +53,8 @@ class IcarusInterface : public hardware_interface::BaseInterface<hardware_interf
 
     rclcpp::Logger logger_;
 
+    rclcpp::Time currentTime_;
+    rclcpp::Time previousTime_ ;
     std::chrono::time_point<std::chrono::system_clock> time_;
 
     std::vector<double> debug;

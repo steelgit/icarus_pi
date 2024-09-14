@@ -1,10 +1,6 @@
 <?xml version="1.0"?>
 <robot name="icarus_pi" xmlns:xacro="http://www.ros.org/wiki/xacro" >
 
-    <xacro:include filename="inertial_macros.xacro"/>
-    <xacro:include filename="robot_dimensions.xacro"/>
-
-
     <!-- BASE LINK -->
 
     <link name="base_link">
@@ -30,7 +26,7 @@
     <joint name="chassis_joint" type="fixed">
         <parent link="base_link"/>
         <child link="chassis"/>
-        <origin xyz="${-wheel_xoff} 0.0 ${-wheel_zoff}"/>
+        <origin xyz="${-wheel_xoff} 0.0 ${-wheel_zoff}" rpy="0 0 0"/>
     </joint>
 
     <link name="chassis">
@@ -39,7 +35,7 @@
             <geometry>
                 <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
             </geometry>
-            <material name="white"/>
+            <material name="blue"/>
         </visual>
         <collision>
             <origin xyz="${chassis_length/2} 0 ${chassis_height/2}"/>
@@ -53,18 +49,18 @@
     </link>
 
     <gazebo reference="chassis">
-        <material>Gazebo/White</material>
+        <material>Gazebo/Gray</material>
     </gazebo>
 
     <!-- wheels -->
-	<xacro:macro name="wheel" params="prefix x_reflect y_reflect">
+	<xacro:macro name="wheel" params="prefix x_reflect y_reflect rotate">
         <joint name="${prefix}_joint" type="continuous">
             <parent link="base_link"/>
             <child link="${prefix}_link"/>
-            <origin xyz="${x_reflect*wheel_xoff} ${y_reflect*(chassis_width/2 + wheel_ygap)} ${-wheel_zoff}" rpy="-${pi/2} 0 0"/>
-            <axis xyz="0 0 1"/>
+            <origin xyz="${x_reflect*wheel_xoff} ${y_reflect*(chassis_width/2 + wheel_ygap)} ${-wheel_zoff}" rpy="${y_reflect*-pi/2} 0 0"/>
+            <axis xyz="0 0 ${y_reflect}"/>
         </joint>
-        
+
         <link name ="${prefix}_link">
 			<collision>
 				<geometry>
@@ -80,18 +76,32 @@
 				<geometry>
 					<cylinder radius="${wheel_radius}" length="${wheel_width}"/>
 				</geometry>
-				<material name="Gray">
-					<color rgba="0.5 0.5 0.5 1.0"/>
+				<material name="Yellow">
+					<color rgba="1 1 0 1"/>
 				</material>
 			</visual>
 	    </link>
-
 	</xacro:macro>
 
-	<xacro:wheel prefix="frontLeft" x_reflect="-1" y_reflect="-1"/>
-	<xacro:wheel prefix="frontRight" x_reflect="-1" y_reflect="1"/>
-	<xacro:wheel prefix="backLeft" x_reflect="1" y_reflect="-1"/>
-	<xacro:wheel prefix="backRight" x_reflect="1" y_reflect="1"/>
+	<xacro:wheel prefix="backRight" x_reflect="-1" y_reflect="-1" rotate="${pi}"/>
+	<xacro:wheel prefix="backLeft" x_reflect="-1" y_reflect="1" rotate="${pi}"/>
+	<xacro:wheel prefix="frontRight" x_reflect="1" y_reflect="-1" rotate="${pi}"/>
+	<xacro:wheel prefix="frontLeft" x_reflect="1" y_reflect="1" rotate="${pi}"/>
     
+    <gazebo reference="backRight_link">
+        <material>Gazebo/ZincYellow</material>
+    </gazebo>
+
+    <gazebo reference="backLeft_link">
+        <material>Gazebo/ZincYellow</material>
+    </gazebo>
+
+    <gazebo reference="frontRight_link">
+        <material>Gazebo/ZincYellow</material>
+    </gazebo>
+
+    <gazebo reference="frontLeft_link">
+        <material>Gazebo/ZincYellow</material>
+    </gazebo>
     
 </robot>

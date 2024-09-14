@@ -42,11 +42,11 @@ void motor_control::setMotorMode(const string &mode, motor m) {
 }
 
 void motor_control::setMotor(const double &power, motor m) {
-    uint16_t pwm;  //was uint8.  keep???
-    if(power > 10) {
+    uint16_t pwm;
+    if(power > 20) {
         setMotorMode("forward", m);
         pwm = (int)(power);
-    } else if(power < -10) {
+    } else if(power < -20) {
         setMotorMode("reverse", m);
         pwm = -(int)(power);
     } else {
