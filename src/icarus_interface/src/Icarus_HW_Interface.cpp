@@ -158,18 +158,18 @@ hardware_interface::return_type IcarusInterface::write()
   br_wheel_.pos_prev = br_wheel_.pos;
 
   //track elapsed time between measurements
-  currentTime_ = rclcpp::Clock().now();
+  /*currentTime_ = rclcpp::Clock().now();
   fr_wheel_.time_difference = (currentTime_ - previousTime_).seconds();
   fl_wheel_.time_difference = (currentTime_ - previousTime_).seconds();
   br_wheel_.time_difference = (currentTime_ - previousTime_).seconds();
   bl_wheel_.time_difference = (currentTime_ - previousTime_).seconds();
-  previousTime_ = currentTime_;
+  previousTime_ = currentTime_;*/
 
   //track velocity for each wheel
-  fl_wheel_.vel = deltaPositionFL/ fr_wheel_.time_difference;
-  fr_wheel_.vel = deltaPositionFR/ fl_wheel_.time_difference;
-  bl_wheel_.vel = deltaPositionBL/ br_wheel_.time_difference;
-  br_wheel_.vel = deltaPositionBR/ bl_wheel_.time_difference;
+  fl_wheel_.vel = deltaPositionFL/ fl_wheel_.time_difference;
+  fr_wheel_.vel = deltaPositionFR/ fr_wheel_.time_difference;
+  bl_wheel_.vel = deltaPositionBL/ bl_wheel_.time_difference;
+  br_wheel_.vel = deltaPositionBR/ br_wheel_.time_difference;
 
   //constrain our desired speed to be between two values
   fl_wheel_.desired_speed = std::clamp( fl_wheel_.cmd , -10.0 , 10.0);

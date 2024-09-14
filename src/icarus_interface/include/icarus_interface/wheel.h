@@ -27,7 +27,7 @@ class Wheel
     double proportionalGain = 2.8;
     double integralGain = .01;
     double derivativeGain = .002;
-    double time_difference = 0; //[s]
+    double time_difference = .067; //[s]
 
 
 
