@@ -71,9 +71,9 @@ A full list of our materials can be found on our [Materials List ](/docs/Materia
 
 # Mechanical
 
-The design of this robot was inspired by the turtlebot-burger educational platform. This design allows for a high degree of felxibility in the placement of components. Addtionally, due to the modular design philosphy here, its possble to add, remove, or swap out new parts and sensors as you see fit. If desired, you can create your own custom fixtures and components to mount onto your robot as you see fit.
-The mounting holes on the base plates have an intial diameter of 4.5mm in order for m3 flathead screws to sit flush within the plate, and then we have a 3.5mm diameter hole thats also designed for m3 screws; With a center to center distance of 20mm between each hole.
-for a more vibration resistant fit, add in threaded brass inserts to your mounting components by melting them in via soldering iron.
+The design of this robot was inspired by the turtlebot-burger educational platform. This design allows for a high degree of flexibility in the placement of components. Additionally, due to the modular design philosophy here, its possible to add, remove, or swap out new parts and sensors as you see fit. If desired, you can create your own custom fixtures and components to mount onto your robot as you see fit.
+The mounting holes on the base plates have an initial diameter of 4.5mm in order for m3 flathead screws to sit flush within the plate, and then we have a 3.5mm diameter hole that's also designed for m3 screws; with a center-to-center distance of 20mm between each hole.
+for a more vibration-resistant fit, add in threaded brass inserts to your mounting components by melting them in via soldering iron.
 
 <br />
 
@@ -136,7 +136,7 @@ A more in-depth description of the various software challenges we faced with mec
 
 ### Electrical
 
-❗blurb
+The switches were a nice addition, however, they could be removed to simplify the power and ground connections. Since the battery connectors are easily accessible, the system can be quickly de-energized without switches by simply disconnecting the connectors. There were also a couple of instances where wires had to be spliced 3 or more times and soldering these splices was a little finicky given 
 
 <br />
 
