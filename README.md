@@ -70,6 +70,15 @@ A full list of our materials can be found on our [Materials List ](/docs/Materia
 <br />
 <br />
 
+# Software
+
+❗Add a short Software Summary
+
+❗embed pic of Software Roadmap 
+
+<br />
+<br />
+
 # Mechanical
 
 The design of this robot was inspired by the turtlebot-burger educational platform. This design allows for a high degree of flexibility in the placement of components. Additionally, due to the modular design philosophy here, its possible to add, remove, or swap out new parts and sensors as you see fit. If desired, you can create your own custom fixtures and components to mount onto your robot as you see fit.
@@ -137,7 +146,7 @@ Overall, we are quite happy with how Icarus turned out! However, looking back on
 
 ### Software
 
-❗blurb
+❗blurb 
 
 <br />
 
@@ -155,8 +164,8 @@ The biggest electrical change we would make would be to switch out our microcont
 
 It was never a wise decision to design something with the idea that we would never move the component from its position, or that it would need to be removed from its mounting area. Always design with ease of assembly and disassembly in mind
 
-Make use of not only the horizontal space available on a given surface. If its more convenient for assembly, create designs that take advantage of the vertical space given.
-i.e: moutning this vertically, upside down, stacked, etc.
+Make use of not only the horizontal space available on a given surface. If it's more convenient for assembly, create designs that take advantage of the vertical space given,
+i.e.: mounting this vertically, upside down, stacked, etc.
 <br />
 <br />
 
