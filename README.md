@@ -58,6 +58,7 @@ Some of our core components include:
 - Jetson Nano
 - Raspberry Pi 4
 - Motors with Quadrature Encoders
+- Motor Controllers (L298N)
 - 2-D LiDAR
 - Raspberry Pi Camera V2
 - Mecanum Wheels
@@ -90,7 +91,8 @@ A more in-depth description of our mechanical design, as well as our STL files, 
 
 # Electrical
 
-❗Electrical Summary.
+Our electrical design was formulated around the core components that we wanted to use. These core components are listed above in the Material List section. We wanted to be able to operate the robot for a good amount of time before we needed to swap out or charge the batteries so that we could work on the project or test things for hours at a time. Because of this, and the fact that we used 12V motors, we opted for 
+two 11.1 V, 5000 milli-amp hour batteries, one to power the motors, and one to power the rest of our electronics. We decided to solder as many of the components as we could for durability. The motors used jumper cable connections and since these could not be soldered easily, we decided to secure the connections with a layer of kapton tape. Our electrical diagram below shows how all of our components interact with each other.
 
 <br />
 
@@ -100,7 +102,7 @@ A more in-depth description of our mechanical design, as well as our STL files, 
 
 <br />
 
-A more in-depth description of our electrical design, as well as our electrical schematic and pinout descriptions, can be found in our [Electrical Documentation](/docs/Electrical/Electrical%20README.md).
+A more in-depth description of our electrical design, as well as our [electrical schematic](docs/Electrical/Icarus%20Electrical%20Schematic.pdf) and [pinout descriptions](/docs/Electrical/Motor%20Connections%20Table.pdf), can be found in our [Electrical Documentation](/docs/Electrical/Electrical%20README.md).
 
 <br />
 <br />
@@ -111,10 +113,15 @@ A more in-depth description of our electrical design, as well as our electrical 
 
 <br />
 
-#### Mecanum Wheel Model
+#### Mecanum Wheel Kinematic Model
 
-❗embed a mecanum wheel cad model pic or kinematics drawing
-![alt text](image.png)
+![Mecanum Wheel Kinematic Model](docs/Mecanum%20wheel%20Kinematic%20Model.png "Mecanum Wheel Kinematic Model")
+
+
+#### Mecanum Wheel CAD Model
+
+![Mecanum Wheel CAD Model](docs/Mecanum%20Wheel%20CAD%20Model.png "Mecanum Wheel CAD Model")
+
 <br />
 
 A more in-depth description of the various software challenges we faced with mecanum wheels can be found in our [Mecanum Wheel Documentation](/docs/Mecanum%20Wheel%20README.md).
@@ -124,7 +131,7 @@ A more in-depth description of the various software challenges we faced with mec
 
 # Lessons Learned & Future Improvements
 
-❗Overall blurb
+Overall, we are quite happy with how Icarus turned out! However, looking back on our implementation, there are some things we would have done differently to achieve similar results while making our lives a little easier in the process. Some items that would have provided some relief to our major pain points include a more modular mechanical design, specifically for our component mounts, a simplified electrical design, and a change in the microcontrollers used. Addressing these issues would have allowed us to better utilize our time spent on Icarus. Below, we have detailed more improvements we would make in our 3 major categories: software, electrical, and mechanical. 
 
 <br />
 
@@ -136,7 +143,11 @@ A more in-depth description of the various software challenges we faced with mec
 
 ### Electrical
 
-The switches were a nice addition, however, they could be removed to simplify the power and ground connections. Since the battery connectors are easily accessible, the system can be quickly de-energized without switches by simply disconnecting the connectors. There were also a couple of instances where wires had to be spliced 3 or more times and soldering these splices was a little finicky given 
+The thing that we would like to improve upon in the future would be to simplify our electrical design. Our design greatly exceeds what was needed for the project, in terms of things like processing power and battery life. This is beneficial because we could easily integrate more features or sensors into the base design without worrying too much about power considerations or having to swap out the batteries too often. However, this also made the design take longer to assemble, which was detrimental to our objectives since we wanted to focus more on the software side of this project.
+
+The switches were a nice addition, however, they could be removed to simplify the power and ground connections. Since the battery connectors are easily accessible, the system can be quickly de-energized without switches by simply disconnecting the connectors. There were also a couple of instances where wires had to be spliced 3 or more times. Creating these splices took us a little longer than initially expected, so using terminal blocks for connections instead of solder could make the assembly process quicker. Smaller milli-amp hour batteries could also be used to save on cost.
+
+The biggest electrical change we would make would be to switch out our microcontrollers. Having the processing power of the Raspberry Pi and the Jetson Nano was nice, however, we could have accomplished everything we did with an Arduino and either a Raspberry Pi or Jetson Nano. The Arduino would control our motors and the rest of the processing would be offloaded onto the other microcontroller.
 
 <br />
 
