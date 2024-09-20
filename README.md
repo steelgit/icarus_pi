@@ -72,7 +72,7 @@ A full list of our materials can be found on our [Materials List ](/docs/Materia
 
 # Software
 
-❗Add a short Software Summary
+The Software for the Icarus Project is split between two devices, which requires having two different Ros2 workspaces.  The Raspberry Pi uses the Icarus_pi workspace in this repo, which contains the three main custom Ros2 packages: icarus_interface, icarus_pi, and mech_drive_controller.  Icarus_pi is the starting point for Icarus architecture and contains the robot description, launch files, and robot configuration files.  Except for PID tunes, all unique robot intrinsics are stored here and can be modified to fit different setups.  Icarus_interface is the Ros2 interface to the motor and encoders.  It leverages the pigpiod library to control gpio signals on the raspberry pi, and will perform PID control when the interface is written to.  Finally, the mech_drive_controller is a custom Ros2 controller which allows two linear and one rotational movements.  These three packages work in tandem to manage all movement of the Icarus Robot and can run independent of icarus_nano.
 
 ❗embed pic of Software Roadmap 
 
@@ -118,7 +118,7 @@ A more in-depth description of our electrical design, as well as our [electrical
 
 # Mecanum Wheels
 
-❗Mecanum wheel summary.
+The Icarus Robot was created with the goal of controlling four Mecanum wheels.  Mecanum wheels that contain a circular array of smaller angled wheels.  This wheel arrangement allows movement in both the x and y linear directions, while still allowing a yaw rotation.  This also allows the robot to diagonally strafe or rotate while moving based on precise control of wheel speed and direction.  This required creating a custom controller package based on Ros2 control diff drive to allow the additional degree of movement.
 
 <br />
 
@@ -146,7 +146,12 @@ Overall, we are quite happy with how Icarus turned out! However, looking back on
 
 ### Software
 
-❗blurb 
+❗What we learned:
+-Fill out and shore up a project's foundation before adding more software layers.  Debugging nav2 and controller issues took significantly longer due to errors in our robot description and odometry calculation.  These could have been caught earlier and saved time later in the project if they had been a step at a time instead of simultaneously with the higher level software.
+-Research embedded software version limits before progressing to far into setup.  The jetson nano cannot run foxy or humble natively, and xubuntu could only run up to foxy.  
+-Be extra careful when reading hardware documentation.  Our lidar was mounted backwards, and caused the robot to move in unexpected directions.
+-Establish a common workflow for group members.  Our personal devices were setup independently, which caused members to not have the same settings on their…..
+ 
 
 <br />
 
