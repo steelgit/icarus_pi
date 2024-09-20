@@ -146,12 +146,9 @@ Overall, we are quite happy with how Icarus turned out! However, looking back on
 
 ### Software
 
-❗What we learned:
--Fill out and shore up a project's foundation before adding more software layers.  Debugging nav2 and controller issues took significantly longer due to errors in our robot description and odometry calculation.  These could have been caught earlier and saved time later in the project if they had been a step at a time instead of simultaneously with the higher level software.
--Research embedded software version limits before progressing to far into setup.  The jetson nano cannot run foxy or humble natively, and xubuntu could only run up to foxy.  
+Our software design went through many iterations and required countless hours of discussion and design to get to our final product.  We learned three main lessons throughout the project's timeline when it came to our software process.  First, we should have filled out and shored up the project's foundational code before adding more software layers.  Debugging nav2 and controller issues took significantly longer due to errors in our robot description and odometry calculation.  These could have been caught earlier and saved time later in the project if they had been a step at a time instead of simultaneously with the higher level software.  More early development in SIM would have been one way to catch these early issues.  The next lesson learned was that the group could have been more careful when researching embedded software version limits before progressing too far into setup.  The jetson nano cannot run foxy or humble natively, and xubuntu on the jetson nano could only run up to foxy.  This caused a version mismatch between some of our devices and the embedded system that led to errors later in the development cycle.  Finally, establish a common workflow for group members.  Our personal devices were setup independently, which caused members to not have the same tools or organization.  More communication on this area of the project would have made certain areas of our workflow run smoother.
+
 -Be extra careful when reading hardware documentation.  Our lidar was mounted backwards, and caused the robot to move in unexpected directions.
--Establish a common workflow for group members.  Our personal devices were setup independently, which caused members to not have the same settings on their…..
- 
 
 <br />
 
