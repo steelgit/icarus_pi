@@ -74,7 +74,7 @@ A full list of our materials can be found on our [Materials List ](/docs/Materia
 
 The Software for the Icarus Project is split between two devices, which requires having two different Ros2 workspaces.  The Raspberry Pi uses the Icarus_pi workspace in this repo, which contains the three main custom ROS2 packages: icarus_interface, icarus_pi, and mech_drive_controller.  Icarus_pi is the starting point for Icarus architecture and contains the robot description, launch files, and robot configuration files.  Except for PID tuning, all unique robot intrinsics are stored here and can be modified to fit different setups.  Icarus_interface is the Ros2 interface to the motor and encoders.  It leverages the PiGPIOd library to control GPIO signals on the Raspberry Pi, and will perform PID control when the interface is written to.  Finally, the mech_drive_controller is a custom ROS2 controller which allows two linear and one rotational movements.  These three packages work in tandem to manage all movement of the Icarus Robot and can run independent of icarus_nano. Icarus_nano contains three main ROS2 packages: autonomy, rplidar_ros, and camera_publisher. The autonomy package extends the slam_toolbox and Nav2 packages to enable support for holonmonic drive roborts. The rplidar_ros is cloned from the official Slamtec repository, (linked in the References section), and takes data from the physical LiDAR and translates it into a laser scan topic. The camera_publisher topic takes in information from our camera stream and publishes it so that we can see what the robot sees through RVIZ. 
 
-❗embed pic of Software Roadmap 
+![Icarus Software Diagram](/docs/Software%20Diagram.png "Icarus Software Design")
 
 <br />
 <br />
